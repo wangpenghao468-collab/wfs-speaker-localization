@@ -1,0 +1,4 @@
+# result files are kept byte-exact (Panoramix reads them as is)
+measurements/** -text
+docs/data/** -text
+*.bat text eol=crlf

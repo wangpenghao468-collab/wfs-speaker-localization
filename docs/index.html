@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WFS 喇叭定位</title>
+<meta name="description" content="用照片量測 112 顆 WFS 喇叭的振膜中心與朝向，輸出給 Panoramix。">
+<link rel="stylesheet" href="site.css">
+<style>
+.wrap { max-width: 1080px; margin: 0 auto; padding: 28px 16px 80px; }
+h1 { font-size: 32px; line-height: 1.25; margin: 6px 0 8px; }
+.lead { color: var(--muted); font-size: 17px; max-width: 760px; margin: 0 0 22px; }
+h2 { font-size: 20px; margin: 40px 0 12px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.stat .v { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.stat .v small { font-size: 15px; font-weight: 600; color: var(--muted); }
+.stat .l { color: var(--muted); font-size: 13.5px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.card { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; text-decoration: none; color: var(--ink); }
+.card:hover { border-color: var(--accent); }
+.card b { display: block; font-size: 17px; margin-bottom: 4px; }
+.card span { color: var(--muted); font-size: 14px; }
+.flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 14px; }
+.flow div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; }
+.flow i { color: var(--muted); font-style: normal; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; background: var(--panel); }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--code); font-weight: 600; }
+.tw { overflow-x: auto; }
+.note { color: var(--muted); font-size: 14px; }
+figure { margin: 0; }
+figure img { width: 100%; border: 1px solid var(--line); border-radius: 10px; background: #fff; display: block; }
+figcaption { color: var(--muted); font-size: 13.5px; margin-top: 6px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } h1 { font-size: 26px; } }
+</style>
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a class="on" href="index.html">首頁</a><a href="finder.html">照片查找</a><a href="learn.html">原理教學</a><a href="results.html">結果與驗證</a><a href="manual.html">操作手冊</a></nav>
+<div class="wrap">
+<h1>用照片量出 112 顆 WFS 喇叭的位置</h1>
+<p class="lead">14 根架子、每根 8 顆、間距 80 mm 的波場合成（WFS）喇叭陣列。從 DJI 影片和 Sony 照片算出每顆振膜中心的 3D 位置和朝向，對齊到 Panoramix 的原點，輸出可以直接載入 Max/MSP 的設定檔。量測日期：2026-10-13。</p>
+
+<div class="stats">
+  <div class="stat"><div class="v">0.74 <small>mm</small></div><div class="l">每顆中心誤差（中位數）</div></div>
+  <div class="stat"><div class="v">1.17 <small>mm</small></div><div class="l">90% 的喇叭在此以內</div></div>
+  <div class="stat"><div class="v">80.10 <small>± 0.74 mm</small></div><div class="l">架內相鄰間距（實際 80 mm）</div></div>
+  <div class="stat"><div class="v">663 <small>張</small></div><div class="l">成功定位的 Sony 照片（每顆中位數約 80 張）</div></div>
+  <div class="stat"><div class="v">15 <small>mm</small></div><div class="l">與手動設計的差（中位數，最大 64 mm）</div></div>
+  <div class="stat"><div class="v">31 → 2.1 <small>µs</small></div><div class="l">WFS 時間誤差 RMS（設計值 → 實測值）</div></div>
+</div>
+
+<h2>從這裡開始</h2>
+<div class="cards">
+  <a class="card" href="finder.html"><b>照片查找</b><span>輸入 1–112，看所有拍到這顆喇叭的照片、你的 DJI 標註，以及它的實測座標。可回報編號錯誤。</span></a>
+  <a class="card" href="learn.html"><b>原理教學</b><span>從相機原理講到三角化、COLMAP、照片定位、多視角求中心與誤差分析。附可操作的示意圖。</span></a>
+  <a class="card" href="results.html"><b>結果與驗證</b><span>與設計的比較、高度、俯視圖、每根架子的人工檢查拼圖，以及所有結果檔下載。</span></a>
+  <a class="card" href="manual.html"><b>操作手冊</b><span>環境設定、每一步的腳本、指令、參數，以及新增照片或回報錯誤後怎麼重算。</span></a>
+</div>
+
+<h2>給 Panoramix 的檔案</h2>
+<div class="tw"><table>
+<tr><th>檔案</th><th>內容</th></tr>
+<tr><td><a href="data/1012_measured.txt" download>1012_measured.txt</a></td><td><b>直接載入。</b>你的 <code>1012.txt</code> 副本，只改了 <code>/bus/10/speakers/aed</code>（位置，仰角 0）和 <code>/bus/10/speakers/directions/xyz</code>（朝向）兩行。</td></tr>
+<tr><td><a href="data/panoramix_bus10_measured.txt" download>panoramix_bus10_measured.txt</a></td><td>只有那兩行，方便手動貼上或比對。</td></tr>
+<tr><td><a href="data/panoramix_bus10_measured.csv" download>panoramix_bus10_measured.csv</a></td><td>每顆的 x、y、方位角、距離、朝向，以及和設計的差。</td></tr>
+<tr><td><a href="data/1012_design.txt" download>1012_design.txt</a></td><td>原始設計檔（對照用，未修改）。</td></tr>
+</table></div>
+<p class="note">其他 CSV（3D 中心、高度、照片對應）在 <a href="results.html#downloads">結果與驗證</a>。</p>
+
+<h2>系統怎麼運作（一句話版）</h2>
+<div class="flow">
+  <div>你在 DJI 影片上標編號</div><i>→</i>
+  <div>每張 Sony 照片對齊到 DJI 座標</div><i>→</i>
+  <div>投影找出照片中的每顆喇叭</div><i>→</i>
+  <div>偵測振膜中心</div><i>→</i>
+  <div>幾十張照片三角化</div><i>→</i>
+  <div>對齊你的原點</div><i>→</i>
+  <div>Panoramix txt</div>
+</div>
+<p class="note">詳細說明見 <a href="learn.html">原理教學</a>。</p>
+
+<h2>結果一覽</h2>
+<div class="two">
+  <figure><a href="figures/topview_manual_vs_photo.png"><img src="figures/topview_manual_vs_photo.png" alt="俯視圖：設計與實測"></a><figcaption>俯視圖（真實比例）：你的設計與照片量測。</figcaption></figure>
+  <figure><a href="figures/design_vs_measured.png"><img src="figures/design_vs_measured.png" alt="設計與實測差異"></a><figcaption>每顆喇叭與設計的差：後排比設計更靠近原點約 5–6 cm。</figcaption></figure>
+</div>
+
+<h2>尚待確認</h2>
+<ul>
+<li><b>整體尺度</b>：完全依賴「架內間距 80 mm」。建議用捲尺量 41 號到 72 號的振膜中心距，預測值 <b>2518 mm</b>。</li>
+<li><b>斜視偏差</b>：振膜有弧度，中心約往前偏 1 mm。所有喇叭差不多一樣，不影響相對位置。</li>
+<li><b>原點</b>：由「整體最接近你的設計」對齊推算，不是實體量測。</li>
+</ul>
+<p class="note" style="margin-top:36px">原始照片不公開；網站中的照片均為低解析度裁切。原始碼與說明：<a href="https://github.com/wangpenghao468-collab/wfs-speaker-localization">GitHub 倉庫</a>。</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>結果與驗證</title>
+<link rel="stylesheet" href="site.css">
+<style>
+.wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 80px; }
+h1 { font-size: 28px; margin: 6px 0 6px; }
+h2 { font-size: 21px; margin: 44px 0 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.lead { color: var(--muted); }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; margin: 10px 0 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; background: var(--panel); margin: 8px 0 14px; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--code); font-weight: 600; }
+.tw { overflow-x: auto; }
+figure { margin: 14px 0; }
+figure img { width: 100%; border: 1px solid var(--line); border-radius: 10px; background: #fff; display: block; }
+figcaption { color: var(--muted); font-size: 14px; margin-top: 6px; }
+.note { color: var(--muted); font-size: 14px; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.tabs button { font: inherit; font-size: 13px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); cursor: pointer; }
+.tabs button.on { background: var(--ink); color: var(--bg); }
+</style>
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a href="index.html">首頁</a><a href="finder.html">照片查找</a><a href="learn.html">原理教學</a><a class="on" href="results.html">結果與驗證</a><a href="manual.html">操作手冊</a></nav>
+<div class="wrap">
+<h1>結果與驗證</h1>
+<p class="lead">2026-10-13 量測。目前採用的版本：每張 Sony 照片對齊 DJI 骨架後多視角三角化（未使用 Sony 光束法平差，原因見<a href="learn.html#c13">原理教學第 13 章</a>）。</p>
+<div class="toc"><a href="#accuracy">精度</a><a href="#design">與設計比較</a><a href="#height">高度</a><a href="#verify">人工檢查拼圖</a><a href="#wfs">對 WFS 的影響</a><a href="#downloads">檔案下載</a></div>
+
+<h2 id="accuracy">精度</h2>
+<div class="tw"><table>
+<tr><th>檢查</th><th>做法</th><th>結果</th></tr>
+<tr><td>Bootstrap</td><td>每顆喇叭的照片隨機重抽樣 200 次，看中心散布</td><td>中位數 <b>0.74 mm</b>，90% ≤ 1.17 mm</td></tr>
+<tr><td>架內間距</td><td>每顆分別計算後，同架相鄰兩顆的距離（實際 80 mm）</td><td>80.10 ± 0.74 mm</td></tr>
+<tr><td>直線度</td><td>同架 8 顆離擬合直線的距離</td><td>中位數 0.6 mm</td></tr>
+<tr><td>留一驗證</td><td>拿掉一顆，用同架其他顆推算它的位置再比較</td><td>中位數 0.8 mm</td></tr>
+<tr><td>架間距離</td><td>相鄰架子端點之間（你實際確認約 9.0 cm）</td><td>約 88–93 mm</td></tr>
+<tr><td>架子朝向</td><td>8 顆跨 56 cm 擬合直線</td><td>約 ±0.2°</td></tr>
+</table></div>
+<p class="note">還沒驗證的系統誤差：整體尺度依賴 80 mm（建議捲尺量 41 號↔72 號，預測 2518 mm）；斜視造成約 1 mm 往前偏，所有喇叭相同。</p>
+<figure><img src="figures/rays_speaker_20.png" alt="20 號的射線"><figcaption>例：20 號的 84 條視線與它們經過中心附近的位置（右圖 ±8 mm）。</figcaption></figure>
+<figure><img src="figures/weights_speaker_20.png" alt="20 號的權重"><figcaption>例：20 號每張照片的實際影響力，以及用最好的 k 張與隨機 k 張的收斂比較。</figcaption></figure>
+<figure><img src="figures/detection_demo_20.png" alt="振膜偵測"><figcaption>例：20 號在不同照片中的振膜偵測。</figcaption></figure>
+
+<h2 id="design">與設計比較</h2>
+<p>以只有旋轉＋平移（不縮放）的轉換對齊到你的設計原點。中位數差 15 mm、最大 64 mm；整體旋轉 0.23°；後排比設計更靠近原點約 5–6 cm；設計的架間距 100 mm，實測約 91 mm；架子朝向與設計差 −0.62° 到 +0.91°；原點落在左右對稱軸上（偏 0.1 mm）。</p>
+<figure><img src="figures/topview_manual_vs_photo.png" alt="俯視比較"><figcaption>俯視圖（真實比例）。</figcaption></figure>
+<figure><img src="figures/design_vs_measured.png" alt="設計與實測差"><figcaption>逐顆差異。</figcaption></figure>
+
+<h2 id="height">高度</h2>
+<p>地板平面由 Sony 照片兩兩三角化的地磚點重新擬合（DJI 模型中的「地板」其實是架子底部，高了約 8 cm）。振膜中心高度 1115–1130 mm，中位數 1120 mm；只用周圍 1 m 局部地板計算，平均只差 0.3 mm。</p>
+<figure><img src="figures/speaker_heights.png" alt="高度"><figcaption>每顆喇叭的離地高度。</figcaption></figure>
+
+<h2 id="verify">人工檢查拼圖</h2>
+<p>每根架子從分散的照片中抽幾張，標上系統認定的編號，用來人工確認背景線索是否一致（例如左右兩側的牆和椅子不同）。「未註冊」版本只用 COLMAP 沒接上的照片，是比較嚴格的檢查。</p>
+<div class="tabs" id="vSet"><button data-d="verify" class="on">全部照片</button><button data-d="verify_unregistered">只用未註冊照片</button></div>
+<div class="tabs" id="vBar"></div>
+<figure><a id="vLink" target="_blank" rel="noopener"><img id="vImg" alt="架子檢查拼圖"></a><figcaption id="vCap"></figcaption></figure>
+
+<h2 id="wfs">對 WFS 的影響</h2>
+<p>把位置誤差換成每顆喇叭的到達時間誤差模擬：用設計值時 RMS 約 <b>31 µs</b>，用實測值後約 <b>2.1 µs</b>。在 2 kHz，最差的同調損失由 −4.6 dB 變成 −0.01 dB。</p>
+
+<h2 id="downloads">檔案下載</h2>
+<div class="tw"><table>
+<tr><th>檔案</th><th>給誰用</th><th>內容</th></tr>
+<tr><td><a href="data/1012_measured.txt" download>1012_measured.txt</a></td><td>Panoramix</td><td>直接載入；只改 aed 與 directions 兩行</td></tr>
+<tr><td><a href="data/panoramix_bus10_measured.txt" download>panoramix_bus10_measured.txt</a></td><td>Panoramix</td><td>只有那兩行</td></tr>
+<tr><td><a href="data/panoramix_bus10_measured.csv" download>panoramix_bus10_measured.csv</a></td><td>檢查</td><td>每顆 x、y、方位角、距離、朝向與設計差</td></tr>
+<tr><td><a href="data/speaker_centers_mm.csv" download>speaker_centers_mm.csv</a></td><td>分析</td><td>3D 中心（mm，原點在陣列中心正下方地板）、誤差、照片數</td></tr>
+<tr><td><a href="data/speaker_heights.csv" download>speaker_heights.csv</a></td><td>分析</td><td>離地高度（全域與局部地板）</td></tr>
+<tr><td><a href="data/design_vs_measured.csv" download>design_vs_measured.csv</a></td><td>分析</td><td>逐顆與設計的偏差（徑向、切向、高度）</td></tr>
+<tr><td><a href="data/speaker_photos.csv" download>speaker_photos.csv</a></td><td>分析</td><td>喇叭 → 照片對應與原圖像素座標</td></tr>
+<tr><td><a href="data/1012_design.txt" download>1012_design.txt</a></td><td>對照</td><td>原始設計檔</td></tr>
+</table></div>
+</div>
+<script>
+const bars = Array.from({ length: 14 }, (_, i) => `bar${String(i + 1).padStart(2, "0")}_${i * 8 + 1}-${i * 8 + 8}.jpg`);
+let set = "verify", bar = 0;
+const vBar = document.getElementById("vBar");
+bars.forEach((b, i) => { const t = document.createElement("button"); t.textContent = `${i * 8 + 1}–${i * 8 + 8}`; t.onclick = () => { bar = i; show(); }; vBar.appendChild(t); });
+document.querySelectorAll("#vSet button").forEach(b => b.onclick = () => { set = b.dataset.d; show(); });
+function show() {
+  const src = `verify/${set}/${bars[bar]}`;
+  document.getElementById("vImg").src = src; document.getElementById("vLink").href = src;
+  document.getElementById("vCap").textContent = `第 ${bar + 1} 架（${bar * 8 + 1}–${bar * 8 + 8} 號）· ${set === "verify" ? "全部照片" : "只用 COLMAP 未註冊的照片"}`;
+  document.querySelectorAll("#vSet button").forEach(b => b.classList.toggle("on", b.dataset.d === set));
+  [...vBar.children].forEach((b, i) => b.classList.toggle("on", i === bar));
+}
+show();
+</script>
+</body>
+</html>

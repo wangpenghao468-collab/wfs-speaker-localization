@@ -1,0 +1,28 @@
+/* shared by every page of the site */
+:root {
+  --bg: #f6f5f2; --panel: #ffffff; --ink: #1d1d1b; --muted: #5f5e5a; --line: #e2e0da;
+  --accent: #1f6feb; --ok: #1a7f37; --warn: #b26b00; --chip: #efeee9; --code: #f1f0ec;
+  --sel: #1d1d1b; --selink: #ffffff; --design: #b0aea6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a3a29c; --line: #33322f;
+    --accent: #5aa2ff; --ok: #4cc26a; --warn: #e0a040; --chip: #2a2a27; --code: #2a2a27;
+    --sel: #ecebe7; --selink: #151514; --design: #6d6b66;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a3a29c; --line: #33322f;
+  --accent: #5aa2ff; --ok: #4cc26a; --warn: #e0a040; --chip: #2a2a27; --code: #2a2a27;
+  --sel: #ecebe7; --selink: #151514; --design: #6d6b66;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.65 system-ui, "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif; }
+a { color: var(--accent); }
+code { font-family: Consolas, "Cascadia Mono", Menlo, monospace; font-size: 13.5px; background: var(--code); padding: 1px 5px; border-radius: 4px; word-break: break-word; }
+.sitenav { display: flex; gap: 4px 18px; align-items: center; flex-wrap: wrap; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg); font-size: 14px; }
+.sitenav .brand { font-weight: 700; color: var(--ink); text-decoration: none; margin-right: 6px; }
+.sitenav a { color: var(--muted); text-decoration: none; padding: 2px 0; border-bottom: 2px solid transparent; }
+.sitenav a:hover { color: var(--ink); }
+.sitenav a.on { color: var(--ink); border-bottom-color: var(--accent); }

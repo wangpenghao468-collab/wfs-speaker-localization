@@ -1,0 +1,23 @@
+# Copy this file to settings.yaml (not uploaded) and set the paths on your computer.
+# Relative paths are relative to the repository root. Check with: python tools/check_env.py
+
+# --- inputs ---
+sony_images: D:/WFS_Sony/WFS_Sony                  # Sony photos (DSC*.JPG)
+dji_model: data/DJI_WFS_COLMAP_PINHOLE/sparse        # DJI COLMAP sparse model (cameras/images/points3D.bin)
+dji_images: data/DJI_WFS_COLMAP_PINHOLE/images       # DJI frames used for that model
+sony_model: data/WFS_Sony_COLMAP/sparse/1            # Sony COLMAP model (only local relations are used)
+sony_database: data/WFS_Sony_COLMAP/database.db      # Sony COLMAP database (features + verified matches)
+sony_selected_list: data/WFS_Sony_COLMAP/selected_image_list.txt
+sony_quality_csv: data/WFS_Sony_COLMAP/quality_metrics.csv
+mask_dir: data/annotations/masks                     # SAM2 diaphragm masks on DJI frames
+coarse_dir: data/annotations/coarse_annotations      # coarse speaker boxes on DJI frames
+design_txt: data/1012.txt                            # Panoramix design file (read only)
+
+# --- tools ---
+colmap_exe: tools/colmap/bin/colmap.exe              # only needed for ba_sony.py / new COLMAP runs
+font: C:/Windows/Fonts/msjh.ttc                      # a font with Chinese glyphs, for the figures
+
+# --- outputs ---
+work_dir: work                                       # caches and intermediate files (~1.5 GB)
+output_dir: outputs                                  # full local results (finder with previews, csv, figures)
+measurement_dir: measurements/2026-10-13             # results copied into the repository

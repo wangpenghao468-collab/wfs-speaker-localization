@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>喇叭照片查找</title>
+<link rel="stylesheet" href="site.css">
+<style>
+body { font-size: 14px; line-height: 1.5; }
+header { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px 16px; }
+.top { display: flex; gap: 10px 14px; align-items: center; flex-wrap: wrap; }
+.search { display: flex; gap: 6px; align-items: center; }
+.search input { width: 76px; font: inherit; font-size: 16px; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); }
+button { font: inherit; padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); cursor: pointer; }
+button:hover { border-color: var(--muted); }
+.meta { color: var(--muted); font-size: 12px; margin-left: auto; }
+main { display: grid; grid-template-columns: 310px minmax(0, 1fr); gap: 16px; padding: 16px; max-width: 1600px; margin: 0 auto; }
+@media (max-width: 820px) { main { grid-template-columns: 1fr; padding: 12px 16px; } .meta { margin-left: 0; width: 100%; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.side { display: flex; flex-direction: column; gap: 12px; align-self: start; position: sticky; top: 64px; max-height: calc(100vh - 80px); overflow-y: auto; }
+@media (max-width: 820px) { .side { position: static; max-height: none; overflow: visible; } }
+.panel h2 { font-size: 13px; margin: 0 0 8px; color: var(--muted); font-weight: 600; }
+#map { width: 100%; aspect-ratio: 1; display: block; cursor: pointer; }
+.legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 4px; }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+.bars { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; }
+.bars .lab { grid-column: 1 / -1; font-size: 11px; color: var(--muted); margin-top: 4px; }
+.chip { font-size: 12px; padding: 3px 0; text-align: center; border-radius: 4px; background: var(--chip); cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip.sel { background: var(--sel); color: var(--selink); }
+.big { font-size: 28px; font-weight: 700; line-height: 1.1; margin-bottom: 6px; }
+.info { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 13px; margin: 0; }
+.info dt { color: var(--muted); }
+.info dd { margin: 0; font-variant-numeric: tabular-nums; }
+.info .sep { grid-column: 1 / -1; border-top: 1px solid var(--line); margin: 6px 0 2px; }
+.toolbar { display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.toolbar label { display: flex; gap: 4px; align-items: center; color: var(--muted); }
+.toolbar select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 10px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; cursor: zoom-in; }
+.card.dji { border-color: #f08a24; }
+.card.flag { outline: 2px solid #e5484d; }
+.card canvas { width: 100%; aspect-ratio: 4 / 3; display: block; background: #000; }
+.cap { padding: 5px 8px; font-size: 12px; display: flex; justify-content: space-between; gap: 6px; align-items: center; }
+.tag { font-size: 11px; padding: 0 6px; border-radius: 10px; border: 1px solid currentColor; white-space: nowrap; }
+.tag.ok { color: var(--ok); } .tag.maybe { color: var(--warn); } .tag.dji { color: #f08a24; } .tag.bad { color: #e5484d; }
+.hint { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+#lb { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; z-index: 20; flex-direction: column; }
+#lb.on { display: flex; }
+#lb .bar { display: flex; gap: 8px 12px; align-items: center; padding: 10px 16px; color: #eee; flex-wrap: wrap; }
+#lb .bar .sp { flex: 1; }
+#lb .bar button { background: #2a2a28; color: #eee; border-color: #555; }
+#lb .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 16px 16px; min-height: 0; }
+#lb canvas { max-width: 100%; max-height: 100%; width: 768px; aspect-ratio: 4 / 3; image-rendering: auto; }
+</style>
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a href="index.html">首頁</a><a class="on" href="finder.html">照片查找</a><a href="learn.html">原理教學</a><a href="results.html">結果與驗證</a><a href="manual.html">操作手冊</a></nav>
+<header>
+  <div class="top">
+    <div class="search">
+      <button id="prev" aria-label="上一顆">‹</button>
+      <input id="q" type="number" min="1" max="112" value="1" aria-label="喇叭編號">
+      <button id="next" aria-label="下一顆">›</button>
+    </div>
+    <button id="fbBtn" title="下載你標記的錯誤，交給重建程式使用">錯誤回報 (<span id="fbN">0</span>) ⤓</button>
+    <span class="meta" id="meta"></span>
+  </div>
+</header>
+<main>
+  <aside class="side">
+    <div class="panel">
+      <div class="big" id="title">#1</div>
+      <dl class="info" id="info"></dl>
+    </div>
+    <div class="panel">
+      <h2>俯視位置（Panoramix 座標，點擊選取）</h2>
+      <canvas id="map" width="600" height="600"></canvas>
+      <div class="legend"><span><i style="background:var(--muted)"></i>實測</span><span><i style="background:var(--design)"></i>你的設計</span><span>原點 ＋</span></div>
+    </div>
+    <div class="panel">
+      <h2>編號（每列一架 8 顆）</h2>
+      <div class="bars" id="bars"></div>
+    </div>
+  </aside>
+  <section>
+    <div class="toolbar">
+      <label>排序
+        <select id="sort">
+          <option value="size">喇叭在照片中最大</option>
+          <option value="angle">最正面</option>
+          <option value="err">重投影誤差最小</option>
+          <option value="name">檔名</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="showDji" checked> 顯示你的 DJI 標註</label>
+      <a id="sheetLink" target="_blank" rel="noopener">開啟整張合成圖</a>
+    </div>
+    <p class="hint">綠圈 = 系統認定的這顆喇叭；橙框 = 你在 DJI 影片上的標註。點任一張放大，發現編號錯了可在放大圖中回報。照片為低解析度裁切，只用於確認身份。</p>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+<div id="lb" role="dialog" aria-modal="true">
+  <div class="bar"><b id="lbTitle"></b><span id="lbInfo"></span><span class="sp"></span>
+    <button id="lbWrong">編號不對</button><button id="lbNot">不是喇叭</button><button id="lbExclude">整張照片編號錯誤</button><button id="lbClose">關閉 (Esc)</button></div>
+  <div class="stage"><canvas id="lbCanvas" width="768" height="576"></canvas></div>
+</div>
+<script src="data.js"></script>
+<script>
+const D = window.SITE_DATA, [TW, TH] = D.tile, COLS = D.cols;
+const ids = Object.keys(D.speakers).map(Number).sort((a, b) => a - b);
+const $ = id => document.getElementById(id);
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const sheetUrl = id => `sheets/${String(id).padStart(3, "0")}.jpg`;
+const sheets = new Map();
+const loadSheet = id => {
+  if (!sheets.has(id)) sheets.set(id, new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = sheetUrl(id); }));
+  return sheets.get(id);
+};
+const sideOf = b => b === 1 ? "後排左段" : b <= 5 ? "左側" : b <= 9 ? "前排" : b <= 13 ? "右側" : "後排右段";
+let cur = 1;
+
+$("meta").textContent = `${D.n_photos} 張 Sony 照片 · 112 顆喇叭 · 資料產生於 ${D.generated}`;
+
+// bar chips
+for (let b = 1; b <= 14; b++) {
+  const lab = document.createElement("div"); lab.className = "lab";
+  lab.textContent = `第 ${b} 架 · ${sideOf(b)} ${(b - 1) * 8 + 1}–${b * 8}`; $("bars").appendChild(lab);
+  for (let i = 1; i <= 8; i++) {
+    const id = (b - 1) * 8 + i, c = document.createElement("div");
+    c.className = "chip"; c.textContent = id; c.dataset.id = id; c.title = `${D.speakers[id].n} 張確認照片`;
+    c.onclick = () => select(id); $("bars").appendChild(c);
+  }
+}
+
+// map in Panoramix coordinates (x right, y forward), measured vs design
+const map = $("map"), mctx = map.getContext("2d");
+const pts = ids.flatMap(i => [[D.speakers[i].pano.x, D.speakers[i].pano.y], [D.speakers[i].design.x, D.speakers[i].design.y]]).concat([[0, 0]]);
+const bx = [Math.min(...pts.map(p => p[0])), Math.max(...pts.map(p => p[0]))], by = [Math.min(...pts.map(p => p[1])), Math.max(...pts.map(p => p[1]))];
+const msc = 520 / Math.max(bx[1] - bx[0], by[1] - by[0]);
+const toMap = (x, y) => [300 + (x - (bx[0] + bx[1]) / 2) * msc, 300 - (y - (by[0] + by[1]) / 2) * msc];
+function drawMap() {
+  mctx.clearRect(0, 0, 600, 600);
+  const [ox, oy] = toMap(0, 0);
+  mctx.strokeStyle = css("--muted"); mctx.lineWidth = 2;
+  mctx.beginPath(); mctx.moveTo(ox - 10, oy); mctx.lineTo(ox + 10, oy); mctx.moveTo(ox, oy - 10); mctx.lineTo(ox, oy + 10); mctx.stroke();
+  for (const i of ids) {
+    const d = D.speakers[i].design, [x, y] = toMap(d.x, d.y);
+    mctx.fillStyle = css("--design"); mctx.beginPath(); mctx.arc(x, y, 3.5, 0, 7); mctx.fill();
+  }
+  mctx.font = "17px system-ui";
+  for (const i of ids) {
+    const p = D.speakers[i].pano, [x, y] = toMap(p.x, p.y), s = i === cur;
+    mctx.fillStyle = s ? css("--accent") : css("--muted");
+    mctx.beginPath(); mctx.arc(x, y, s ? 9 : 4.5, 0, 7); mctx.fill();
+    if (i % 8 === 1 || s) { mctx.fillStyle = s ? css("--accent") : css("--ink"); mctx.fillText(i, x + 8, y - 8); }
+  }
+}
+map.onclick = e => {
+  const r = map.getBoundingClientRect(), px = (e.clientX - r.left) * 600 / r.width, py = (e.clientY - r.top) * 600 / r.height;
+  let best = 1, bd = 1e9;
+  for (const i of ids) { const [x, y] = toMap(D.speakers[i].pano.x, D.speakers[i].pano.y), d = (x - px) ** 2 + (y - py) ** 2; if (d < bd) { bd = d; best = i; } }
+  select(best);
+};
+
+// tiles are cut from the speaker's contact sheet
+async function drawTile(cv, id, k) {
+  const im = await loadSheet(id), ctx = cv.getContext("2d");
+  ctx.drawImage(im, (k % COLS) * TW, Math.floor(k / COLS) * TH, TW, TH, 0, 0, cv.width, cv.height);
+}
+
+let io;
+function renderGrid() {
+  const s = D.speakers[cur], key = $("sort").value;
+  let list = s.items.map((it, k) => ({ it, k })).filter(o => o.it.k === "sony" || $("showDji").checked);
+  const cmp = { size: () => 0, angle: (a, b) => a.it.a - b.it.a, err: (a, b) => (a.it.e ?? 99) - (b.it.e ?? 99), name: (a, b) => a.it.f.localeCompare(b.it.f) }[key];
+  list.sort((a, b) => (a.it.k === "dji" ? 0 : 1) - (b.it.k === "dji" ? 0 : 1) || cmp(a, b) || a.k - b.k);
+  $("grid").innerHTML = "";
+  if (io) io.disconnect();
+  io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); drawTile(e.target, cur, e.target._k).catch(() => {}); } }), { rootMargin: "400px" });
+  for (const { it, k } of list) {
+    const card = document.createElement("div"), flagged = it.k === "sony" && fbOf(it.f).length;
+    card.className = "card" + (it.k === "dji" ? " dji" : "") + (flagged ? " flag" : "");
+    const cv = document.createElement("canvas"); cv.width = TW; cv.height = TH; cv._k = k;
+    const cap = document.createElement("div"); cap.className = "cap";
+    cap.innerHTML = it.k === "dji"
+      ? `<b>${it.f.replace(".jpg", "")}</b><span class="tag dji">${it.src === "sam2_mask" ? "SAM2 遮罩" : "粗框"}</span>`
+      : `<b>${it.f.replace(".JPG", "")}</b><span>${Math.round(it.a)}°</span>` + (flagged ? `<span class="tag bad">已回報</span>` : it.b ? `<span class="tag maybe">模糊</span>` : `<span class="tag ok">確認</span>`);
+    card.append(cv, cap); card.onclick = () => openLB(it, k); $("grid").appendChild(card); io.observe(cv);
+  }
+}
+
+function renderInfo() {
+  const s = D.speakers[cur], p = s.pano, d = s.design;
+  $("title").textContent = `#${cur}`;
+  $("info").innerHTML =
+    `<dt>位置</dt><dd>第 ${s.bar} 架（${sideOf(s.bar)}），架內第 ${(cur - 1) % 8 + 1} 顆</dd>` +
+    `<dt>確認照片</dt><dd>${s.n} 張${s.maybe ? `（另有 ${s.maybe} 張可能拍到但未偵測到振膜）` : ""}</dd>` +
+    `<dt>精度</dt><dd>±${s.sd_mm ?? "–"} mm（bootstrap）· 重投影 ${s.reproj ?? "–"} px</dd>` +
+    `<dt>離地高度</dt><dd>${s.xyz_mm[2].toFixed(1)} mm</dd>` +
+    `<div class="sep"></div>` +
+    `<dt>Panoramix x, y</dt><dd>${p.x.toFixed(3)}, ${p.y.toFixed(3)} m</dd>` +
+    `<dt>方位角 · 距離</dt><dd>${p.az.toFixed(2)}° · ${p.d.toFixed(3)} m</dd>` +
+    `<dt>朝向</dt><dd>${p.dir.toFixed(2)}°（設計 ${p.dir_design.toFixed(1)}°）</dd>` +
+    `<dt>設計 x, y</dt><dd>${d.x.toFixed(3)}, ${d.y.toFixed(3)} m</dd>` +
+    `<dt>與設計差</dt><dd>${d.dev.toFixed(1)} mm（${d.radial >= 0 ? "遠離" : "靠近"}原點 ${Math.abs(d.radial).toFixed(1)} mm）</dd>`;
+  document.querySelectorAll(".chip").forEach(c => c.classList.toggle("sel", +c.dataset.id === cur));
+  $("sheetLink").href = sheetUrl(cur);
+}
+
+function select(id) {
+  cur = Math.min(112, Math.max(1, id | 0)); $("q").value = cur;
+  try { localStorage.setItem("wfsFinder.cur", cur); } catch (e) {}
+  history.replaceState(null, "", "#" + cur);
+  renderInfo(); drawMap(); renderGrid();
+}
+
+// feedback, kept in this browser and downloaded as speaker_corrections.json for the rebuild
+const FB_KEY = "wfsFinder.corrections";
+let fb = [];
+try { fb = JSON.parse(localStorage.getItem(FB_KEY) || "[]"); } catch (e) {}
+const fbOf = f => fb.filter(c => c.photo === f);
+function saveFb() { try { localStorage.setItem(FB_KEY, JSON.stringify(fb)); } catch (e) {} $("fbN").textContent = fb.length; }
+saveFb();
+$("fbBtn").onclick = () => {
+  if (!fb.length) { alert("還沒有回報。點任一張照片放大，發現編號錯了按「編號不對」。"); return; }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify({ corrections: fb }, null, 1)], { type: "application/json" }));
+  a.download = "speaker_corrections.json"; a.click();
+};
+function addFix(correct) {
+  const it = lbItem;
+  fb = fb.filter(c => !(c.photo === it.f && c.shown_id === cur));
+  fb.push({ photo: it.f, shown_id: cur, correct_id: correct, x_px: it.px[0], y_px: it.px[1], time: new Date().toISOString() });
+  saveFb(); closeLB(); renderGrid();
+}
+$("lbWrong").onclick = () => {
+  const ans = prompt(`這張照片中綠圈標成 #${cur}。它實際是幾號？（1–112）`, "");
+  if (ans === null || ans.trim() === "") return;
+  const v = parseInt(ans, 10);
+  if (isNaN(v) || v < 1 || v > 112) { alert("請輸入 1–112"); return; }
+  addFix(v);
+};
+$("lbNot").onclick = () => { if (confirm("綠圈裡不是喇叭振膜？")) addFix(0); };
+$("lbExclude").onclick = () => {
+  if (!confirm(`標記 ${lbItem.f} 整張照片的編號都錯了？重建時會排除這張。`)) return;
+  fb = fb.filter(c => !(c.photo === lbItem.f && c.exclude));
+  fb.push({ photo: lbItem.f, exclude: true, time: new Date().toISOString() });
+  saveFb(); closeLB(); renderGrid();
+};
+
+// lightbox: the tile enlarged
+const lb = $("lb");
+let lbItem = null;
+async function openLB(it, k) {
+  lbItem = it; lb.classList.add("on");
+  $("lbTitle").textContent = `#${cur} · ${it.f}`;
+  $("lbInfo").textContent = it.k === "dji" ? "你的 DJI 標註" : `視角 ${Math.round(it.a)}°` + (it.e != null ? ` · 重投影 ${it.e} px` : "") + (fbOf(it.f).length ? " · 已回報" : "");
+  for (const b of ["lbWrong", "lbNot", "lbExclude"]) $(b).style.display = it.k === "dji" ? "none" : "";
+  await drawTile($("lbCanvas"), cur, k);
+}
+const closeLB = () => lb.classList.remove("on");
+$("lbClose").onclick = closeLB;
+lb.onclick = e => { if (e.target === lb || e.target.classList.contains("stage")) closeLB(); };
+
+$("q").onchange = e => select(+e.target.value);
+$("prev").onclick = () => select(cur - 1);
+$("next").onclick = () => select(cur + 1);
+$("sort").onchange = renderGrid;
+$("showDji").onchange = renderGrid;
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeLB();
+  if (e.target.tagName === "INPUT" || lb.classList.contains("on")) return;
+  if (e.key === "ArrowRight") select(cur + 1);
+  if (e.key === "ArrowLeft") select(cur - 1);
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawMap);
+
+let start = +location.hash.slice(1);
+if (!start) { try { start = +localStorage.getItem("wfsFinder.cur"); } catch (e) {} }
+select(start || 1);
+</script>
+</body>
+</html>

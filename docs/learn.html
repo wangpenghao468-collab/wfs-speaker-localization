@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>定位系統原理</title>
+<style>
+:root {
+  --bg: #f6f5f2; --panel: #ffffff; --ink: #1d1d1b; --muted: #5f5e5a; --line: #e2e0da;
+  --accent: #1f6feb; --code: #f1f0ec; --key: #fff6d6; --key-edge: #d9a400;
+  --ray-a: #2a78d6; --ray-b: #e0662a; --ok: #1a9e5c; --bad: #c8372d;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a3a29c; --line: #33322f; --accent: #5aa2ff;
+    --code: #2a2a27; --key: #332c17; --key-edge: #c79a1a; --ray-a: #5aa2ff; --ray-b: #ff8a50;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a3a29c; --line: #33322f; --accent: #5aa2ff;
+  --code: #2a2a27; --key: #332c17; --key-edge: #c79a1a; --ray-a: #5aa2ff; --ray-b: #ff8a50;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.75 system-ui, "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+.wrap { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 36px; max-width: 1200px; margin: 0 auto; padding: 24px 16px 100px; }
+@media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } nav { position: static !important; max-height: none !important; } }
+nav { position: sticky; top: 16px; align-self: start; font-size: 14px; max-height: calc(100vh - 32px); overflow-y: auto; }
+nav a { display: block; color: var(--muted); text-decoration: none; padding: 3px 0; }
+nav a:hover { color: var(--accent); }
+nav .h { font-weight: 650; color: var(--ink); margin: 14px 0 4px; }
+main { min-width: 0; max-width: 820px; }
+h1 { font-size: 30px; margin: 0 0 6px; line-height: 1.3; }
+h2 { font-size: 23px; margin: 56px 0 10px; padding-top: 12px; border-top: 1px solid var(--line); line-height: 1.35; }
+h2 .n { color: var(--muted); font-weight: 500; margin-right: 8px; }
+h3 { font-size: 18px; margin: 26px 0 6px; }
+p { margin: 8px 0 12px; }
+a { color: var(--accent); }
+.lead { color: var(--muted); font-size: 17px; }
+code { font-family: Consolas, "Cascadia Mono", monospace; font-size: 14px; background: var(--code); padding: 1px 5px; border-radius: 4px; }
+.key { background: var(--key); border-left: 4px solid var(--key-edge); border-radius: 8px; padding: 10px 14px; margin: 14px 0; }
+.key b:first-child { display: block; margin-bottom: 2px; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 14px 0; }
+.math { font-family: "Cambria Math", Cambria, "Times New Roman", serif; font-size: 18px; text-align: center; margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0 16px; font-size: 14.5px; background: var(--panel); }
+th, td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: var(--code); font-weight: 600; }
+.tw { overflow-x: auto; }
+figure { margin: 16px 0; }
+figure img { max-width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #fff; display: block; }
+figcaption { color: var(--muted); font-size: 14px; margin-top: 6px; }
+details { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; margin: 12px 0; }
+details summary { cursor: pointer; font-weight: 600; }
+details[open] summary { margin-bottom: 6px; }
+.q { color: var(--muted); font-size: 14px; font-weight: 600; letter-spacing: .03em; margin-top: 18px; }
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 14px 0; }
+.flow div { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.flow div b { display: block; font-size: 15px; }
+.flow div span { color: var(--muted); }
+.demo { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin: 16px 0; }
+.demo svg { width: 100%; height: auto; display: block; }
+.ctl { display: grid; grid-template-columns: 150px 1fr 90px; gap: 6px 10px; align-items: center; font-size: 14px; margin-top: 10px; }
+.ctl input { width: 100%; }
+.ctl output { font-variant-numeric: tabular-nums; text-align: right; }
+.readout { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 10px; font-size: 14.5px; }
+.readout b { font-variant-numeric: tabular-nums; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 14px; }
+</style>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a href="index.html">首頁</a><a href="finder.html">照片查找</a><a class="on" href="learn.html">原理教學</a><a href="results.html">結果與驗證</a><a href="manual.html">操作手冊</a></nav>
+<div class="wrap">
+<nav>
+  <div class="h">定位系統原理</div>
+  <a href="#c0">0. 先看全貌</a>
+  <div class="h">基礎</div>
+  <a href="#c1">1. 照片只給方向，不給距離</a>
+  <a href="#c2">2. 兩個方向相交 = 三角化</a>
+  <a href="#c3">3. 相機在哪？COLMAP 在做什麼</a>
+  <div class="h">這套系統</div>
+  <a href="#c4">4. 為什麼用 DJI 當骨架</a>
+  <a href="#c5">5. 把每張 Sony 照片放進 DJI 座標</a>
+  <a href="#c6">6. 防止左右認錯：鄰居投票</a>
+  <a href="#c7">7. 這顆是幾號？</a>
+  <a href="#c8">8. 振膜中心在照片的哪個像素</a>
+  <a href="#c9">9. 幾十張照片合成一個中心</a>
+  <a href="#c10">10. 公分從哪來：尺度、地板、高度</a>
+  <a href="#c11">11. 對齊你的原點，輸出 Panoramix</a>
+  <div class="h">可信度</div>
+  <a href="#c12">12. 怎麼知道誤差是 0.7 mm</a>
+  <a href="#c13">13. 為什麼 Sony 光束法平差反而變差</a>
+  <a href="#c14">14. 名詞對照</a>
+  <div class="h">其他頁面</div>
+  <a href="finder.html">喇叭照片查找</a>
+  <a href="manual.html">操作手冊（腳本、指令）</a>
+</nav>
+
+<main>
+
+<h1>喇叭定位系統：技術原理</h1>
+<p class="lead">這頁解釋系統「為什麼這樣做」，從相機的基本原理講到最後的誤差分析。不需要先懂電腦視覺，從頭往下讀就好。每章結尾有一段「重點」，最後有名詞對照。腳本和指令請看<a href="manual.html">操作手冊</a>。</p>
+
+<h2 id="c0"><span class="n">0</span>先看全貌</h2>
+<p>最終要得到的是 112 顆喇叭的<b>振膜中心座標（mm）</b>和<b>朝向</b>，用你的 Panoramix 原點表示。整個問題可以拆成三個小問題：</p>
+<div class="flow">
+  <div><b>① 照片在哪裡拍的？</b><span>每張照片拍攝時相機的位置和方向（叫做「位姿」）。</span></div>
+  <div><b>② 照片裡哪顆是幾號？</b><span>112 顆長得一模一樣，要靠你的標註把編號傳過來。</span></div>
+  <div><b>③ 振膜中心在哪一個像素？</b><span>在照片上找到那個白色圓點的中心。</span></div>
+</div>
+<p>三個都知道之後，每張照片就提供了「從某個位置往某個方向看，看到了第 N 號」這樣一條線。幾十條線交在一起，就是第 N 號的 3D 位置。</p>
+<figure><img src="figures/pipeline_overview.png" alt="流程總覽"><figcaption>整體流程。左邊是輸入資料，右邊是產出。以下各章依序解釋每一塊。</figcaption></figure>
+
+<h2 id="c1"><span class="n">1</span>照片只給方向，不給距離</h2>
+<p>相機可以想成一個小孔：場景中每個點發出的光，穿過小孔落在感光元件上。點在照片上的位置，只取決於它相對相機的<b>方向</b>：</p>
+<div class="math">u = f · X / Z + c<sub>x</sub>　　v = f · Y / Z + c<sub>y</sub></div>
+<p>X、Y、Z 是點在相機座標中的位置（Z 是往前的距離），f 是焦距（用像素表示），c<sub>x</sub>、c<sub>y</sub> 是畫面中心。你的 Sony 照片 7008×3944 像素，焦距 27 mm，換成像素約 <b>f ≈ 5387 px</b>。</p>
+<p>關鍵在於 X/Z 這個比值：把點沿著視線往前或往後移，X 和 Z 同比例變大變小，照片上的位置完全不變。所以<b>一張照片只能告訴你點在哪一條線上，不能告訴你它有多遠</b>。</p>
+<div class="box">
+<b>一個像素有多大？</b> 距離 Z 時，一個像素對應 Z / f。Sony 在 1 m 外，1 px ≈ 1000 / 5387 ≈ <b>0.19 mm</b>；在 2 m 外約 0.37 mm。所以如果振膜中心能抓準到 1–3 px，單張照片的「側向」精度就在 1 mm 左右。這是整個系統精度的物理基礎。
+</div>
+<p>真實鏡頭還有一點彎曲（畸變），直線會稍微變彎。計算前先用鏡頭參數把像素「拉直」（去畸變），之後就能套用上面的小孔公式。</p>
+<div class="key"><b>重點</b>照片上的一個點 = 從相機出發的一條射線。距離（深度）必須靠第二張照片才能得到。</div>
+
+<h2 id="c2"><span class="n">2</span>兩個方向相交 = 三角化</h2>
+<p>如果知道兩台相機的位置，又在兩張照片裡找到同一個點，就能畫出兩條射線，它們的交點就是這個點的 3D 位置。這叫<b>三角化</b>，人的雙眼也是這樣判斷距離的。</p>
+<p>COLMAP 的「深度」就是這樣算出來的，不需要深度感測器。不過三角化的精度跟<b>兩條射線的夾角</b>關係很大，可以用下面的示意圖試試看：</p>
+
+<div class="demo" id="triDemo">
+  <svg viewBox="0 0 640 360" role="img" aria-label="三角化示意">
+    <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="var(--line)" stroke-width="1"/></pattern></defs>
+    <rect width="640" height="360" fill="url(#g)"/>
+    <g id="triG"></g>
+  </svg>
+  <div class="ctl">
+    <label for="tAng">兩張照片的夾角</label><input id="tAng" type="range" min="2" max="120" value="30"><output id="oAng"></output>
+    <label for="tPx">中心抓偏多少像素</label><input id="tPx" type="range" min="0.5" max="20" step="0.5" value="3"><output id="oPx"></output>
+    <label for="tN">照片張數</label><input id="tN" type="range" min="2" max="100" value="2"><output id="oN"></output>
+  </div>
+  <div class="readout">
+    <span>前後（深度）誤差 <b id="rDepth"></b></span>
+    <span>左右誤差 <b id="rSide"></b></span>
+    <span id="rNote" style="color:var(--muted)"></span>
+  </div>
+  <p style="font-size:14px;color:var(--muted);margin:8px 0 0">俯視圖，喇叭距離相機 1.5 m，焦距 5387 px。橘色區域是兩條射線各偏移 ± 指定像素後，交點可能落在的範圍（放大 40 倍顯示）。張數 &gt; 2 時，假設照片平均分布在夾角範圍內，誤差約以 1/√張數 下降。</p>
+</div>
+
+<p>試幾個情況：</p>
+<ul>
+<li>夾角 2°：兩條線幾乎平行，深度誤差約 5 cm，左右誤差卻只有 0.8 mm。角度差不多的照片可以定方向，但不能拿來算距離。</li>
+<li>夾角 30°：深度約 3 mm；到 90° 時前後和左右誤差相同，都約 1.2 mm。</li>
+<li>夾角 90°、照片增加到 80 張：誤差降到約 0.2 mm。實際上每張照片的位姿也有誤差，所以真實結果約 0.7 mm（第 12 章）；但道理一樣，照片越多、角度越分散越好。</li>
+</ul>
+<div class="key"><b>重點</b>深度是從「不同角度的照片」算出來的。角度差越大、照片越多，位置就越準。</div>
+
+<h2 id="c3"><span class="n">3</span>相機在哪？COLMAP 在做什麼</h2>
+<p>上一章假設「已知相機位置」。可是拍照時沒有人量相機在哪裡。COLMAP（Structure from Motion，「從運動恢復結構」）的作用，就是<b>只看照片，同時算出相機位置和場景的 3D 點</b>：</p>
+<ol>
+<li><b>找特徵點</b>：在每張照片上找有辨識度的小區塊（角落、花紋、文字），每個附上一組描述它長相的數字（SIFT 描述子）。</li>
+<li><b>配對</b>：比對兩張照片的描述子，找出「同一個東西」。配錯的會在下一步被淘汰。</li>
+<li><b>幾何驗證</b>：真正的同一場景，配對必須符合兩台相機之間的幾何關係（極線約束）。不符合的配對丟掉（RANSAC：隨機抽樣、保留多數一致的結果）。</li>
+<li><b>逐步重建</b>：先用兩張照片三角化出一批 3D 點，再把下一張照片「放」進去（看它看到哪些已知點，反推它的位置，就是下一章的 PnP），再三角化更多點，一張一張加。</li>
+<li><b>光束法平差（Bundle Adjustment, BA）</b>：所有相機和所有 3D 點一起微調，讓每個 3D 點投影回每張照片時，跟實際看到的位置差距（<b>重投影誤差</b>）總和最小。</li>
+</ol>
+<div class="box">
+<b>尺度是未知的。</b>如果把整個場景和所有相機位置一起放大兩倍，每張照片看起來完全一樣。所以 COLMAP 算出的單位是任意的（這裡 1 單位 ≈ 34.6 cm），必須用一個已知長度來換算成公分。我們用的是架內喇叭間距 80 mm（第 10 章）。
+</div>
+<div class="key"><b>重點</b>COLMAP 用「同一個東西出現在多張照片」這個關係，把相機一張一張串起來。照片之間串得越緊，整體越準。串不起來的照片，相對位置就沒有東西能約束。</div>
+
+<h2 id="c4"><span class="n">4</span>為什麼用 DJI 當骨架</h2>
+<p>你有兩組影像：</p>
+<div class="tw"><table>
+<tr><th></th><th>DJI 影片幀</th><th>Sony 照片</th></tr>
+<tr><td>數量</td><td>286 幀</td><td>944 張（663 張成功定位）</td></tr>
+<tr><td>畫質</td><td>較低，振膜邊緣模糊</td><td>7008×3944，振膜清楚</td></tr>
+<tr><td>拍攝方式</td><td>連續繞一圈，相鄰幀幾乎重疊</td><td>手持一張張拍，常換位置、很多特寫</td></tr>
+<tr><td>串連性</td><td>好：整圈是同一個模型</td><td>差：分成很多小群，群與群之間共同特徵很少</td></tr>
+<tr><td>你的標註</td><td>有（SAM2 遮罩、粗框）</td><td>沒有</td></tr>
+</table></div>
+<p>直接用 Sony 跑 COLMAP 的結果是<b>左右摺疊</b>：左側和右側的架子長得一樣，COLMAP 把兩側疊在一起，當成同一側。原因是 Sony 照片串不起來，跨過「左右不同」的連結太弱，而重複的外觀又提供了很強的錯誤配對。</p>
+<p>DJI 影片是連續拍攝，從左側繞到右側的每一步都有大量重疊，所以整圈的形狀是正確的。因此系統的分工是：</p>
+<div class="flow">
+  <div><b>DJI 提供</b><span>正確的整體座標系（骨架），加上你標註的編號。</span></div>
+  <div><b>Sony 提供</b><span>高解析的振膜影像，用來精確量測中心。</span></div>
+</div>
+<p>注意：Sony 照片<b>沒有</b>被轉換成 DJI 照片，也沒有用 DJI 的影像量測中心。DJI 只負責「座標系」和「編號」；量測全部來自 Sony 照片本身的像素。</p>
+<div class="key"><b>重點</b>DJI：形狀正確但模糊；Sony：清楚但串不起來。所以用 DJI 定座標，用 Sony 量位置。</div>
+
+<h2 id="c5"><span class="n">5</span>把每張 Sony 照片放進 DJI 座標</h2>
+<p>對每張 Sony 照片，系統要找出它在 DJI 座標中的位置和方向。方法叫 <b>PnP</b>（Perspective-n-Point）：</p>
+<ol>
+<li>找幾張「可能拍到同一處」的 DJI 幀。</li>
+<li>把 Sony 照片和這些 DJI 幀做特徵配對（RootSIFT、GPU 加速、雙向最近鄰 + Lowe 比值測試）。</li>
+<li>DJI 幀上的特徵點很多已經有 3D 座標（來自 DJI 的 COLMAP）。所以配對之後，我們得到一批「Sony 照片上的像素 ↔ 已知 3D 點」。</li>
+<li>已知一批 3D 點和它們在照片上的位置，就能反推相機在哪裡：只有一個相機位姿能讓這些點都投影到正確位置。</li>
+<li>用 RANSAC 淘汰錯誤配對，再用最小化重投影誤差微調（LM 法）。</li>
+</ol>
+<p>這一步相當於「把 Sony 照片一張一張地掛到 DJI 骨架上」。每張照片獨立定位，所以不需要 Sony 照片彼此串得起來。</p>
+<div class="key"><b>重點</b>PnP = 看到一些已知 3D 點 → 反推相機位置。每張 Sony 照片各自對齊 DJI，避開 Sony 自己串不起來的問題。</div>
+
+<h2 id="c6"><span class="n">6</span>防止左右認錯：鄰居投票</h2>
+<p>PnP 依然有陷阱：左側和右側的架子長得一樣，一張只拍到架子特寫的照片，可能被配到另一側的同一位置，而且配對數量看起來還很好。之前你回報過「標 8 號的其實是 39 號」，就是這種錯誤。</p>
+<p>解法是利用照片之間的<b>相對關係</b>：</p>
+<ul>
+<li>兩張 Sony 照片如果共用很多特徵（≥40 個共同 3D 點，或資料庫中 ≥60 個驗證過的配對），它們之間的<b>相對旋轉與方向</b>可以直接算出來。這個相對關係是局部的、可靠的。</li>
+<li>每張照片的候選位姿（可能有好幾個，例如左側版本和右側版本）都拿去跟鄰居比對：如果鄰居們說「你應該在我右邊 30 cm 處、朝向差 10°」，那麼符合這個關係的候選位姿就得票。</li>
+<li>反覆投票直到穩定。你在網頁上回報的修正，會被當作不可違反的條件。</li>
+</ul>
+<p>最初曾用檔名順序判斷鄰居（DSC04160 後面是 DSC04161），但你拍攝時會跳著拍，檔名相鄰不代表位置相鄰，後來改成用實際共同特徵判斷。</p>
+<div class="key"><b>重點</b>單張照片可能被重複外觀騙到另一側；但一群相互看得到的照片不會一起被騙。用鄰居關係投票，就能把錯放的照片拉回來。</div>
+
+<h2 id="c7"><span class="n">7</span>這顆是幾號？</h2>
+<p>你在 DJI 幀上標了每顆喇叭的編號，DJI 又有正確的 3D 座標，所以系統先算出每顆喇叭在 DJI 座標中的<b>大約位置</b>（幾公分精度）。</p>
+<p>有了 Sony 照片的位姿之後，把這 112 個大約位置<b>投影</b>到這張 Sony 照片上，得到「第 N 號應該出現在這個像素附近」。再到附近找實際偵測到的振膜：</p>
+<ul>
+<li>預測位置和偵測位置要夠近（門檻依振膜在照片上的大小縮放）；</li>
+<li>最近的候選必須明顯比第二近的候選更近（避免卡在兩顆中間，認錯隔壁）；</li>
+<li>振膜在照片上的大小要符合預期的距離；</li>
+<li>你回報「這不是喇叭」或「這是 X 號」的照片會被強制修正。</li>
+</ul>
+<p>只有通過這些檢查的才列進照片查找網頁，也才會用來計算中心。</p>
+<div class="key"><b>重點</b>編號從 DJI 的標註來，再透過 3D 投影傳到 Sony。Sony 照片本身不需要任何人工標註。</div>
+
+<h2 id="c8"><span class="n">8</span>振膜中心在照片的哪個像素</h2>
+<p>喇叭振膜在照片中是一個<b>亮白色、接近圓形、外圍有一圈深色</b>的區塊。偵測步驟：</p>
+<ol>
+<li>挑出又亮又不飽和的像素（亮度 V &gt; 140、飽和度 S &lt; 60），也就是白色。</li>
+<li>把相連的白色像素組成區塊。</li>
+<li>過濾：形狀要夠圓（圓度 ≥ 0.6），外圍要有一圈暗的邊（≥ 35%），大小要合理。</li>
+<li>取區塊的<b>質心</b>（所有像素位置的平均）作為中心，再去畸變。</li>
+</ol>
+<figure><img src="figures/detection_demo_20.png" alt="20 號振膜偵測示例"><figcaption>20 號在不同照片中的偵測結果。綠色點是算出的中心。</figcaption></figure>
+<details><summary>為什麼不用 SAM2 遮罩來找中心？</summary>
+<p>SAM2 的遮罩是在 DJI 幀上做的，DJI 影像本身就模糊，遮罩邊緣只能精準到幾個像素，換算成實際距離有好幾 mm。SAM2 的任務是「哪一塊是哪顆喇叭」（身份），不是精確量測。在 7008 px 的 Sony 照片上，振膜直徑常有上百像素，亮白色和深色外圈的對比非常明顯，用簡單的亮度門檻加質心就比 SAM2 精確許多。</p>
+</details>
+<details><summary>斜著拍的時候質心會偏嗎？</summary>
+<p>會偏一點。振膜不是完全平的，有一點弧度（像淺碗），斜著看時看到的亮區中心會往一側偏。估算約 +1.1 mm，方向是沿著喇叭朝向（前後），左右不受影響。這對所有喇叭差不多一樣，相當於整排一起往前移約 1 mm，不影響喇叭之間的相對位置。CVPR 2024 的 DiscoCal 方法可以修正透視造成的圓心偏差，但估算這裡只能改善約 0.1–0.2 mm。</p>
+</details>
+<div class="key"><b>重點</b>中心 = 白色圓形區塊的質心。Sony 高解析度讓這一步能精確到 1–3 px。</div>
+
+<h2 id="c9"><span class="n">9</span>幾十張照片合成一個中心</h2>
+<p>到這裡，每張拍到第 N 號的照片都提供一條射線。因為每張照片的位姿和中心都有一點誤差，這些射線不會剛好交在同一點，所以要找一個「最能同時解釋所有照片」的點。</p>
+<h3>9.1 最小化重投影誤差</h3>
+<p>猜一個 3D 位置，把它投影到每張照片上，看跟實際偵測到的中心差幾個像素。所有照片的差距平方和越小，這個猜測越好。從 DLT（線性解，直接算出初值）出發，用 Gauss–Newton 法反覆修正，直到不再變化。</p>
+<p>用「像素差距」而不是「3D 距離」來衡量，是因為照片的誤差本來就以像素發生。遠的照片一個像素代表比較長的距離，自然權重比較低，不需要另外設定。</p>
+<h3>9.2 讓少數壞照片不要拖累結果（Huber 權重）</h3>
+<p>如果某張照片偏了 50 px（例如位姿稍微錯、或偵測到反光），用平方和會讓它的影響非常大。所以用 <b>Huber 權重</b>：差距在門檻內的照片權重為 1；超過門檻的照片，權重隨差距反比下降。</p>
+<p>門檻不是固定的，而是依照這顆喇叭所有照片的典型誤差自動決定（2.45 倍的穩健標準差），讓一般照片都是全權重，只壓低真正異常的照片。</p>
+<h3>9.3 其他篩選</h3>
+<ul>
+<li><b>整張照片偏移</b>：如果一張照片裡每顆喇叭都偏了（中位數 &gt; 25 px 且 &gt; 3 倍典型值），代表這張照片的位姿有問題，整張不用。</li>
+<li><b>角度太斜</b>：視線與喇叭朝向夾角 &gt; 75° 不用（振膜變成細橢圓，中心不可靠）。</li>
+<li><b>模糊</b>：清晰度太低的照片不用。</li>
+</ul>
+<figure><img src="figures/rays_speaker_20.png" alt="20 號的射線"><figcaption>20 號：84 張照片的射線。右邊是每條射線經過估計中心附近的位置（±8 mm），顏色是距離，大小是權重。大部分射線都在 1–2 mm 內經過。</figcaption></figure>
+<figure><img src="figures/weights_speaker_20.png" alt="20 號的權重分布"><figcaption>每張照片的實際影響力（權重 × 近距離加成）。近的、正對的照片影響大；但只用最好的幾張，結果並不比用全部好。</figcaption></figure>
+<div class="box"><b>例子：20 號</b>　84 張照片、射線分布的角度範圍 108°、重投影誤差中位數 6.6 px、bootstrap 標準差 <b>0.56 mm</b>、跟同架其他 7 顆擬合的直線只差 0.9 mm。</div>
+<div class="key"><b>重點</b>找一個點，讓它在所有照片上的投影都最接近實際偵測。好的照片全權重，異常的自動降權，不需要手動刪除。</div>
+
+<h2 id="c10"><span class="n">10</span>公分從哪來：尺度、地板、高度</h2>
+<h3>10.1 尺度</h3>
+<p>第 3 章說過，重建的單位是任意的。我們知道同一根架子上的 8 顆喇叭間距是 80 mm，所以先在 DJI 座標中算出所有架內相鄰間距的平均值，再用它換算成 mm（1 單位 ≈ 345.9 mm）。</p>
+<p>換算後再檢查：架子之間的距離算出約 9.0 cm，跟你實際確認的一致，表示尺度沒問題。不過整體尺度完全依賴「80 mm」這個數字；如果架子實際是 80.5 mm，所有距離都會差 0.6%。建議用捲尺量一段長距離（例如 41 號到 72 號，預測 2518 mm）做最後驗證。</p>
+<h3>10.2 地板</h3>
+<p>高度要以地板為基準。DJI 模型裡的「地板」點其實多半是架子底部，比真正的地板高了約 8 cm。所以改用 Sony 照片兩兩配對，在地板區域三角化出大量點，再用穩健的平面擬合（反覆加權直到收斂）找出真正的地板平面。</p>
+<h3>10.3 高度</h3>
+<p>每顆喇叭中心到地板平面的垂直距離就是高度。結果：1115–1130 mm，中位數 1120 mm。用局部地板（只用喇叭附近的地板點）和整體平面算，平均只差 0.3 mm，表示地板是平的。</p>
+<figure><img src="figures/speaker_heights.png" alt="高度"><figcaption>每顆喇叭的振膜中心高度。</figcaption></figure>
+<div class="key"><b>重點</b>單位靠「架內 80 mm」換算；高度靠 Sony 照片重新算出的地板平面。</div>
+
+<h2 id="c11"><span class="n">11</span>對齊你的原點，輸出 Panoramix</h2>
+<p>重建座標的原點和方向是任意的，需要轉到你的 Panoramix 座標（<code>1012.txt</code> 裡的原點和軸向）。</p>
+<ol>
+<li>把量測位置投到水平面（俯視）。</li>
+<li>找一個<b>只有旋轉和平移、不縮放</b>的轉換，讓 112 顆量測位置整體最接近你的設計位置。不縮放是因為尺度已經由 80 mm 決定，不應該被設計值拉伸。</li>
+<li>轉換後的位置就是「你的原點下，喇叭實際在哪裡」。實際喇叭沒有移動，只是換了表示方式。</li>
+<li>朝向：每根架子的 8 顆中心擬合一條直線，喇叭朝向是這條線的法線（垂直方向），正負號依照設計的朝向決定。</li>
+<li>換算成 Panoramix 需要的 <code>aed</code>（方位角、仰角、距離）和 <code>directions/xyz</code>，仰角固定為 0（<code>ignorez 1</code>）。</li>
+</ol>
+<p>輸出的 <code>1012_measured.txt</code> 是你原始檔的副本，只改了 <code>/bus/10/speakers/aed</code> 和 <code>/bus/10/speakers/directions/xyz</code> 這兩行，原始檔沒有修改。</p>
+<figure><img src="figures/topview_manual_vs_photo.png" alt="俯視比較"><figcaption>俯視圖，真實比例：你的設計（手動量測）與照片量測的比較。</figcaption></figure>
+<figure><img src="figures/design_vs_measured.png" alt="設計與量測差異"><figcaption>每顆喇叭的設計與量測差距。中位數 15 mm、最大 64 mm；後排比設計更靠近原點約 5–6 cm。</figcaption></figure>
+<div class="key"><b>重點</b>只做旋轉 + 平移對齊你的設計，不縮放。輸出檔只改兩行。</div>
+
+<h2 id="c12"><span class="n">12</span>怎麼知道誤差是 0.7 mm</h2>
+<p>沒有一個「標準答案」可以對照，所以用好幾種彼此獨立的方法交叉檢查：</p>
+<div class="tw"><table>
+<tr><th>檢查方法</th><th>怎麼做</th><th>結果</th></tr>
+<tr><td>Bootstrap</td><td>從該喇叭的照片中隨機抽樣（可重複）200 次，每次重算中心，看結果散布多大</td><td>中位數 <b>0.74 mm</b>，90% ≤ 1.17 mm</td></tr>
+<tr><td>架內間距</td><td>同一架相鄰兩顆的距離，實際應為 80 mm。每顆是分別算的，間距不會被強制成 80 mm（尺度只用平均值換算）</td><td>80.10 ± 0.74 mm</td></tr>
+<tr><td>直線度</td><td>同架 8 顆應該在一條直線上。每顆分別算出後，看離直線多遠</td><td>中位數 0.6 mm</td></tr>
+<tr><td>留一驗證</td><td>拿掉一顆，用同架其他顆的直線推算它的位置，跟它自己的量測比較</td><td>中位數 0.8 mm</td></tr>
+</table></div>
+<p>這幾個數字都在 0.6–0.8 mm，彼此一致，所以可以相信「喇叭之間的相對位置」大約是這個精度。</p>
+<div class="box">
+<b>還沒驗證的系統誤差</b>（所有喇叭一起偏，上面的檢查看不出來）：
+<ul>
+<li>整體尺度：完全依賴 80 mm，需要捲尺驗證。</li>
+<li>斜視偏差：振膜弧度造成約 1 mm 往前偏，所有喇叭差不多一樣。</li>
+</ul>
+這兩項不影響喇叭之間的相對關係。對 WFS 來說，模擬結果顯示時間誤差 RMS 從 31 µs（用設計值）降到 2.1 µs（用量測值）。
+</div>
+<div class="key"><b>重點</b>多種獨立檢查都落在 0.6–0.8 mm，相對位置可信；絕對尺度還需要一次捲尺量測確認。</div>
+
+<h2 id="c13"><span class="n">13</span>為什麼 Sony 光束法平差反而變差</h2>
+<p>光束法平差（第 3 章第 5 步）通常會讓結果更好，所以試了直接對 663 張 Sony 照片做 BA。試了三種設定，結果都比現在差：</p>
+<div class="tw"><table>
+<tr><th>版本</th><th>重投影誤差</th><th>中心散布（bootstrap）</th><th>架內間距誤差</th></tr>
+<tr><td><b>目前採用（不做 Sony BA）</b></td><td><b>6.6 px</b></td><td><b>0.74 mm</b></td><td><b>0.74 mm</b></td></tr>
+<tr><td>BA，相機參數也調整</td><td>24.0 px</td><td>2.65 mm</td><td>2.3 mm</td></tr>
+<tr><td>BA，相機參數固定</td><td>21.9 px</td><td>2.87 mm</td><td>2.4 mm</td></tr>
+<tr><td>BA，遮掉喇叭架區域</td><td>—</td><td>—</td><td>1.6 mm</td></tr>
+</table></div>
+<p>原因不是 COLMAP 算不出深度，而是第 3、4 章說的<b>串連性</b>：</p>
+<ul>
+<li>以「共同點 ≥ 30」當作有連結，663 張 Sony 照片分成 <b>333 群</b>，最大一群只有 56 張。</li>
+<li>BA 只看 Sony 自己的特徵。每一群內部能調得很好（背景特徵的重投影誤差只剩 0.8 px），但群與群之間沒有足夠的共同點約束，就會各自漂移。</li>
+<li>同一顆喇叭被好幾群拍到，各群漂移方向不同，射線就對不準了，振膜重投影誤差從 6.6 px 增加到 22 px 以上。</li>
+<li>BA 跑了 500 次迭代還沒收斂，相機平均移動了 1.6–1.9 cm。</li>
+</ul>
+<p>目前的做法，是讓每張照片直接對齊 DJI 骨架，固定在正確的整體座標中，不讓它們彼此漂移。所以現在的 0.74 mm <b>不是</b>靠 Sony BA 得到的。</p>
+<details><summary>以後怎麼讓 BA 有用？</summary>
+<ul>
+<li><b>聯合 BA</b>：把 Sony–DJI 的配對也放進 BA，DJI 當作固定骨架，Sony 只做局部微調。這樣群與群之間就有 DJI 約束，不會漂移。預估 2–3 小時，效果要做了才知道。</li>
+<li><b>拍攝端</b>：補拍時每移動一步多拍一張重疊的照片（相鄰照片重疊 60% 以上），或在場地貼幾張定位標記（例如 AprilTag）。這比改演算法更有效。</li>
+</ul>
+</details>
+<div class="key"><b>重點</b>BA 需要照片之間串得起來。Sony 照片分成 333 個小群，單獨做 BA 會各自漂移；用 DJI 當骨架才穩定。</div>
+
+<h2 id="c14"><span class="n">14</span>名詞對照</h2>
+<div class="tw"><table>
+<tr><th>名詞</th><th>意思</th></tr>
+<tr><td>位姿（pose）</td><td>相機拍照時的位置（3 個數）和方向（3 個數）。</td></tr>
+<tr><td>內參（intrinsics）</td><td>相機本身的參數：焦距 f、畫面中心、畸變。</td></tr>
+<tr><td>投影</td><td>把 3D 點依照相機位姿和內參算到照片上的像素位置。</td></tr>
+<tr><td>重投影誤差</td><td>3D 點投影回照片的位置與實際觀察位置的距離（px）。衡量「解釋照片」好不好的標準。</td></tr>
+<tr><td>三角化</td><td>用兩張以上照片的射線求交點，得到 3D 位置。</td></tr>
+<tr><td>SfM / COLMAP</td><td>只從照片同時求出相機位姿和 3D 點的方法 / 軟體。</td></tr>
+<tr><td>SIFT / RootSIFT</td><td>找特徵點並描述其外觀的方法，用來在不同照片間配對。</td></tr>
+<tr><td>RANSAC</td><td>隨機抽少量資料算答案，看多少其他資料同意；重複多次，保留最多人同意的答案。用來淘汰錯誤配對。</td></tr>
+<tr><td>PnP</td><td>已知若干 3D 點及其在照片上的位置，反推相機位姿。</td></tr>
+<tr><td>光束法平差（BA）</td><td>同時微調所有相機與 3D 點，使重投影誤差總和最小。</td></tr>
+<tr><td>Huber 權重</td><td>小誤差全權重、大誤差降權的穩健估計方法，避免少數壞資料主導結果。</td></tr>
+<tr><td>Bootstrap</td><td>對資料重複隨機抽樣並重算，用結果的散布估計不確定度。</td></tr>
+<tr><td>尺度</td><td>重建單位與實際 mm 的換算比例，這裡由架內 80 mm 決定。</td></tr>
+</table></div>
+<p style="color:var(--muted);font-size:14px;margin-top:30px">最後更新：2026-10-14。數字來自目前採用的版本（未使用 Sony BA）。</p>
+</main>
+</div>
+
+<script>
+(function () {
+  const f = 5387, Z = 1500, MAG = 40;
+  const $ = id => document.getElementById(id);
+  const ns = "http://www.w3.org/2000/svg";
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  function el(tag, attrs) { const e = document.createElementNS(ns, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function intersect(p1, d1, p2, d2) {
+    const det = d1[0] * -d2[1] + d2[0] * d1[1];
+    if (Math.abs(det) < 1e-12) return null;
+    const bx = p2[0] - p1[0], by = p2[1] - p1[1];
+    const t = (bx * -d2[1] + d2[0] * by) / det;
+    return [p1[0] + t * d1[0], p1[1] + t * d1[1]];
+  }
+  function rot(d, a) { const c = Math.cos(a), s = Math.sin(a); return [d[0] * c - d[1] * s, d[0] * s + d[1] * c]; }
+  function draw() {
+    const ang = +$("tAng").value, px = +$("tPx").value, n = +$("tN").value;
+    $("oAng").textContent = ang + "°"; $("oPx").textContent = px + " px"; $("oN").textContent = n + " 張";
+    const half = ang / 2 * Math.PI / 180, dth = px / f;
+    // target at origin (mm); cameras at distance Z, symmetric about +y axis (cameras below target)
+    const cams = [-half, half].map(a => [Math.sin(a) * Z, -Math.cos(a) * Z]);
+    const dirs = cams.map(c => { const L = Math.hypot(c[0], c[1]); return [-c[0] / L, -c[1] / L]; });
+    const corners = [];
+    for (const s1 of [-1, 1]) for (const s2 of [-1, 1]) {
+      const q = intersect(cams[0], rot(dirs[0], s1 * dth), cams[1], rot(dirs[1], s2 * dth));
+      if (q) corners.push(q);
+    }
+    let depth = 0, side = 0;
+    for (const a of corners) { depth = Math.max(depth, Math.abs(a[1])); side = Math.max(side, Math.abs(a[0])); }
+    const k = Math.sqrt(2 / n);
+    depth *= k; side *= k;
+    // drawing: scene scale so that Z fits
+    const W = 640, H = 360, tx = W / 2, ty = 70, sc = (H - 110) / Z;
+    const P = q => [tx + q[0] * sc, ty - q[1] * sc];
+    const g = $("triG"); g.innerHTML = "";
+    const colA = css("--ray-a"), colB = css("--ray-b"), ink = css("--ink"), mut = css("--muted");
+    // region (magnified)
+    if (corners.length === 4) {
+      const ord = [corners[0], corners[1], corners[3], corners[2]];
+      const pts = ord.map(q => { const s = k * MAG; const r = [tx + q[0] * s * sc * 1, ty - q[1] * s * sc]; return r.join(","); }).join(" ");
+      g.appendChild(el("polygon", { points: pts, fill: colB, "fill-opacity": 0.25, stroke: colB, "stroke-width": 1.5 }));
+    }
+    cams.forEach((c, i) => {
+      const a = P(c), col = i ? colB : colA;
+      for (const s of [-1, 0, 1]) {
+        const d = rot(dirs[i], s * dth * MAG);
+        const far = [c[0] + d[0] * Z * 1.25, c[1] + d[1] * Z * 1.25], b = P(far);
+        g.appendChild(el("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: col, "stroke-width": s ? 1 : 2, "stroke-dasharray": s ? "4 4" : "", "stroke-opacity": s ? 0.7 : 1 }));
+      }
+      g.appendChild(el("rect", { x: a[0] - 9, y: a[1] - 6, width: 18, height: 12, rx: 2, fill: col }));
+      const t = el("text", { x: a[0], y: a[1] + 24, "text-anchor": "middle", "font-size": 13, fill: mut }); t.textContent = "照片 " + (i + 1); g.appendChild(t);
+    });
+    const tg = P([0, 0]);
+    g.appendChild(el("circle", { cx: tg[0], cy: tg[1], r: 4, fill: ink }));
+    const t = el("text", { x: tg[0] + 10, y: tg[1] - 10, "font-size": 13, fill: ink }); t.textContent = "振膜中心"; g.appendChild(t);
+    const fmt = v => v >= 10 ? v.toFixed(0) + " mm" : v.toFixed(2) + " mm";
+    $("rDepth").textContent = fmt(depth); $("rSide").textContent = fmt(side);
+    $("rNote").textContent = depth > 5 * side ? "夾角太小：深度方向特別不穩" : (depth < 1.5 && side < 1.5 ? "已在 1 mm 量級" : "");
+  }
+  ["tAng", "tPx", "tN"].forEach(id => $(id).addEventListener("input", draw));
+  draw();
+})();
+</script>
+</body>
+</html>

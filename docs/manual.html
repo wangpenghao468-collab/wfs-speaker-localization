@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>操作手冊</title>
+<link rel="stylesheet" href="site.css">
+<style>
+:root { --you-edge: #eb6a1e; --geo-edge: #2a78d6; --out-edge: #1a9e5c; }
+.wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; max-width: 1200px; margin: 0 auto; padding: 24px 16px 80px; }
+@media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } .wrap > nav { position: static !important; max-height: none !important; } }
+.wrap > nav { position: sticky; top: 16px; align-self: start; font-size: 14px; max-height: calc(100vh - 32px); overflow-y: auto; }
+.wrap > nav a { display: block; color: var(--muted); text-decoration: none; padding: 3px 0; }
+.wrap > nav a:hover { color: var(--accent); }
+.wrap > nav .h { font-weight: 650; color: var(--ink); margin: 12px 0 4px; }
+main { min-width: 0; max-width: 860px; }
+h1 { font-size: 28px; margin: 0 0 6px; }
+h2 { font-size: 21px; margin: 42px 0 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+h3 { font-size: 17px; margin: 20px 0 8px; }
+.lead { color: var(--muted); }
+pre { position: relative; background: var(--code); border-radius: 8px; padding: 10px 76px 10px 12px; font: 13px/1.55 Consolas, "Cascadia Mono", Menlo, monospace; overflow-x: auto; margin: 8px 0 14px; }
+pre button { position: absolute; right: 8px; top: 8px; font: 12px system-ui; padding: 3px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); cursor: pointer; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; font-size: 14px; background: var(--panel); }
+th, td { border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: var(--code); font-weight: 600; }
+.tw { overflow-x: auto; }
+.step { background: var(--panel); border: 1px solid var(--line); border-left: 5px solid var(--geo-edge); border-radius: 10px; padding: 10px 16px; margin: 10px 0; }
+.step.you { border-left-color: var(--you-edge); } .step.out { border-left-color: var(--out-edge); }
+.step h3 { margin: 0 0 4px; }
+.kv { display: grid; grid-template-columns: 76px 1fr; gap: 3px 12px; font-size: 14px; margin: 0; }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; }
+.tag { font-size: 12px; padding: 1px 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--muted); margin-left: 6px; font-weight: 400; }
+.note { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a href="index.html">首頁</a><a href="finder.html">照片查找</a><a href="learn.html">原理教學</a><a href="results.html">結果與驗證</a><a class="on" href="manual.html">操作手冊</a></nav>
+<div class="wrap">
+<nav>
+  <div class="h">開始</div>
+  <a href="#repo">倉庫結構</a>
+  <a href="#setup">安裝與設定</a>
+  <a href="#data">輸入資料</a>
+  <div class="h">流程</div>
+  <a href="#s-annot">A. 標註編號</a>
+  <a href="#s-colmap">B. COLMAP 重建</a>
+  <a href="#s-pipeline">C. 主流程 14 步</a>
+  <a href="#aux">輔助腳本</a>
+  <div class="h">使用</div>
+  <a href="#recipes">常見操作</a>
+  <a href="#publish">更新網站</a>
+  <a href="#params">重要參數</a>
+  <a href="#next">後續：移動檢查</a>
+</nav>
+<main>
+<h1>操作手冊</h1>
+<p class="lead">每一步用哪個腳本、怎麼執行、產出什麼。想先了解原理請看<a href="learn.html">原理教學</a>。下面所有指令都在倉庫根目錄執行，<code>python</code> 指的是裝好套件的 Python（這台電腦上是 conda 環境 <code>speaker-mask</code>）。</p>
+
+<h2 id="repo">倉庫結構</h2>
+<div class="tw"><table>
+<tr><th>位置</th><th>內容</th></tr>
+<tr><td><code>pipeline/</code></td><td>主流程程式。<code>run_all.py</code> 依序執行全部；<code>config.py</code> 從 <code>settings.yaml</code> 讀取所有路徑。</td></tr>
+<tr><td><code>tools/check_env.py</code></td><td>檢查 Python 套件、GPU、設定的路徑與 COLMAP；可自動下載 COLMAP。</td></tr>
+<tr><td><code>tools/build_site.py</code></td><td>從本機結果產生 <code>docs/</code> 網站（合成圖、資料、圖表、結果檔）。</td></tr>
+<tr><td><code>tools/coarse_annotation_ui.py</code></td><td>粗框標註工具（在 DJI 幀上拖框並指定編號）。</td></tr>
+<tr><td><code>上傳更新.bat</code></td><td>重新產生網站 → 記錄改動 → 推送到 GitHub。</td></tr>
+<tr><td><code>settings.example.yaml</code></td><td>路徑設定範本。複製成 <code>settings.yaml</code>（不上傳）後修改。</td></tr>
+<tr><td><code>measurements/2026-10-13/</code></td><td>這次量測的結果檔。以後重新量測時另開一個日期資料夾。</td></tr>
+<tr><td><code>docs/</code></td><td>本網站（GitHub Pages）。</td></tr>
+</table></div>
+<p class="note">不在倉庫中：Sony 與 DJI 原始影像、COLMAP 資料庫與模型、特徵快取（約 1.5 GB）、本機的完整輸出（含 1600 px 預覽圖）。這些放在 <code>settings.yaml</code> 指定的位置。</p>
+
+<h2 id="setup">安裝與設定</h2>
+<h3>1. 取得程式</h3>
+<pre>git clone https://github.com/wangpenghao468-collab/wfs-speaker-localization.git
+cd wfs-speaker-localization<button>複製</button></pre>
+<h3>2. Python 環境</h3>
+<p>需要 Python 3.10 以上，以及 NumPy、OpenCV（4.4 以上，含 SIFT）、Pillow、PyYAML、PyTorch（CUDA 版，用於 GPU 特徵匹配；沒有 GPU 也能跑，但慢很多）。</p>
+<pre>conda create -n wfs python=3.10 -y
+conda activate wfs
+pip install numpy opencv-python pillow pyyaml
+pip install torch --index-url https://download.pytorch.org/whl/cu118<button>複製</button></pre>
+<h3>3. 設定路徑並檢查</h3>
+<pre>copy settings.example.yaml settings.yaml
+python tools/check_env.py<button>複製</button></pre>
+<p>用文字編輯器打開 <code>settings.yaml</code>，把每一行改成資料在你電腦上的位置（可用相對路徑，相對於倉庫根目錄）。<code>check_env.py</code> 會逐項列出 ok 或缺少什麼。COLMAP 只有重建或做光束法平差時才需要，可以用 <code>python tools/check_env.py --download-colmap</code> 自動下載 3.11.1 版。</p>
+<p>這台電腦上目前的環境：Python 3.10、OpenCV 5.0、PyTorch 2.5.1 + CUDA 11.8（RTX 4090）、COLMAP 3.11.1。</p>
+
+<h2 id="data">輸入資料</h2>
+<div class="tw"><table>
+<tr><th>設定名稱</th><th>內容</th><th>來源</th></tr>
+<tr><td><code>sony_images</code></td><td>Sony 照片 DSC*.JPG（944 張，7008×3944）</td><td>拍攝</td></tr>
+<tr><td><code>dji_model</code>、<code>dji_images</code></td><td>DJI 影片抽出的 286 幀與其 COLMAP 模型（PINHOLE），是整個系統的座標基準</td><td>B 步</td></tr>
+<tr><td><code>sony_model</code>、<code>sony_database</code></td><td>Sony 的 COLMAP 模型與資料庫（只用局部關係和驗證過的匹配）</td><td>B 步</td></tr>
+<tr><td><code>sony_selected_list</code>、<code>sony_quality_csv</code></td><td>選用的照片清單與清晰度</td><td>B 步</td></tr>
+<tr><td><code>mask_dir</code>、<code>coarse_dir</code></td><td>你在 DJI 幀上的 SAM2 振膜遮罩與粗框標註</td><td>A 步</td></tr>
+<tr><td><code>design_txt</code></td><td>Panoramix 設計檔（只讀，不會被修改）</td><td>你的設定</td></tr>
+</table></div>
+
+<h2 id="s-annot">A. 標註編號（你操作）</h2>
+<div class="step you"><h3>SAM2 振膜遮罩 / 粗框</h3><dl class="kv">
+<dt>目的</dt><dd>112 顆外觀相同，必須由人指出「哪一顆是幾號」。只要標一部分，其餘由「8 顆一架」規則補齊。</dd>
+<dt>工具</dt><dd>粗框：<code>python tools/coarse_annotation_ui.py</code>（需要 <code>pip install gradio</code>，瀏覽器開 127.0.0.1:7861）。SAM2 遮罩工具目前只在原電腦上（<code>work/speaker_mask_ui</code>），模型見 <a href="https://github.com/facebookresearch/sam2">facebookresearch/sam2</a>。</dd>
+<dt>輸出</dt><dd><code>masks/manual_mask_annotations.csv</code>、<code>coarse_annotations/speaker_boxes.json</code></dd>
+<dt>注意</dt><dd>左右兩側幾乎一樣，容易標錯側（frame_00059 曾標成 16–31，實為 80–95，已更正）。</dd></dl></div>
+
+<h2 id="s-colmap">B. COLMAP 重建（已完成，一般不需重跑）</h2>
+<div class="step"><dl class="kv">
+<dt>技術</dt><dd>COLMAP 3.11：SIFT 特徵、順序與詞彙樹匹配、增量式重建。</dd>
+<dt>結論</dt><dd>DJI 連續影片的模型正確，當作座標基準。Sony 模型把左右兩側摺疊在一起（938 張只註冊 396 張），只用它的資料庫匹配和局部相對關係。</dd>
+<dt>平差</dt><dd>曾用 <code>pipeline/ba_sony.py</code> 對 Sony 照片做光束法平差，三種設定都比現在差（Sony 照片分成 333 個互不相連的小群，會各自漂移），沒有採用。詳見<a href="learn.html#c13">原理教學第 13 章</a>。</dd></dl></div>
+
+<h2 id="s-pipeline">C. 主流程 14 步</h2>
+<p>一次執行全部：</p>
+<pre>python pipeline/run_all.py<button>複製</button></pre>
+<p>也可以單獨執行任一步，例如 <code>python pipeline/identify.py</code>。時間是這台電腦、特徵已快取時的大約值。</p>
+
+<div class="step"><h3>1. sony_cameras.py <span class="tag">&lt; 1 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>準備每張 Sony 照片的鏡頭參數：已註冊的用 COLMAP 校正值，其餘按 EXIF 焦距套用同焦距的校正值。</dd>
+<dt>輸出</dt><dd><code>sony_intrinsics.json</code></dd></dl></div>
+<div class="step"><h3>2. detect_diaphragms.py <span class="tag">約 10 分（新照片才計算）</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>找銀白色振膜：HSV 門檻（V &gt; 140、S &lt; 60）、連通區域、圓度 ≥ 0.6、暗環 ≥ 35%，取質心並去畸變。</dd>
+<dt>輸出</dt><dd><code>detections.json</code></dd></dl></div>
+<div class="step"><h3>3. dji_speakers.py <span class="tag">&lt; 1 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>把你的標註在 DJI 模型中三角化（多幀 DLT；單幀時用點雲深度）。標錯時會出現上百像素的誤差。</dd>
+<dt>輸出</dt><dd><code>dji_speakers.json</code></dd></dl></div>
+<div class="step"><h3>4. dji_bars.py <span class="tag">&lt; 1 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>8 顆一架、共線等距，用 RANSAC 擬合全部 112 顆的大約位置，並由架內 80 mm 決定尺度。</dd>
+<dt>輸出</dt><dd><code>dji_bar_model.json</code></dd></dl></div>
+<div class="step"><h3>5. localize_sony.py <span class="tag">首次約 1 小時；快取後 10–15 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>每張 Sony 照片與 DJI 幀做特徵匹配，取得 2D–3D 對應，以 PnP RANSAC 求相機位姿。</dd>
+<dt>技術</dt><dd>RootSIFT（3000 px）、GPU 雙向最近鄰 + 比值測試、AP3P/SQPnP/EPnP RANSAC、LM 精修。</dd>
+<dt>輸出</dt><dd><code>sony_in_dji.json</code>、<code>corr/</code>、<code>feats2/</code>（特徵快取）</dd></dl></div>
+<div class="step"><h3>6. consensus_poses.py <span class="tag">15–25 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>鄰居投票：用照片之間的相對旋轉與位置（共視 ≥ 40 點，或資料庫驗證匹配 ≥ 60）檢查每個候選位姿，排除被配到對側的照片。網站回報的錯誤是硬性條件。</dd>
+<dt>輸出</dt><dd><code>sony_poses_final.json</code>（663 張）</dd></dl></div>
+<div class="step"><h3>7. identify.py <span class="tag">約 5 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>把每顆喇叭投影到每張照片，要求完整在畫面內、面向相機、附近有大小合理的振膜偵測（0.25 間距內，且明顯比第二近的近）。</dd>
+<dt>輸出</dt><dd><code>speakers_final.json</code></dd></dl></div>
+<div class="step"><h3>8. triangulate_centers.py <span class="tag">約 1 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>DLT 初值 + Gauss–Newton 最小化重投影誤差。自適應 Huber 權重（2.45σ）、整張偏移照片排除（&gt; 25 px 且 &gt; 3 倍典型值）、視角 ≤ 75°、清晰度 ≥ 50、bootstrap 200 次。</dd>
+<dt>輸出</dt><dd><code>centers.json</code>、<code>speaker_centers_mm.csv</code></dd></dl></div>
+<div class="step"><h3>9. floor_height.py <span class="tag">3–5 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>Sony 照片兩兩三角化地磚點，穩健擬合地板平面，算出每顆的離地高度。<code>run_all.py</code> 會再跑一次第 8、9 步，讓座標建立在新地板上。</dd>
+<dt>輸出</dt><dd><code>floor.json</code>、<code>speaker_heights.csv</code></dd></dl></div>
+<div class="step out"><h3>10. compare_design.py ／ 11. export_panoramix.py <span class="tag">&lt; 1 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>讀設計檔的 <code>/bus/10/speakers/aed</code>，以水平旋轉 + 平移（不縮放）對齊；架子直線的法線為朝向；寫出只改兩行的設定檔副本（保留原換行格式）。</dd>
+<dt>輸出</dt><dd><code>1012_measured.txt</code>、<code>panoramix_bus10_measured.txt/.csv</code>、<code>design_vs_measured.csv</code></dd></dl></div>
+<div class="step"><h3>12. 圖 <span class="tag">&lt; 1 分</span></h3><dl class="kv">
+<dt>腳本</dt><dd><code>plot_design_vs_measured.py</code>、<code>plot_heights.py</code>、<code>plot_overlay_topview.py</code></dd></dl></div>
+<div class="step out"><h3>13. build_finder.py <span class="tag">1–5 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>本機版照片查找頁的資料：1600 px 預覽圖、<code>data.js</code>、<code>speaker_photos.csv</code>。網站版由 <code>tools/build_site.py</code> 再從這裡產生。</dd></dl></div>
+<div class="step"><h3>14. verify_bars.py <span class="tag">約 2 分</span></h3><dl class="kv">
+<dt>做什麼</dt><dd>每根架子抽幾張照片標上編號拼成一張圖，用來人工檢查；<code>--unregistered</code> 只用 COLMAP 未註冊的照片。</dd></dl></div>
+
+<h2 id="aux">輔助腳本</h2>
+<div class="tw"><table>
+<tr><th>腳本</th><th>用途</th><th>例子</th></tr>
+<tr><td><code>plot_rays.py</code></td><td>單顆喇叭的視線圖與標靶圖</td><td><code>python pipeline/plot_rays.py 20</code></td></tr>
+<tr><td><code>plot_weights.py</code></td><td>每張照片的份量，以及需要幾張才穩定</td><td><code>python pipeline/plot_weights.py 20</code></td></tr>
+<tr><td><code>plot_detection_demo.py</code></td><td>振膜偵測示意</td><td><code>python pipeline/plot_detection_demo.py 20</code></td></tr>
+<tr><td><code>wfs_error_sim.py</code></td><td>位置誤差對 WFS 時間與相位的影響</td><td><code>python pipeline/wfs_error_sim.py</code></td></tr>
+<tr><td><code>show_photo_ids.py</code></td><td>在指定照片上畫出所有識別到的編號</td><td><code>python pipeline/show_photo_ids.py out.jpg DSC04160.JPG</code></td></tr>
+<tr><td><code>plot_pipeline.py</code></td><td>重畫流程圖</td><td><code>python pipeline/plot_pipeline.py</code></td></tr>
+<tr><td><code>ba_sony.py</code></td><td>Sony 光束法平差實驗（未採用）</td><td><code>python pipeline/ba_sony.py</code></td></tr>
+<tr><td><code>eval_poses.py</code>、<code>colmap_io.py</code>、<code>common.py</code>、<code>annotations.py</code>、<code>corrections.py</code></td><td>共用函式：位姿檢查、讀 COLMAP、SIFT、讀標註、讀回報</td><td>—</td></tr>
+</table></div>
+
+<h2 id="recipes">常見操作</h2>
+<h3>回報編號錯誤</h3>
+<ol>
+<li>在<a href="finder.html">照片查找</a>點照片放大，按「編號不對」輸入正確號碼，或按「不是喇叭」「整張照片編號錯誤」。回報存在你的瀏覽器裡。</li>
+<li>按上方「錯誤回報 (N) ⤓」下載 <code>speaker_corrections.json</code>，放進 <code>output_dir</code>（或留在「下載」資料夾，程式會找最新的一份）。</li>
+<li>執行 <code>python pipeline/run_all.py</code>，再更新網站。</li>
+</ol>
+<h3>新增照片</h3>
+<p>把新的 JPG 放進 Sony 照片資料夾，檔名加到 <code>sony_selected_list</code>，再執行 <code>run_all.py</code>。要讓新照片參與鄰居投票，需要先用 COLMAP 把它們加入 <code>database.db</code> 做匹配；否則只能靠自己的定位。補拍時每移動一步多拍一張重疊的照片，效果最好。</p>
+<h3>只更新 Panoramix 檔（例如改了設計原點）</h3>
+<pre>python pipeline/compare_design.py
+python pipeline/export_panoramix.py<button>複製</button></pre>
+<h3>重新量測（喇叭移動過）</h3>
+<p>在 <code>settings.yaml</code> 把 <code>measurement_dir</code> 改成新日期（例如 <code>measurements/2026-12-01</code>），用新的照片資料夾和新的 <code>work_dir</code>、<code>output_dir</code>，執行 <code>run_all.py</code>。舊的量測結果會留著，可以比較。</p>
+
+<h2 id="publish">更新網站</h2>
+<p>在檔案總管雙擊倉庫根目錄的 <code>上傳更新.bat</code>，或執行：</p>
+<pre>python tools/build_site.py
+git add -A
+git commit -m "update results"
+git push<button>複製</button></pre>
+<p>推送後約 1–2 分鐘，GitHub Pages 會更新。</p>
+
+<h2 id="params">重要參數</h2>
+<div class="tw"><table>
+<tr><th>參數</th><th>值</th><th>位置</th><th>意義</th></tr>
+<tr><td>架內間距</td><td>8.0 cm</td><td><code>dji_bars.py</code> <code>IN_BAR_CM</code></td><td>整個系統的比例尺</td></tr>
+<tr><td>鄰居門檻</td><td>40 共視點 / 60 匹配</td><td><code>consensus_poses.py</code></td><td>多少共同特徵才算鄰居</td></tr>
+<tr><td>位姿一致容差</td><td>約 5 cm、4°</td><td><code>consensus_poses.py</code></td><td>兩個假設算「同意」的範圍</td></tr>
+<tr><td>振膜配對門檻</td><td>0.25 間距；半徑 0.11–0.30 間距</td><td><code>identify.py</code></td><td>投影附近多遠、多大的偵測算數</td></tr>
+<tr><td>Huber 門檻</td><td>2.45σ</td><td><code>triangulate_centers.py</code></td><td>超過就降權</td></tr>
+<tr><td>整張照片排除</td><td>&gt; 25 px 且 &gt; 3 倍典型值</td><td><code>triangulate_centers.py</code></td><td>位姿錯誤的判斷</td></tr>
+<tr><td>視角 / 清晰度</td><td>≤ 75°、≥ 50</td><td><code>triangulate_centers.py</code></td><td>可用來算中心的照片</td></tr>
+<tr><td>地板候選帶</td><td>±40 mm</td><td><code>floor_height.py</code></td><td>取地板點的範圍</td></tr>
+</table></div>
+
+<h2 id="next">後續：移動 / 碰撞檢查（設計中，尚未實作）</h2>
+<ul>
+<li><b>流程</b>：拍 30–40 張（每根架子 2–3 個角度）→ 只用牆、地板等固定背景定位相機 → 以整根架子擬合平移和旋轉 → 判斷。</li>
+<li><b>門檻</b>：&lt; 2 mm 且 &lt; 0.3° 不用處理；2–5 mm 只更新該架；&gt; 5 mm、&gt; 1° 或單顆與架子不一致時重拍該區。</li>
+<li><b>建議</b>：在牆面和每根架子兩端貼 AprilTag，單張照片就能量出架子位置，也不會左右認錯。</li>
+<li><b>基準</b>：每次都和 2026-10-13 這次的結果比，不和上一次比。</li>
+</ul>
+</main>
+</div>
+<script>
+document.querySelectorAll("pre button").forEach(b => b.addEventListener("click", () => {
+  const t = b.parentElement.innerText.replace(/(已)?複製$/, "").trim();
+  navigator.clipboard.writeText(t).then(() => { b.textContent = "已複製"; setTimeout(() => b.textContent = "複製", 1500); });
+}));
+</script>
+</body>
+</html>
