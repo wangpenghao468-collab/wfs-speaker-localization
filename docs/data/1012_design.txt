@@ -1,0 +1,4340 @@
+# ==============================================================================
+# File: "/Users/imlabntu/Desktop/PengHao_audio/WFS/1004/1012_rearranged.txt"
+# Derived from: "/Users/imlabntu/Desktop/PengHao_audio/WFS/1004/1012.txt"
+# Prepared by: Codex from the original Panoramix export
+# imlabntu@Mac-Studio-2 - macOS 26.6.0
+# 12-oct-2026 17:11:10
+# Origin: Panoramix [1.7.0] - arm64
+# Content: 4331 OSC messages
+# ==============================================================================
+/options/name "Options"
+/options/color 1.0 0.0 0.0 1.0
+/options/annotation ""
+/options/vumeters/rate 85.0
+/options/vumeters/input/visible 1
+/options/vumeters/output/visible 1
+/options/vumeters/input/post 0
+/options/vumeters/output/post 1
+/options/vumeters/input/mode "peak"
+/options/vumeters/output/mode "peak"
+/options/parallel/bus 1
+/options/parallel/tracks 0
+/options/solo/mode "latch"
+/options/lock 0
+/internals 8
+/master/name "Master"
+/master/color 0.0 0.0 0.0 1.0
+/master/numio 128 128
+/master/visible 1
+/master/trim 0.000000
+/master/dynamics/attack 10.01
+/master/dynamics/release 30.0
+/master/dynamics/lookahead 0.0
+/master/dynamics/compressor/threshold -30.0
+/master/dynamics/compressor/ratio 1.0
+/master/dynamics/expander/threshold -60.0
+/master/dynamics/expander/ratio 1.0
+/master/dynamics/makeup 0.000000
+/master/dynamics/link "multi mono"
+/master/dynamics/bypass 1
+/master/dynamics/grid/visible 1
+/master/dynamics/curve/fill 1
+/master/dynamics/background/color 1.0 1.0 1.0 0.0
+/master/dynamics/foreground/color 0.0 0.0 0.0 0.6
+/master/dynamics/curve/color 0.0 0.0 0.0 1.0
+/master/dynamics/curve/thickness 1.0
+/master/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/master/dynamics/title "Master"
+/master/equalizer/bypass 1
+/master/equalizer/gain 0.0
+/master/equalizer/filter/1/active 0
+/master/equalizer/filter/1/freq 50.0
+/master/equalizer/filter/1/order 2
+/master/equalizer/filter/2/active 1
+/master/equalizer/filter/2/freq 100.0
+/master/equalizer/filter/2/gain 0.0
+/master/equalizer/filter/2/q 1.0
+/master/equalizer/filter/3/active 1
+/master/equalizer/filter/3/freq 500.0
+/master/equalizer/filter/3/gain 0.0
+/master/equalizer/filter/3/q 1.0
+/master/equalizer/filter/4/active 1
+/master/equalizer/filter/4/freq 1000.0
+/master/equalizer/filter/4/gain 0.0
+/master/equalizer/filter/4/q 1.0
+/master/equalizer/filter/5/active 1
+/master/equalizer/filter/5/freq 2000.0
+/master/equalizer/filter/5/gain 0.0
+/master/equalizer/filter/5/q 1.0
+/master/equalizer/filter/6/active 1
+/master/equalizer/filter/6/freq 5000.0
+/master/equalizer/filter/6/gain 0.0
+/master/equalizer/filter/6/q 1.0
+/master/equalizer/filter/7/active 1
+/master/equalizer/filter/7/freq 10000.0
+/master/equalizer/filter/7/gain 0.0
+/master/equalizer/filter/7/q 1.0
+/master/equalizer/filter/8/active 0
+/master/equalizer/filter/8/freq 16000.0
+/master/equalizer/filter/8/order 2
+/master/gain 0.000000
+/master/gain/ramptime 20.0
+/master/mute 0
+/master/annotation ""
+/master/levels/input/visible 1
+/master/levels/input/post 0
+/master/levels/input/mode "peak"
+/master/levels/output/visible 1
+/master/levels/output/post 1
+/master/levels/output/mode "peak"
+/master/channel/1/equalizer/bypass 1
+/master/channel/1/equalizer/gain 0.0
+/master/channel/1/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/2/equalizer/bypass 1
+/master/channel/2/equalizer/gain 0.0
+/master/channel/2/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/3/equalizer/bypass 1
+/master/channel/3/equalizer/gain 0.0
+/master/channel/3/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/4/equalizer/bypass 1
+/master/channel/4/equalizer/gain 0.0
+/master/channel/4/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/5/equalizer/bypass 1
+/master/channel/5/equalizer/gain 0.0
+/master/channel/5/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/6/equalizer/bypass 1
+/master/channel/6/equalizer/gain 0.0
+/master/channel/6/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/7/equalizer/bypass 1
+/master/channel/7/equalizer/gain 0.0
+/master/channel/7/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/8/equalizer/bypass 1
+/master/channel/8/equalizer/gain 0.0
+/master/channel/8/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/9/equalizer/bypass 1
+/master/channel/9/equalizer/gain 0.0
+/master/channel/9/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/10/equalizer/bypass 1
+/master/channel/10/equalizer/gain 0.0
+/master/channel/10/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/11/equalizer/bypass 1
+/master/channel/11/equalizer/gain 0.0
+/master/channel/11/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/12/equalizer/bypass 1
+/master/channel/12/equalizer/gain 0.0
+/master/channel/12/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/13/equalizer/bypass 1
+/master/channel/13/equalizer/gain 0.0
+/master/channel/13/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/14/equalizer/bypass 1
+/master/channel/14/equalizer/gain 0.0
+/master/channel/14/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/15/equalizer/bypass 1
+/master/channel/15/equalizer/gain 0.0
+/master/channel/15/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/16/equalizer/bypass 1
+/master/channel/16/equalizer/gain 0.0
+/master/channel/16/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/17/equalizer/bypass 1
+/master/channel/17/equalizer/gain 0.0
+/master/channel/17/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/18/equalizer/bypass 1
+/master/channel/18/equalizer/gain 0.0
+/master/channel/18/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/19/equalizer/bypass 1
+/master/channel/19/equalizer/gain 0.0
+/master/channel/19/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/20/equalizer/bypass 1
+/master/channel/20/equalizer/gain 0.0
+/master/channel/20/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/21/equalizer/bypass 1
+/master/channel/21/equalizer/gain 0.0
+/master/channel/21/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/22/equalizer/bypass 1
+/master/channel/22/equalizer/gain 0.0
+/master/channel/22/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/23/equalizer/bypass 1
+/master/channel/23/equalizer/gain 0.0
+/master/channel/23/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/24/equalizer/bypass 1
+/master/channel/24/equalizer/gain 0.0
+/master/channel/24/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/25/equalizer/bypass 1
+/master/channel/25/equalizer/gain 0.0
+/master/channel/25/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/26/equalizer/bypass 1
+/master/channel/26/equalizer/gain 0.0
+/master/channel/26/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/27/equalizer/bypass 1
+/master/channel/27/equalizer/gain 0.0
+/master/channel/27/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/28/equalizer/bypass 1
+/master/channel/28/equalizer/gain 0.0
+/master/channel/28/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/29/equalizer/bypass 1
+/master/channel/29/equalizer/gain 0.0
+/master/channel/29/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/30/equalizer/bypass 1
+/master/channel/30/equalizer/gain 0.0
+/master/channel/30/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/31/equalizer/bypass 1
+/master/channel/31/equalizer/gain 0.0
+/master/channel/31/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/32/equalizer/bypass 1
+/master/channel/32/equalizer/gain 0.0
+/master/channel/32/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/33/equalizer/bypass 1
+/master/channel/33/equalizer/gain 0.0
+/master/channel/33/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/34/equalizer/bypass 1
+/master/channel/34/equalizer/gain 0.0
+/master/channel/34/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/35/equalizer/bypass 1
+/master/channel/35/equalizer/gain 0.0
+/master/channel/35/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/36/equalizer/bypass 1
+/master/channel/36/equalizer/gain 0.0
+/master/channel/36/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/37/equalizer/bypass 1
+/master/channel/37/equalizer/gain 0.0
+/master/channel/37/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/38/equalizer/bypass 1
+/master/channel/38/equalizer/gain 0.0
+/master/channel/38/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/39/equalizer/bypass 1
+/master/channel/39/equalizer/gain 0.0
+/master/channel/39/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/40/equalizer/bypass 1
+/master/channel/40/equalizer/gain 0.0
+/master/channel/40/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/41/equalizer/bypass 1
+/master/channel/41/equalizer/gain 0.0
+/master/channel/41/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/42/equalizer/bypass 1
+/master/channel/42/equalizer/gain 0.0
+/master/channel/42/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/43/equalizer/bypass 1
+/master/channel/43/equalizer/gain 0.0
+/master/channel/43/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/44/equalizer/bypass 1
+/master/channel/44/equalizer/gain 0.0
+/master/channel/44/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/45/equalizer/bypass 1
+/master/channel/45/equalizer/gain 0.0
+/master/channel/45/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/46/equalizer/bypass 1
+/master/channel/46/equalizer/gain 0.0
+/master/channel/46/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/47/equalizer/bypass 1
+/master/channel/47/equalizer/gain 0.0
+/master/channel/47/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/48/equalizer/bypass 1
+/master/channel/48/equalizer/gain 0.0
+/master/channel/48/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/49/equalizer/bypass 1
+/master/channel/49/equalizer/gain 0.0
+/master/channel/49/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/50/equalizer/bypass 1
+/master/channel/50/equalizer/gain 0.0
+/master/channel/50/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/51/equalizer/bypass 1
+/master/channel/51/equalizer/gain 0.0
+/master/channel/51/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/52/equalizer/bypass 1
+/master/channel/52/equalizer/gain 0.0
+/master/channel/52/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/53/equalizer/bypass 1
+/master/channel/53/equalizer/gain 0.0
+/master/channel/53/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/54/equalizer/bypass 1
+/master/channel/54/equalizer/gain 0.0
+/master/channel/54/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/55/equalizer/bypass 1
+/master/channel/55/equalizer/gain 0.0
+/master/channel/55/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/56/equalizer/bypass 1
+/master/channel/56/equalizer/gain 0.0
+/master/channel/56/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/57/equalizer/bypass 1
+/master/channel/57/equalizer/gain 0.0
+/master/channel/57/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/58/equalizer/bypass 1
+/master/channel/58/equalizer/gain 0.0
+/master/channel/58/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/59/equalizer/bypass 1
+/master/channel/59/equalizer/gain 0.0
+/master/channel/59/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/60/equalizer/bypass 1
+/master/channel/60/equalizer/gain 0.0
+/master/channel/60/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/61/equalizer/bypass 1
+/master/channel/61/equalizer/gain 0.0
+/master/channel/61/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/62/equalizer/bypass 1
+/master/channel/62/equalizer/gain 0.0
+/master/channel/62/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/63/equalizer/bypass 1
+/master/channel/63/equalizer/gain 0.0
+/master/channel/63/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/64/equalizer/bypass 1
+/master/channel/64/equalizer/gain 0.0
+/master/channel/64/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/65/equalizer/bypass 1
+/master/channel/65/equalizer/gain 0.0
+/master/channel/65/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/66/equalizer/bypass 1
+/master/channel/66/equalizer/gain 0.0
+/master/channel/66/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/67/equalizer/bypass 1
+/master/channel/67/equalizer/gain 0.0
+/master/channel/67/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/68/equalizer/bypass 1
+/master/channel/68/equalizer/gain 0.0
+/master/channel/68/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/69/equalizer/bypass 1
+/master/channel/69/equalizer/gain 0.0
+/master/channel/69/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/70/equalizer/bypass 1
+/master/channel/70/equalizer/gain 0.0
+/master/channel/70/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/71/equalizer/bypass 1
+/master/channel/71/equalizer/gain 0.0
+/master/channel/71/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/72/equalizer/bypass 1
+/master/channel/72/equalizer/gain 0.0
+/master/channel/72/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/73/equalizer/bypass 1
+/master/channel/73/equalizer/gain 0.0
+/master/channel/73/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/74/equalizer/bypass 1
+/master/channel/74/equalizer/gain 0.0
+/master/channel/74/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/75/equalizer/bypass 1
+/master/channel/75/equalizer/gain 0.0
+/master/channel/75/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/76/equalizer/bypass 1
+/master/channel/76/equalizer/gain 0.0
+/master/channel/76/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/77/equalizer/bypass 1
+/master/channel/77/equalizer/gain 0.0
+/master/channel/77/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/78/equalizer/bypass 1
+/master/channel/78/equalizer/gain 0.0
+/master/channel/78/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/79/equalizer/bypass 1
+/master/channel/79/equalizer/gain 0.0
+/master/channel/79/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/80/equalizer/bypass 1
+/master/channel/80/equalizer/gain 0.0
+/master/channel/80/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/81/equalizer/bypass 1
+/master/channel/81/equalizer/gain 0.0
+/master/channel/81/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/82/equalizer/bypass 1
+/master/channel/82/equalizer/gain 0.0
+/master/channel/82/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/83/equalizer/bypass 1
+/master/channel/83/equalizer/gain 0.0
+/master/channel/83/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/84/equalizer/bypass 1
+/master/channel/84/equalizer/gain 0.0
+/master/channel/84/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/85/equalizer/bypass 1
+/master/channel/85/equalizer/gain 0.0
+/master/channel/85/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/86/equalizer/bypass 1
+/master/channel/86/equalizer/gain 0.0
+/master/channel/86/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/87/equalizer/bypass 1
+/master/channel/87/equalizer/gain 0.0
+/master/channel/87/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/88/equalizer/bypass 1
+/master/channel/88/equalizer/gain 0.0
+/master/channel/88/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/89/equalizer/bypass 1
+/master/channel/89/equalizer/gain 0.0
+/master/channel/89/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/90/equalizer/bypass 1
+/master/channel/90/equalizer/gain 0.0
+/master/channel/90/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/91/equalizer/bypass 1
+/master/channel/91/equalizer/gain 0.0
+/master/channel/91/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/92/equalizer/bypass 1
+/master/channel/92/equalizer/gain 0.0
+/master/channel/92/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/93/equalizer/bypass 1
+/master/channel/93/equalizer/gain 0.0
+/master/channel/93/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/94/equalizer/bypass 1
+/master/channel/94/equalizer/gain 0.0
+/master/channel/94/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/95/equalizer/bypass 1
+/master/channel/95/equalizer/gain 0.0
+/master/channel/95/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/96/equalizer/bypass 1
+/master/channel/96/equalizer/gain 0.0
+/master/channel/96/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/97/equalizer/bypass 1
+/master/channel/97/equalizer/gain 0.0
+/master/channel/97/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/98/equalizer/bypass 1
+/master/channel/98/equalizer/gain 0.0
+/master/channel/98/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/99/equalizer/bypass 1
+/master/channel/99/equalizer/gain 0.0
+/master/channel/99/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/100/equalizer/bypass 1
+/master/channel/100/equalizer/gain 0.0
+/master/channel/100/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/101/equalizer/bypass 1
+/master/channel/101/equalizer/gain 0.0
+/master/channel/101/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/102/equalizer/bypass 1
+/master/channel/102/equalizer/gain 0.0
+/master/channel/102/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/103/equalizer/bypass 1
+/master/channel/103/equalizer/gain 0.0
+/master/channel/103/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/104/equalizer/bypass 1
+/master/channel/104/equalizer/gain 0.0
+/master/channel/104/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/105/equalizer/bypass 1
+/master/channel/105/equalizer/gain 0.0
+/master/channel/105/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/106/equalizer/bypass 1
+/master/channel/106/equalizer/gain 0.0
+/master/channel/106/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/107/equalizer/bypass 1
+/master/channel/107/equalizer/gain 0.0
+/master/channel/107/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/108/equalizer/bypass 1
+/master/channel/108/equalizer/gain 0.0
+/master/channel/108/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/109/equalizer/bypass 1
+/master/channel/109/equalizer/gain 0.0
+/master/channel/109/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/110/equalizer/bypass 1
+/master/channel/110/equalizer/gain 0.0
+/master/channel/110/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/111/equalizer/bypass 1
+/master/channel/111/equalizer/gain 0.0
+/master/channel/111/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/112/equalizer/bypass 1
+/master/channel/112/equalizer/gain 0.0
+/master/channel/112/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/113/equalizer/bypass 1
+/master/channel/113/equalizer/gain 0.0
+/master/channel/113/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/114/equalizer/bypass 1
+/master/channel/114/equalizer/gain 0.0
+/master/channel/114/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/115/equalizer/bypass 1
+/master/channel/115/equalizer/gain 0.0
+/master/channel/115/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/116/equalizer/bypass 1
+/master/channel/116/equalizer/gain 0.0
+/master/channel/116/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/117/equalizer/bypass 1
+/master/channel/117/equalizer/gain 0.0
+/master/channel/117/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/118/equalizer/bypass 1
+/master/channel/118/equalizer/gain 0.0
+/master/channel/118/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/119/equalizer/bypass 1
+/master/channel/119/equalizer/gain 0.0
+/master/channel/119/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/120/equalizer/bypass 1
+/master/channel/120/equalizer/gain 0.0
+/master/channel/120/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/121/equalizer/bypass 1
+/master/channel/121/equalizer/gain 0.0
+/master/channel/121/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/122/equalizer/bypass 1
+/master/channel/122/equalizer/gain 0.0
+/master/channel/122/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/123/equalizer/bypass 1
+/master/channel/123/equalizer/gain 0.0
+/master/channel/123/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/124/equalizer/bypass 1
+/master/channel/124/equalizer/gain 0.0
+/master/channel/124/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/125/equalizer/bypass 1
+/master/channel/125/equalizer/gain 0.0
+/master/channel/125/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/126/equalizer/bypass 1
+/master/channel/126/equalizer/gain 0.0
+/master/channel/126/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/127/equalizer/bypass 1
+/master/channel/127/equalizer/gain 0.0
+/master/channel/127/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/128/equalizer/bypass 1
+/master/channel/128/equalizer/gain 0.0
+/master/channel/128/equalizer/filters/params 0 50.0 2 1 100.0 0.0 1.0 1 500.0 0.0 1.0 1 1000.0 0.0 1.0 1 2000.0 0.0 1.0 1 5000.0 0.0 1.0 1 10000.0 0.0 1.0 0 16000.0 2
+/master/channel/1/delay 0.0
+/master/channel/2/delay 0.0
+/master/channel/3/delay 0.0
+/master/channel/4/delay 0.0
+/master/channel/5/delay 0.0
+/master/channel/6/delay 0.0
+/master/channel/7/delay 0.0
+/master/channel/8/delay 0.0
+/master/channel/9/delay 0.0
+/master/channel/10/delay 0.0
+/master/channel/11/delay 0.0
+/master/channel/12/delay 0.0
+/master/channel/13/delay 0.0
+/master/channel/14/delay 0.0
+/master/channel/15/delay 0.0
+/master/channel/16/delay 0.0
+/master/channel/17/delay 0.0
+/master/channel/18/delay 0.0
+/master/channel/19/delay 0.0
+/master/channel/20/delay 0.0
+/master/channel/21/delay 0.0
+/master/channel/22/delay 0.0
+/master/channel/23/delay 0.0
+/master/channel/24/delay 0.0
+/master/channel/25/delay 0.0
+/master/channel/26/delay 0.0
+/master/channel/27/delay 0.0
+/master/channel/28/delay 0.0
+/master/channel/29/delay 0.0
+/master/channel/30/delay 0.0
+/master/channel/31/delay 0.0
+/master/channel/32/delay 0.0
+/master/channel/33/delay 0.0
+/master/channel/34/delay 0.0
+/master/channel/35/delay 0.0
+/master/channel/36/delay 0.0
+/master/channel/37/delay 0.0
+/master/channel/38/delay 0.0
+/master/channel/39/delay 0.0
+/master/channel/40/delay 0.0
+/master/channel/41/delay 0.0
+/master/channel/42/delay 0.0
+/master/channel/43/delay 0.0
+/master/channel/44/delay 0.0
+/master/channel/45/delay 0.0
+/master/channel/46/delay 0.0
+/master/channel/47/delay 0.0
+/master/channel/48/delay 0.0
+/master/channel/49/delay 0.0
+/master/channel/50/delay 0.0
+/master/channel/51/delay 0.0
+/master/channel/52/delay 0.0
+/master/channel/53/delay 0.0
+/master/channel/54/delay 0.0
+/master/channel/55/delay 0.0
+/master/channel/56/delay 0.0
+/master/channel/57/delay 0.0
+/master/channel/58/delay 0.0
+/master/channel/59/delay 0.0
+/master/channel/60/delay 0.0
+/master/channel/61/delay 0.0
+/master/channel/62/delay 0.0
+/master/channel/63/delay 0.0
+/master/channel/64/delay 0.0
+/master/channel/65/delay 0.0
+/master/channel/66/delay 0.0
+/master/channel/67/delay 0.0
+/master/channel/68/delay 0.0
+/master/channel/69/delay 0.0
+/master/channel/70/delay 0.0
+/master/channel/71/delay 0.0
+/master/channel/72/delay 0.0
+/master/channel/73/delay 0.0
+/master/channel/74/delay 0.0
+/master/channel/75/delay 0.0
+/master/channel/76/delay 0.0
+/master/channel/77/delay 0.0
+/master/channel/78/delay 0.0
+/master/channel/79/delay 0.0
+/master/channel/80/delay 0.0
+/master/channel/81/delay 0.0
+/master/channel/82/delay 0.0
+/master/channel/83/delay 0.0
+/master/channel/84/delay 0.0
+/master/channel/85/delay 0.0
+/master/channel/86/delay 0.0
+/master/channel/87/delay 0.0
+/master/channel/88/delay 0.0
+/master/channel/89/delay 0.0
+/master/channel/90/delay 0.0
+/master/channel/91/delay 0.0
+/master/channel/92/delay 0.0
+/master/channel/93/delay 0.0
+/master/channel/94/delay 0.0
+/master/channel/95/delay 0.0
+/master/channel/96/delay 0.0
+/master/channel/97/delay 0.0
+/master/channel/98/delay 0.0
+/master/channel/99/delay 0.0
+/master/channel/100/delay 0.0
+/master/channel/101/delay 0.0
+/master/channel/102/delay 0.0
+/master/channel/103/delay 0.0
+/master/channel/104/delay 0.0
+/master/channel/105/delay 0.0
+/master/channel/106/delay 0.0
+/master/channel/107/delay 0.0
+/master/channel/108/delay 0.0
+/master/channel/109/delay 0.0
+/master/channel/110/delay 0.0
+/master/channel/111/delay 0.0
+/master/channel/112/delay 0.0
+/master/channel/113/delay 0.0
+/master/channel/114/delay 0.0
+/master/channel/115/delay 0.0
+/master/channel/116/delay 0.0
+/master/channel/117/delay 0.0
+/master/channel/118/delay 0.0
+/master/channel/119/delay 0.0
+/master/channel/120/delay 0.0
+/master/channel/121/delay 0.0
+/master/channel/122/delay 0.0
+/master/channel/123/delay 0.0
+/master/channel/124/delay 0.0
+/master/channel/125/delay 0.0
+/master/channel/126/delay 0.0
+/master/channel/127/delay 0.0
+/master/channel/128/delay 0.0
+/master/output/mode "everything"
+/master/dim 0
+/master/lock 0
+/monitoring/name "Monitoring"
+/monitoring/color 1.0 1.0 1.0 1.0
+/monitoring/numio 2 2
+/monitoring/visible 0
+/monitoring/trim 0.000000
+/monitoring/dynamics/attack 10.01
+/monitoring/dynamics/release 30.0
+/monitoring/dynamics/lookahead 0.0
+/monitoring/dynamics/compressor/threshold -30.0
+/monitoring/dynamics/compressor/ratio 1.0
+/monitoring/dynamics/expander/threshold -60.0
+/monitoring/dynamics/expander/ratio 1.0
+/monitoring/dynamics/makeup 0.000000
+/monitoring/dynamics/link "multi mono"
+/monitoring/dynamics/bypass 1
+/monitoring/dynamics/grid/visible 1
+/monitoring/dynamics/curve/fill 1
+/monitoring/dynamics/background/color 1.0 1.0 1.0 0.0
+/monitoring/dynamics/foreground/color 1.0 1.0 1.0 0.6
+/monitoring/dynamics/curve/color 0.8 0.8 0.8 1.0
+/monitoring/dynamics/curve/thickness 1.0
+/monitoring/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/monitoring/dynamics/title "Monitoring"
+/monitoring/equalizer/bypass 1
+/monitoring/equalizer/gain 0.0
+/monitoring/equalizer/filter/1/active 0
+/monitoring/equalizer/filter/1/freq 50.0
+/monitoring/equalizer/filter/1/order 2
+/monitoring/equalizer/filter/2/active 1
+/monitoring/equalizer/filter/2/freq 100.0
+/monitoring/equalizer/filter/2/gain 0.0
+/monitoring/equalizer/filter/2/q 1.0
+/monitoring/equalizer/filter/3/active 1
+/monitoring/equalizer/filter/3/freq 500.0
+/monitoring/equalizer/filter/3/gain 0.0
+/monitoring/equalizer/filter/3/q 1.0
+/monitoring/equalizer/filter/4/active 1
+/monitoring/equalizer/filter/4/freq 1000.0
+/monitoring/equalizer/filter/4/gain 0.0
+/monitoring/equalizer/filter/4/q 1.0
+/monitoring/equalizer/filter/5/active 1
+/monitoring/equalizer/filter/5/freq 2000.0
+/monitoring/equalizer/filter/5/gain 0.0
+/monitoring/equalizer/filter/5/q 1.0
+/monitoring/equalizer/filter/6/active 1
+/monitoring/equalizer/filter/6/freq 5000.0
+/monitoring/equalizer/filter/6/gain 0.0
+/monitoring/equalizer/filter/6/q 1.0
+/monitoring/equalizer/filter/7/active 1
+/monitoring/equalizer/filter/7/freq 10000.0
+/monitoring/equalizer/filter/7/gain 0.0
+/monitoring/equalizer/filter/7/q 1.0
+/monitoring/equalizer/filter/8/active 0
+/monitoring/equalizer/filter/8/freq 16000.0
+/monitoring/equalizer/filter/8/order 2
+/monitoring/gain 0.000000
+/monitoring/gain/ramptime 20.0
+/monitoring/mute 1
+/monitoring/annotation ""
+/monitoring/levels/input/visible 1
+/monitoring/levels/input/post 0
+/monitoring/levels/input/mode "peak"
+/monitoring/levels/output/visible 1
+/monitoring/levels/output/post 1
+/monitoring/levels/output/mode "peak"
+/monitoring/dim 0
+/monitoring/itd/scaling 100.0
+/monitoring/itd/scaling/bypass 0
+/monitoring/hrtf ""
+/monitoring/listener/orientation 0.0 0.0 0.0 1.0
+/monitoring/headphoneeq/type "none"
+/monitoring/routing/output/empty
+/monitoring/lock 0
+/bus/indices 10 1
+/bus/10/format "WFS"
+/bus/10/name "FongPao"
+/bus/10/color 0.803922 0.247059 0.6 1.0
+/bus/10/numio 112 112
+/bus/10/visible 1
+/bus/10/trim 0.000000
+/bus/10/dynamics/attack 10.0
+/bus/10/dynamics/release 30.0
+/bus/10/dynamics/lookahead 0.0
+/bus/10/dynamics/compressor/threshold -30.0
+/bus/10/dynamics/compressor/ratio 1.0
+/bus/10/dynamics/expander/threshold -60.0
+/bus/10/dynamics/expander/ratio 1.0
+/bus/10/dynamics/makeup 0.000000
+/bus/10/dynamics/link "multi mono"
+/bus/10/dynamics/bypass 1
+/bus/10/dynamics/grid/visible 1
+/bus/10/dynamics/curve/fill 1
+/bus/10/dynamics/background/color 1.0 1.0 1.0 0.0
+/bus/10/dynamics/foreground/color 0.803922 0.247059 0.6 0.6
+/bus/10/dynamics/curve/color 0.643137 0.196078 0.478431 1.0
+/bus/10/dynamics/curve/thickness 1.0
+/bus/10/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/bus/10/dynamics/title "FongPao"
+/bus/10/equalizer/bypass 1
+/bus/10/equalizer/gain 0.0
+/bus/10/equalizer/filter/1/active 0
+/bus/10/equalizer/filter/1/freq 50.0
+/bus/10/equalizer/filter/1/order 2
+/bus/10/equalizer/filter/2/active 1
+/bus/10/equalizer/filter/2/freq 100.0
+/bus/10/equalizer/filter/2/gain 0.0
+/bus/10/equalizer/filter/2/q 1.0
+/bus/10/equalizer/filter/3/active 1
+/bus/10/equalizer/filter/3/freq 500.0
+/bus/10/equalizer/filter/3/gain 0.0
+/bus/10/equalizer/filter/3/q 1.0
+/bus/10/equalizer/filter/4/active 1
+/bus/10/equalizer/filter/4/freq 1000.0
+/bus/10/equalizer/filter/4/gain 0.0
+/bus/10/equalizer/filter/4/q 1.0
+/bus/10/equalizer/filter/5/active 1
+/bus/10/equalizer/filter/5/freq 2000.0
+/bus/10/equalizer/filter/5/gain 0.0
+/bus/10/equalizer/filter/5/q 1.0
+/bus/10/equalizer/filter/6/active 1
+/bus/10/equalizer/filter/6/freq 5000.0
+/bus/10/equalizer/filter/6/gain 0.0
+/bus/10/equalizer/filter/6/q 1.0
+/bus/10/equalizer/filter/7/active 1
+/bus/10/equalizer/filter/7/freq 10000.0
+/bus/10/equalizer/filter/7/gain 0.0
+/bus/10/equalizer/filter/7/q 1.0
+/bus/10/equalizer/filter/8/active 0
+/bus/10/equalizer/filter/8/freq 16000.0
+/bus/10/equalizer/filter/8/order 2
+/bus/10/gain 12.0
+/bus/10/gain/ramptime 20.0
+/bus/10/mute 0
+/bus/10/annotation ""
+/bus/10/levels/input/visible 1
+/bus/10/levels/input/post 0
+/bus/10/levels/input/mode "peak"
+/bus/10/levels/output/visible 1
+/bus/10/levels/output/post 1
+/bus/10/levels/output/mode "peak"
+/bus/10/solo 0
+/bus/10/speaker/number 112
+/bus/10/speakers/correction/delay "off"
+/bus/10/speakers/correction/gain "off"
+/bus/10/speakers/aed -141.491 0.0 1.18849 -138.597 0.0 1.23988 -135.939 0.0 1.29418 -133.5 0.0 1.35104 -131.262 0.0 1.41014 -129.207 0.0 1.47122 -127.318 0.0 1.53405 -125.579 0.0 1.59841 -116.878 0.0 1.63683 -114.326 0.0 1.60225 -111.666 0.0 1.57099 -108.905 0.0 1.54324 -106.049 0.0 1.51921 -103.109 0.0 1.49907 -100.098 0.0 1.48297 -97.0284 0.0 1.47105 -93.1364 0.0 1.46219 -90.0 0.0 1.46 -86.8636 0.0 1.46219 -83.746 0.0 1.46874 -80.665 0.0 1.47959 -77.6375 0.0 1.49466 -74.6785 0.0 1.5138 -71.8008 0.0 1.53688 -68.334 0.0 1.57099 -65.6744 0.0 1.60225 -63.1219 0.0 1.63683 -60.6795 0.0 1.67452 -58.3487 0.0 1.71511 -56.1292 0.0 1.75841 -54.0193 0.0 1.80422 -52.0165 0.0 1.85235 -49.6583 0.0 1.91552 -47.883 0.0 1.96825 -46.2018 0.0 2.02277 -44.6102 0.0 2.07894 -43.1035 0.0 2.13663 -41.6769 0.0 2.19572 -40.3258 0.0 2.2561 -39.0459 0.0 2.31767 -32.4155 0.0 2.36916 -30.7526 0.0 2.32725 -29.0303 0.0 2.28738 -27.2485 0.0 2.24964 -25.4077 0.0 2.21416 -23.509 0.0 2.18103 -21.554 0.0 2.15037 -19.5449 0.0 2.12229 -16.9617 0.0 2.09096 -14.8422 0.0 2.06903 -12.6804 0.0 2.05 -10.4812 0.0 2.03394 -8.25039 0.0 2.02092 -5.99409 0.0 2.01099 -3.71899 0.0 2.00422 -1.4321 0.0 2.00062 1.4321 0.0 2.00062 3.71899 0.0 2.00422 5.99409 0.0 2.01099 8.25039 0.0 2.02092 10.4812 0.0 2.03394 12.6804 0.0 2.05 14.8422 0.0 2.06903 16.9617 0.0 2.09096 19.5449 0.0 2.12229 21.554 0.0 2.15037 23.509 0.0 2.18103 25.4077 0.0 2.21416 27.2485 0.0 2.24964 29.0303 0.0 2.28738 30.7526 0.0 2.32725 32.4155 0.0 2.36916 39.0459 0.0 2.31767 40.3258 0.0 2.2561 41.6769 0.0 2.19572 43.1035 0.0 2.13663 44.6102 0.0 2.07894 46.2018 0.0 2.02277 47.883 0.0 1.96825 49.6583 0.0 1.91552 52.0165 0.0 1.85235 54.0193 0.0 1.80422 56.1292 0.0 1.75841 58.3487 0.0 1.71511 60.6795 0.0 1.67452 63.1219 0.0 1.63683 65.6744 0.0 1.60225 68.334 0.0 1.57099 71.8008 0.0 1.53688 74.6785 0.0 1.5138 77.6375 0.0 1.49466 80.665 0.0 1.47959 83.746 0.0 1.46874 86.8636 0.0 1.46219 90.0 0.0 1.46 93.1364 0.0 1.46219 97.0284 0.0 1.47105 100.098 0.0 1.48297 103.109 0.0 1.49907 106.049 0.0 1.51921 108.905 0.0 1.54324 111.666 0.0 1.57099 114.326 0.0 1.60225 116.878 0.0 1.63683 125.579 0.0 1.59841 127.318 0.0 1.53405 129.207 0.0 1.47122 131.262 0.0 1.41014 133.5 0.0 1.35104 135.939 0.0 1.29418 138.597 0.0 1.23988 141.491 0.0 1.18849
+/bus/10/speaker/1/delay 0.0
+/bus/10/speaker/2/delay 0.0
+/bus/10/speaker/3/delay 0.0
+/bus/10/speaker/4/delay 0.0
+/bus/10/speaker/5/delay 0.0
+/bus/10/speaker/6/delay 0.0
+/bus/10/speaker/7/delay 0.0
+/bus/10/speaker/8/delay 0.0
+/bus/10/speaker/9/delay 0.0
+/bus/10/speaker/10/delay 0.0
+/bus/10/speaker/11/delay 0.0
+/bus/10/speaker/12/delay 0.0
+/bus/10/speaker/13/delay 0.0
+/bus/10/speaker/14/delay 0.0
+/bus/10/speaker/15/delay 0.0
+/bus/10/speaker/16/delay 0.0
+/bus/10/speaker/17/delay 0.0
+/bus/10/speaker/18/delay 0.0
+/bus/10/speaker/19/delay 0.0
+/bus/10/speaker/20/delay 0.0
+/bus/10/speaker/21/delay 0.0
+/bus/10/speaker/22/delay 0.0
+/bus/10/speaker/23/delay 0.0
+/bus/10/speaker/24/delay 0.0
+/bus/10/speaker/25/delay 0.0
+/bus/10/speaker/26/delay 0.0
+/bus/10/speaker/27/delay 0.0
+/bus/10/speaker/28/delay 0.0
+/bus/10/speaker/29/delay 0.0
+/bus/10/speaker/30/delay 0.0
+/bus/10/speaker/31/delay 0.0
+/bus/10/speaker/32/delay 0.0
+/bus/10/speaker/33/delay 0.0
+/bus/10/speaker/34/delay 0.0
+/bus/10/speaker/35/delay 0.0
+/bus/10/speaker/36/delay 0.0
+/bus/10/speaker/37/delay 0.0
+/bus/10/speaker/38/delay 0.0
+/bus/10/speaker/39/delay 0.0
+/bus/10/speaker/40/delay 0.0
+/bus/10/speaker/41/delay 0.0
+/bus/10/speaker/42/delay 0.0
+/bus/10/speaker/43/delay 0.0
+/bus/10/speaker/44/delay 0.0
+/bus/10/speaker/45/delay 0.0
+/bus/10/speaker/46/delay 0.0
+/bus/10/speaker/47/delay 0.0
+/bus/10/speaker/48/delay 0.0
+/bus/10/speaker/49/delay 0.0
+/bus/10/speaker/50/delay 0.0
+/bus/10/speaker/51/delay 0.0
+/bus/10/speaker/52/delay 0.0
+/bus/10/speaker/53/delay 0.0
+/bus/10/speaker/54/delay 0.0
+/bus/10/speaker/55/delay 0.0
+/bus/10/speaker/56/delay 0.0
+/bus/10/speaker/57/delay 0.0
+/bus/10/speaker/58/delay 0.0
+/bus/10/speaker/59/delay 0.0
+/bus/10/speaker/60/delay 0.0
+/bus/10/speaker/61/delay 0.0
+/bus/10/speaker/62/delay 0.0
+/bus/10/speaker/63/delay 0.0
+/bus/10/speaker/64/delay 0.0
+/bus/10/speaker/65/delay 0.0
+/bus/10/speaker/66/delay 0.0
+/bus/10/speaker/67/delay 0.0
+/bus/10/speaker/68/delay 0.0
+/bus/10/speaker/69/delay 0.0
+/bus/10/speaker/70/delay 0.0
+/bus/10/speaker/71/delay 0.0
+/bus/10/speaker/72/delay 0.0
+/bus/10/speaker/73/delay 0.0
+/bus/10/speaker/74/delay 0.0
+/bus/10/speaker/75/delay 0.0
+/bus/10/speaker/76/delay 0.0
+/bus/10/speaker/77/delay 0.0
+/bus/10/speaker/78/delay 0.0
+/bus/10/speaker/79/delay 0.0
+/bus/10/speaker/80/delay 0.0
+/bus/10/speaker/81/delay 0.0
+/bus/10/speaker/82/delay 0.0
+/bus/10/speaker/83/delay 0.0
+/bus/10/speaker/84/delay 0.0
+/bus/10/speaker/85/delay 0.0
+/bus/10/speaker/86/delay 0.0
+/bus/10/speaker/87/delay 0.0
+/bus/10/speaker/88/delay 0.0
+/bus/10/speaker/89/delay 0.0
+/bus/10/speaker/90/delay 0.0
+/bus/10/speaker/91/delay 0.0
+/bus/10/speaker/92/delay 0.0
+/bus/10/speaker/93/delay 0.0
+/bus/10/speaker/94/delay 0.0
+/bus/10/speaker/95/delay 0.0
+/bus/10/speaker/96/delay 0.0
+/bus/10/speaker/97/delay 0.0
+/bus/10/speaker/98/delay 0.0
+/bus/10/speaker/99/delay 0.0
+/bus/10/speaker/100/delay 0.0
+/bus/10/speaker/101/delay 0.0
+/bus/10/speaker/102/delay 0.0
+/bus/10/speaker/103/delay 0.0
+/bus/10/speaker/104/delay 0.0
+/bus/10/speaker/105/delay 0.0
+/bus/10/speaker/106/delay 0.0
+/bus/10/speaker/107/delay 0.0
+/bus/10/speaker/108/delay 0.0
+/bus/10/speaker/109/delay 0.0
+/bus/10/speaker/110/delay 0.0
+/bus/10/speaker/111/delay 0.0
+/bus/10/speaker/112/delay 0.0
+/bus/10/speaker/1/gain/db 0.0
+/bus/10/speaker/2/gain/db 0.0
+/bus/10/speaker/3/gain/db 0.0
+/bus/10/speaker/4/gain/db 0.0
+/bus/10/speaker/5/gain/db 0.0
+/bus/10/speaker/6/gain/db 0.0
+/bus/10/speaker/7/gain/db 0.0
+/bus/10/speaker/8/gain/db 0.0
+/bus/10/speaker/9/gain/db 0.0
+/bus/10/speaker/10/gain/db 0.0
+/bus/10/speaker/11/gain/db 0.0
+/bus/10/speaker/12/gain/db 0.0
+/bus/10/speaker/13/gain/db 0.0
+/bus/10/speaker/14/gain/db 0.0
+/bus/10/speaker/15/gain/db 0.0
+/bus/10/speaker/16/gain/db 0.0
+/bus/10/speaker/17/gain/db 0.0
+/bus/10/speaker/18/gain/db 0.0
+/bus/10/speaker/19/gain/db 0.0
+/bus/10/speaker/20/gain/db 0.0
+/bus/10/speaker/21/gain/db 0.0
+/bus/10/speaker/22/gain/db 0.0
+/bus/10/speaker/23/gain/db 0.0
+/bus/10/speaker/24/gain/db 0.0
+/bus/10/speaker/25/gain/db 0.0
+/bus/10/speaker/26/gain/db 0.0
+/bus/10/speaker/27/gain/db 0.0
+/bus/10/speaker/28/gain/db 0.0
+/bus/10/speaker/29/gain/db 0.0
+/bus/10/speaker/30/gain/db 0.0
+/bus/10/speaker/31/gain/db 0.0
+/bus/10/speaker/32/gain/db 0.0
+/bus/10/speaker/33/gain/db 0.0
+/bus/10/speaker/34/gain/db 0.0
+/bus/10/speaker/35/gain/db 0.0
+/bus/10/speaker/36/gain/db 0.0
+/bus/10/speaker/37/gain/db 0.0
+/bus/10/speaker/38/gain/db 0.0
+/bus/10/speaker/39/gain/db 0.0
+/bus/10/speaker/40/gain/db 0.0
+/bus/10/speaker/41/gain/db 0.0
+/bus/10/speaker/42/gain/db 0.0
+/bus/10/speaker/43/gain/db 0.0
+/bus/10/speaker/44/gain/db 0.0
+/bus/10/speaker/45/gain/db 0.0
+/bus/10/speaker/46/gain/db 0.0
+/bus/10/speaker/47/gain/db 0.0
+/bus/10/speaker/48/gain/db 0.0
+/bus/10/speaker/49/gain/db 0.0
+/bus/10/speaker/50/gain/db 0.0
+/bus/10/speaker/51/gain/db 0.0
+/bus/10/speaker/52/gain/db 0.0
+/bus/10/speaker/53/gain/db 0.0
+/bus/10/speaker/54/gain/db 0.0
+/bus/10/speaker/55/gain/db 0.0
+/bus/10/speaker/56/gain/db 0.0
+/bus/10/speaker/57/gain/db 0.0
+/bus/10/speaker/58/gain/db 0.0
+/bus/10/speaker/59/gain/db 0.0
+/bus/10/speaker/60/gain/db 0.0
+/bus/10/speaker/61/gain/db 0.0
+/bus/10/speaker/62/gain/db 0.0
+/bus/10/speaker/63/gain/db 0.0
+/bus/10/speaker/64/gain/db 0.0
+/bus/10/speaker/65/gain/db 0.0
+/bus/10/speaker/66/gain/db 0.0
+/bus/10/speaker/67/gain/db 0.0
+/bus/10/speaker/68/gain/db 0.0
+/bus/10/speaker/69/gain/db 0.0
+/bus/10/speaker/70/gain/db 0.0
+/bus/10/speaker/71/gain/db 0.0
+/bus/10/speaker/72/gain/db 0.0
+/bus/10/speaker/73/gain/db 0.0
+/bus/10/speaker/74/gain/db 0.0
+/bus/10/speaker/75/gain/db 0.0
+/bus/10/speaker/76/gain/db 0.0
+/bus/10/speaker/77/gain/db 0.0
+/bus/10/speaker/78/gain/db 0.0
+/bus/10/speaker/79/gain/db 0.0
+/bus/10/speaker/80/gain/db 0.0
+/bus/10/speaker/81/gain/db 0.0
+/bus/10/speaker/82/gain/db 0.0
+/bus/10/speaker/83/gain/db 0.0
+/bus/10/speaker/84/gain/db 0.0
+/bus/10/speaker/85/gain/db 0.0
+/bus/10/speaker/86/gain/db 0.0
+/bus/10/speaker/87/gain/db 0.0
+/bus/10/speaker/88/gain/db 0.0
+/bus/10/speaker/89/gain/db 0.0
+/bus/10/speaker/90/gain/db 0.0
+/bus/10/speaker/91/gain/db 0.0
+/bus/10/speaker/92/gain/db 0.0
+/bus/10/speaker/93/gain/db 0.0
+/bus/10/speaker/94/gain/db 0.0
+/bus/10/speaker/95/gain/db 0.0
+/bus/10/speaker/96/gain/db 0.0
+/bus/10/speaker/97/gain/db 0.0
+/bus/10/speaker/98/gain/db 0.0
+/bus/10/speaker/99/gain/db 0.0
+/bus/10/speaker/100/gain/db 0.0
+/bus/10/speaker/101/gain/db 0.0
+/bus/10/speaker/102/gain/db 0.0
+/bus/10/speaker/103/gain/db 0.0
+/bus/10/speaker/104/gain/db 0.0
+/bus/10/speaker/105/gain/db 0.0
+/bus/10/speaker/106/gain/db 0.0
+/bus/10/speaker/107/gain/db 0.0
+/bus/10/speaker/108/gain/db 0.0
+/bus/10/speaker/109/gain/db 0.0
+/bus/10/speaker/110/gain/db 0.0
+/bus/10/speaker/111/gain/db 0.0
+/bus/10/speaker/112/gain/db 0.0
+/bus/10/speaker/1/name "1"
+/bus/10/speaker/2/name "2"
+/bus/10/speaker/3/name "3"
+/bus/10/speaker/4/name "4"
+/bus/10/speaker/5/name "5"
+/bus/10/speaker/6/name "6"
+/bus/10/speaker/7/name "7"
+/bus/10/speaker/8/name "8"
+/bus/10/speaker/9/name "9"
+/bus/10/speaker/10/name "10"
+/bus/10/speaker/11/name "11"
+/bus/10/speaker/12/name "12"
+/bus/10/speaker/13/name "13"
+/bus/10/speaker/14/name "14"
+/bus/10/speaker/15/name "15"
+/bus/10/speaker/16/name "16"
+/bus/10/speaker/17/name "17"
+/bus/10/speaker/18/name "18"
+/bus/10/speaker/19/name "19"
+/bus/10/speaker/20/name "20"
+/bus/10/speaker/21/name "21"
+/bus/10/speaker/22/name "22"
+/bus/10/speaker/23/name "23"
+/bus/10/speaker/24/name "24"
+/bus/10/speaker/25/name "25"
+/bus/10/speaker/26/name "26"
+/bus/10/speaker/27/name "27"
+/bus/10/speaker/28/name "28"
+/bus/10/speaker/29/name "29"
+/bus/10/speaker/30/name "30"
+/bus/10/speaker/31/name "31"
+/bus/10/speaker/32/name "32"
+/bus/10/speaker/33/name "33"
+/bus/10/speaker/34/name "34"
+/bus/10/speaker/35/name "35"
+/bus/10/speaker/36/name "36"
+/bus/10/speaker/37/name "37"
+/bus/10/speaker/38/name "38"
+/bus/10/speaker/39/name "39"
+/bus/10/speaker/40/name "40"
+/bus/10/speaker/41/name "41"
+/bus/10/speaker/42/name "42"
+/bus/10/speaker/43/name "43"
+/bus/10/speaker/44/name "44"
+/bus/10/speaker/45/name "45"
+/bus/10/speaker/46/name "46"
+/bus/10/speaker/47/name "47"
+/bus/10/speaker/48/name "48"
+/bus/10/speaker/49/name "49"
+/bus/10/speaker/50/name "50"
+/bus/10/speaker/51/name "51"
+/bus/10/speaker/52/name "52"
+/bus/10/speaker/53/name "53"
+/bus/10/speaker/54/name "54"
+/bus/10/speaker/55/name "55"
+/bus/10/speaker/56/name "56"
+/bus/10/speaker/57/name "57"
+/bus/10/speaker/58/name "58"
+/bus/10/speaker/59/name "59"
+/bus/10/speaker/60/name "60"
+/bus/10/speaker/61/name "61"
+/bus/10/speaker/62/name "62"
+/bus/10/speaker/63/name "63"
+/bus/10/speaker/64/name "64"
+/bus/10/speaker/65/name "65"
+/bus/10/speaker/66/name "66"
+/bus/10/speaker/67/name "67"
+/bus/10/speaker/68/name "68"
+/bus/10/speaker/69/name "69"
+/bus/10/speaker/70/name "70"
+/bus/10/speaker/71/name "71"
+/bus/10/speaker/72/name "72"
+/bus/10/speaker/73/name "73"
+/bus/10/speaker/74/name "74"
+/bus/10/speaker/75/name "75"
+/bus/10/speaker/76/name "76"
+/bus/10/speaker/77/name "77"
+/bus/10/speaker/78/name "78"
+/bus/10/speaker/79/name "79"
+/bus/10/speaker/80/name "80"
+/bus/10/speaker/81/name "81"
+/bus/10/speaker/82/name "82"
+/bus/10/speaker/83/name "83"
+/bus/10/speaker/84/name "84"
+/bus/10/speaker/85/name "85"
+/bus/10/speaker/86/name "86"
+/bus/10/speaker/87/name "87"
+/bus/10/speaker/88/name "88"
+/bus/10/speaker/89/name "89"
+/bus/10/speaker/90/name "90"
+/bus/10/speaker/91/name "91"
+/bus/10/speaker/92/name "92"
+/bus/10/speaker/93/name "93"
+/bus/10/speaker/94/name "94"
+/bus/10/speaker/95/name "95"
+/bus/10/speaker/96/name "96"
+/bus/10/speaker/97/name "97"
+/bus/10/speaker/98/name "98"
+/bus/10/speaker/99/name "99"
+/bus/10/speaker/100/name "100"
+/bus/10/speaker/101/name "101"
+/bus/10/speaker/102/name "102"
+/bus/10/speaker/103/name "103"
+/bus/10/speaker/104/name "104"
+/bus/10/speaker/105/name "105"
+/bus/10/speaker/106/name "106"
+/bus/10/speaker/107/name "107"
+/bus/10/speaker/108/name "108"
+/bus/10/speaker/109/name "109"
+/bus/10/speaker/110/name "110"
+/bus/10/speaker/111/name "111"
+/bus/10/speaker/112/name "112"
+/bus/10/speakers/visible 1
+/bus/10/speakers/reference/xyz 0.0 0.0 0.0
+/bus/10/ignorez 1
+/bus/10/routing/output/1/master 1
+/bus/10/routing/output/2/master 2
+/bus/10/routing/output/3/master 3
+/bus/10/routing/output/4/master 4
+/bus/10/routing/output/5/master 5
+/bus/10/routing/output/6/master 6
+/bus/10/routing/output/7/master 7
+/bus/10/routing/output/8/master 8
+/bus/10/routing/output/9/master 9
+/bus/10/routing/output/10/master 10
+/bus/10/routing/output/11/master 11
+/bus/10/routing/output/12/master 12
+/bus/10/routing/output/13/master 13
+/bus/10/routing/output/14/master 14
+/bus/10/routing/output/15/master 15
+/bus/10/routing/output/16/master 16
+/bus/10/routing/output/17/master 17
+/bus/10/routing/output/18/master 18
+/bus/10/routing/output/19/master 19
+/bus/10/routing/output/20/master 20
+/bus/10/routing/output/21/master 21
+/bus/10/routing/output/22/master 22
+/bus/10/routing/output/23/master 23
+/bus/10/routing/output/24/master 24
+/bus/10/routing/output/25/master 25
+/bus/10/routing/output/26/master 26
+/bus/10/routing/output/27/master 27
+/bus/10/routing/output/28/master 28
+/bus/10/routing/output/29/master 29
+/bus/10/routing/output/30/master 30
+/bus/10/routing/output/31/master 31
+/bus/10/routing/output/32/master 32
+/bus/10/routing/output/33/master 33
+/bus/10/routing/output/34/master 34
+/bus/10/routing/output/35/master 35
+/bus/10/routing/output/36/master 36
+/bus/10/routing/output/37/master 37
+/bus/10/routing/output/38/master 38
+/bus/10/routing/output/39/master 39
+/bus/10/routing/output/40/master 40
+/bus/10/routing/output/41/master 41
+/bus/10/routing/output/42/master 42
+/bus/10/routing/output/43/master 43
+/bus/10/routing/output/44/master 44
+/bus/10/routing/output/45/master 45
+/bus/10/routing/output/46/master 46
+/bus/10/routing/output/47/master 47
+/bus/10/routing/output/48/master 48
+/bus/10/routing/output/49/master 49
+/bus/10/routing/output/50/master 50
+/bus/10/routing/output/51/master 51
+/bus/10/routing/output/52/master 52
+/bus/10/routing/output/53/master 53
+/bus/10/routing/output/54/master 54
+/bus/10/routing/output/55/master 55
+/bus/10/routing/output/56/master 56
+/bus/10/routing/output/57/master 57
+/bus/10/routing/output/58/master 58
+/bus/10/routing/output/59/master 59
+/bus/10/routing/output/60/master 60
+/bus/10/routing/output/61/master 61
+/bus/10/routing/output/62/master 62
+/bus/10/routing/output/63/master 63
+/bus/10/routing/output/64/master 64
+/bus/10/routing/output/65/master 65
+/bus/10/routing/output/66/master 66
+/bus/10/routing/output/67/master 67
+/bus/10/routing/output/68/master 68
+/bus/10/routing/output/69/master 69
+/bus/10/routing/output/70/master 70
+/bus/10/routing/output/71/master 71
+/bus/10/routing/output/72/master 72
+/bus/10/routing/output/73/master 73
+/bus/10/routing/output/74/master 74
+/bus/10/routing/output/75/master 75
+/bus/10/routing/output/76/master 76
+/bus/10/routing/output/77/master 77
+/bus/10/routing/output/78/master 78
+/bus/10/routing/output/79/master 79
+/bus/10/routing/output/80/master 80
+/bus/10/routing/output/81/master 81
+/bus/10/routing/output/82/master 82
+/bus/10/routing/output/83/master 83
+/bus/10/routing/output/84/master 84
+/bus/10/routing/output/85/master 85
+/bus/10/routing/output/86/master 86
+/bus/10/routing/output/87/master 87
+/bus/10/routing/output/88/master 88
+/bus/10/routing/output/89/master 89
+/bus/10/routing/output/90/master 90
+/bus/10/routing/output/91/master 91
+/bus/10/routing/output/92/master 92
+/bus/10/routing/output/93/master 93
+/bus/10/routing/output/94/master 94
+/bus/10/routing/output/95/master 95
+/bus/10/routing/output/96/master 96
+/bus/10/routing/output/97/master 97
+/bus/10/routing/output/98/master 98
+/bus/10/routing/output/99/master 99
+/bus/10/routing/output/100/master 100
+/bus/10/routing/output/101/master 101
+/bus/10/routing/output/102/master 102
+/bus/10/routing/output/103/master 103
+/bus/10/routing/output/104/master 104
+/bus/10/routing/output/105/master 105
+/bus/10/routing/output/106/master 106
+/bus/10/routing/output/107/master 107
+/bus/10/routing/output/108/master 108
+/bus/10/routing/output/109/master 109
+/bus/10/routing/output/110/master 110
+/bus/10/routing/output/111/master 111
+/bus/10/routing/output/112/master 112
+/bus/10/lock 0
+/bus/10/delay 0.0
+/bus/10/delay/bypass 0
+/bus/10/monitor 0
+/bus/10/ramp/time 20.0
+/bus/10/interpolation/time 20.0
+/bus/10/speakers/directions/xyz -0.000000 1.0 -0.0 -0.000000 1.0 -0.0 0.000000 1.0 -0.0 -0.000000 1.0 -0.0 -0.000000 1.0 -0.0 -0.000000 1.0 -0.0 -0.000000 1.0 -0.0 -0.000000 1.0 -0.0 1.0 -0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 -0.000000 -0.0 1.0 -0.000000 -0.0 1.0 -0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 -0.000000 -0.0 1.0 -0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 -0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 1.0 0.000000 -0.0 -0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 0.000000 -1.0 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 0.000000 -0.0 -1.0 -0.0 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 -1.0 -0.000000 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0 0.000000 1.0 -0.0
+/bus/10/prefilter 1
+/bus/10/delays/normalization "zero-latency"
+/bus/10/delays/offset 0.000000
+/bus/10/delay/mode "xdelay"
+/bus/10/delay/scaling 100.0
+/bus/10/delay/switchtonearest 0
+/bus/10/gain/scaling 100.0
+/bus/10/gains/normalization "energy"
+/bus/10/interpolation/mode "lagrange3"
+/bus/10/window 1
+/bus/10/window/size 30.0
+/bus/10/blend/method "focus+nonfocus"
+/bus/10/blend/range 2.0
+/bus/10/lsa/mode "off"
+/bus/10/lsa/gain 0.000000
+/bus/10/lsa/depth 20.0
+/bus/10/lsa/curvature 100.0
+/bus/10/lsa/equalizer/bypass 1
+/bus/10/lsa/equalizer/gain 0.0
+/bus/10/lsa/equalizer/filter/1/active 0
+/bus/10/lsa/equalizer/filter/1/freq 50.0
+/bus/10/lsa/equalizer/filter/1/order 2
+/bus/10/lsa/equalizer/filter/2/active 1
+/bus/10/lsa/equalizer/filter/2/freq 100.0
+/bus/10/lsa/equalizer/filter/2/gain 0.0
+/bus/10/lsa/equalizer/filter/2/q 1.0
+/bus/10/lsa/equalizer/filter/3/active 1
+/bus/10/lsa/equalizer/filter/3/freq 500.0
+/bus/10/lsa/equalizer/filter/3/gain 0.0
+/bus/10/lsa/equalizer/filter/3/q 1.0
+/bus/10/lsa/equalizer/filter/4/active 1
+/bus/10/lsa/equalizer/filter/4/freq 1000.0
+/bus/10/lsa/equalizer/filter/4/gain 0.0
+/bus/10/lsa/equalizer/filter/4/q 1.0
+/bus/10/lsa/equalizer/filter/5/active 1
+/bus/10/lsa/equalizer/filter/5/freq 2000.0
+/bus/10/lsa/equalizer/filter/5/gain 0.0
+/bus/10/lsa/equalizer/filter/5/q 1.0
+/bus/10/lsa/equalizer/filter/6/active 1
+/bus/10/lsa/equalizer/filter/6/freq 5000.0
+/bus/10/lsa/equalizer/filter/6/gain 0.0
+/bus/10/lsa/equalizer/filter/6/q 1.0
+/bus/10/lsa/equalizer/filter/7/active 1
+/bus/10/lsa/equalizer/filter/7/freq 10000.0
+/bus/10/lsa/equalizer/filter/7/gain 0.0
+/bus/10/lsa/equalizer/filter/7/q 1.0
+/bus/10/lsa/equalizer/filter/8/active 0
+/bus/10/lsa/equalizer/filter/8/freq 16000.0
+/bus/10/lsa/equalizer/filter/8/order 2
+/reverb/10/name "FongPao Reverb"
+/reverb/10/color 0.803922 0.247059 0.6 1.0
+/reverb/10/numio 8 112
+/reverb/10/visible 1
+/reverb/10/trim -10.0
+/reverb/10/dynamics/attack 10.0
+/reverb/10/dynamics/release 30.0
+/reverb/10/dynamics/lookahead 0.0
+/reverb/10/dynamics/compressor/threshold -30.0
+/reverb/10/dynamics/compressor/ratio 1.0
+/reverb/10/dynamics/expander/threshold -60.0
+/reverb/10/dynamics/expander/ratio 1.0
+/reverb/10/dynamics/makeup 0.000000
+/reverb/10/dynamics/link "multi mono"
+/reverb/10/dynamics/bypass 1
+/reverb/10/dynamics/grid/visible 1
+/reverb/10/dynamics/curve/fill 1
+/reverb/10/dynamics/background/color 1.0 1.0 1.0 0.0
+/reverb/10/dynamics/foreground/color 0.803922 0.247059 0.6 0.6
+/reverb/10/dynamics/curve/color 0.643137 0.196078 0.478431 1.0
+/reverb/10/dynamics/curve/thickness 1.0
+/reverb/10/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/reverb/10/dynamics/title "FongPao Reverb"
+/reverb/10/equalizer/bypass 1
+/reverb/10/equalizer/gain 0.0
+/reverb/10/equalizer/filter/1/active 0
+/reverb/10/equalizer/filter/1/freq 50.0
+/reverb/10/equalizer/filter/1/order 2
+/reverb/10/equalizer/filter/2/active 1
+/reverb/10/equalizer/filter/2/freq 100.0
+/reverb/10/equalizer/filter/2/gain 0.0
+/reverb/10/equalizer/filter/2/q 1.0
+/reverb/10/equalizer/filter/3/active 1
+/reverb/10/equalizer/filter/3/freq 500.0
+/reverb/10/equalizer/filter/3/gain 0.0
+/reverb/10/equalizer/filter/3/q 1.0
+/reverb/10/equalizer/filter/4/active 1
+/reverb/10/equalizer/filter/4/freq 1000.0
+/reverb/10/equalizer/filter/4/gain 0.0
+/reverb/10/equalizer/filter/4/q 1.0
+/reverb/10/equalizer/filter/5/active 1
+/reverb/10/equalizer/filter/5/freq 2000.0
+/reverb/10/equalizer/filter/5/gain 0.0
+/reverb/10/equalizer/filter/5/q 1.0
+/reverb/10/equalizer/filter/6/active 1
+/reverb/10/equalizer/filter/6/freq 5000.0
+/reverb/10/equalizer/filter/6/gain 0.0
+/reverb/10/equalizer/filter/6/q 1.0
+/reverb/10/equalizer/filter/7/active 1
+/reverb/10/equalizer/filter/7/freq 10000.0
+/reverb/10/equalizer/filter/7/gain 0.0
+/reverb/10/equalizer/filter/7/q 1.0
+/reverb/10/equalizer/filter/8/active 0
+/reverb/10/equalizer/filter/8/freq 16000.0
+/reverb/10/equalizer/filter/8/order 2
+/reverb/10/gain 0.000000
+/reverb/10/gain/ramptime 20.0
+/reverb/10/mute 0
+/reverb/10/annotation ""
+/reverb/10/levels/input/visible 1
+/reverb/10/levels/input/post 0
+/reverb/10/levels/input/mode "peak"
+/reverb/10/levels/output/visible 1
+/reverb/10/levels/output/post 1
+/reverb/10/levels/output/mode "peak"
+/reverb/10/solo 0
+/reverb/10/lock 0
+/reverb/10/cluster/gain -6.0
+/reverb/10/cluster/filter/bypass 1
+/reverb/10/cluster/gain/low 0.000000
+/reverb/10/cluster/gain/med 0.000000
+/reverb/10/cluster/gain/high 0.000000
+/reverb/10/cluster/freq/low 250.0
+/reverb/10/cluster/freq/high 4000.0
+/reverb/10/cluster/mute 0
+/reverb/10/cluster/delays 20.25 31.3633 36.1999 44.4223 56.5628 64.2643 72.8267 83.42
+/reverb/10/tr0 0.1
+/reverb/10/trl 1.0
+/reverb/10/trm 1.0
+/reverb/10/trh 0.5
+/reverb/10/fl 250.0
+/reverb/10/fh 8000.0
+/reverb/10/air 1
+/reverb/10/air/freq 10000.0
+/reverb/10/reverb/delays 52.9 72.1111 80.4721 94.6858 115.673 128.986 143.788 162.1
+/reverb/10/spread 100.0
+/reverb/10/spread/bypass 0
+/reverb/10/spread/ae 0.0 0.000000
+/bus/1/format "WFS"
+/bus/1/name "WFS Front"
+/bus/1/color 0.803922 0.247059 0.6 1.0
+/bus/1/numio 32 32
+/bus/1/visible 1
+/bus/1/trim 0.000000
+/bus/1/dynamics/attack 10.0
+/bus/1/dynamics/release 30.0
+/bus/1/dynamics/lookahead 0.0
+/bus/1/dynamics/compressor/threshold -30.0
+/bus/1/dynamics/compressor/ratio 1.0
+/bus/1/dynamics/expander/threshold -60.0
+/bus/1/dynamics/expander/ratio 1.0
+/bus/1/dynamics/makeup 0.000000
+/bus/1/dynamics/link "multi mono"
+/bus/1/dynamics/bypass 1
+/bus/1/dynamics/grid/visible 1
+/bus/1/dynamics/curve/fill 1
+/bus/1/dynamics/background/color 1.0 1.0 1.0 0.0
+/bus/1/dynamics/foreground/color 0.803922 0.247059 0.6 0.6
+/bus/1/dynamics/curve/color 0.643137 0.196078 0.478431 1.0
+/bus/1/dynamics/curve/thickness 1.0
+/bus/1/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/bus/1/dynamics/title "WFS Front"
+/bus/1/equalizer/bypass 1
+/bus/1/equalizer/gain 0.0
+/bus/1/equalizer/filter/1/active 0
+/bus/1/equalizer/filter/1/freq 50.0
+/bus/1/equalizer/filter/1/order 2
+/bus/1/equalizer/filter/2/active 1
+/bus/1/equalizer/filter/2/freq 100.0
+/bus/1/equalizer/filter/2/gain 0.0
+/bus/1/equalizer/filter/2/q 1.0
+/bus/1/equalizer/filter/3/active 1
+/bus/1/equalizer/filter/3/freq 500.0
+/bus/1/equalizer/filter/3/gain 0.0
+/bus/1/equalizer/filter/3/q 1.0
+/bus/1/equalizer/filter/4/active 1
+/bus/1/equalizer/filter/4/freq 1000.0
+/bus/1/equalizer/filter/4/gain 0.0
+/bus/1/equalizer/filter/4/q 1.0
+/bus/1/equalizer/filter/5/active 1
+/bus/1/equalizer/filter/5/freq 2000.0
+/bus/1/equalizer/filter/5/gain 0.0
+/bus/1/equalizer/filter/5/q 1.0
+/bus/1/equalizer/filter/6/active 1
+/bus/1/equalizer/filter/6/freq 5000.0
+/bus/1/equalizer/filter/6/gain 0.0
+/bus/1/equalizer/filter/6/q 1.0
+/bus/1/equalizer/filter/7/active 1
+/bus/1/equalizer/filter/7/freq 10000.0
+/bus/1/equalizer/filter/7/gain 0.0
+/bus/1/equalizer/filter/7/q 1.0
+/bus/1/equalizer/filter/8/active 0
+/bus/1/equalizer/filter/8/freq 16000.0
+/bus/1/equalizer/filter/8/order 2
+/bus/1/gain 0.000000
+/bus/1/gain/ramptime 20.0
+/bus/1/mute 0
+/bus/1/annotation ""
+/bus/1/levels/input/visible 1
+/bus/1/levels/input/post 0
+/bus/1/levels/input/mode "peak"
+/bus/1/levels/output/visible 1
+/bus/1/levels/output/post 1
+/bus/1/levels/output/mode "peak"
+/bus/1/solo 0
+/bus/1/speaker/number 32
+/bus/1/speakers/correction/delay "off"
+/bus/1/speakers/correction/gain "off"
+/bus/1/speakers/aed -32.4155 0.0 2.36916 -30.7526 0.0 2.32725 -29.0303 0.0 2.28738 -27.2485 0.0 2.24964 -25.4077 0.0 2.21416 -23.509 0.0 2.18103 -21.554 0.0 2.15037 -19.5449 0.0 2.12229 -16.9617 0.0 2.09096 -14.8422 0.0 2.06903 -12.6804 0.0 2.05 -10.4812 0.0 2.03394 -8.25039 0.0 2.02092 -5.99409 0.0 2.01099 -3.71899 0.0 2.00422 -1.4321 0.0 2.00062 1.4321 0.0 2.00062 3.71899 0.0 2.00422 5.99409 0.0 2.01099 8.25039 0.0 2.02092 10.4812 0.0 2.03394 12.6804 0.0 2.05 14.8422 0.0 2.06903 16.9617 0.0 2.09096 19.5449 0.0 2.12229 21.554 0.0 2.15037 23.509 0.0 2.18103 25.4077 0.0 2.21416 27.2485 0.0 2.24964 29.0303 0.0 2.28738 30.7526 0.0 2.32725 32.4155 0.0 2.36916
+/bus/1/speaker/1/delay 0.0
+/bus/1/speaker/2/delay 0.0
+/bus/1/speaker/3/delay 0.0
+/bus/1/speaker/4/delay 0.0
+/bus/1/speaker/5/delay 0.0
+/bus/1/speaker/6/delay 0.0
+/bus/1/speaker/7/delay 0.0
+/bus/1/speaker/8/delay 0.0
+/bus/1/speaker/9/delay 0.0
+/bus/1/speaker/10/delay 0.0
+/bus/1/speaker/11/delay 0.0
+/bus/1/speaker/12/delay 0.0
+/bus/1/speaker/13/delay 0.0
+/bus/1/speaker/14/delay 0.0
+/bus/1/speaker/15/delay 0.0
+/bus/1/speaker/16/delay 0.0
+/bus/1/speaker/17/delay 0.0
+/bus/1/speaker/18/delay 0.0
+/bus/1/speaker/19/delay 0.0
+/bus/1/speaker/20/delay 0.0
+/bus/1/speaker/21/delay 0.0
+/bus/1/speaker/22/delay 0.0
+/bus/1/speaker/23/delay 0.0
+/bus/1/speaker/24/delay 0.0
+/bus/1/speaker/25/delay 0.0
+/bus/1/speaker/26/delay 0.0
+/bus/1/speaker/27/delay 0.0
+/bus/1/speaker/28/delay 0.0
+/bus/1/speaker/29/delay 0.0
+/bus/1/speaker/30/delay 0.0
+/bus/1/speaker/31/delay 0.0
+/bus/1/speaker/32/delay 0.0
+/bus/1/speaker/1/gain/db 0.0
+/bus/1/speaker/2/gain/db 0.0
+/bus/1/speaker/3/gain/db 0.0
+/bus/1/speaker/4/gain/db 0.0
+/bus/1/speaker/5/gain/db 0.0
+/bus/1/speaker/6/gain/db 0.0
+/bus/1/speaker/7/gain/db 0.0
+/bus/1/speaker/8/gain/db 0.0
+/bus/1/speaker/9/gain/db 0.0
+/bus/1/speaker/10/gain/db 0.0
+/bus/1/speaker/11/gain/db 0.0
+/bus/1/speaker/12/gain/db 0.0
+/bus/1/speaker/13/gain/db 0.0
+/bus/1/speaker/14/gain/db 0.0
+/bus/1/speaker/15/gain/db 0.0
+/bus/1/speaker/16/gain/db 0.0
+/bus/1/speaker/17/gain/db 0.0
+/bus/1/speaker/18/gain/db 0.0
+/bus/1/speaker/19/gain/db 0.0
+/bus/1/speaker/20/gain/db 0.0
+/bus/1/speaker/21/gain/db 0.0
+/bus/1/speaker/22/gain/db 0.0
+/bus/1/speaker/23/gain/db 0.0
+/bus/1/speaker/24/gain/db 0.0
+/bus/1/speaker/25/gain/db 0.0
+/bus/1/speaker/26/gain/db 0.0
+/bus/1/speaker/27/gain/db 0.0
+/bus/1/speaker/28/gain/db 0.0
+/bus/1/speaker/29/gain/db 0.0
+/bus/1/speaker/30/gain/db 0.0
+/bus/1/speaker/31/gain/db 0.0
+/bus/1/speaker/32/gain/db 0.0
+/bus/1/speaker/1/name "1"
+/bus/1/speaker/2/name "2"
+/bus/1/speaker/3/name "3"
+/bus/1/speaker/4/name "4"
+/bus/1/speaker/5/name "5"
+/bus/1/speaker/6/name "6"
+/bus/1/speaker/7/name "7"
+/bus/1/speaker/8/name "8"
+/bus/1/speaker/9/name "9"
+/bus/1/speaker/10/name "10"
+/bus/1/speaker/11/name "11"
+/bus/1/speaker/12/name "12"
+/bus/1/speaker/13/name "13"
+/bus/1/speaker/14/name "14"
+/bus/1/speaker/15/name "15"
+/bus/1/speaker/16/name "16"
+/bus/1/speaker/17/name "17"
+/bus/1/speaker/18/name "18"
+/bus/1/speaker/19/name "19"
+/bus/1/speaker/20/name "20"
+/bus/1/speaker/21/name "21"
+/bus/1/speaker/22/name "22"
+/bus/1/speaker/23/name "23"
+/bus/1/speaker/24/name "24"
+/bus/1/speaker/25/name "25"
+/bus/1/speaker/26/name "26"
+/bus/1/speaker/27/name "27"
+/bus/1/speaker/28/name "28"
+/bus/1/speaker/29/name "29"
+/bus/1/speaker/30/name "30"
+/bus/1/speaker/31/name "31"
+/bus/1/speaker/32/name "32"
+/bus/1/speakers/visible 0
+/bus/1/speakers/reference/xyz 0.0 0.0 0.0
+/bus/1/ignorez 0
+/bus/1/routing/output/1/master 41
+/bus/1/routing/output/2/master 42
+/bus/1/routing/output/3/master 43
+/bus/1/routing/output/4/master 44
+/bus/1/routing/output/5/master 45
+/bus/1/routing/output/6/master 46
+/bus/1/routing/output/7/master 47
+/bus/1/routing/output/8/master 48
+/bus/1/routing/output/9/master 49
+/bus/1/routing/output/10/master 50
+/bus/1/routing/output/11/master 51
+/bus/1/routing/output/12/master 52
+/bus/1/routing/output/13/master 53
+/bus/1/routing/output/14/master 54
+/bus/1/routing/output/15/master 55
+/bus/1/routing/output/16/master 56
+/bus/1/routing/output/17/master 57
+/bus/1/routing/output/18/master 58
+/bus/1/routing/output/19/master 59
+/bus/1/routing/output/20/master 60
+/bus/1/routing/output/21/master 61
+/bus/1/routing/output/22/master 62
+/bus/1/routing/output/23/master 63
+/bus/1/routing/output/24/master 64
+/bus/1/routing/output/25/master 65
+/bus/1/routing/output/26/master 66
+/bus/1/routing/output/27/master 67
+/bus/1/routing/output/28/master 68
+/bus/1/routing/output/29/master 69
+/bus/1/routing/output/30/master 70
+/bus/1/routing/output/31/master 71
+/bus/1/routing/output/32/master 72
+/bus/1/lock 0
+/bus/1/delay 0.0
+/bus/1/delay/bypass 0
+/bus/1/monitor 0
+/bus/1/ramp/time 20.0
+/bus/1/interpolation/time 20.0
+/bus/1/speakers/directions/xyz 0.707107 -0.707107 -0.0 0.683157 -0.730271 -0.0 0.656781 -0.754082 -0.0 0.627752 -0.778413 -0.0 0.595847 -0.803098 -0.0 0.560848 -0.827919 -0.0 0.522562 -0.852601 -0.0 0.480833 -0.876812 -0.0 0.435561 -0.900159 -0.0 0.386727 -0.922194 -0.0 0.33441 -0.942428 -0.0 0.27881 -0.960346 -0.0 0.220261 -0.975441 -0.0 0.159232 -0.987241 -0.0 0.0963242 -0.99535 -0.0 0.0322413 -0.99948 -0.0 -0.0322413 -0.99948 -0.0 -0.0963242 -0.99535 -0.0 -0.159232 -0.987241 -0.0 -0.220261 -0.975441 -0.0 -0.27881 -0.960346 -0.0 -0.33441 -0.942428 -0.0 -0.386727 -0.922194 -0.0 -0.435561 -0.900159 -0.0 -0.480833 -0.876812 -0.0 -0.522562 -0.852601 -0.0 -0.560848 -0.827919 -0.0 -0.595847 -0.803098 -0.0 -0.627752 -0.778413 -0.0 -0.656781 -0.754082 -0.0 -0.683157 -0.730271 -0.0 -0.707107 -0.707107 -0.0
+/bus/1/prefilter 1
+/bus/1/delays/normalization "zero-latency"
+/bus/1/delays/offset 0.000000
+/bus/1/delay/mode "xdelay"
+/bus/1/delay/scaling 100.0
+/bus/1/delay/switchtonearest 0
+/bus/1/gain/scaling 100.0
+/bus/1/gains/normalization "energy"
+/bus/1/interpolation/mode "lagrange3"
+/bus/1/window 1
+/bus/1/window/size 30.0
+/bus/1/blend/method "none"
+/bus/1/blend/range 2.0
+/bus/1/lsa/mode "off"
+/bus/1/lsa/gain 0.000000
+/bus/1/lsa/depth 20.0
+/bus/1/lsa/curvature 100.0
+/bus/1/lsa/equalizer/bypass 1
+/bus/1/lsa/equalizer/gain 0.0
+/bus/1/lsa/equalizer/filter/1/active 0
+/bus/1/lsa/equalizer/filter/1/freq 50.0
+/bus/1/lsa/equalizer/filter/1/order 2
+/bus/1/lsa/equalizer/filter/2/active 1
+/bus/1/lsa/equalizer/filter/2/freq 100.0
+/bus/1/lsa/equalizer/filter/2/gain 0.0
+/bus/1/lsa/equalizer/filter/2/q 1.0
+/bus/1/lsa/equalizer/filter/3/active 1
+/bus/1/lsa/equalizer/filter/3/freq 500.0
+/bus/1/lsa/equalizer/filter/3/gain 0.0
+/bus/1/lsa/equalizer/filter/3/q 1.0
+/bus/1/lsa/equalizer/filter/4/active 1
+/bus/1/lsa/equalizer/filter/4/freq 1000.0
+/bus/1/lsa/equalizer/filter/4/gain 0.0
+/bus/1/lsa/equalizer/filter/4/q 1.0
+/bus/1/lsa/equalizer/filter/5/active 1
+/bus/1/lsa/equalizer/filter/5/freq 2000.0
+/bus/1/lsa/equalizer/filter/5/gain 0.0
+/bus/1/lsa/equalizer/filter/5/q 1.0
+/bus/1/lsa/equalizer/filter/6/active 1
+/bus/1/lsa/equalizer/filter/6/freq 5000.0
+/bus/1/lsa/equalizer/filter/6/gain 0.0
+/bus/1/lsa/equalizer/filter/6/q 1.0
+/bus/1/lsa/equalizer/filter/7/active 1
+/bus/1/lsa/equalizer/filter/7/freq 10000.0
+/bus/1/lsa/equalizer/filter/7/gain 0.0
+/bus/1/lsa/equalizer/filter/7/q 1.0
+/bus/1/lsa/equalizer/filter/8/active 0
+/bus/1/lsa/equalizer/filter/8/freq 16000.0
+/bus/1/lsa/equalizer/filter/8/order 2
+/reverb/1/name "WFS Reverb 2"
+/reverb/1/color 0.803922 0.247059 0.6 1.0
+/reverb/1/numio 8 32
+/reverb/1/visible 1
+/reverb/1/trim 0.000000
+/reverb/1/dynamics/attack 10.0
+/reverb/1/dynamics/release 30.0
+/reverb/1/dynamics/lookahead 0.0
+/reverb/1/dynamics/compressor/threshold -30.0
+/reverb/1/dynamics/compressor/ratio 1.0
+/reverb/1/dynamics/expander/threshold -60.0
+/reverb/1/dynamics/expander/ratio 1.0
+/reverb/1/dynamics/makeup 0.000000
+/reverb/1/dynamics/link "multi mono"
+/reverb/1/dynamics/bypass 1
+/reverb/1/dynamics/grid/visible 1
+/reverb/1/dynamics/curve/fill 1
+/reverb/1/dynamics/background/color 1.0 1.0 1.0 0.0
+/reverb/1/dynamics/foreground/color 0.803922 0.247059 0.6 0.6
+/reverb/1/dynamics/curve/color 0.643137 0.196078 0.478431 1.0
+/reverb/1/dynamics/curve/thickness 1.0
+/reverb/1/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/reverb/1/dynamics/title "WFS Reverb 2"
+/reverb/1/equalizer/bypass 1
+/reverb/1/equalizer/gain 0.0
+/reverb/1/equalizer/filter/1/active 0
+/reverb/1/equalizer/filter/1/freq 50.0
+/reverb/1/equalizer/filter/1/order 2
+/reverb/1/equalizer/filter/2/active 1
+/reverb/1/equalizer/filter/2/freq 100.0
+/reverb/1/equalizer/filter/2/gain 0.0
+/reverb/1/equalizer/filter/2/q 1.0
+/reverb/1/equalizer/filter/3/active 1
+/reverb/1/equalizer/filter/3/freq 500.0
+/reverb/1/equalizer/filter/3/gain 0.0
+/reverb/1/equalizer/filter/3/q 1.0
+/reverb/1/equalizer/filter/4/active 1
+/reverb/1/equalizer/filter/4/freq 1000.0
+/reverb/1/equalizer/filter/4/gain 0.0
+/reverb/1/equalizer/filter/4/q 1.0
+/reverb/1/equalizer/filter/5/active 1
+/reverb/1/equalizer/filter/5/freq 2000.0
+/reverb/1/equalizer/filter/5/gain 0.0
+/reverb/1/equalizer/filter/5/q 1.0
+/reverb/1/equalizer/filter/6/active 1
+/reverb/1/equalizer/filter/6/freq 5000.0
+/reverb/1/equalizer/filter/6/gain 0.0
+/reverb/1/equalizer/filter/6/q 1.0
+/reverb/1/equalizer/filter/7/active 1
+/reverb/1/equalizer/filter/7/freq 10000.0
+/reverb/1/equalizer/filter/7/gain 0.0
+/reverb/1/equalizer/filter/7/q 1.0
+/reverb/1/equalizer/filter/8/active 0
+/reverb/1/equalizer/filter/8/freq 16000.0
+/reverb/1/equalizer/filter/8/order 2
+/reverb/1/gain 0.000000
+/reverb/1/gain/ramptime 20.0
+/reverb/1/mute 0
+/reverb/1/annotation ""
+/reverb/1/levels/input/visible 1
+/reverb/1/levels/input/post 0
+/reverb/1/levels/input/mode "peak"
+/reverb/1/levels/output/visible 1
+/reverb/1/levels/output/post 1
+/reverb/1/levels/output/mode "peak"
+/reverb/1/solo 0
+/reverb/1/lock 0
+/reverb/1/cluster/gain -6.0
+/reverb/1/cluster/filter/bypass 1
+/reverb/1/cluster/gain/low 0.000000
+/reverb/1/cluster/gain/med 0.000000
+/reverb/1/cluster/gain/high 0.000000
+/reverb/1/cluster/freq/low 250.0
+/reverb/1/cluster/freq/high 4000.0
+/reverb/1/cluster/mute 0
+/reverb/1/cluster/delays 20.25 31.3633 36.1999 44.4223 56.5628 64.2643 72.8267 83.42
+/reverb/1/tr0 1.995
+/reverb/1/trl 1.0
+/reverb/1/trm 1.0
+/reverb/1/trh 0.5
+/reverb/1/fl 250.0
+/reverb/1/fh 8000.0
+/reverb/1/air 1
+/reverb/1/air/freq 10000.0
+/reverb/1/reverb/delays 52.9 72.1111 80.4721 94.6858 115.673 128.986 143.788 162.1
+/reverb/1/spread 100.0
+/reverb/1/spread/bypass 0
+/reverb/1/spread/ae 0.0 0.000000
+/lfe/name "LFE"
+/lfe/color 1.0 1.0 0.0 1.0
+/lfe/numio 2 2
+/lfe/visible 1
+/lfe/trim 5.0
+/lfe/dynamics/attack 10.01
+/lfe/dynamics/release 30.0
+/lfe/dynamics/lookahead 0.0
+/lfe/dynamics/compressor/threshold -30.0
+/lfe/dynamics/compressor/ratio 1.0
+/lfe/dynamics/expander/threshold -60.0
+/lfe/dynamics/expander/ratio 1.0
+/lfe/dynamics/makeup 0.000000
+/lfe/dynamics/link "multi mono"
+/lfe/dynamics/bypass 1
+/lfe/dynamics/grid/visible 1
+/lfe/dynamics/curve/fill 1
+/lfe/dynamics/background/color 1.0 1.0 1.0 0.0
+/lfe/dynamics/foreground/color 1.0 1.0 0.0 0.6
+/lfe/dynamics/curve/color 0.8 0.8 0.0 1.0
+/lfe/dynamics/curve/thickness 1.0
+/lfe/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/lfe/dynamics/title "LFE"
+/lfe/equalizer/bypass 1
+/lfe/equalizer/gain 0.0
+/lfe/equalizer/filter/1/active 0
+/lfe/equalizer/filter/1/freq 50.0
+/lfe/equalizer/filter/1/order 2
+/lfe/equalizer/filter/2/active 1
+/lfe/equalizer/filter/2/freq 100.0
+/lfe/equalizer/filter/2/gain 0.0
+/lfe/equalizer/filter/2/q 1.0
+/lfe/equalizer/filter/3/active 1
+/lfe/equalizer/filter/3/freq 500.0
+/lfe/equalizer/filter/3/gain 0.0
+/lfe/equalizer/filter/3/q 1.0
+/lfe/equalizer/filter/4/active 1
+/lfe/equalizer/filter/4/freq 1000.0
+/lfe/equalizer/filter/4/gain 0.0
+/lfe/equalizer/filter/4/q 1.0
+/lfe/equalizer/filter/5/active 1
+/lfe/equalizer/filter/5/freq 2000.0
+/lfe/equalizer/filter/5/gain 0.0
+/lfe/equalizer/filter/5/q 1.0
+/lfe/equalizer/filter/6/active 1
+/lfe/equalizer/filter/6/freq 5000.0
+/lfe/equalizer/filter/6/gain 0.0
+/lfe/equalizer/filter/6/q 1.0
+/lfe/equalizer/filter/7/active 1
+/lfe/equalizer/filter/7/freq 10000.0
+/lfe/equalizer/filter/7/gain 0.0
+/lfe/equalizer/filter/7/q 1.0
+/lfe/equalizer/filter/8/active 0
+/lfe/equalizer/filter/8/freq 16000.0
+/lfe/equalizer/filter/8/order 2
+/lfe/gain 11.0
+/lfe/gain/ramptime 20.0
+/lfe/mute 0
+/lfe/annotation "逻辑输出127/128；由Max重映射到聚合装置129/130"
+/lfe/levels/input/visible 1
+/lfe/levels/input/post 0
+/lfe/levels/input/mode "peak"
+/lfe/levels/output/visible 1
+/lfe/levels/output/post 1
+/lfe/levels/output/mode "peak"
+/lfe/solo 0
+/lfe/routing/output/empty
+/lfe/lock 0
+/lfe/delay 0.0
+/lfe/delay/bypass 0
+/lfe/cutoff 220.0
+/lfe/cutoff/bypass 0
+/track/indices 1 2 3 4 5 6 7 8 9 10 11 16 17 18 19 20
+/stereo/indices
+/multi/indices
+/tree/indices
+/hoastream/indices
+/hoadrir/indices
+/em32/indices
+/em64/indices
+/zylia/indices
+/bformat/indices
+/aformat/indices
+/d2m/indices
+/d2b/indices
+/track/1/name "Mono Speech"
+/track/1/color 0.376471 1.0 0.0470588 1.0
+/track/1/numinputs 1
+/track/1/visible 1
+/track/1/trim 1.0
+/track/1/dynamics/attack 10.0
+/track/1/dynamics/release 30.0
+/track/1/dynamics/lookahead 0.0
+/track/1/dynamics/compressor/threshold -30.0
+/track/1/dynamics/compressor/ratio 1.0
+/track/1/dynamics/expander/threshold -60.0
+/track/1/dynamics/expander/ratio 1.0
+/track/1/dynamics/makeup 0.000000
+/track/1/dynamics/link "multi mono"
+/track/1/dynamics/bypass 1
+/track/1/dynamics/grid/visible 1
+/track/1/dynamics/curve/fill 1
+/track/1/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/1/dynamics/foreground/color 0.376471 1.0 0.0470588 0.6
+/track/1/dynamics/curve/color 0.298039 0.8 0.0352941 1.0
+/track/1/dynamics/curve/thickness 1.0
+/track/1/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/1/dynamics/title "Mono Speech"
+/track/1/equalizer/bypass 1
+/track/1/equalizer/gain 0.0
+/track/1/equalizer/filter/1/active 0
+/track/1/equalizer/filter/1/freq 50.0
+/track/1/equalizer/filter/1/order 2
+/track/1/equalizer/filter/2/active 1
+/track/1/equalizer/filter/2/freq 100.0
+/track/1/equalizer/filter/2/gain 0.0
+/track/1/equalizer/filter/2/q 1.0
+/track/1/equalizer/filter/3/active 1
+/track/1/equalizer/filter/3/freq 500.0
+/track/1/equalizer/filter/3/gain 0.0
+/track/1/equalizer/filter/3/q 1.0
+/track/1/equalizer/filter/4/active 1
+/track/1/equalizer/filter/4/freq 1000.0
+/track/1/equalizer/filter/4/gain 0.0
+/track/1/equalizer/filter/4/q 1.0
+/track/1/equalizer/filter/5/active 1
+/track/1/equalizer/filter/5/freq 2000.0
+/track/1/equalizer/filter/5/gain 0.0
+/track/1/equalizer/filter/5/q 1.0
+/track/1/equalizer/filter/6/active 1
+/track/1/equalizer/filter/6/freq 5000.0
+/track/1/equalizer/filter/6/gain 0.0
+/track/1/equalizer/filter/6/q 1.0
+/track/1/equalizer/filter/7/active 1
+/track/1/equalizer/filter/7/freq 10000.0
+/track/1/equalizer/filter/7/gain 0.0
+/track/1/equalizer/filter/7/q 1.0
+/track/1/equalizer/filter/8/active 0
+/track/1/equalizer/filter/8/freq 16000.0
+/track/1/equalizer/filter/8/order 2
+/track/1/gain 0.000000
+/track/1/gain/ramptime 20.0
+/track/1/mute 0
+/track/1/annotation ""
+/track/1/levels/input/visible 1
+/track/1/levels/input/post 0
+/track/1/levels/input/mode "peak"
+/track/1/levels/output/visible 1
+/track/1/levels/output/post 1
+/track/1/levels/output/mode "peak"
+/track/1/solo 0
+/track/1/routing/input/1/adc 1
+/track/1/lfe/send 0.000000
+/track/1/lfe/mute 1
+/track/1/monitor "off"
+/track/1/doppler 0
+/track/1/air 0
+/track/1/phaseinvert 0
+/track/1/azim -116.84
+/track/1/elev 0.000000
+/track/1/dist 0.1
+/track/1/delay/linkedtodistance 0
+/track/1/direct/linkedtodistance 0
+/track/1/early/linkedtodistance 0
+/track/1/reverb/linkedtodistance 0
+/track/1/delay 0.0
+/track/1/direct/gain/offset 0.000000
+/track/1/direct/gain -0.5
+/track/1/direct/gain/low 0.000000
+/track/1/direct/gain/med 0.000000
+/track/1/direct/gain/high 0.000000
+/track/1/direct/freq/low 250.0
+/track/1/direct/freq/high 4000.0
+/track/1/direct/filter/bypass 1
+/track/1/early/gain/offset 0.000000
+/track/1/early/gain -6.3
+/track/1/early/gain/low 0.000000
+/track/1/early/gain/med 0.000000
+/track/1/early/gain/high 0.000000
+/track/1/early/freq/low 250.0
+/track/1/early/freq/high 4000.0
+/track/1/early/filter/bypass 1
+/track/1/reverb/send -18.0
+/track/1/reverb/send/offset 0.000000
+/track/1/reverb/send/ramptime 20.0
+/track/1/early/width 30.0
+/track/1/direct/mute 0
+/track/1/early/mute 1
+/track/1/reverb/mute 1
+/track/1/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/1/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/1/bus/A/destination "/bus/10"
+/track/1/bus/B/destination "/"
+/track/1/bus/C/destination "/"
+/track/1/bus/D/destination "/"
+/track/1/bus/E/destination "/"
+/track/1/bus/F/destination "/"
+/track/1/bus/G/destination "/"
+/track/1/bus/H/destination "/"
+/track/1/bus/A/mute 0
+/track/1/bus/B/mute 0
+/track/1/bus/C/mute 0
+/track/1/bus/D/mute 0
+/track/1/bus/E/mute 0
+/track/1/bus/F/mute 0
+/track/1/bus/G/mute 0
+/track/1/bus/H/mute 0
+/track/1/bus/A/gain 0.0
+/track/1/bus/B/gain 0.0
+/track/1/bus/C/gain 0.0
+/track/1/bus/D/gain 0.0
+/track/1/bus/E/gain 0.0
+/track/1/bus/F/gain 0.0
+/track/1/bus/G/gain 0.0
+/track/1/bus/H/gain 0.0
+/track/1/bus/A/delay 0.0
+/track/1/bus/B/delay 0.0
+/track/1/bus/C/delay 0.0
+/track/1/bus/D/delay 0.0
+/track/1/bus/E/delay 0.0
+/track/1/bus/F/delay 0.0
+/track/1/bus/G/delay 0.0
+/track/1/bus/H/delay 0.0
+/track/1/bus/display "A"
+/track/1/bus/send/display "A-D"
+/track/1/lock 0
+/track/2/name "Mono Music"
+/track/2/color 0.905882 0.298039 0.960784 1.0
+/track/2/numinputs 1
+/track/2/visible 1
+/track/2/trim 0.000000
+/track/2/dynamics/attack 10.0
+/track/2/dynamics/release 30.0
+/track/2/dynamics/lookahead 0.0
+/track/2/dynamics/compressor/threshold -30.0
+/track/2/dynamics/compressor/ratio 1.0
+/track/2/dynamics/expander/threshold -60.0
+/track/2/dynamics/expander/ratio 1.0
+/track/2/dynamics/makeup 0.000000
+/track/2/dynamics/link "multi mono"
+/track/2/dynamics/bypass 1
+/track/2/dynamics/grid/visible 1
+/track/2/dynamics/curve/fill 1
+/track/2/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/2/dynamics/foreground/color 0.905882 0.298039 0.960784 0.6
+/track/2/dynamics/curve/color 0.721569 0.235294 0.768627 1.0
+/track/2/dynamics/curve/thickness 1.0
+/track/2/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/2/dynamics/title "Mono Music"
+/track/2/equalizer/bypass 1
+/track/2/equalizer/gain 0.0
+/track/2/equalizer/filter/1/active 0
+/track/2/equalizer/filter/1/freq 50.0
+/track/2/equalizer/filter/1/order 2
+/track/2/equalizer/filter/2/active 1
+/track/2/equalizer/filter/2/freq 100.0
+/track/2/equalizer/filter/2/gain 0.0
+/track/2/equalizer/filter/2/q 1.0
+/track/2/equalizer/filter/3/active 1
+/track/2/equalizer/filter/3/freq 500.0
+/track/2/equalizer/filter/3/gain 0.0
+/track/2/equalizer/filter/3/q 1.0
+/track/2/equalizer/filter/4/active 1
+/track/2/equalizer/filter/4/freq 1000.0
+/track/2/equalizer/filter/4/gain 0.0
+/track/2/equalizer/filter/4/q 1.0
+/track/2/equalizer/filter/5/active 1
+/track/2/equalizer/filter/5/freq 2000.0
+/track/2/equalizer/filter/5/gain 0.0
+/track/2/equalizer/filter/5/q 1.0
+/track/2/equalizer/filter/6/active 1
+/track/2/equalizer/filter/6/freq 5000.0
+/track/2/equalizer/filter/6/gain 0.0
+/track/2/equalizer/filter/6/q 1.0
+/track/2/equalizer/filter/7/active 1
+/track/2/equalizer/filter/7/freq 10000.0
+/track/2/equalizer/filter/7/gain 0.0
+/track/2/equalizer/filter/7/q 1.0
+/track/2/equalizer/filter/8/active 0
+/track/2/equalizer/filter/8/freq 16000.0
+/track/2/equalizer/filter/8/order 2
+/track/2/gain 0.000000
+/track/2/gain/ramptime 20.0
+/track/2/mute 0
+/track/2/annotation ""
+/track/2/levels/input/visible 1
+/track/2/levels/input/post 0
+/track/2/levels/input/mode "peak"
+/track/2/levels/output/visible 1
+/track/2/levels/output/post 1
+/track/2/levels/output/mode "peak"
+/track/2/solo 0
+/track/2/routing/input/1/adc 2
+/track/2/lfe/send 0.000000
+/track/2/lfe/mute 0
+/track/2/monitor "off"
+/track/2/doppler 0
+/track/2/air 0
+/track/2/phaseinvert 0
+/track/2/azim -1.15
+/track/2/elev -4.85
+/track/2/dist 1.01
+/track/2/delay/linkedtodistance 0
+/track/2/direct/linkedtodistance 1
+/track/2/early/linkedtodistance 1
+/track/2/reverb/linkedtodistance 1
+/track/2/delay 0.0
+/track/2/direct/gain/offset 0.000000
+/track/2/direct/gain -0.6
+/track/2/direct/gain/low 0.000000
+/track/2/direct/gain/med 0.000000
+/track/2/direct/gain/high 0.000000
+/track/2/direct/freq/low 250.0
+/track/2/direct/freq/high 4000.0
+/track/2/direct/filter/bypass 1
+/track/2/early/gain/offset 0.000000
+/track/2/early/gain -8.6
+/track/2/early/gain/low 0.000000
+/track/2/early/gain/med 0.000000
+/track/2/early/gain/high 0.000000
+/track/2/early/freq/low 250.0
+/track/2/early/freq/high 4000.0
+/track/2/early/filter/bypass 1
+/track/2/reverb/send -18.0
+/track/2/reverb/send/offset 0.000000
+/track/2/reverb/send/ramptime 20.0
+/track/2/early/width 30.0
+/track/2/direct/mute 0
+/track/2/early/mute 0
+/track/2/reverb/mute 0
+/track/2/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/2/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/2/bus/A/destination "/bus/10"
+/track/2/bus/B/destination "/"
+/track/2/bus/C/destination "/"
+/track/2/bus/D/destination "/"
+/track/2/bus/E/destination "/"
+/track/2/bus/F/destination "/"
+/track/2/bus/G/destination "/"
+/track/2/bus/H/destination "/"
+/track/2/bus/A/mute 0
+/track/2/bus/B/mute 0
+/track/2/bus/C/mute 0
+/track/2/bus/D/mute 0
+/track/2/bus/E/mute 0
+/track/2/bus/F/mute 0
+/track/2/bus/G/mute 0
+/track/2/bus/H/mute 0
+/track/2/bus/A/gain 0.0
+/track/2/bus/B/gain 0.0
+/track/2/bus/C/gain 0.0
+/track/2/bus/D/gain 0.0
+/track/2/bus/E/gain 0.0
+/track/2/bus/F/gain 0.0
+/track/2/bus/G/gain 0.0
+/track/2/bus/H/gain 0.0
+/track/2/bus/A/delay 0.0
+/track/2/bus/B/delay 0.0
+/track/2/bus/C/delay 0.0
+/track/2/bus/D/delay 0.0
+/track/2/bus/E/delay 0.0
+/track/2/bus/F/delay 0.0
+/track/2/bus/G/delay 0.0
+/track/2/bus/H/delay 0.0
+/track/2/bus/display "A"
+/track/2/bus/send/display "A-D"
+/track/2/lock 0
+/group/indices 1 3 2
+/group/1/name "all tracks"
+/group/1/affects/mute 1
+/group/1/affects/solo 1
+/group/1/affects/send 1
+/group/1/affects/bussend 1
+/group/1/affects/position 1
+/group/1/track 1 2 3 4 16 17 18 19 20 5 6
+/group/1/active 0
+/group/3/name "all mono"
+/group/3/affects/mute 1
+/group/3/affects/solo 1
+/group/3/affects/send 1
+/group/3/affects/bussend 1
+/group/3/affects/position 1
+/group/3/track 1 2 3 4 5 16 17 18 19 20 6
+/group/3/active 0
+/group/2/name ">> FongPao"
+/group/2/affects/mute 1
+/group/2/affects/solo 1
+/group/2/affects/send 1
+/group/2/affects/bussend 1
+/group/2/affects/position 1
+/group/2/track 1 2 3 4 5 16 17 18 19 20 6
+/group/2/active 0
+/viewer/layout "leftright"
+/viewer/background/color 0.709804 0.709804 0.709804 1.0
+/viewer/backgroundimage/file "none"
+/viewer/backgroundimage/visible 1
+/viewer/backgroundimage/opacity 1.0
+/viewer/backgroundimage/scale 100.0
+/viewer/backgroundimage/angle 0.0
+/viewer/backgroundimage/offset/xy 0.0 0.0
+/viewer/backgroundimage/quality "medium"
+/viewer/display/zoom 403.513
+/viewer/display/offset/xyz 22.6 22.7 0.0
+/viewer/display/zoom/lock 0
+/viewer/axis/visible 1
+/viewer/axis/label/visible 1
+/viewer/axis/origin/visible 1
+/viewer/axis/color 1.0 1.0 1.0 1.0
+/viewer/axis/thickness 2.0
+/viewer/grid/visible 1
+/viewer/grid/mode "circular"
+/viewer/grid/spacing 1.0
+/viewer/grid/line/number 30
+/viewer/grid/angulardivisions/number 8
+/viewer/grid/angulardivisions/visible 1
+/viewer/grid/dashed 0
+/viewer/grid/color 1.0 1.0 1.0 0.501961
+/viewer/grid/thickness 1.0
+/viewer/grid/unitcircle/visible 1
+/viewer/grid/unitcircle/color 0.501961 0.501961 0.501961 0.239216
+/viewer/grid/unitcircle/radius 1.0
+/viewer/legend/visible 1
+/viewer/legend/color 1.0 1.0 1.0 1.0
+/viewer/legend/unit "meters"
+/viewer/emphasis/source 1
+/viewer/emphasis/stereo 1
+/viewer/emphasis/speaker 0
+/viewer/emphasis/microphone 0
+/viewer/settings/visible 0
+/viewer/settings/editable 1
+/viewer/area/number 0
+/viewer/anchor/number 0
+/usurp 0
+/window/title "Panoramix - 1012 *"
+/window/visible 1
+/window/moveable 1
+/window/resizable 1
+/window/enable 1
+/window/bounds 582 155 1920 920
+/window/background/color 0.827451 0.827451 0.827451 1.0
+/window/opaque 1
+/window/titlebar 1
+/window/fullscreen 0
+/window/minimise 0
+/window/scale 100.0
+/window/rendering/engine "CoreGraphics Renderer"
+/window/rendering/fps/visible 0
+/window/floating 0
+/window/hidesondeactivate 0
+/window/buttons/close 1
+/window/buttons/minimise 1
+/window/buttons/maximise 1
+/track/3/name "Firework 1"
+/track/3/color 0.117647 0.564706 1.0 1.0
+/track/3/numinputs 1
+/track/3/visible 1
+/track/3/trim 0.000000
+/track/3/dynamics/attack 10.0
+/track/3/dynamics/release 30.0
+/track/3/dynamics/lookahead 0.0
+/track/3/dynamics/compressor/threshold -30.0
+/track/3/dynamics/compressor/ratio 1.0
+/track/3/dynamics/expander/threshold -60.0
+/track/3/dynamics/expander/ratio 1.0
+/track/3/dynamics/makeup 0.000000
+/track/3/dynamics/link "multi mono"
+/track/3/dynamics/bypass 1
+/track/3/dynamics/grid/visible 1
+/track/3/dynamics/curve/fill 1
+/track/3/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/3/dynamics/foreground/color 0.117647 0.564706 1.0 0.6
+/track/3/dynamics/curve/color 0.0941176 0.45098 0.8 1.0
+/track/3/dynamics/curve/thickness 1.0
+/track/3/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/3/dynamics/title "Firework 1"
+/track/3/equalizer/bypass 1
+/track/3/equalizer/gain 0.0
+/track/3/equalizer/filter/1/active 0
+/track/3/equalizer/filter/1/freq 50.0
+/track/3/equalizer/filter/1/order 2
+/track/3/equalizer/filter/2/active 1
+/track/3/equalizer/filter/2/freq 100.0
+/track/3/equalizer/filter/2/gain 0.0
+/track/3/equalizer/filter/2/q 1.0
+/track/3/equalizer/filter/3/active 1
+/track/3/equalizer/filter/3/freq 500.0
+/track/3/equalizer/filter/3/gain 0.0
+/track/3/equalizer/filter/3/q 1.0
+/track/3/equalizer/filter/4/active 1
+/track/3/equalizer/filter/4/freq 1000.0
+/track/3/equalizer/filter/4/gain 0.0
+/track/3/equalizer/filter/4/q 1.0
+/track/3/equalizer/filter/5/active 1
+/track/3/equalizer/filter/5/freq 2000.0
+/track/3/equalizer/filter/5/gain 0.0
+/track/3/equalizer/filter/5/q 1.0
+/track/3/equalizer/filter/6/active 1
+/track/3/equalizer/filter/6/freq 5000.0
+/track/3/equalizer/filter/6/gain 0.0
+/track/3/equalizer/filter/6/q 1.0
+/track/3/equalizer/filter/7/active 1
+/track/3/equalizer/filter/7/freq 10000.0
+/track/3/equalizer/filter/7/gain 0.0
+/track/3/equalizer/filter/7/q 1.0
+/track/3/equalizer/filter/8/active 0
+/track/3/equalizer/filter/8/freq 16000.0
+/track/3/equalizer/filter/8/order 2
+/track/3/gain 0.000000
+/track/3/gain/ramptime 20.0
+/track/3/mute 0
+/track/3/annotation ""
+/track/3/levels/input/visible 1
+/track/3/levels/input/post 0
+/track/3/levels/input/mode "peak"
+/track/3/levels/output/visible 1
+/track/3/levels/output/post 1
+/track/3/levels/output/mode "peak"
+/track/3/solo 0
+/track/3/routing/input/1/adc 3
+/track/3/lfe/send 0.000000
+/track/3/lfe/mute 0
+/track/3/monitor "off"
+/track/3/doppler 0
+/track/3/air 0
+/track/3/phaseinvert 0
+/track/3/azim 0.000000
+/track/3/elev 89.71
+/track/3/dist 2.0
+/track/3/delay/linkedtodistance 0
+/track/3/direct/linkedtodistance 1
+/track/3/early/linkedtodistance 1
+/track/3/reverb/linkedtodistance 1
+/track/3/delay 0.0
+/track/3/direct/gain/offset 0.000000
+/track/3/direct/gain -6.5
+/track/3/direct/gain/low 0.000000
+/track/3/direct/gain/med 0.000000
+/track/3/direct/gain/high 0.000000
+/track/3/direct/freq/low 250.0
+/track/3/direct/freq/high 4000.0
+/track/3/direct/filter/bypass 1
+/track/3/early/gain/offset 0.000000
+/track/3/early/gain -14.4
+/track/3/early/gain/low 0.000000
+/track/3/early/gain/med 0.000000
+/track/3/early/gain/high 0.000000
+/track/3/early/freq/low 250.0
+/track/3/early/freq/high 4000.0
+/track/3/early/filter/bypass 1
+/track/3/reverb/send -18.2
+/track/3/reverb/send/offset 0.000000
+/track/3/reverb/send/ramptime 20.0
+/track/3/early/width 30.0
+/track/3/direct/mute 0
+/track/3/early/mute 0
+/track/3/reverb/mute 0
+/track/3/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/3/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/3/bus/A/destination "/bus/10"
+/track/3/bus/B/destination "/"
+/track/3/bus/C/destination "/"
+/track/3/bus/D/destination "/"
+/track/3/bus/E/destination "/"
+/track/3/bus/F/destination "/"
+/track/3/bus/G/destination "/"
+/track/3/bus/H/destination "/"
+/track/3/bus/A/mute 0
+/track/3/bus/B/mute 0
+/track/3/bus/C/mute 0
+/track/3/bus/D/mute 0
+/track/3/bus/E/mute 0
+/track/3/bus/F/mute 0
+/track/3/bus/G/mute 0
+/track/3/bus/H/mute 0
+/track/3/bus/A/gain 0.0
+/track/3/bus/B/gain 0.0
+/track/3/bus/C/gain 0.0
+/track/3/bus/D/gain 0.0
+/track/3/bus/E/gain 0.0
+/track/3/bus/F/gain 0.0
+/track/3/bus/G/gain 0.0
+/track/3/bus/H/gain 0.0
+/track/3/bus/A/delay 0.0
+/track/3/bus/B/delay 0.0
+/track/3/bus/C/delay 0.0
+/track/3/bus/D/delay 0.0
+/track/3/bus/E/delay 0.0
+/track/3/bus/F/delay 0.0
+/track/3/bus/G/delay 0.0
+/track/3/bus/H/delay 0.0
+/track/3/bus/display "A"
+/track/3/bus/send/display "A-D"
+/track/3/lock 0
+/track/4/name "Firework 2"
+/track/4/color 0.117647 0.564706 1.0 1.0
+/track/4/numinputs 1
+/track/4/visible 1
+/track/4/trim 0.000000
+/track/4/dynamics/attack 10.0
+/track/4/dynamics/release 30.0
+/track/4/dynamics/lookahead 0.0
+/track/4/dynamics/compressor/threshold -30.0
+/track/4/dynamics/compressor/ratio 1.0
+/track/4/dynamics/expander/threshold -60.0
+/track/4/dynamics/expander/ratio 1.0
+/track/4/dynamics/makeup 0.000000
+/track/4/dynamics/link "multi mono"
+/track/4/dynamics/bypass 1
+/track/4/dynamics/grid/visible 1
+/track/4/dynamics/curve/fill 1
+/track/4/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/4/dynamics/foreground/color 0.117647 0.564706 1.0 0.6
+/track/4/dynamics/curve/color 0.0941176 0.45098 0.8 1.0
+/track/4/dynamics/curve/thickness 1.0
+/track/4/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/4/dynamics/title "Firework 2"
+/track/4/equalizer/bypass 1
+/track/4/equalizer/gain 0.0
+/track/4/equalizer/filter/1/active 0
+/track/4/equalizer/filter/1/freq 50.0
+/track/4/equalizer/filter/1/order 2
+/track/4/equalizer/filter/2/active 1
+/track/4/equalizer/filter/2/freq 100.0
+/track/4/equalizer/filter/2/gain 0.0
+/track/4/equalizer/filter/2/q 1.0
+/track/4/equalizer/filter/3/active 1
+/track/4/equalizer/filter/3/freq 500.0
+/track/4/equalizer/filter/3/gain 0.0
+/track/4/equalizer/filter/3/q 1.0
+/track/4/equalizer/filter/4/active 1
+/track/4/equalizer/filter/4/freq 1000.0
+/track/4/equalizer/filter/4/gain 0.0
+/track/4/equalizer/filter/4/q 1.0
+/track/4/equalizer/filter/5/active 1
+/track/4/equalizer/filter/5/freq 2000.0
+/track/4/equalizer/filter/5/gain 0.0
+/track/4/equalizer/filter/5/q 1.0
+/track/4/equalizer/filter/6/active 1
+/track/4/equalizer/filter/6/freq 5000.0
+/track/4/equalizer/filter/6/gain 0.0
+/track/4/equalizer/filter/6/q 1.0
+/track/4/equalizer/filter/7/active 1
+/track/4/equalizer/filter/7/freq 10000.0
+/track/4/equalizer/filter/7/gain 0.0
+/track/4/equalizer/filter/7/q 1.0
+/track/4/equalizer/filter/8/active 0
+/track/4/equalizer/filter/8/freq 16000.0
+/track/4/equalizer/filter/8/order 2
+/track/4/gain 0.000000
+/track/4/gain/ramptime 20.0
+/track/4/mute 0
+/track/4/annotation ""
+/track/4/levels/input/visible 1
+/track/4/levels/input/post 0
+/track/4/levels/input/mode "peak"
+/track/4/levels/output/visible 1
+/track/4/levels/output/post 1
+/track/4/levels/output/mode "peak"
+/track/4/solo 0
+/track/4/routing/input/1/adc 4
+/track/4/lfe/send 0.000000
+/track/4/lfe/mute 0
+/track/4/monitor "off"
+/track/4/doppler 0
+/track/4/air 0
+/track/4/phaseinvert 0
+/track/4/azim 166.41
+/track/4/elev 11.6
+/track/4/dist 2.41
+/track/4/delay/linkedtodistance 0
+/track/4/direct/linkedtodistance 1
+/track/4/early/linkedtodistance 1
+/track/4/reverb/linkedtodistance 1
+/track/4/delay 0.0
+/track/4/direct/gain/offset 0.000000
+/track/4/direct/gain -8.1
+/track/4/direct/gain/low 0.000000
+/track/4/direct/gain/med 0.000000
+/track/4/direct/gain/high 0.000000
+/track/4/direct/freq/low 250.0
+/track/4/direct/freq/high 4000.0
+/track/4/direct/filter/bypass 1
+/track/4/early/gain/offset 0.000000
+/track/4/early/gain -16.0
+/track/4/early/gain/low 0.000000
+/track/4/early/gain/med 0.000000
+/track/4/early/gain/high 0.000000
+/track/4/early/freq/low 250.0
+/track/4/early/freq/high 4000.0
+/track/4/early/filter/bypass 1
+/track/4/reverb/send -18.2
+/track/4/reverb/send/offset 0.000000
+/track/4/reverb/send/ramptime 20.0
+/track/4/early/width 30.0
+/track/4/direct/mute 0
+/track/4/early/mute 0
+/track/4/reverb/mute 0
+/track/4/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/4/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/4/bus/A/destination "/bus/10"
+/track/4/bus/B/destination "/"
+/track/4/bus/C/destination "/"
+/track/4/bus/D/destination "/"
+/track/4/bus/E/destination "/"
+/track/4/bus/F/destination "/"
+/track/4/bus/G/destination "/"
+/track/4/bus/H/destination "/"
+/track/4/bus/A/mute 0
+/track/4/bus/B/mute 0
+/track/4/bus/C/mute 0
+/track/4/bus/D/mute 0
+/track/4/bus/E/mute 0
+/track/4/bus/F/mute 0
+/track/4/bus/G/mute 0
+/track/4/bus/H/mute 0
+/track/4/bus/A/gain 0.0
+/track/4/bus/B/gain 0.0
+/track/4/bus/C/gain 0.0
+/track/4/bus/D/gain 0.0
+/track/4/bus/E/gain 0.0
+/track/4/bus/F/gain 0.0
+/track/4/bus/G/gain 0.0
+/track/4/bus/H/gain 0.0
+/track/4/bus/A/delay 0.0
+/track/4/bus/B/delay 0.0
+/track/4/bus/C/delay 0.0
+/track/4/bus/D/delay 0.0
+/track/4/bus/E/delay 0.0
+/track/4/bus/F/delay 0.0
+/track/4/bus/G/delay 0.0
+/track/4/bus/H/delay 0.0
+/track/4/bus/display "A"
+/track/4/bus/send/display "A-D"
+/track/4/lock 0
+/track/5/name "Firework 3"
+/track/5/color 0.117647 0.564706 1.0 1.0
+/track/5/numinputs 1
+/track/5/visible 1
+/track/5/trim 0.000000
+/track/5/dynamics/attack 10.0
+/track/5/dynamics/release 30.0
+/track/5/dynamics/lookahead 0.0
+/track/5/dynamics/compressor/threshold -30.0
+/track/5/dynamics/compressor/ratio 1.0
+/track/5/dynamics/expander/threshold -60.0
+/track/5/dynamics/expander/ratio 1.0
+/track/5/dynamics/makeup 0.000000
+/track/5/dynamics/link "multi mono"
+/track/5/dynamics/bypass 1
+/track/5/dynamics/grid/visible 1
+/track/5/dynamics/curve/fill 1
+/track/5/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/5/dynamics/foreground/color 0.117647 0.564706 1.0 0.6
+/track/5/dynamics/curve/color 0.0941176 0.45098 0.8 1.0
+/track/5/dynamics/curve/thickness 1.0
+/track/5/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/5/dynamics/title "Firework 3"
+/track/5/equalizer/bypass 1
+/track/5/equalizer/gain 0.0
+/track/5/equalizer/filter/1/active 0
+/track/5/equalizer/filter/1/freq 50.0
+/track/5/equalizer/filter/1/order 2
+/track/5/equalizer/filter/2/active 1
+/track/5/equalizer/filter/2/freq 100.0
+/track/5/equalizer/filter/2/gain 0.0
+/track/5/equalizer/filter/2/q 1.0
+/track/5/equalizer/filter/3/active 1
+/track/5/equalizer/filter/3/freq 500.0
+/track/5/equalizer/filter/3/gain 0.0
+/track/5/equalizer/filter/3/q 1.0
+/track/5/equalizer/filter/4/active 1
+/track/5/equalizer/filter/4/freq 1000.0
+/track/5/equalizer/filter/4/gain 0.0
+/track/5/equalizer/filter/4/q 1.0
+/track/5/equalizer/filter/5/active 1
+/track/5/equalizer/filter/5/freq 2000.0
+/track/5/equalizer/filter/5/gain 0.0
+/track/5/equalizer/filter/5/q 1.0
+/track/5/equalizer/filter/6/active 1
+/track/5/equalizer/filter/6/freq 5000.0
+/track/5/equalizer/filter/6/gain 0.0
+/track/5/equalizer/filter/6/q 1.0
+/track/5/equalizer/filter/7/active 1
+/track/5/equalizer/filter/7/freq 10000.0
+/track/5/equalizer/filter/7/gain 0.0
+/track/5/equalizer/filter/7/q 1.0
+/track/5/equalizer/filter/8/active 0
+/track/5/equalizer/filter/8/freq 16000.0
+/track/5/equalizer/filter/8/order 2
+/track/5/gain 0.000000
+/track/5/gain/ramptime 20.0
+/track/5/mute 0
+/track/5/annotation ""
+/track/5/levels/input/visible 1
+/track/5/levels/input/post 0
+/track/5/levels/input/mode "peak"
+/track/5/levels/output/visible 1
+/track/5/levels/output/post 1
+/track/5/levels/output/mode "peak"
+/track/5/solo 0
+/track/5/routing/input/1/adc 5
+/track/5/lfe/send 0.000000
+/track/5/lfe/mute 0
+/track/5/monitor "off"
+/track/5/doppler 0
+/track/5/air 0
+/track/5/phaseinvert 0
+/track/5/azim 0.000000
+/track/5/elev 0.000000
+/track/5/dist 3.98
+/track/5/delay/linkedtodistance 0
+/track/5/direct/linkedtodistance 1
+/track/5/early/linkedtodistance 1
+/track/5/reverb/linkedtodistance 1
+/track/5/delay 0.0
+/track/5/direct/gain/offset 0.000000
+/track/5/direct/gain -12.5
+/track/5/direct/gain/low 0.000000
+/track/5/direct/gain/med 0.000000
+/track/5/direct/gain/high 0.000000
+/track/5/direct/freq/low 250.0
+/track/5/direct/freq/high 4000.0
+/track/5/direct/filter/bypass 1
+/track/5/early/gain/offset 0.000000
+/track/5/early/gain -20.3
+/track/5/early/gain/low 0.000000
+/track/5/early/gain/med 0.000000
+/track/5/early/gain/high 0.000000
+/track/5/early/freq/low 250.0
+/track/5/early/freq/high 4000.0
+/track/5/early/filter/bypass 1
+/track/5/reverb/send -18.5
+/track/5/reverb/send/offset 0.000000
+/track/5/reverb/send/ramptime 20.0
+/track/5/early/width 30.0
+/track/5/direct/mute 0
+/track/5/early/mute 0
+/track/5/reverb/mute 0
+/track/5/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/5/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/5/bus/A/destination "/bus/10"
+/track/5/bus/B/destination "/"
+/track/5/bus/C/destination "/"
+/track/5/bus/D/destination "/"
+/track/5/bus/E/destination "/"
+/track/5/bus/F/destination "/"
+/track/5/bus/G/destination "/"
+/track/5/bus/H/destination "/"
+/track/5/bus/A/mute 0
+/track/5/bus/B/mute 0
+/track/5/bus/C/mute 0
+/track/5/bus/D/mute 0
+/track/5/bus/E/mute 0
+/track/5/bus/F/mute 0
+/track/5/bus/G/mute 0
+/track/5/bus/H/mute 0
+/track/5/bus/A/gain 0.0
+/track/5/bus/B/gain 0.0
+/track/5/bus/C/gain 0.0
+/track/5/bus/D/gain 0.0
+/track/5/bus/E/gain 0.0
+/track/5/bus/F/gain 0.0
+/track/5/bus/G/gain 0.0
+/track/5/bus/H/gain 0.0
+/track/5/bus/A/delay 0.0
+/track/5/bus/B/delay 0.0
+/track/5/bus/C/delay 0.0
+/track/5/bus/D/delay 0.0
+/track/5/bus/E/delay 0.0
+/track/5/bus/F/delay 0.0
+/track/5/bus/G/delay 0.0
+/track/5/bus/H/delay 0.0
+/track/5/bus/display "A"
+/track/5/bus/send/display "A-D"
+/track/5/lock 0
+/track/6/name "Firework 4"
+/track/6/color 0.117647 0.564706 1.0 1.0
+/track/6/numinputs 1
+/track/6/visible 1
+/track/6/trim 0.000000
+/track/6/dynamics/attack 10.0
+/track/6/dynamics/release 30.0
+/track/6/dynamics/lookahead 0.0
+/track/6/dynamics/compressor/threshold -30.0
+/track/6/dynamics/compressor/ratio 1.0
+/track/6/dynamics/expander/threshold -60.0
+/track/6/dynamics/expander/ratio 1.0
+/track/6/dynamics/makeup 0.000000
+/track/6/dynamics/link "multi mono"
+/track/6/dynamics/bypass 1
+/track/6/dynamics/grid/visible 1
+/track/6/dynamics/curve/fill 1
+/track/6/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/6/dynamics/foreground/color 0.117647 0.564706 1.0 0.6
+/track/6/dynamics/curve/color 0.0941176 0.45098 0.8 1.0
+/track/6/dynamics/curve/thickness 1.0
+/track/6/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/6/dynamics/title "Firework 4"
+/track/6/equalizer/bypass 1
+/track/6/equalizer/gain 0.0
+/track/6/equalizer/filter/1/active 0
+/track/6/equalizer/filter/1/freq 50.0
+/track/6/equalizer/filter/1/order 2
+/track/6/equalizer/filter/2/active 1
+/track/6/equalizer/filter/2/freq 100.0
+/track/6/equalizer/filter/2/gain 0.0
+/track/6/equalizer/filter/2/q 1.0
+/track/6/equalizer/filter/3/active 1
+/track/6/equalizer/filter/3/freq 500.0
+/track/6/equalizer/filter/3/gain 0.0
+/track/6/equalizer/filter/3/q 1.0
+/track/6/equalizer/filter/4/active 1
+/track/6/equalizer/filter/4/freq 1000.0
+/track/6/equalizer/filter/4/gain 0.0
+/track/6/equalizer/filter/4/q 1.0
+/track/6/equalizer/filter/5/active 1
+/track/6/equalizer/filter/5/freq 2000.0
+/track/6/equalizer/filter/5/gain 0.0
+/track/6/equalizer/filter/5/q 1.0
+/track/6/equalizer/filter/6/active 1
+/track/6/equalizer/filter/6/freq 5000.0
+/track/6/equalizer/filter/6/gain 0.0
+/track/6/equalizer/filter/6/q 1.0
+/track/6/equalizer/filter/7/active 1
+/track/6/equalizer/filter/7/freq 10000.0
+/track/6/equalizer/filter/7/gain 0.0
+/track/6/equalizer/filter/7/q 1.0
+/track/6/equalizer/filter/8/active 0
+/track/6/equalizer/filter/8/freq 16000.0
+/track/6/equalizer/filter/8/order 2
+/track/6/gain 0.000000
+/track/6/gain/ramptime 20.0
+/track/6/mute 0
+/track/6/annotation ""
+/track/6/levels/input/visible 1
+/track/6/levels/input/post 0
+/track/6/levels/input/mode "peak"
+/track/6/levels/output/visible 1
+/track/6/levels/output/post 1
+/track/6/levels/output/mode "peak"
+/track/6/solo 0
+/track/6/routing/input/1/adc 6
+/track/6/lfe/send 0.000000
+/track/6/lfe/mute 0
+/track/6/monitor "off"
+/track/6/doppler 0
+/track/6/air 0
+/track/6/phaseinvert 0
+/track/6/azim -165.9
+/track/6/elev 12.67
+/track/6/dist 2.21
+/track/6/delay/linkedtodistance 0
+/track/6/direct/linkedtodistance 1
+/track/6/early/linkedtodistance 1
+/track/6/reverb/linkedtodistance 1
+/track/6/delay 0.0
+/track/6/direct/gain/offset 0.000000
+/track/6/direct/gain -7.4
+/track/6/direct/gain/low 0.000000
+/track/6/direct/gain/med 0.000000
+/track/6/direct/gain/high 0.000000
+/track/6/direct/freq/low 250.0
+/track/6/direct/freq/high 4000.0
+/track/6/direct/filter/bypass 1
+/track/6/early/gain/offset 0.000000
+/track/6/early/gain -15.3
+/track/6/early/gain/low 0.000000
+/track/6/early/gain/med 0.000000
+/track/6/early/gain/high 0.000000
+/track/6/early/freq/low 250.0
+/track/6/early/freq/high 4000.0
+/track/6/early/filter/bypass 1
+/track/6/reverb/send -18.2
+/track/6/reverb/send/offset 0.000000
+/track/6/reverb/send/ramptime 20.0
+/track/6/early/width 30.0
+/track/6/direct/mute 0
+/track/6/early/mute 0
+/track/6/reverb/mute 0
+/track/6/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/6/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/6/bus/A/destination "/bus/10"
+/track/6/bus/B/destination "/"
+/track/6/bus/C/destination "/"
+/track/6/bus/D/destination "/"
+/track/6/bus/E/destination "/"
+/track/6/bus/F/destination "/"
+/track/6/bus/G/destination "/"
+/track/6/bus/H/destination "/"
+/track/6/bus/A/mute 0
+/track/6/bus/B/mute 0
+/track/6/bus/C/mute 0
+/track/6/bus/D/mute 0
+/track/6/bus/E/mute 0
+/track/6/bus/F/mute 0
+/track/6/bus/G/mute 0
+/track/6/bus/H/mute 0
+/track/6/bus/A/gain 0.0
+/track/6/bus/B/gain 0.0
+/track/6/bus/C/gain 0.0
+/track/6/bus/D/gain 0.0
+/track/6/bus/E/gain 0.0
+/track/6/bus/F/gain 0.0
+/track/6/bus/G/gain 0.0
+/track/6/bus/H/gain 0.0
+/track/6/bus/A/delay 0.0
+/track/6/bus/B/delay 0.0
+/track/6/bus/C/delay 0.0
+/track/6/bus/D/delay 0.0
+/track/6/bus/E/delay 0.0
+/track/6/bus/F/delay 0.0
+/track/6/bus/G/delay 0.0
+/track/6/bus/H/delay 0.0
+/track/6/bus/display "A"
+/track/6/bus/send/display "A-D"
+/track/6/lock 0
+/track/7/name "Firework 5"
+/track/7/color 0.117647 0.564706 1.0 1.0
+/track/7/numinputs 1
+/track/7/visible 1
+/track/7/trim 0.000000
+/track/7/dynamics/attack 10.0
+/track/7/dynamics/release 30.0
+/track/7/dynamics/lookahead 0.0
+/track/7/dynamics/compressor/threshold -30.0
+/track/7/dynamics/compressor/ratio 1.0
+/track/7/dynamics/expander/threshold -60.0
+/track/7/dynamics/expander/ratio 1.0
+/track/7/dynamics/makeup 0.000000
+/track/7/dynamics/link "multi mono"
+/track/7/dynamics/bypass 1
+/track/7/dynamics/grid/visible 1
+/track/7/dynamics/curve/fill 1
+/track/7/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/7/dynamics/foreground/color 0.117647 0.564706 1.0 0.6
+/track/7/dynamics/curve/color 0.0941176 0.45098 0.8 1.0
+/track/7/dynamics/curve/thickness 1.0
+/track/7/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/7/dynamics/title "Firework 5"
+/track/7/equalizer/bypass 1
+/track/7/equalizer/gain 0.0
+/track/7/equalizer/filter/1/active 0
+/track/7/equalizer/filter/1/freq 50.0
+/track/7/equalizer/filter/1/order 2
+/track/7/equalizer/filter/2/active 1
+/track/7/equalizer/filter/2/freq 100.0
+/track/7/equalizer/filter/2/gain 0.0
+/track/7/equalizer/filter/2/q 1.0
+/track/7/equalizer/filter/3/active 1
+/track/7/equalizer/filter/3/freq 500.0
+/track/7/equalizer/filter/3/gain 0.0
+/track/7/equalizer/filter/3/q 1.0
+/track/7/equalizer/filter/4/active 1
+/track/7/equalizer/filter/4/freq 1000.0
+/track/7/equalizer/filter/4/gain 0.0
+/track/7/equalizer/filter/4/q 1.0
+/track/7/equalizer/filter/5/active 1
+/track/7/equalizer/filter/5/freq 2000.0
+/track/7/equalizer/filter/5/gain 0.0
+/track/7/equalizer/filter/5/q 1.0
+/track/7/equalizer/filter/6/active 1
+/track/7/equalizer/filter/6/freq 5000.0
+/track/7/equalizer/filter/6/gain 0.0
+/track/7/equalizer/filter/6/q 1.0
+/track/7/equalizer/filter/7/active 1
+/track/7/equalizer/filter/7/freq 10000.0
+/track/7/equalizer/filter/7/gain 0.0
+/track/7/equalizer/filter/7/q 1.0
+/track/7/equalizer/filter/8/active 0
+/track/7/equalizer/filter/8/freq 16000.0
+/track/7/equalizer/filter/8/order 2
+/track/7/gain 0.000000
+/track/7/gain/ramptime 20.0
+/track/7/mute 0
+/track/7/annotation ""
+/track/7/levels/input/visible 1
+/track/7/levels/input/post 0
+/track/7/levels/input/mode "peak"
+/track/7/levels/output/visible 1
+/track/7/levels/output/post 1
+/track/7/levels/output/mode "peak"
+/track/7/solo 0
+/track/7/routing/input/1/adc 7
+/track/7/lfe/send 0.000000
+/track/7/lfe/mute 0
+/track/7/monitor "off"
+/track/7/doppler 0
+/track/7/air 0
+/track/7/phaseinvert 0
+/track/7/azim 0.000000
+/track/7/elev 89.71
+/track/7/dist 2.0
+/track/7/delay/linkedtodistance 0
+/track/7/direct/linkedtodistance 1
+/track/7/early/linkedtodistance 1
+/track/7/reverb/linkedtodistance 1
+/track/7/delay 0.0
+/track/7/direct/gain/offset 0.000000
+/track/7/direct/gain -6.5
+/track/7/direct/gain/low 0.000000
+/track/7/direct/gain/med 0.000000
+/track/7/direct/gain/high 0.000000
+/track/7/direct/freq/low 250.0
+/track/7/direct/freq/high 4000.0
+/track/7/direct/filter/bypass 1
+/track/7/early/gain/offset 0.000000
+/track/7/early/gain -14.4
+/track/7/early/gain/low 0.000000
+/track/7/early/gain/med 0.000000
+/track/7/early/gain/high 0.000000
+/track/7/early/freq/low 250.0
+/track/7/early/freq/high 4000.0
+/track/7/early/filter/bypass 1
+/track/7/reverb/send -18.2
+/track/7/reverb/send/offset 0.000000
+/track/7/reverb/send/ramptime 20.0
+/track/7/early/width 30.0
+/track/7/direct/mute 0
+/track/7/early/mute 0
+/track/7/reverb/mute 0
+/track/7/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/7/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/7/bus/A/destination "/bus/10"
+/track/7/bus/B/destination "/"
+/track/7/bus/C/destination "/"
+/track/7/bus/D/destination "/"
+/track/7/bus/E/destination "/"
+/track/7/bus/F/destination "/"
+/track/7/bus/G/destination "/"
+/track/7/bus/H/destination "/"
+/track/7/bus/A/mute 0
+/track/7/bus/B/mute 0
+/track/7/bus/C/mute 0
+/track/7/bus/D/mute 0
+/track/7/bus/E/mute 0
+/track/7/bus/F/mute 0
+/track/7/bus/G/mute 0
+/track/7/bus/H/mute 0
+/track/7/bus/A/gain 0.0
+/track/7/bus/B/gain 0.0
+/track/7/bus/C/gain 0.0
+/track/7/bus/D/gain 0.0
+/track/7/bus/E/gain 0.0
+/track/7/bus/F/gain 0.0
+/track/7/bus/G/gain 0.0
+/track/7/bus/H/gain 0.0
+/track/7/bus/A/delay 0.0
+/track/7/bus/B/delay 0.0
+/track/7/bus/C/delay 0.0
+/track/7/bus/D/delay 0.0
+/track/7/bus/E/delay 0.0
+/track/7/bus/F/delay 0.0
+/track/7/bus/G/delay 0.0
+/track/7/bus/H/delay 0.0
+/track/7/bus/display "A"
+/track/7/bus/send/display "A-D"
+/track/7/lock 0
+/track/8/name "Firework 6"
+/track/8/color 0.117647 0.564706 1.0 1.0
+/track/8/numinputs 1
+/track/8/visible 1
+/track/8/trim 0.000000
+/track/8/dynamics/attack 10.0
+/track/8/dynamics/release 30.0
+/track/8/dynamics/lookahead 0.0
+/track/8/dynamics/compressor/threshold -30.0
+/track/8/dynamics/compressor/ratio 1.0
+/track/8/dynamics/expander/threshold -60.0
+/track/8/dynamics/expander/ratio 1.0
+/track/8/dynamics/makeup 0.000000
+/track/8/dynamics/link "multi mono"
+/track/8/dynamics/bypass 1
+/track/8/dynamics/grid/visible 1
+/track/8/dynamics/curve/fill 1
+/track/8/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/8/dynamics/foreground/color 0.117647 0.564706 1.0 0.6
+/track/8/dynamics/curve/color 0.0941176 0.45098 0.8 1.0
+/track/8/dynamics/curve/thickness 1.0
+/track/8/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/8/dynamics/title "Firework 6"
+/track/8/equalizer/bypass 1
+/track/8/equalizer/gain 0.0
+/track/8/equalizer/filter/1/active 0
+/track/8/equalizer/filter/1/freq 50.0
+/track/8/equalizer/filter/1/order 2
+/track/8/equalizer/filter/2/active 1
+/track/8/equalizer/filter/2/freq 100.0
+/track/8/equalizer/filter/2/gain 0.0
+/track/8/equalizer/filter/2/q 1.0
+/track/8/equalizer/filter/3/active 1
+/track/8/equalizer/filter/3/freq 500.0
+/track/8/equalizer/filter/3/gain 0.0
+/track/8/equalizer/filter/3/q 1.0
+/track/8/equalizer/filter/4/active 1
+/track/8/equalizer/filter/4/freq 1000.0
+/track/8/equalizer/filter/4/gain 0.0
+/track/8/equalizer/filter/4/q 1.0
+/track/8/equalizer/filter/5/active 1
+/track/8/equalizer/filter/5/freq 2000.0
+/track/8/equalizer/filter/5/gain 0.0
+/track/8/equalizer/filter/5/q 1.0
+/track/8/equalizer/filter/6/active 1
+/track/8/equalizer/filter/6/freq 5000.0
+/track/8/equalizer/filter/6/gain 0.0
+/track/8/equalizer/filter/6/q 1.0
+/track/8/equalizer/filter/7/active 1
+/track/8/equalizer/filter/7/freq 10000.0
+/track/8/equalizer/filter/7/gain 0.0
+/track/8/equalizer/filter/7/q 1.0
+/track/8/equalizer/filter/8/active 0
+/track/8/equalizer/filter/8/freq 16000.0
+/track/8/equalizer/filter/8/order 2
+/track/8/gain 0.000000
+/track/8/gain/ramptime 20.0
+/track/8/mute 0
+/track/8/annotation ""
+/track/8/levels/input/visible 1
+/track/8/levels/input/post 0
+/track/8/levels/input/mode "peak"
+/track/8/levels/output/visible 1
+/track/8/levels/output/post 1
+/track/8/levels/output/mode "peak"
+/track/8/solo 0
+/track/8/routing/input/1/adc 8
+/track/8/lfe/send 0.000000
+/track/8/lfe/mute 0
+/track/8/monitor "off"
+/track/8/doppler 0
+/track/8/air 0
+/track/8/phaseinvert 0
+/track/8/azim 166.41
+/track/8/elev 11.6
+/track/8/dist 2.41
+/track/8/delay/linkedtodistance 0
+/track/8/direct/linkedtodistance 1
+/track/8/early/linkedtodistance 1
+/track/8/reverb/linkedtodistance 1
+/track/8/delay 0.0
+/track/8/direct/gain/offset 0.000000
+/track/8/direct/gain -8.1
+/track/8/direct/gain/low 0.000000
+/track/8/direct/gain/med 0.000000
+/track/8/direct/gain/high 0.000000
+/track/8/direct/freq/low 250.0
+/track/8/direct/freq/high 4000.0
+/track/8/direct/filter/bypass 1
+/track/8/early/gain/offset 0.000000
+/track/8/early/gain -16.0
+/track/8/early/gain/low 0.000000
+/track/8/early/gain/med 0.000000
+/track/8/early/gain/high 0.000000
+/track/8/early/freq/low 250.0
+/track/8/early/freq/high 4000.0
+/track/8/early/filter/bypass 1
+/track/8/reverb/send -18.2
+/track/8/reverb/send/offset 0.000000
+/track/8/reverb/send/ramptime 20.0
+/track/8/early/width 30.0
+/track/8/direct/mute 0
+/track/8/early/mute 0
+/track/8/reverb/mute 0
+/track/8/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/8/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/8/bus/A/destination "/bus/10"
+/track/8/bus/B/destination "/"
+/track/8/bus/C/destination "/"
+/track/8/bus/D/destination "/"
+/track/8/bus/E/destination "/"
+/track/8/bus/F/destination "/"
+/track/8/bus/G/destination "/"
+/track/8/bus/H/destination "/"
+/track/8/bus/A/mute 0
+/track/8/bus/B/mute 0
+/track/8/bus/C/mute 0
+/track/8/bus/D/mute 0
+/track/8/bus/E/mute 0
+/track/8/bus/F/mute 0
+/track/8/bus/G/mute 0
+/track/8/bus/H/mute 0
+/track/8/bus/A/gain 0.0
+/track/8/bus/B/gain 0.0
+/track/8/bus/C/gain 0.0
+/track/8/bus/D/gain 0.0
+/track/8/bus/E/gain 0.0
+/track/8/bus/F/gain 0.0
+/track/8/bus/G/gain 0.0
+/track/8/bus/H/gain 0.0
+/track/8/bus/A/delay 0.0
+/track/8/bus/B/delay 0.0
+/track/8/bus/C/delay 0.0
+/track/8/bus/D/delay 0.0
+/track/8/bus/E/delay 0.0
+/track/8/bus/F/delay 0.0
+/track/8/bus/G/delay 0.0
+/track/8/bus/H/delay 0.0
+/track/8/bus/display "A"
+/track/8/bus/send/display "A-D"
+/track/8/lock 0
+/track/9/name "AI Speech"
+/track/9/color 0.376471 1.0 0.0470588 1.0
+/track/9/numinputs 1
+/track/9/visible 1
+/track/9/trim 1.0
+/track/9/dynamics/attack 10.0
+/track/9/dynamics/release 30.0
+/track/9/dynamics/lookahead 0.0
+/track/9/dynamics/compressor/threshold -30.0
+/track/9/dynamics/compressor/ratio 1.0
+/track/9/dynamics/expander/threshold -60.0
+/track/9/dynamics/expander/ratio 1.0
+/track/9/dynamics/makeup 0.000000
+/track/9/dynamics/link "multi mono"
+/track/9/dynamics/bypass 1
+/track/9/dynamics/grid/visible 1
+/track/9/dynamics/curve/fill 1
+/track/9/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/9/dynamics/foreground/color 0.376471 1.0 0.0470588 0.6
+/track/9/dynamics/curve/color 0.298039 0.8 0.0352941 1.0
+/track/9/dynamics/curve/thickness 1.0
+/track/9/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/9/dynamics/title "AI Speech"
+/track/9/equalizer/bypass 1
+/track/9/equalizer/gain 0.0
+/track/9/equalizer/filter/1/active 0
+/track/9/equalizer/filter/1/freq 50.0
+/track/9/equalizer/filter/1/order 2
+/track/9/equalizer/filter/2/active 1
+/track/9/equalizer/filter/2/freq 100.0
+/track/9/equalizer/filter/2/gain 0.0
+/track/9/equalizer/filter/2/q 1.0
+/track/9/equalizer/filter/3/active 1
+/track/9/equalizer/filter/3/freq 500.0
+/track/9/equalizer/filter/3/gain 0.0
+/track/9/equalizer/filter/3/q 1.0
+/track/9/equalizer/filter/4/active 1
+/track/9/equalizer/filter/4/freq 1000.0
+/track/9/equalizer/filter/4/gain 0.0
+/track/9/equalizer/filter/4/q 1.0
+/track/9/equalizer/filter/5/active 1
+/track/9/equalizer/filter/5/freq 2000.0
+/track/9/equalizer/filter/5/gain 0.0
+/track/9/equalizer/filter/5/q 1.0
+/track/9/equalizer/filter/6/active 1
+/track/9/equalizer/filter/6/freq 5000.0
+/track/9/equalizer/filter/6/gain 0.0
+/track/9/equalizer/filter/6/q 1.0
+/track/9/equalizer/filter/7/active 1
+/track/9/equalizer/filter/7/freq 10000.0
+/track/9/equalizer/filter/7/gain 0.0
+/track/9/equalizer/filter/7/q 1.0
+/track/9/equalizer/filter/8/active 0
+/track/9/equalizer/filter/8/freq 16000.0
+/track/9/equalizer/filter/8/order 2
+/track/9/gain 0.000000
+/track/9/gain/ramptime 20.0
+/track/9/mute 0
+/track/9/annotation ""
+/track/9/levels/input/visible 1
+/track/9/levels/input/post 0
+/track/9/levels/input/mode "peak"
+/track/9/levels/output/visible 1
+/track/9/levels/output/post 1
+/track/9/levels/output/mode "peak"
+/track/9/solo 0
+/track/9/routing/input/1/adc 9
+/track/9/lfe/send 0.000000
+/track/9/lfe/mute 1
+/track/9/monitor "off"
+/track/9/doppler 0
+/track/9/air 0
+/track/9/phaseinvert 0
+/track/9/azim -116.84
+/track/9/elev 0.000000
+/track/9/dist 0.1
+/track/9/delay/linkedtodistance 0
+/track/9/direct/linkedtodistance 0
+/track/9/early/linkedtodistance 0
+/track/9/reverb/linkedtodistance 0
+/track/9/delay 0.0
+/track/9/direct/gain/offset 0.000000
+/track/9/direct/gain -0.5
+/track/9/direct/gain/low 0.000000
+/track/9/direct/gain/med 0.000000
+/track/9/direct/gain/high 0.000000
+/track/9/direct/freq/low 250.0
+/track/9/direct/freq/high 4000.0
+/track/9/direct/filter/bypass 1
+/track/9/early/gain/offset 0.000000
+/track/9/early/gain -6.3
+/track/9/early/gain/low 0.000000
+/track/9/early/gain/med 0.000000
+/track/9/early/gain/high 0.000000
+/track/9/early/freq/low 250.0
+/track/9/early/freq/high 4000.0
+/track/9/early/filter/bypass 1
+/track/9/reverb/send -18.0
+/track/9/reverb/send/offset 0.000000
+/track/9/reverb/send/ramptime 20.0
+/track/9/early/width 30.0
+/track/9/direct/mute 0
+/track/9/early/mute 1
+/track/9/reverb/mute 1
+/track/9/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/9/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/9/bus/A/destination "/bus/10"
+/track/9/bus/B/destination "/"
+/track/9/bus/C/destination "/"
+/track/9/bus/D/destination "/"
+/track/9/bus/E/destination "/"
+/track/9/bus/F/destination "/"
+/track/9/bus/G/destination "/"
+/track/9/bus/H/destination "/"
+/track/9/bus/A/mute 0
+/track/9/bus/B/mute 0
+/track/9/bus/C/mute 0
+/track/9/bus/D/mute 0
+/track/9/bus/E/mute 0
+/track/9/bus/F/mute 0
+/track/9/bus/G/mute 0
+/track/9/bus/H/mute 0
+/track/9/bus/A/gain 0.0
+/track/9/bus/B/gain 0.0
+/track/9/bus/C/gain 0.0
+/track/9/bus/D/gain 0.0
+/track/9/bus/E/gain 0.0
+/track/9/bus/F/gain 0.0
+/track/9/bus/G/gain 0.0
+/track/9/bus/H/gain 0.0
+/track/9/bus/A/delay 0.0
+/track/9/bus/B/delay 0.0
+/track/9/bus/C/delay 0.0
+/track/9/bus/D/delay 0.0
+/track/9/bus/E/delay 0.0
+/track/9/bus/F/delay 0.0
+/track/9/bus/G/delay 0.0
+/track/9/bus/H/delay 0.0
+/track/9/bus/display "A"
+/track/9/bus/send/display "A-D"
+/track/9/lock 0
+/track/10/name "Virtual pet"
+/track/10/color 0.376471 1.0 0.0470588 1.0
+/track/10/numinputs 1
+/track/10/visible 1
+/track/10/trim 1.0
+/track/10/dynamics/attack 10.0
+/track/10/dynamics/release 30.0
+/track/10/dynamics/lookahead 0.0
+/track/10/dynamics/compressor/threshold -30.0
+/track/10/dynamics/compressor/ratio 1.0
+/track/10/dynamics/expander/threshold -60.0
+/track/10/dynamics/expander/ratio 1.0
+/track/10/dynamics/makeup 0.000000
+/track/10/dynamics/link "multi mono"
+/track/10/dynamics/bypass 1
+/track/10/dynamics/grid/visible 1
+/track/10/dynamics/curve/fill 1
+/track/10/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/10/dynamics/foreground/color 0.376471 1.0 0.0470588 0.6
+/track/10/dynamics/curve/color 0.298039 0.8 0.0352941 1.0
+/track/10/dynamics/curve/thickness 1.0
+/track/10/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/10/dynamics/title "Virtual pet"
+/track/10/equalizer/bypass 1
+/track/10/equalizer/gain 0.0
+/track/10/equalizer/filter/1/active 0
+/track/10/equalizer/filter/1/freq 50.0
+/track/10/equalizer/filter/1/order 2
+/track/10/equalizer/filter/2/active 1
+/track/10/equalizer/filter/2/freq 100.0
+/track/10/equalizer/filter/2/gain 0.0
+/track/10/equalizer/filter/2/q 1.0
+/track/10/equalizer/filter/3/active 1
+/track/10/equalizer/filter/3/freq 500.0
+/track/10/equalizer/filter/3/gain 0.0
+/track/10/equalizer/filter/3/q 1.0
+/track/10/equalizer/filter/4/active 1
+/track/10/equalizer/filter/4/freq 1000.0
+/track/10/equalizer/filter/4/gain 0.0
+/track/10/equalizer/filter/4/q 1.0
+/track/10/equalizer/filter/5/active 1
+/track/10/equalizer/filter/5/freq 2000.0
+/track/10/equalizer/filter/5/gain 0.0
+/track/10/equalizer/filter/5/q 1.0
+/track/10/equalizer/filter/6/active 1
+/track/10/equalizer/filter/6/freq 5000.0
+/track/10/equalizer/filter/6/gain 0.0
+/track/10/equalizer/filter/6/q 1.0
+/track/10/equalizer/filter/7/active 1
+/track/10/equalizer/filter/7/freq 10000.0
+/track/10/equalizer/filter/7/gain 0.0
+/track/10/equalizer/filter/7/q 1.0
+/track/10/equalizer/filter/8/active 0
+/track/10/equalizer/filter/8/freq 16000.0
+/track/10/equalizer/filter/8/order 2
+/track/10/gain 0.000000
+/track/10/gain/ramptime 20.0
+/track/10/mute 0
+/track/10/annotation ""
+/track/10/levels/input/visible 1
+/track/10/levels/input/post 0
+/track/10/levels/input/mode "peak"
+/track/10/levels/output/visible 1
+/track/10/levels/output/post 1
+/track/10/levels/output/mode "peak"
+/track/10/solo 0
+/track/10/routing/input/1/adc 10
+/track/10/lfe/send 0.000000
+/track/10/lfe/mute 1
+/track/10/monitor "off"
+/track/10/doppler 0
+/track/10/air 0
+/track/10/phaseinvert 0
+/track/10/azim -116.84
+/track/10/elev 0.000000
+/track/10/dist 0.1
+/track/10/delay/linkedtodistance 0
+/track/10/direct/linkedtodistance 0
+/track/10/early/linkedtodistance 0
+/track/10/reverb/linkedtodistance 0
+/track/10/delay 0.0
+/track/10/direct/gain/offset 0.000000
+/track/10/direct/gain -0.5
+/track/10/direct/gain/low 0.000000
+/track/10/direct/gain/med 0.000000
+/track/10/direct/gain/high 0.000000
+/track/10/direct/freq/low 250.0
+/track/10/direct/freq/high 4000.0
+/track/10/direct/filter/bypass 1
+/track/10/early/gain/offset 0.000000
+/track/10/early/gain -6.3
+/track/10/early/gain/low 0.000000
+/track/10/early/gain/med 0.000000
+/track/10/early/gain/high 0.000000
+/track/10/early/freq/low 250.0
+/track/10/early/freq/high 4000.0
+/track/10/early/filter/bypass 1
+/track/10/reverb/send -18.0
+/track/10/reverb/send/offset 0.000000
+/track/10/reverb/send/ramptime 20.0
+/track/10/early/width 30.0
+/track/10/direct/mute 0
+/track/10/early/mute 1
+/track/10/reverb/mute 1
+/track/10/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/10/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/10/bus/A/destination "/bus/10"
+/track/10/bus/B/destination "/"
+/track/10/bus/C/destination "/"
+/track/10/bus/D/destination "/"
+/track/10/bus/E/destination "/"
+/track/10/bus/F/destination "/"
+/track/10/bus/G/destination "/"
+/track/10/bus/H/destination "/"
+/track/10/bus/A/mute 0
+/track/10/bus/B/mute 0
+/track/10/bus/C/mute 0
+/track/10/bus/D/mute 0
+/track/10/bus/E/mute 0
+/track/10/bus/F/mute 0
+/track/10/bus/G/mute 0
+/track/10/bus/H/mute 0
+/track/10/bus/A/gain 0.0
+/track/10/bus/B/gain 0.0
+/track/10/bus/C/gain 0.0
+/track/10/bus/D/gain 0.0
+/track/10/bus/E/gain 0.0
+/track/10/bus/F/gain 0.0
+/track/10/bus/G/gain 0.0
+/track/10/bus/H/gain 0.0
+/track/10/bus/A/delay 0.0
+/track/10/bus/B/delay 0.0
+/track/10/bus/C/delay 0.0
+/track/10/bus/D/delay 0.0
+/track/10/bus/E/delay 0.0
+/track/10/bus/F/delay 0.0
+/track/10/bus/G/delay 0.0
+/track/10/bus/H/delay 0.0
+/track/10/bus/display "A"
+/track/10/bus/send/display "A-D"
+/track/10/lock 0
+/track/11/name "Voice-over"
+/track/11/color 0.376471 1.0 0.0470588 1.0
+/track/11/numinputs 1
+/track/11/visible 1
+/track/11/trim 1.0
+/track/11/dynamics/attack 10.0
+/track/11/dynamics/release 30.0
+/track/11/dynamics/lookahead 0.0
+/track/11/dynamics/compressor/threshold -30.0
+/track/11/dynamics/compressor/ratio 1.0
+/track/11/dynamics/expander/threshold -60.0
+/track/11/dynamics/expander/ratio 1.0
+/track/11/dynamics/makeup 0.000000
+/track/11/dynamics/link "multi mono"
+/track/11/dynamics/bypass 1
+/track/11/dynamics/grid/visible 1
+/track/11/dynamics/curve/fill 1
+/track/11/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/11/dynamics/foreground/color 0.376471 1.0 0.0470588 0.6
+/track/11/dynamics/curve/color 0.298039 0.8 0.0352941 1.0
+/track/11/dynamics/curve/thickness 1.0
+/track/11/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/11/dynamics/title "Voice-over"
+/track/11/equalizer/bypass 1
+/track/11/equalizer/gain 0.0
+/track/11/equalizer/filter/1/active 0
+/track/11/equalizer/filter/1/freq 50.0
+/track/11/equalizer/filter/1/order 2
+/track/11/equalizer/filter/2/active 1
+/track/11/equalizer/filter/2/freq 100.0
+/track/11/equalizer/filter/2/gain 0.0
+/track/11/equalizer/filter/2/q 1.0
+/track/11/equalizer/filter/3/active 1
+/track/11/equalizer/filter/3/freq 500.0
+/track/11/equalizer/filter/3/gain 0.0
+/track/11/equalizer/filter/3/q 1.0
+/track/11/equalizer/filter/4/active 1
+/track/11/equalizer/filter/4/freq 1000.0
+/track/11/equalizer/filter/4/gain 0.0
+/track/11/equalizer/filter/4/q 1.0
+/track/11/equalizer/filter/5/active 1
+/track/11/equalizer/filter/5/freq 2000.0
+/track/11/equalizer/filter/5/gain 0.0
+/track/11/equalizer/filter/5/q 1.0
+/track/11/equalizer/filter/6/active 1
+/track/11/equalizer/filter/6/freq 5000.0
+/track/11/equalizer/filter/6/gain 0.0
+/track/11/equalizer/filter/6/q 1.0
+/track/11/equalizer/filter/7/active 1
+/track/11/equalizer/filter/7/freq 10000.0
+/track/11/equalizer/filter/7/gain 0.0
+/track/11/equalizer/filter/7/q 1.0
+/track/11/equalizer/filter/8/active 0
+/track/11/equalizer/filter/8/freq 16000.0
+/track/11/equalizer/filter/8/order 2
+/track/11/gain 0.000000
+/track/11/gain/ramptime 20.0
+/track/11/mute 0
+/track/11/annotation ""
+/track/11/levels/input/visible 1
+/track/11/levels/input/post 0
+/track/11/levels/input/mode "peak"
+/track/11/levels/output/visible 1
+/track/11/levels/output/post 1
+/track/11/levels/output/mode "peak"
+/track/11/solo 0
+/track/11/routing/input/1/adc 11
+/track/11/lfe/send 0.000000
+/track/11/lfe/mute 1
+/track/11/monitor "off"
+/track/11/doppler 0
+/track/11/air 0
+/track/11/phaseinvert 0
+/track/11/azim -116.84
+/track/11/elev 0.000000
+/track/11/dist 0.1
+/track/11/delay/linkedtodistance 0
+/track/11/direct/linkedtodistance 0
+/track/11/early/linkedtodistance 0
+/track/11/reverb/linkedtodistance 0
+/track/11/delay 0.0
+/track/11/direct/gain/offset 0.000000
+/track/11/direct/gain -0.5
+/track/11/direct/gain/low 0.000000
+/track/11/direct/gain/med 0.000000
+/track/11/direct/gain/high 0.000000
+/track/11/direct/freq/low 250.0
+/track/11/direct/freq/high 4000.0
+/track/11/direct/filter/bypass 1
+/track/11/early/gain/offset 0.000000
+/track/11/early/gain -6.3
+/track/11/early/gain/low 0.000000
+/track/11/early/gain/med 0.000000
+/track/11/early/gain/high 0.000000
+/track/11/early/freq/low 250.0
+/track/11/early/freq/high 4000.0
+/track/11/early/filter/bypass 1
+/track/11/reverb/send -18.0
+/track/11/reverb/send/offset 0.000000
+/track/11/reverb/send/ramptime 20.0
+/track/11/early/width 30.0
+/track/11/direct/mute 0
+/track/11/early/mute 1
+/track/11/reverb/mute 1
+/track/11/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/11/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/11/bus/A/destination "/bus/10"
+/track/11/bus/B/destination "/"
+/track/11/bus/C/destination "/"
+/track/11/bus/D/destination "/"
+/track/11/bus/E/destination "/"
+/track/11/bus/F/destination "/"
+/track/11/bus/G/destination "/"
+/track/11/bus/H/destination "/"
+/track/11/bus/A/mute 0
+/track/11/bus/B/mute 0
+/track/11/bus/C/mute 0
+/track/11/bus/D/mute 0
+/track/11/bus/E/mute 0
+/track/11/bus/F/mute 0
+/track/11/bus/G/mute 0
+/track/11/bus/H/mute 0
+/track/11/bus/A/gain 0.0
+/track/11/bus/B/gain 0.0
+/track/11/bus/C/gain 0.0
+/track/11/bus/D/gain 0.0
+/track/11/bus/E/gain 0.0
+/track/11/bus/F/gain 0.0
+/track/11/bus/G/gain 0.0
+/track/11/bus/H/gain 0.0
+/track/11/bus/A/delay 0.0
+/track/11/bus/B/delay 0.0
+/track/11/bus/C/delay 0.0
+/track/11/bus/D/delay 0.0
+/track/11/bus/E/delay 0.0
+/track/11/bus/F/delay 0.0
+/track/11/bus/G/delay 0.0
+/track/11/bus/H/delay 0.0
+/track/11/bus/display "A"
+/track/11/bus/send/display "A-D"
+/track/11/lock 0
+/track/16/name "Saxophone"
+/track/16/color 1.0 0.117647 0.117647 1.0
+/track/16/numinputs 1
+/track/16/visible 1
+/track/16/trim 0.000000
+/track/16/dynamics/attack 10.0
+/track/16/dynamics/release 30.0
+/track/16/dynamics/lookahead 0.0
+/track/16/dynamics/compressor/threshold -30.0
+/track/16/dynamics/compressor/ratio 1.0
+/track/16/dynamics/expander/threshold -60.0
+/track/16/dynamics/expander/ratio 1.0
+/track/16/dynamics/makeup 0.000000
+/track/16/dynamics/link "multi mono"
+/track/16/dynamics/bypass 1
+/track/16/dynamics/grid/visible 1
+/track/16/dynamics/curve/fill 1
+/track/16/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/16/dynamics/foreground/color 1.0 0.117647 0.117647 0.6
+/track/16/dynamics/curve/color 0.8 0.0941176 0.0941176 1.0
+/track/16/dynamics/curve/thickness 1.0
+/track/16/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/16/dynamics/title "Saxophone"
+/track/16/equalizer/bypass 1
+/track/16/equalizer/gain 0.0
+/track/16/equalizer/filter/1/active 0
+/track/16/equalizer/filter/1/freq 50.0
+/track/16/equalizer/filter/1/order 2
+/track/16/equalizer/filter/2/active 1
+/track/16/equalizer/filter/2/freq 100.0
+/track/16/equalizer/filter/2/gain 0.0
+/track/16/equalizer/filter/2/q 1.0
+/track/16/equalizer/filter/3/active 1
+/track/16/equalizer/filter/3/freq 500.0
+/track/16/equalizer/filter/3/gain 0.0
+/track/16/equalizer/filter/3/q 1.0
+/track/16/equalizer/filter/4/active 1
+/track/16/equalizer/filter/4/freq 1000.0
+/track/16/equalizer/filter/4/gain 0.0
+/track/16/equalizer/filter/4/q 1.0
+/track/16/equalizer/filter/5/active 1
+/track/16/equalizer/filter/5/freq 2000.0
+/track/16/equalizer/filter/5/gain 0.0
+/track/16/equalizer/filter/5/q 1.0
+/track/16/equalizer/filter/6/active 1
+/track/16/equalizer/filter/6/freq 5000.0
+/track/16/equalizer/filter/6/gain 0.0
+/track/16/equalizer/filter/6/q 1.0
+/track/16/equalizer/filter/7/active 1
+/track/16/equalizer/filter/7/freq 10000.0
+/track/16/equalizer/filter/7/gain 0.0
+/track/16/equalizer/filter/7/q 1.0
+/track/16/equalizer/filter/8/active 0
+/track/16/equalizer/filter/8/freq 16000.0
+/track/16/equalizer/filter/8/order 2
+/track/16/gain 0.000000
+/track/16/gain/ramptime 20.0
+/track/16/mute 0
+/track/16/annotation ""
+/track/16/levels/input/visible 1
+/track/16/levels/input/post 0
+/track/16/levels/input/mode "peak"
+/track/16/levels/output/visible 1
+/track/16/levels/output/post 1
+/track/16/levels/output/mode "peak"
+/track/16/solo 0
+/track/16/routing/input/1/adc 16
+/track/16/lfe/send 0.000000
+/track/16/lfe/mute 0
+/track/16/monitor "off"
+/track/16/doppler 0
+/track/16/air 0
+/track/16/phaseinvert 0
+/track/16/azim 119.03
+/track/16/elev 49.39
+/track/16/dist 0.92
+/track/16/delay/linkedtodistance 0
+/track/16/direct/linkedtodistance 1
+/track/16/early/linkedtodistance 1
+/track/16/reverb/linkedtodistance 1
+/track/16/delay 0.0
+/track/16/direct/gain/offset 0.000000
+/track/16/direct/gain 0.2
+/track/16/direct/gain/low 0.000000
+/track/16/direct/gain/med 0.000000
+/track/16/direct/gain/high 0.000000
+/track/16/direct/freq/low 250.0
+/track/16/direct/freq/high 4000.0
+/track/16/direct/filter/bypass 1
+/track/16/early/gain/offset 0.000000
+/track/16/early/gain -7.8
+/track/16/early/gain/low 0.000000
+/track/16/early/gain/med 0.000000
+/track/16/early/gain/high 0.000000
+/track/16/early/freq/low 250.0
+/track/16/early/freq/high 4000.0
+/track/16/early/filter/bypass 1
+/track/16/reverb/send -18.0
+/track/16/reverb/send/offset 0.000000
+/track/16/reverb/send/ramptime 20.0
+/track/16/early/width 30.0
+/track/16/direct/mute 0
+/track/16/early/mute 0
+/track/16/reverb/mute 0
+/track/16/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/16/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/16/bus/A/destination "/bus/10"
+/track/16/bus/B/destination "/"
+/track/16/bus/C/destination "/"
+/track/16/bus/D/destination "/"
+/track/16/bus/E/destination "/"
+/track/16/bus/F/destination "/"
+/track/16/bus/G/destination "/"
+/track/16/bus/H/destination "/"
+/track/16/bus/A/mute 0
+/track/16/bus/B/mute 0
+/track/16/bus/C/mute 0
+/track/16/bus/D/mute 0
+/track/16/bus/E/mute 0
+/track/16/bus/F/mute 0
+/track/16/bus/G/mute 0
+/track/16/bus/H/mute 0
+/track/16/bus/A/gain 0.0
+/track/16/bus/B/gain 0.0
+/track/16/bus/C/gain 0.0
+/track/16/bus/D/gain 0.0
+/track/16/bus/E/gain 0.0
+/track/16/bus/F/gain 0.0
+/track/16/bus/G/gain 0.0
+/track/16/bus/H/gain 0.0
+/track/16/bus/A/delay 0.0
+/track/16/bus/B/delay 0.0
+/track/16/bus/C/delay 0.0
+/track/16/bus/D/delay 0.0
+/track/16/bus/E/delay 0.0
+/track/16/bus/F/delay 0.0
+/track/16/bus/G/delay 0.0
+/track/16/bus/H/delay 0.0
+/track/16/bus/display "A"
+/track/16/bus/send/display "A-D"
+/track/16/lock 0
+/track/17/name "Piano"
+/track/17/color 1.0 0.117647 0.117647 1.0
+/track/17/numinputs 1
+/track/17/visible 1
+/track/17/trim 0.000000
+/track/17/dynamics/attack 10.0
+/track/17/dynamics/release 30.0
+/track/17/dynamics/lookahead 0.0
+/track/17/dynamics/compressor/threshold -30.0
+/track/17/dynamics/compressor/ratio 1.0
+/track/17/dynamics/expander/threshold -60.0
+/track/17/dynamics/expander/ratio 1.0
+/track/17/dynamics/makeup 0.000000
+/track/17/dynamics/link "multi mono"
+/track/17/dynamics/bypass 1
+/track/17/dynamics/grid/visible 1
+/track/17/dynamics/curve/fill 1
+/track/17/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/17/dynamics/foreground/color 1.0 0.117647 0.117647 0.6
+/track/17/dynamics/curve/color 0.8 0.0941176 0.0941176 1.0
+/track/17/dynamics/curve/thickness 1.0
+/track/17/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/17/dynamics/title "Piano"
+/track/17/equalizer/bypass 1
+/track/17/equalizer/gain 0.0
+/track/17/equalizer/filter/1/active 0
+/track/17/equalizer/filter/1/freq 50.0
+/track/17/equalizer/filter/1/order 2
+/track/17/equalizer/filter/2/active 1
+/track/17/equalizer/filter/2/freq 100.0
+/track/17/equalizer/filter/2/gain 0.0
+/track/17/equalizer/filter/2/q 1.0
+/track/17/equalizer/filter/3/active 1
+/track/17/equalizer/filter/3/freq 500.0
+/track/17/equalizer/filter/3/gain 0.0
+/track/17/equalizer/filter/3/q 1.0
+/track/17/equalizer/filter/4/active 1
+/track/17/equalizer/filter/4/freq 1000.0
+/track/17/equalizer/filter/4/gain 0.0
+/track/17/equalizer/filter/4/q 1.0
+/track/17/equalizer/filter/5/active 1
+/track/17/equalizer/filter/5/freq 2000.0
+/track/17/equalizer/filter/5/gain 0.0
+/track/17/equalizer/filter/5/q 1.0
+/track/17/equalizer/filter/6/active 1
+/track/17/equalizer/filter/6/freq 5000.0
+/track/17/equalizer/filter/6/gain 0.0
+/track/17/equalizer/filter/6/q 1.0
+/track/17/equalizer/filter/7/active 1
+/track/17/equalizer/filter/7/freq 10000.0
+/track/17/equalizer/filter/7/gain 0.0
+/track/17/equalizer/filter/7/q 1.0
+/track/17/equalizer/filter/8/active 0
+/track/17/equalizer/filter/8/freq 16000.0
+/track/17/equalizer/filter/8/order 2
+/track/17/gain 0.000000
+/track/17/gain/ramptime 20.0
+/track/17/mute 0
+/track/17/annotation ""
+/track/17/levels/input/visible 1
+/track/17/levels/input/post 0
+/track/17/levels/input/mode "peak"
+/track/17/levels/output/visible 1
+/track/17/levels/output/post 1
+/track/17/levels/output/mode "peak"
+/track/17/solo 0
+/track/17/routing/input/1/adc 17
+/track/17/lfe/send 0.000000
+/track/17/lfe/mute 0
+/track/17/monitor "off"
+/track/17/doppler 0
+/track/17/air 0
+/track/17/phaseinvert 0
+/track/17/azim 62.56
+/track/17/elev 0.000000
+/track/17/dist 0.9
+/track/17/delay/linkedtodistance 0
+/track/17/direct/linkedtodistance 1
+/track/17/early/linkedtodistance 1
+/track/17/reverb/linkedtodistance 1
+/track/17/delay 0.0
+/track/17/direct/gain/offset 0.000000
+/track/17/direct/gain 0.4
+/track/17/direct/gain/low 0.000000
+/track/17/direct/gain/med 0.000000
+/track/17/direct/gain/high 0.000000
+/track/17/direct/freq/low 250.0
+/track/17/direct/freq/high 4000.0
+/track/17/direct/filter/bypass 1
+/track/17/early/gain/offset 0.000000
+/track/17/early/gain -7.6
+/track/17/early/gain/low 0.000000
+/track/17/early/gain/med 0.000000
+/track/17/early/gain/high 0.000000
+/track/17/early/freq/low 250.0
+/track/17/early/freq/high 4000.0
+/track/17/early/filter/bypass 1
+/track/17/reverb/send -18.0
+/track/17/reverb/send/offset 0.000000
+/track/17/reverb/send/ramptime 20.0
+/track/17/early/width 30.0
+/track/17/direct/mute 0
+/track/17/early/mute 0
+/track/17/reverb/mute 0
+/track/17/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/17/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/17/bus/A/destination "/bus/10"
+/track/17/bus/B/destination "/"
+/track/17/bus/C/destination "/"
+/track/17/bus/D/destination "/"
+/track/17/bus/E/destination "/"
+/track/17/bus/F/destination "/"
+/track/17/bus/G/destination "/"
+/track/17/bus/H/destination "/"
+/track/17/bus/A/mute 0
+/track/17/bus/B/mute 0
+/track/17/bus/C/mute 0
+/track/17/bus/D/mute 0
+/track/17/bus/E/mute 0
+/track/17/bus/F/mute 0
+/track/17/bus/G/mute 0
+/track/17/bus/H/mute 0
+/track/17/bus/A/gain 0.0
+/track/17/bus/B/gain 0.0
+/track/17/bus/C/gain 0.0
+/track/17/bus/D/gain 0.0
+/track/17/bus/E/gain 0.0
+/track/17/bus/F/gain 0.0
+/track/17/bus/G/gain 0.0
+/track/17/bus/H/gain 0.0
+/track/17/bus/A/delay 0.0
+/track/17/bus/B/delay 0.0
+/track/17/bus/C/delay 0.0
+/track/17/bus/D/delay 0.0
+/track/17/bus/E/delay 0.0
+/track/17/bus/F/delay 0.0
+/track/17/bus/G/delay 0.0
+/track/17/bus/H/delay 0.0
+/track/17/bus/display "A"
+/track/17/bus/send/display "A-D"
+/track/17/lock 0
+/track/18/name "Guitar"
+/track/18/color 1.0 0.117647 0.117647 1.0
+/track/18/numinputs 1
+/track/18/visible 1
+/track/18/trim 0.000000
+/track/18/dynamics/attack 10.0
+/track/18/dynamics/release 30.0
+/track/18/dynamics/lookahead 0.0
+/track/18/dynamics/compressor/threshold -30.0
+/track/18/dynamics/compressor/ratio 1.0
+/track/18/dynamics/expander/threshold -60.0
+/track/18/dynamics/expander/ratio 1.0
+/track/18/dynamics/makeup 0.000000
+/track/18/dynamics/link "multi mono"
+/track/18/dynamics/bypass 1
+/track/18/dynamics/grid/visible 1
+/track/18/dynamics/curve/fill 1
+/track/18/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/18/dynamics/foreground/color 1.0 0.117647 0.117647 0.6
+/track/18/dynamics/curve/color 0.8 0.0941176 0.0941176 1.0
+/track/18/dynamics/curve/thickness 1.0
+/track/18/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/18/dynamics/title "Guitar"
+/track/18/equalizer/bypass 1
+/track/18/equalizer/gain 0.0
+/track/18/equalizer/filter/1/active 0
+/track/18/equalizer/filter/1/freq 50.0
+/track/18/equalizer/filter/1/order 2
+/track/18/equalizer/filter/2/active 1
+/track/18/equalizer/filter/2/freq 100.0
+/track/18/equalizer/filter/2/gain 0.0
+/track/18/equalizer/filter/2/q 1.0
+/track/18/equalizer/filter/3/active 1
+/track/18/equalizer/filter/3/freq 500.0
+/track/18/equalizer/filter/3/gain 0.0
+/track/18/equalizer/filter/3/q 1.0
+/track/18/equalizer/filter/4/active 1
+/track/18/equalizer/filter/4/freq 1000.0
+/track/18/equalizer/filter/4/gain 0.0
+/track/18/equalizer/filter/4/q 1.0
+/track/18/equalizer/filter/5/active 1
+/track/18/equalizer/filter/5/freq 2000.0
+/track/18/equalizer/filter/5/gain 0.0
+/track/18/equalizer/filter/5/q 1.0
+/track/18/equalizer/filter/6/active 1
+/track/18/equalizer/filter/6/freq 5000.0
+/track/18/equalizer/filter/6/gain 0.0
+/track/18/equalizer/filter/6/q 1.0
+/track/18/equalizer/filter/7/active 1
+/track/18/equalizer/filter/7/freq 10000.0
+/track/18/equalizer/filter/7/gain 0.0
+/track/18/equalizer/filter/7/q 1.0
+/track/18/equalizer/filter/8/active 0
+/track/18/equalizer/filter/8/freq 16000.0
+/track/18/equalizer/filter/8/order 2
+/track/18/gain 0.000000
+/track/18/gain/ramptime 20.0
+/track/18/mute 0
+/track/18/annotation ""
+/track/18/levels/input/visible 1
+/track/18/levels/input/post 0
+/track/18/levels/input/mode "peak"
+/track/18/levels/output/visible 1
+/track/18/levels/output/post 1
+/track/18/levels/output/mode "peak"
+/track/18/solo 0
+/track/18/routing/input/1/adc 18
+/track/18/lfe/send 0.000000
+/track/18/lfe/mute 0
+/track/18/monitor "off"
+/track/18/doppler 0
+/track/18/air 0
+/track/18/phaseinvert 0
+/track/18/azim -94.3
+/track/18/elev 0.000000
+/track/18/dist 1.26
+/track/18/delay/linkedtodistance 0
+/track/18/direct/linkedtodistance 1
+/track/18/early/linkedtodistance 1
+/track/18/reverb/linkedtodistance 1
+/track/18/delay 0.0
+/track/18/direct/gain/offset 0.000000
+/track/18/direct/gain -2.5
+/track/18/direct/gain/low 0.000000
+/track/18/direct/gain/med 0.000000
+/track/18/direct/gain/high 0.000000
+/track/18/direct/freq/low 250.0
+/track/18/direct/freq/high 4000.0
+/track/18/direct/filter/bypass 1
+/track/18/early/gain/offset 0.000000
+/track/18/early/gain -10.5
+/track/18/early/gain/low 0.000000
+/track/18/early/gain/med 0.000000
+/track/18/early/gain/high 0.000000
+/track/18/early/freq/low 250.0
+/track/18/early/freq/high 4000.0
+/track/18/early/filter/bypass 1
+/track/18/reverb/send -18.0
+/track/18/reverb/send/offset 0.000000
+/track/18/reverb/send/ramptime 20.0
+/track/18/early/width 30.0
+/track/18/direct/mute 0
+/track/18/early/mute 0
+/track/18/reverb/mute 0
+/track/18/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/18/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/18/bus/A/destination "/bus/10"
+/track/18/bus/B/destination "/"
+/track/18/bus/C/destination "/"
+/track/18/bus/D/destination "/"
+/track/18/bus/E/destination "/"
+/track/18/bus/F/destination "/"
+/track/18/bus/G/destination "/"
+/track/18/bus/H/destination "/"
+/track/18/bus/A/mute 0
+/track/18/bus/B/mute 0
+/track/18/bus/C/mute 0
+/track/18/bus/D/mute 0
+/track/18/bus/E/mute 0
+/track/18/bus/F/mute 0
+/track/18/bus/G/mute 0
+/track/18/bus/H/mute 0
+/track/18/bus/A/gain 0.0
+/track/18/bus/B/gain 0.0
+/track/18/bus/C/gain 0.0
+/track/18/bus/D/gain 0.0
+/track/18/bus/E/gain 0.0
+/track/18/bus/F/gain 0.0
+/track/18/bus/G/gain 0.0
+/track/18/bus/H/gain 0.0
+/track/18/bus/A/delay 0.0
+/track/18/bus/B/delay 0.0
+/track/18/bus/C/delay 0.0
+/track/18/bus/D/delay 0.0
+/track/18/bus/E/delay 0.0
+/track/18/bus/F/delay 0.0
+/track/18/bus/G/delay 0.0
+/track/18/bus/H/delay 0.0
+/track/18/bus/display "A"
+/track/18/bus/send/display "A-D"
+/track/18/lock 0
+/track/19/name "Bass"
+/track/19/color 1.0 0.117647 0.117647 1.0
+/track/19/numinputs 1
+/track/19/visible 1
+/track/19/trim 0.000000
+/track/19/dynamics/attack 10.0
+/track/19/dynamics/release 30.0
+/track/19/dynamics/lookahead 0.0
+/track/19/dynamics/compressor/threshold -30.0
+/track/19/dynamics/compressor/ratio 1.0
+/track/19/dynamics/expander/threshold -60.0
+/track/19/dynamics/expander/ratio 1.0
+/track/19/dynamics/makeup 0.000000
+/track/19/dynamics/link "multi mono"
+/track/19/dynamics/bypass 1
+/track/19/dynamics/grid/visible 1
+/track/19/dynamics/curve/fill 1
+/track/19/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/19/dynamics/foreground/color 1.0 0.117647 0.117647 0.6
+/track/19/dynamics/curve/color 0.8 0.0941176 0.0941176 1.0
+/track/19/dynamics/curve/thickness 1.0
+/track/19/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/19/dynamics/title "Bass"
+/track/19/equalizer/bypass 1
+/track/19/equalizer/gain 0.0
+/track/19/equalizer/filter/1/active 0
+/track/19/equalizer/filter/1/freq 50.0
+/track/19/equalizer/filter/1/order 2
+/track/19/equalizer/filter/2/active 1
+/track/19/equalizer/filter/2/freq 100.0
+/track/19/equalizer/filter/2/gain 0.0
+/track/19/equalizer/filter/2/q 1.0
+/track/19/equalizer/filter/3/active 1
+/track/19/equalizer/filter/3/freq 500.0
+/track/19/equalizer/filter/3/gain 0.0
+/track/19/equalizer/filter/3/q 1.0
+/track/19/equalizer/filter/4/active 1
+/track/19/equalizer/filter/4/freq 1000.0
+/track/19/equalizer/filter/4/gain 0.0
+/track/19/equalizer/filter/4/q 1.0
+/track/19/equalizer/filter/5/active 1
+/track/19/equalizer/filter/5/freq 2000.0
+/track/19/equalizer/filter/5/gain 0.0
+/track/19/equalizer/filter/5/q 1.0
+/track/19/equalizer/filter/6/active 1
+/track/19/equalizer/filter/6/freq 5000.0
+/track/19/equalizer/filter/6/gain 0.0
+/track/19/equalizer/filter/6/q 1.0
+/track/19/equalizer/filter/7/active 1
+/track/19/equalizer/filter/7/freq 10000.0
+/track/19/equalizer/filter/7/gain 0.0
+/track/19/equalizer/filter/7/q 1.0
+/track/19/equalizer/filter/8/active 0
+/track/19/equalizer/filter/8/freq 16000.0
+/track/19/equalizer/filter/8/order 2
+/track/19/gain 0.000000
+/track/19/gain/ramptime 20.0
+/track/19/mute 0
+/track/19/annotation ""
+/track/19/levels/input/visible 1
+/track/19/levels/input/post 0
+/track/19/levels/input/mode "peak"
+/track/19/levels/output/visible 1
+/track/19/levels/output/post 1
+/track/19/levels/output/mode "peak"
+/track/19/solo 0
+/track/19/routing/input/1/adc 19
+/track/19/lfe/send 0.000000
+/track/19/lfe/mute 0
+/track/19/monitor "off"
+/track/19/doppler 0
+/track/19/air 0
+/track/19/phaseinvert 0
+/track/19/azim 156.2
+/track/19/elev 0.000000
+/track/19/dist 1.17
+/track/19/delay/linkedtodistance 0
+/track/19/direct/linkedtodistance 1
+/track/19/early/linkedtodistance 1
+/track/19/reverb/linkedtodistance 1
+/track/19/delay 0.0
+/track/19/direct/gain/offset 0.000000
+/track/19/direct/gain -1.9
+/track/19/direct/gain/low 0.000000
+/track/19/direct/gain/med 0.000000
+/track/19/direct/gain/high 0.000000
+/track/19/direct/freq/low 250.0
+/track/19/direct/freq/high 4000.0
+/track/19/direct/filter/bypass 1
+/track/19/early/gain/offset 0.000000
+/track/19/early/gain -9.8
+/track/19/early/gain/low 0.000000
+/track/19/early/gain/med 0.000000
+/track/19/early/gain/high 0.000000
+/track/19/early/freq/low 250.0
+/track/19/early/freq/high 4000.0
+/track/19/early/filter/bypass 1
+/track/19/reverb/send -18.0
+/track/19/reverb/send/offset 0.000000
+/track/19/reverb/send/ramptime 20.0
+/track/19/early/width 30.0
+/track/19/direct/mute 0
+/track/19/early/mute 0
+/track/19/reverb/mute 0
+/track/19/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/19/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/19/bus/A/destination "/bus/10"
+/track/19/bus/B/destination "/"
+/track/19/bus/C/destination "/"
+/track/19/bus/D/destination "/"
+/track/19/bus/E/destination "/"
+/track/19/bus/F/destination "/"
+/track/19/bus/G/destination "/"
+/track/19/bus/H/destination "/"
+/track/19/bus/A/mute 0
+/track/19/bus/B/mute 0
+/track/19/bus/C/mute 0
+/track/19/bus/D/mute 0
+/track/19/bus/E/mute 0
+/track/19/bus/F/mute 0
+/track/19/bus/G/mute 0
+/track/19/bus/H/mute 0
+/track/19/bus/A/gain 0.0
+/track/19/bus/B/gain 0.0
+/track/19/bus/C/gain 0.0
+/track/19/bus/D/gain 0.0
+/track/19/bus/E/gain 0.0
+/track/19/bus/F/gain 0.0
+/track/19/bus/G/gain 0.0
+/track/19/bus/H/gain 0.0
+/track/19/bus/A/delay 0.0
+/track/19/bus/B/delay 0.0
+/track/19/bus/C/delay 0.0
+/track/19/bus/D/delay 0.0
+/track/19/bus/E/delay 0.0
+/track/19/bus/F/delay 0.0
+/track/19/bus/G/delay 0.0
+/track/19/bus/H/delay 0.0
+/track/19/bus/display "A"
+/track/19/bus/send/display "A-D"
+/track/19/lock 0
+/track/20/name "Drums"
+/track/20/color 1.0 0.117647 0.117647 1.0
+/track/20/numinputs 1
+/track/20/visible 1
+/track/20/trim 0.000000
+/track/20/dynamics/attack 10.0
+/track/20/dynamics/release 30.0
+/track/20/dynamics/lookahead 0.0
+/track/20/dynamics/compressor/threshold -30.0
+/track/20/dynamics/compressor/ratio 1.0
+/track/20/dynamics/expander/threshold -60.0
+/track/20/dynamics/expander/ratio 1.0
+/track/20/dynamics/makeup 0.000000
+/track/20/dynamics/link "multi mono"
+/track/20/dynamics/bypass 1
+/track/20/dynamics/grid/visible 1
+/track/20/dynamics/curve/fill 1
+/track/20/dynamics/background/color 1.0 1.0 1.0 0.0
+/track/20/dynamics/foreground/color 1.0 0.117647 0.117647 0.6
+/track/20/dynamics/curve/color 0.8 0.0941176 0.0941176 1.0
+/track/20/dynamics/curve/thickness 1.0
+/track/20/dynamics/grid/color 0.501961 0.501961 0.501961 1.0
+/track/20/dynamics/title "Drums"
+/track/20/equalizer/bypass 1
+/track/20/equalizer/gain 0.0
+/track/20/equalizer/filter/1/active 0
+/track/20/equalizer/filter/1/freq 50.0
+/track/20/equalizer/filter/1/order 2
+/track/20/equalizer/filter/2/active 1
+/track/20/equalizer/filter/2/freq 100.0
+/track/20/equalizer/filter/2/gain 0.0
+/track/20/equalizer/filter/2/q 1.0
+/track/20/equalizer/filter/3/active 1
+/track/20/equalizer/filter/3/freq 500.0
+/track/20/equalizer/filter/3/gain 0.0
+/track/20/equalizer/filter/3/q 1.0
+/track/20/equalizer/filter/4/active 1
+/track/20/equalizer/filter/4/freq 1000.0
+/track/20/equalizer/filter/4/gain 0.0
+/track/20/equalizer/filter/4/q 1.0
+/track/20/equalizer/filter/5/active 1
+/track/20/equalizer/filter/5/freq 2000.0
+/track/20/equalizer/filter/5/gain 0.0
+/track/20/equalizer/filter/5/q 1.0
+/track/20/equalizer/filter/6/active 1
+/track/20/equalizer/filter/6/freq 5000.0
+/track/20/equalizer/filter/6/gain 0.0
+/track/20/equalizer/filter/6/q 1.0
+/track/20/equalizer/filter/7/active 1
+/track/20/equalizer/filter/7/freq 10000.0
+/track/20/equalizer/filter/7/gain 0.0
+/track/20/equalizer/filter/7/q 1.0
+/track/20/equalizer/filter/8/active 0
+/track/20/equalizer/filter/8/freq 16000.0
+/track/20/equalizer/filter/8/order 2
+/track/20/gain 0.000000
+/track/20/gain/ramptime 20.0
+/track/20/mute 0
+/track/20/annotation ""
+/track/20/levels/input/visible 1
+/track/20/levels/input/post 0
+/track/20/levels/input/mode "peak"
+/track/20/levels/output/visible 1
+/track/20/levels/output/post 1
+/track/20/levels/output/mode "peak"
+/track/20/solo 0
+/track/20/routing/input/1/adc 20
+/track/20/lfe/send 0.000000
+/track/20/lfe/mute 0
+/track/20/monitor "off"
+/track/20/doppler 0
+/track/20/air 0
+/track/20/phaseinvert 0
+/track/20/azim -18.13
+/track/20/elev 0.000000
+/track/20/dist 1.33
+/track/20/delay/linkedtodistance 0
+/track/20/direct/linkedtodistance 1
+/track/20/early/linkedtodistance 1
+/track/20/reverb/linkedtodistance 1
+/track/20/delay 0.0
+/track/20/direct/gain/offset 0.000000
+/track/20/direct/gain -3.0
+/track/20/direct/gain/low 0.000000
+/track/20/direct/gain/med 0.000000
+/track/20/direct/gain/high 0.000000
+/track/20/direct/freq/low 250.0
+/track/20/direct/freq/high 4000.0
+/track/20/direct/filter/bypass 1
+/track/20/early/gain/offset 0.000000
+/track/20/early/gain -10.9
+/track/20/early/gain/low 0.000000
+/track/20/early/gain/med 0.000000
+/track/20/early/gain/high 0.000000
+/track/20/early/freq/low 250.0
+/track/20/early/freq/high 4000.0
+/track/20/early/filter/bypass 1
+/track/20/reverb/send -18.0
+/track/20/reverb/send/offset 0.000000
+/track/20/reverb/send/ramptime 20.0
+/track/20/early/width 30.0
+/track/20/direct/mute 0
+/track/20/early/mute 0
+/track/20/reverb/mute 0
+/track/20/bus/A/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/A/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/B/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/B/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/C/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/C/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/D/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/D/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/E/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/E/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/F/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/F/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/G/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/G/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/H/early/delays 22.22 25.2969 26.6361 28.9126 32.274 34.4063 36.777 39.71
+/track/20/bus/H/early/gains -1.0 1.0 1.0 -1.0 -1.0 -1.0 1.0 1.0
+/track/20/bus/A/destination "/bus/10"
+/track/20/bus/B/destination "/"
+/track/20/bus/C/destination "/"
+/track/20/bus/D/destination "/"
+/track/20/bus/E/destination "/"
+/track/20/bus/F/destination "/"
+/track/20/bus/G/destination "/"
+/track/20/bus/H/destination "/"
+/track/20/bus/A/mute 0
+/track/20/bus/B/mute 0
+/track/20/bus/C/mute 0
+/track/20/bus/D/mute 0
+/track/20/bus/E/mute 0
+/track/20/bus/F/mute 0
+/track/20/bus/G/mute 0
+/track/20/bus/H/mute 0
+/track/20/bus/A/gain 0.0
+/track/20/bus/B/gain 0.0
+/track/20/bus/C/gain 0.0
+/track/20/bus/D/gain 0.0
+/track/20/bus/E/gain 0.0
+/track/20/bus/F/gain 0.0
+/track/20/bus/G/gain 0.0
+/track/20/bus/H/gain 0.0
+/track/20/bus/A/delay 0.0
+/track/20/bus/B/delay 0.0
+/track/20/bus/C/delay 0.0
+/track/20/bus/D/delay 0.0
+/track/20/bus/E/delay 0.0
+/track/20/bus/F/delay 0.0
+/track/20/bus/G/delay 0.0
+/track/20/bus/H/delay 0.0
+/track/20/bus/display "A"
+/track/20/bus/send/display "A-D"
+/track/20/lock 0

@@ -1,8 +1,8 @@
 # local paths and data (never uploaded)
 settings.yaml
-work/
-outputs/
-data/
+/work/
+/outputs/
+/data/
 tools/colmap/
 speaker_corrections*.json
 # python / editors
