@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>資料目錄</title>
+<link rel="stylesheet" href="site.css">
+<style>
+.wrap { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 32px; max-width: 1240px; margin: 0 auto; padding: 24px 16px 80px; }
+@media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } .wrap > nav { position: static !important; } }
+.wrap > nav { position: sticky; top: 16px; align-self: start; font-size: 14px; }
+.wrap > nav a { display: block; color: var(--muted); text-decoration: none; padding: 3px 0; }
+.wrap > nav a:hover { color: var(--accent); }
+.wrap > nav .h { font-weight: 650; color: var(--ink); margin: 12px 0 4px; }
+main { min-width: 0; }
+h1 { font-size: 28px; margin: 0 0 6px; }
+h2 { font-size: 21px; margin: 42px 0 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+h3 { font-size: 17px; margin: 22px 0 6px; }
+.lead { color: var(--muted); max-width: 820px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--panel); margin: 8px 0 14px; }
+th, td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+th { background: var(--code); font-weight: 600; white-space: nowrap; }
+td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tw { overflow-x: auto; }
+.p { font-family: Consolas, "Cascadia Mono", Menlo, monospace; font-size: 13px; word-break: break-all; }
+.st { font-size: 12px; padding: 1px 7px; border-radius: 10px; border: 1px solid currentColor; white-space: nowrap; }
+.st.use { color: var(--ok); } .st.ref { color: var(--accent); } .st.old { color: var(--muted); } .st.no { color: var(--warn); }
+.note { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; color: var(--muted); font-size: 14px; }
+.tree { background: var(--code); border-radius: 8px; padding: 12px 14px; font: 13px/1.6 Consolas, "Cascadia Mono", Menlo, monospace; overflow-x: auto; white-space: pre; }
+</style>
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a href="index.html">首頁</a><a href="finder.html">照片查找</a><a href="learn.html">原理教學</a><a href="results.html">結果與驗證</a><a href="manual.html">操作手冊</a><a class="on" href="catalog.html">資料目錄</a></nav>
+<div class="wrap">
+<nav>
+  <a href="#map">總覽</a>
+  <div class="h">資料</div>
+  <a href="#raw">1. 原始影像</a>
+  <a href="#annot">2. 人工標註</a>
+  <div class="h">重建方法</div>
+  <a href="#dji">3. DJI COLMAP</a>
+  <a href="#sony">4. Sony COLMAP</a>
+  <a href="#pgsr">5. PGSR 訓練</a>
+  <a href="#ours">6. 喇叭定位流程</a>
+  <div class="h">其他</div>
+  <a href="#tools">7. 工具與模型權重</a>
+  <a href="#misc">8. 試驗與雜項</a>
+  <a href="#clean">9. 可清理空間</a>
+</nav>
+<main>
+<h1>資料目錄</h1>
+<p class="lead">這台電腦上和這個專案有關的所有影像、重建模型、訓練結果：放在哪裡、多大、用什麼方法和參數產生、最後有沒有用在喇叭定位。路徑中的 <code>zh\</code> 是專案根目錄（<code>Documents\Codex\2026-10-05\zh</code>），<code>Desktop\</code> 是桌面。整理日期 2026-11-03。</p>
+<p><span class="st use">採用</span> 最終結果用到 · <span class="st ref">參考</span> 局部用到 · <span class="st old">未採用</span> 試驗或替代方案 · <span class="st no">無關</span> 和本專案無關</p>
+
+<h2 id="map">總覽</h2>
+<div class="tree">Desktop\WFS_Sony\
+  ├─ WFS_Sony\                 Sony 照片 944 張                       5.1 GB   <b>採用</b>
+  └─ 1012.txt                  Panoramix 設計檔                                 <b>採用</b>
+zh\work\
+  ├─ pgsr_data\                DJI 286 幀 + COLMAP 模型（座標基準）    533 MB   <b>採用</b>
+  ├─ pgsr_data_augmented\      DJI 286 + 22 補充幀 + COLMAP 模型       1.1 GB   PGSR 用
+  ├─ old_model_txt\ aug_model_txt\   上面兩個模型的 txt 版            214 MB
+  ├─ speaker_photo_finder\     喇叭定位的快取與中間資料                1.5 GB   <b>採用</b>
+  ├─ PGSR\                     PGSR 原始碼（zju3dv/PGSR）              140 MB
+  ├─ sam2\                     SAM 2 原始碼 + 權重                     1.1 GB
+  ├─ colmap311\                COLMAP 3.11.1 執行檔                    428 MB
+  ├─ speaker_mask_ui\          SAM2 標註介面
+  └─ speaker_contact\          早期的接線/編號參考圖                   9 MB
+zh\outputs\
+  ├─ speaker_localization_review\   你的標註（SAM2 遮罩、粗框）        169 MB   <b>採用</b>
+  ├─ WFS_Sony_COLMAP\          Sony 的 COLMAP 資料庫與模型             495 MB   參考
+  ├─ PGSR_DJI_WFS\             PGSR 訓練結果（286 幀）                 5.4 GB
+  ├─ PGSR_DJI_WFS_augmented\   PGSR 訓練結果（308 幀）                 4.5 GB
+  ├─ speaker_photo_finder\     喇叭定位的本機完整輸出                   98 MB   <b>採用</b>
+  ├─ speaker_1_search\         早期找 1 號喇叭的試驗                    1 MB
+  └─ wps_photo_assoc_backup_20261011\   Windows 登錄檔備份             0.3 MB   無關
+zh\wfs-speaker-localization\    本倉庫（程式、結果、網站）              44 MB</div>
+
+<h2 id="raw">1. 原始影像</h2>
+<div class="tw"><table>
+<tr><th>資料</th><th>位置</th><th>內容</th><th>大小</th><th>狀態</th></tr>
+<tr><td>Sony 照片</td><td class="p">Desktop\WFS_Sony\WFS_Sony\</td><td>944 張 DSC*.JPG，Sony ILCE-7M4 + FE 24-105 mm F4 G OSS，焦距 24–32 mm，7008×3944。選用 938 張（6 張嚴重模糊排除，清單在 <span class="p">WFS_Sony_COLMAP\excluded_images.csv</span>）；663 張最後成功定位</td><td class="n">5.1 GB</td><td><span class="st use">採用</span></td></tr>
+<tr><td>DJI 影片幀</td><td class="p">zh\work\pgsr_data\DJI_WFS_COLMAP_PINHOLE\images\</td><td>frame_00001–00286.jpg，2560×1919（已去畸變成 PINHOLE）。你的編號標註都畫在這些幀上</td><td class="n">≈ 530 MB</td><td><span class="st use">採用</span></td></tr>
+<tr><td>DJI 補充幀</td><td class="p">zh\work\pgsr_data_augmented\DJI_WFS_COLMAP_PINHOLE\images\supp_*ms.jpg</td><td>從影片另外抽的 22 幀（檔名是時間點，例如 supp_001420ms = 1.42 s），依清晰度挑選，清單 <span class="p">selected_video_frames.tsv</span></td><td class="n">—</td><td><span class="st old">PGSR 用</span></td></tr>
+<tr><td>DJI 原始影片</td><td>這台電腦上沒找到</td><td>只有抽好的幀。若之後要重新抽幀，需要從原拍攝設備或 Mac 上找回</td><td class="n">—</td><td>—</td></tr>
+<tr><td>Panoramix 設計</td><td class="p">Desktop\WFS_Sony\1012.txt</td><td>你的設定檔（bus 10、手動量測位置），從未被修改。網站上有副本 <a href="data/1012_design.txt">1012_design.txt</a></td><td class="n">173 KB</td><td><span class="st use">採用</span></td></tr>
+</table></div>
+
+<h2 id="annot">2. 人工標註</h2>
+<div class="tw"><table>
+<tr><th>資料</th><th>位置</th><th>內容</th><th>狀態</th></tr>
+<tr><td>SAM2 振膜遮罩</td><td class="p">zh\outputs\speaker_localization_review\masks\</td><td><span class="p">manual_mask_annotations.csv</span>：144 筆、14 幀、46 個編號；每筆一個 <span class="p">frame_N_spkN_mask.png</span> 和疊圖（136 組）</td><td><span class="st use">採用</span></td></tr>
+<tr><td>粗框</td><td class="p">zh\outputs\speaker_localization_review\coarse_annotations\</td><td><span class="p">speaker_boxes.json/.csv</span>：8 幀、113 個框、76 個編號；<span class="p">original_images\</span> 16 張原圖、<span class="p">original_size_overlays\</span> 疊圖；<span class="p">*.backup_before_frame59_fix.*</span> 是 frame_00059 更正前的備份</td><td><span class="st use">採用</span></td></tr>
+<tr><td>標註輔助</td><td class="p">zh\outputs\speaker_localization_review\</td><td><span class="p">speaker_id_inventory.csv</span>、<span class="p">anchor_cross_reference_1-16.csv</span>、<span class="p">contact_sheets\</span>（DJI 幀總覽 4 頁）、<span class="p">本地SAM2使用說明.md</span>、<span class="p">README_zh.md</span></td><td><span class="st ref">參考</span></td></tr>
+<tr><td>網站回報</td><td>你的「下載」資料夾 <span class="p">speaker_corrections*.json</span></td><td>照片查找頁下載的錯誤回報，重跑時自動讀取最新一份</td><td>—</td></tr>
+</table></div>
+
+<h2 id="dji">3. DJI COLMAP 重建</h2>
+<div class="tw"><table>
+<tr><th>模型</th><th>位置</th><th>相機</th><th class="n">影像</th><th class="n">3D 點</th><th class="n">平均重投影</th><th>狀態</th></tr>
+<tr><td><b>DJI 原版</b></td><td class="p">zh\work\pgsr_data\DJI_WFS_COLMAP_PINHOLE\sparse\</td><td>PINHOLE，1 台共用，f = 1209.4 px</td><td class="n">286</td><td class="n">42,129</td><td class="n">0.81 px</td><td><span class="st use">採用：座標基準</span></td></tr>
+<tr><td>DJI 補充版</td><td class="p">zh\work\pgsr_data_augmented\DJI_WFS_COLMAP_PINHOLE\sparse\</td><td>PINHOLE，fx 1207.8 / fy 1210.3 px</td><td class="n">308</td><td class="n">95,649</td><td class="n">0.48 px</td><td><span class="st old">PGSR 用</span></td></tr>
+<tr><td>補充版變體</td><td class="p">…\sparse_relaxed\0\、sparse_mapper2\、sparse_registered\</td><td colspan="4">sparse_relaxed 和主模型相同（308 張）；sparse_mapper2、sparse_registered 是空資料夾（失敗的嘗試）</td><td><span class="st old">未採用</span></td></tr>
+<tr><td>txt 匯出</td><td class="p">zh\work\old_model_txt\、zh\work\aug_model_txt\</td><td colspan="4">上面兩個模型的 cameras / images / points3D.txt（方便用文字編輯器檢查）</td><td><span class="st ref">參考</span></td></tr>
+</table></div>
+<p class="note">喇叭定位流程只用原版 286 幀模型。補充版點更多、誤差更小，但你的標註和定位快取都是在原版座標下做的。改用補充版需要整套重跑，對中心精度幫助有限，因為精度主要來自 Sony 照片。補充版的資料庫 <span class="p">database.db</span>（463 MB）也在同一個資料夾。</p>
+
+<h2 id="sony">4. Sony COLMAP 重建</h2>
+<p>位置：<span class="p">zh\outputs\WFS_Sony_COLMAP\</span>（495 MB）。COLMAP 3.11.1，GPU SIFT。</p>
+<div class="tw"><table>
+<tr><th>步驟 / 檔案</th><th>方法與參數</th><th>結果</th></tr>
+<tr><td>選片 <span class="p">selection_summary.txt</span>、<span class="p">selected_image_list.txt</span>、<span class="p">quality_metrics.csv</span></td><td>只排除目視確認的嚴重模糊</td><td>944 → 938 張</td></tr>
+<tr><td>特徵 <span class="p">feature_extractor.log</span></td><td>SIFT（GPU）；相機模型 SIMPLE_RADIAL，<b>每張照片獨立</b>（不強制共用焦距，因為變焦 24–32 mm）</td><td>約 2 分鐘</td></tr>
+<tr><td>匹配 <span class="p">sequential_matcher*.log</span>、<span class="p">vocab_tree_matcher*.log</span></td><td>順序匹配（一般版、overlap 50 版）+ 詞彙樹匹配（<span class="p">vocab_tree_faiss_flickr100K_words32K.bin</span>）</td><td><span class="p">database.db</span>（331 MB），喇叭定位用它的驗證匹配</td></tr>
+<tr><td>重建 <span class="p">mapper.log</span> → <span class="p">sparse\</span></td><td>增量式重建</td><td>sparse\1：396 張、62,536 點、0.88 px（<b>左右摺疊</b>）；sparse\0：2 張</td></tr>
+<tr><td>重建 <span class="p">mapper_overlap50.log</span> → <span class="p">sparse_overlap50\</span></td><td>overlap 50 的順序匹配</td><td>斷成 6 個模型：395 / 47 / 39 / 23 / 22 / 2 張</td></tr>
+<tr><td>匯出 <span class="p">camera_export\</span>、<span class="p">sparse_txt\</span>、<span class="p">sparse_best.ply</span></td><td>相機參數 CSV、註冊狀態、txt 模型、點雲</td><td><span class="p">unregistered_images.txt</span> 列出沒接上的照片</td></tr>
+<tr><td>檢視圖 <span class="p">contact_*.jpg</span>、<span class="p">low_sharpness_review.jpg</span>、<span class="p">point_cloud_preview.png</span></td><td>每 80 張一頁的總覽</td><td>—</td></tr>
+</table></div>
+<p class="note">狀態：<span class="st ref">參考</span>。Sony 模型左右兩側摺疊在一起，所以全局位姿沒有用；喇叭定位只用了它的匹配資料庫（鄰居投票）、局部相對關係，以及已註冊照片的鏡頭參數。原因見<a href="learn.html#c4">原理教學第 4 章</a>。</p>
+
+<h2 id="pgsr">5. PGSR 訓練（DJI 稠密重建）</h2>
+<p>PGSR（Planar-based Gaussian Splatting，<a href="https://github.com/zju3dv/PGSR">zju3dv/PGSR</a>，版本 de24f1a）。原始碼在 <span class="p">zh\work\PGSR\</span>，conda 環境 <code>pgsr</code>。本機改過一處：<span class="p">scene/gaussian_model.py</span> 用自己寫的 <code>quaternion_to_matrix</code> 取代 PyTorch3D，省去安裝 PyTorch3D。</p>
+<h3>兩次訓練</h3>
+<div class="tw"><table>
+<tr><th></th><th>PGSR_DJI_WFS</th><th>PGSR_DJI_WFS_augmented</th></tr>
+<tr><td>輸出位置</td><td class="p">zh\outputs\PGSR_DJI_WFS\</td><td class="p">zh\outputs\PGSR_DJI_WFS_augmented\</td></tr>
+<tr><td>輸入資料</td><td>DJI 原版 286 幀（<span class="p">work\pgsr_data</span>）</td><td>DJI 補充版 308 幀（<span class="p">work\pgsr_data_augmented</span>）</td></tr>
+<tr><td>訓練時間</td><td class="n">0.89 h（30,000 次）</td><td class="n">0.95 h（30,000 次）</td></tr>
+<tr><td>最終 PSNR（訓練視角）</td><td class="n">27.07 dB（7,000 次時 24.38）</td><td class="n">27.25 dB</td></tr>
+<tr><td>最終 L1</td><td class="n">0.0254</td><td class="n">0.0272</td></tr>
+<tr><td>高斯數量</td><td class="n">1.94 M</td><td class="n">2.17 M</td></tr>
+<tr><td>點雲存檔</td><td>iteration 7000 / 15000 / 23000 / 30000</td><td>iteration 10000 / 20000 / 30000</td></tr>
+<tr><td>網格</td><td><span class="p">mesh\tsdf_fusion.ply</span>（1.0 GB）、<span class="p">tsdf_fusion_post.ply</span>（934 MB）</td><td><span class="p">mesh\tsdf_fusion.ply</span>（543 MB）、<span class="p">tsdf_fusion_post.ply</span>（528 MB）</td></tr>
+<tr><td>其他</td><td colspan="2"><span class="p">chkpnt30000.pth</span>（1.4 / 1.6 GB，可接續訓練）、<span class="p">train\ours_30000\</span>（每個視角的 gt、renders、renders_depth、renders_normal）、<span class="p">debug\</span>（訓練過程截圖 115 張）、<span class="p">input.ply</span>（COLMAP 初始點）、<span class="p">cameras.json</span>、<span class="p">multi_view.json</span>、<span class="p">cfg_args</span>、TensorBoard 記錄 <span class="p">events.out.tfevents.*</span>；原版另有 <span class="p">preview_input_vs_PGSR.jpg</span></td></tr>
+</table></div>
+<h3>訓練參數</h3>
+<div class="tw"><table>
+<tr><th>類別</th><th>參數</th><th>來源</th></tr>
+<tr><td>模型 / 資料</td><td>resolution 2（半解析度 1280×960）、sh_degree 3、preload_img、data_device cuda、white_background False、eval False</td><td><span class="p">cfg_args</span>（兩次相同）</td></tr>
+<tr><td>多視角</td><td>multi_view_num 8、max_angle 30°、min_dis 0.01、max_dis 1.5、ncc_scale 0.5</td><td><span class="p">cfg_args</span>（兩次相同）</td></tr>
+<tr><td>最佳化</td><td>iterations 30,000；position_lr 1.6e-4 → 1.6e-6；feature 0.0025、opacity 0.05、scaling 0.005、rotation 0.001；lambda_dssim 0.2</td><td>PGSR 預設值*</td></tr>
+<tr><td>增密</td><td>從 500 到 15,000 次，每 100 次；grad 門檻 2e-4、abs grad 8e-4；opacity 每 3,000 次重置；opacity 剔除 0.005；上限 6 M 個</td><td>PGSR 預設值*</td></tr>
+<tr><td>幾何正則</td><td>single_view_weight 0.015（7,000 次起）；multi_view_ncc_weight 0.15、geo_weight 0.03（7,000 次起）；patch 3、取樣 102,400；scale_loss_weight 100</td><td>PGSR 預設值*</td></tr>
+</table></div>
+<p class="note">* PGSR 只把模型參數存進 <span class="p">cfg_args</span>，最佳化參數沒有記錄。上表是 <span class="p">arguments/__init__.py</span> 的預設值，兩次訓練的點雲存檔時間點不同，表示啟動指令至少在 save_iterations 上不一樣。狀態：<span class="st old">未採用</span>。PGSR 的稠密網格只看 DJI 畫質，沒有用在喇叭中心計算，可用來看整個房間的 3D 外觀，或做之後的碰撞檢查。</p>
+
+<h2 id="ours">6. 喇叭定位流程</h2>
+<div class="tw"><table>
+<tr><th>內容</th><th>位置</th><th>大小</th><th>狀態</th></tr>
+<tr><td>程式（唯一一份）</td><td class="p">zh\wfs-speaker-localization\pipeline\</td><td class="n">—</td><td><span class="st use">採用</span></td></tr>
+<tr><td>特徵快取（RootSIFT）</td><td class="p">zh\work\speaker_photo_finder\feats2\</td><td class="n">982 MB</td><td><span class="st use">採用</span></td></tr>
+<tr><td>Sony–DJI 對應點</td><td class="p">zh\work\speaker_photo_finder\corr\</td><td class="n">39 MB</td><td><span class="st use">採用</span></td></tr>
+<tr><td>中間結果</td><td class="p">zh\work\speaker_photo_finder\*.json</td><td colspan="2"><span class="p">sony_intrinsics</span> → <span class="p">detections</span> → <span class="p">dji_speakers</span> → <span class="p">dji_bar_model</span> → <span class="p">sony_in_dji</span> → <span class="p">sony_poses_final</span>（663 張）→ <span class="p">speakers_final</span> → <span class="p">centers</span> → <span class="p">floor</span> → <span class="p">design_vs_measured</span>；各步驟的 <span class="p">*.log</span></td></tr>
+<tr><td>採用版本的備份</td><td class="p">zh\work\speaker_photo_finder\before_ba\</td><td class="n">4 MB</td><td><span class="st use">採用</span></td></tr>
+<tr><td>Sony 光束法平差試驗</td><td class="p">zh\work\speaker_photo_finder\ba\</td><td class="n">397 MB</td><td><span class="st old">未採用</span></td></tr>
+<tr><td>試驗結果</td><td class="p">…\sony_poses_ba*.json、speakers_final_ba2/3.json、centers_ba2/3.json、centers_before_*.json</td><td class="n">—</td><td><span class="st old">未採用</span></td></tr>
+<tr><td>本機完整輸出</td><td class="p">zh\outputs\speaker_photo_finder\</td><td class="n">98 MB</td><td><span class="st use">採用</span></td></tr>
+<tr><td>　預覽圖</td><td class="p">…\previews\</td><td colspan="2">770 張 1600 px 縮圖，本機版照片查找頁用（不上傳）</td></tr>
+<tr><td>　結果檔</td><td class="p">…\1012_measured.txt、*.csv</td><td colspan="2">與 <span class="p">measurements\2026-10-13\</span> 和網站 <a href="results.html#downloads">下載區</a> 相同</td></tr>
+<tr><td>　圖與拼圖</td><td class="p">…\*.png、verify\、verify_unregistered\</td><td colspan="2">網站 <a href="results.html">結果與驗證</a> 中的圖</td></tr>
+<tr><td>　本機版查找頁</td><td class="p">…\index.html、開啟網頁.bat</td><td colspan="2">用原解析度預覽圖，回報錯誤時可點任一顆喇叭</td></tr>
+</table></div>
+
+<h2 id="tools">7. 工具與模型權重</h2>
+<div class="tw"><table>
+<tr><th>工具</th><th>位置</th><th>說明</th></tr>
+<tr><td>COLMAP 3.11.1（CUDA）</td><td class="p">zh\work\colmap311\bin\colmap.exe</td><td>428 MB。新電腦可用 <code>python tools/check_env.py --download-colmap</code> 下載</td></tr>
+<tr><td>SAM 2.1</td><td class="p">zh\work\sam2\</td><td>原始碼 + <span class="p">checkpoints\sam2.1_hiera_large.pt</span>（857 MB，可用 <span class="p">checkpoints\download_ckpts.sh</span> 重新下載）</td></tr>
+<tr><td>SAM2 標註介面</td><td class="p">zh\work\speaker_mask_ui\app.py</td><td>只有編譯後的 .pyc，沒有原始碼；粗框工具已放進本倉庫 <span class="p">tools\</span></td></tr>
+<tr><td>PGSR</td><td class="p">zh\work\PGSR\</td><td>見第 5 節</td></tr>
+<tr><td>conda 環境</td><td class="p">anaconda3\envs\</td><td><code>speaker-mask</code>（喇叭定位、SAM2）、<code>pgsr</code>（PGSR、TensorBoard）；另有 3DGS、4DGS_CVPR2024、4c4d、exavatar、gaugar、rembg_env 是其他專案的</td></tr>
+</table></div>
+
+<h2 id="misc">8. 試驗與雜項</h2>
+<div class="tw"><table>
+<tr><th>位置</th><th>內容</th><th>狀態</th></tr>
+<tr><td class="p">zh\outputs\speaker_1_search\</td><td>早期用 COLMAP track 找 1 號喇叭的試驗（候選 CSV、frame 82 裁切）</td><td><span class="st old">未採用</span></td></tr>
+<tr><td class="p">zh\outputs\speaker_localization_review\crop*、tight*、mask_box*</td><td>SAM2 框選與遮罩分數的測試圖</td><td><span class="st old">未採用</span></td></tr>
+<tr><td class="p">zh\outputs\speaker_photo_finder\compare_frame59_vs_119.jpg、sam2_frames_18_24.jpg</td><td>查 frame_00059 標錯、SAM2 品質時的比對圖</td><td><span class="st ref">參考</span></td></tr>
+<tr><td class="p">zh\outputs\speaker_photo_finder\iterations_accuracy.png</td><td>已撤回的「各次改進精度」圖</td><td><span class="st old">未採用</span></td></tr>
+<tr><td class="p">zh\work\speaker_contact\</td><td>早期的喇叭排列/接線參考圖（4 頁 + 裁切）</td><td><span class="st ref">參考</span></td></tr>
+<tr><td class="p">zh\outputs\wps_photo_assoc_backup_20261011\</td><td>82 個 Windows 登錄檔 .reg（照片檢視器的檔案關聯備份）</td><td><span class="st no">無關</span></td></tr>
+<tr><td class="p">Desktop\WFS_Sony\__MACOSX\</td><td>從 Mac 解壓縮時留下的空資料夾</td><td><span class="st no">無關</span></td></tr>
+</table></div>
+
+<h2 id="clean">9. 可清理空間（尚未刪除）</h2>
+<p>這些不影響最終結果和重算，需要空間時可以刪除或移到外接硬碟。刪除前建議先確認，PGSR 的部分如果還要用就保留。</p>
+<div class="tw"><table>
+<tr><th>項目</th><th class="n">大小</th><th>刪除後的影響</th></tr>
+<tr><td class="p">outputs\PGSR_DJI_WFS*\chkpnt30000.pth</td><td class="n">3.0 GB</td><td>不能接續訓練；點雲與網格仍在</td></tr>
+<tr><td class="p">outputs\PGSR_DJI_WFS*\point_cloud\iteration_（非 30000）</td><td class="n">≈ 1.6 GB</td><td>只剩最終點雲</td></tr>
+<tr><td class="p">outputs\PGSR_DJI_WFS*\mesh\tsdf_fusion.ply（保留 _post）</td><td class="n">1.5 GB</td><td>只剩後處理過的網格</td></tr>
+<tr><td class="p">outputs\PGSR_DJI_WFS*\debug\</td><td class="n">614 MB</td><td>沒有影響（訓練過程截圖）</td></tr>
+<tr><td class="p">work\speaker_photo_finder\ba\</td><td class="n">397 MB</td><td>沒有影響（未採用的平差試驗）</td></tr>
+<tr><td class="p">outputs\wps_photo_assoc_backup_20261011\</td><td class="n">0.3 MB</td><td>和本專案無關；如果是你需要的系統備份，就移到別處</td></tr>
+<tr><td class="p">work\old_model_txt\、aug_model_txt\</td><td class="n">214 MB</td><td>可以隨時用 COLMAP 從 .bin 重新匯出</td></tr>
+</table></div>
+<p class="note"><b>不要刪</b>：Sony 照片、DJI 幀與 <span class="p">pgsr_data\…\sparse</span>、你的標註、<span class="p">WFS_Sony_COLMAP\database.db</span>、<span class="p">work\speaker_photo_finder\</span>（除 ba\ 外）。這些是重算喇叭位置需要的。<span class="p">feats2\</span> 可以刪，但下次重跑會多花約 1 小時重算特徵。</p>
+</main>
+</div>
+</body>
+</html>
