@@ -42,6 +42,8 @@ td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowra
   <a href="#sony">4. Sony COLMAP</a>
   <a href="#pgsr">5. PGSR 訓練</a>
   <a href="#ours">6. 喇叭定位流程</a>
+  <a href="#ply">6b. 喇叭陣列 PLY</a>
+  <a href="#zhg">6c. 早期 3DGS（9/30）</a>
   <div class="h">其他</div>
   <a href="#tools">7. 工具與模型權重</a>
   <a href="#misc">8. 試驗與雜項</a>
@@ -74,7 +76,8 @@ zh\outputs\
   ├─ speaker_photo_finder\     喇叭定位的本機完整輸出                   98 MB   <b>採用</b>
   ├─ speaker_1_search\         早期找 1 號喇叭的試驗                    1 MB
   └─ wps_photo_assoc_backup_20261011\   Windows 登錄檔備份             0.3 MB   無關
-zh\wfs-speaker-localization\    本倉庫（程式、結果、網站）              44 MB</div>
+zh\wfs-speaker-localization\    本倉庫（程式、結果、網站、喇叭陣列 PLY）  64 MB
+Documents\Codex6-09-30\zh-g\   早期 3DGS 試驗（iPhone + Sony）          4.2 GB   未採用</div>
 
 <h2 id="raw">1. 原始影像</h2>
 <div class="tw"><table>
@@ -161,6 +164,30 @@ zh\wfs-speaker-localization\    本倉庫（程式、結果、網站）         
 <tr><td>　圖與拼圖</td><td class="p">…\*.png、verify\、verify_unregistered\</td><td colspan="2">網站 <a href="results.html">結果與驗證</a> 中的圖</td></tr>
 <tr><td>　本機版查找頁</td><td class="p">…\index.html、開啟網頁.bat</td><td colspan="2">用原解析度預覽圖，回報錯誤時可點任一顆喇叭</td></tr>
 </table></div>
+
+<h2 id="ply">6b. 喇叭陣列 PLY（Panoramix 座標，單位 mm）</h2>
+<p>位置：<span class="p">zh\wfs-speaker-localization\measurements6-10-13\</span>（也可在倉庫下載）。由 <code>python tools/export_ply.py</code> 產生；x 向右、y 向前、z 為離地高度，和 <span class="p">1012_measured.txt</span> 同一個原點。</p>
+<div class="tw"><table>
+<tr><th>檔案</th><th>內容</th><th class="n">大小</th></tr>
+<tr><td class="p">speakers_measured_points.ply</td><td>112 個實測振膜中心；法向量 = 朝向；顏色依架子；附 speaker_id 屬性</td><td class="n">4 KB</td></tr>
+<tr><td class="p">speakers_measured_discs.ply</td><td>每顆一片直徑 28 mm、朝向正確的圓片，在 MeshLab / Blender 裡最容易看</td><td class="n">77 KB</td></tr>
+<tr><td class="p">speakers_design_points.ply</td><td>你的 1012.txt 設計位置（高度取實測中位數 1120 mm），可和實測疊在一起比較</td><td class="n">2 KB</td></tr>
+<tr><td class="p">array_pgsr_mesh.ply</td><td>PGSR 網格 <span class="p">tsdf_fusion_post.ply</span> 裁切到 14 根架子（距架子直線 150 mm 內、高 850–1400 mm），已轉成 mm 與 Panoramix 座標；50 萬頂點、92 萬面</td><td class="n">19 MB</td></tr>
+</table></div>
+<p class="note">檢查：把實測中心疊到裁切網格上，112 顆都落在網格的喇叭架上；同一顆喇叭的 DJI 初始位置與照片實測中心只差 0.4 mm（座標轉換正確）。網格只有 DJI 畫質，看得到架子外形，振膜細節模糊。</p>
+
+<h2 id="zhg">6c. 早期 3DGS 試驗（2026-09-30）</h2>
+<p>位置：<span class="p">Documents\Codex6-09-30\zh-g\</span>（4.2 GB）。原版 3D Gaussian Splatting（<span class="p">work\gaussian-splatting</span>）+ LightGlue 匹配，使用 153 張 iPhone 影片影格 + 73 張 Sony 照片（與本專案不同的一批拍攝）。</p>
+<div class="tw"><table>
+<tr><th>實驗</th><th>位置</th><th>內容</th><th class="n">驗證 PSNR</th></tr>
+<tr><td>主模型 learned_joint</td><td class="p">outputs\WFS_3DGS\model\point_cloud\iteration_7000\point_cloud.ply</td><td>226 張輸入、203 張註冊（iPhone 142 / Sony 61）、33,474 稀疏點；7,000 次、41.7 萬高斯；resolution 1、eval</td><td class="n">12.49 dB</td></tr>
+<tr><td>clean_joint</td><td class="p">workttempt_clean\WFS_3DGS.ply</td><td>179 張註冊、91 萬高斯</td><td class="n">12.82 dB</td></tr>
+<tr><td>temporal</td><td class="p">work\model_temporal\</td><td>利用 iPhone 影格順序</td><td class="n">14.16 dB</td></tr>
+<tr><td>per_image</td><td class="p">work\model_per_image\</td><td>逐張鏡頭校正</td><td class="n">12.22 dB</td></tr>
+<tr><td>iPhone only / Sony only</td><td class="p">work\model_iphone\、work\model_sony_learned\</td><td>單一相機</td><td class="n">12.11 / 11.25 dB</td></tr>
+<tr><td>其他</td><td class="p">workttempt_blurred\、attempt_stable\、dataset_*\sparse \points3D.ply</td><td>早期嘗試與各資料集的 COLMAP 稀疏點</td><td class="n">10–11 dB</td></tr>
+</table></div>
+<p class="note">狀態：<span class="st old">未採用</span>。當時的報告 <span class="p">outputs\WFS_diagnostics\重建檢查.md</span> 判定未通過品質檢查（模糊、錯位、漂浮碎片，驗證 PSNR 只有 11–14 dB），模型不能用於尺寸量測。之後改用 DJI 連續影片 + PGSR（第 5 節）和照片三角化（第 6 節）。</p>
 
 <h2 id="tools">7. 工具與模型權重</h2>
 <div class="tw"><table>
