@@ -172,6 +172,7 @@ Documents\Codex6-09-30\zh-g\   早期 3DGS 試驗（iPhone + Sony）          
 <tr><td class="p">speakers_measured_points.ply</td><td>112 個實測振膜中心；法向量 = 朝向；顏色依架子；附 speaker_id 屬性</td><td class="n">4 KB</td></tr>
 <tr><td class="p">speakers_measured_discs.ply</td><td>每顆一片直徑 28 mm、朝向正確的圓片，在 MeshLab / Blender 裡最容易看</td><td class="n">77 KB</td></tr>
 <tr><td class="p">speakers_design_points.ply</td><td>你的 1012.txt 設計位置（高度取實測中位數 1120 mm），可和實測疊在一起比較</td><td class="n">2 KB</td></tr>
+<tr><td class="p"><b>sony_points.ply</b></td><td><b>Sony 照片重建的點雲</b>：663 張已定位 Sony 照片的特徵，用採用的相機位姿（固定不動）三角化；只留誤差 &lt; 2 px、至少 3 張照片看到的點，共 26,776 點（全部 53,512 點在 <span class="p">work\speaker_photo_findera	riangulated\</span>）。左右兩側正確分開，和原本摺疊的 Sony COLMAP 模型不同</td><td class="n">0.4 MB</td></tr>
 <tr><td class="p">array_pgsr_mesh.ply</td><td>PGSR 網格 <span class="p">tsdf_fusion_post.ply</span> 裁切到 14 根架子（距架子直線 150 mm 內、高 850–1400 mm），已轉成 mm 與 Panoramix 座標；50 萬頂點、92 萬面</td><td class="n">19 MB</td></tr>
 </table></div>
 <p class="note">檢查：把實測中心疊到裁切網格上，112 顆都落在網格的喇叭架上；同一顆喇叭的 DJI 初始位置與照片實測中心只差 0.4 mm（座標轉換正確）。網格只有 DJI 畫質，看得到架子外形，振膜細節模糊。</p>

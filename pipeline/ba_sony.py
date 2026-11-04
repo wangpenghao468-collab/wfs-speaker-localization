@@ -20,6 +20,7 @@ DB_SRC = SONY_DB
 BA = f"{WORK}/ba"
 REFINE_INTRINSICS = "--refine-intrinsics" in sys.argv   # default: lens parameters fixed, poses + points refined
 MASK_BARS = "--mask-bars" in sys.argv                   # drop keypoints on the speaker bars (repeated structure)
+TRI_ONLY = "--triangulate-only" in sys.argv             # stop after triangulating with the adopted poses (Sony point cloud)
 BAR_MARGIN = 0.7                                        # pitches around each bar's centre line
 SAMPSON_PX = 4.0          # a match must agree with the known poses within this (pixels)
 MIN_PAIR_INLIERS = 15
@@ -158,6 +159,9 @@ def main():
     run(["point_triangulator", "--database_path", db_path, "--image_path", SONY_IMAGES, "--input_path", inp,
          "--output_path", tri, "--Mapper.ba_refine_focal_length", "0", "--Mapper.ba_refine_extra_params", "0",
          "--Mapper.ba_refine_principal_point", "0"], f"{BA}/point_triangulator.log")
+    if TRI_ONLY:
+        print(f"Sony points triangulated with the adopted poses: {tri}")
+        return
     print("COLMAP bundle_adjuster (everything refined) ...", flush=True)
     run(["bundle_adjuster", "--input_path", tri, "--output_path", ba,
          "--BundleAdjustment.refine_focal_length", "1" if REFINE_INTRINSICS else "0",

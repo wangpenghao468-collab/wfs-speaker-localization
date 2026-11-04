@@ -7,6 +7,7 @@ Writes to measurement_dir:
   speakers_measured_points.ply   112 diaphragm centres, normal = facing direction, colour per bar, speaker id
   speakers_measured_discs.ply    a 28 mm disc at each centre, facing its direction (easy to see in MeshLab/Blender)
   speakers_design_points.ply     your Panoramix design positions (at the median measured height)
+  sony_points.ply                Sony feature points triangulated with the adopted poses (run ba_sony.py --triangulate-only first)
   array_pgsr_mesh.ply            the PGSR scene mesh cropped to the speaker bars, in the same frame"""
 import csv, json, os, sys
 import numpy as np
@@ -16,6 +17,7 @@ from config import WORK, OUT_DIR, MEASURE_DIR, REPO
 
 PGSR_MESH = os.path.join(os.path.dirname(OUT_DIR), "PGSR_DJI_WFS", "mesh", "tsdf_fusion_post.ply")
 DISC_R, DISC_N = 14.0, 24              # diaphragm radius (mm, ~0.176 pitch) and polygon sides
+SONY_MAX_ERR, SONY_MIN_TRACK = 2.0, 3       # keep well-triangulated Sony points
 CROP_XY, CROP_Z = 150.0, (850.0, 1400.0)  # keep mesh within this distance of a bar line / height band
 
 
@@ -74,6 +76,19 @@ def read_open3d_ply(path):
     return v["p"], v["c"], fc["i"]
 
 
+def read_colmap_points(path):
+    """COLMAP points3D.bin -> xyz, rgb, reprojection error, track length."""
+    import struct
+    with open(path, "rb") as f:
+        (n,) = struct.unpack("<Q", f.read(8))
+        xyz = np.empty((n, 3)); rgb = np.empty((n, 3), np.uint8); err = np.empty(n); tl = np.empty(n, int)
+        for i in range(n):
+            _, x, y, z, r, g, b, e = struct.unpack("<QdddBBBd", f.read(43))
+            (t,) = struct.unpack("<Q", f.read(8)); f.read(8 * t)
+            xyz[i], rgb[i], err[i], tl[i] = (x, y, z), (r, g, b), e, t
+    return xyz, rgb, err, tl
+
+
 def main():
     P, H = table("panoramix_bus10_measured.csv"), table("speaker_heights.csv")
     D = json.load(open(f"{WORK}/design_vs_measured.json"))
@@ -98,20 +113,31 @@ def main():
     Xd = np.array([[r["design_xy"][0], r["design_xy"][1], D["summary"]["height_median"]] for r in sorted(D["rows"], key=lambda r: r["id"])])
     write_ply(f"{MEASURE_DIR}/speakers_design_points.ply", Xd, colours=np.full((112, 3), 160, np.uint8), ids=ids, comment="Panoramix design (1012.txt) at median height")
 
-    if "--no-mesh" in sys.argv or not os.path.exists(PGSR_MESH):
-        return
-    # PGSR mesh: DJI units -> floor frame (centers.json) -> Panoramix frame (design alignment)
+    # DJI units -> floor frame (centers.json) -> Panoramix frame (design alignment)
     c = json.load(open(f"{WORK}/centers.json"))
     A = np.stack([c["x"], c["y"], c["z"]]); o = np.array(c["origin"]); s = c["mm_per_unit"]
     th = np.radians(D["summary"]["rotation_deg"]); R2 = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]])
     t2 = np.array(D["summary"]["translation_mm"])
-    check = (np.array(json.load(open(f"{WORK}/speakers_final.json"))["speakers"]["20"]["xyz"]) - o) @ A.T * s
-    check[:2] = R2 @ check[:2] + t2
+
+    def to_pano(Y):
+        Q = (Y - o) @ A.T * s
+        Q[:, :2] = Q[:, :2] @ R2.T + t2
+        return Q
+    check = to_pano(np.array([json.load(open(f"{WORK}/speakers_final.json"))["speakers"]["20"]["xyz"]]))[0]
     print(f"frame check, speaker 20: {np.linalg.norm(check - X[19]):.1f} mm between DJI seed and measured centre")
+
+    sony = f"{WORK}/ba/triangulated/points3D.bin"      # from: python pipeline/ba_sony.py --triangulate-only
+    if os.path.exists(sony):
+        xyz, rgb, err, tl = read_colmap_points(sony)
+        ok = (err < SONY_MAX_ERR) & (tl >= SONY_MIN_TRACK)
+        write_ply(f"{MEASURE_DIR}/sony_points.ply", to_pano(xyz[ok]), colours=rgb[ok],
+                  comment=f"Sony features triangulated with the adopted poses (error < {SONY_MAX_ERR} px, >= {SONY_MIN_TRACK} photos)")
+
+    if "--no-mesh" in sys.argv or not os.path.exists(PGSR_MESH):
+        return
     print(f"reading {PGSR_MESH} ...")
     pv, pc, pf = read_open3d_ply(PGSR_MESH)
-    Q = (pv - o) @ A.T * s
-    Q[:, :2] = Q[:, :2] @ R2.T + t2
+    Q = to_pano(pv)
     keep = (Q[:, 2] > CROP_Z[0]) & (Q[:, 2] < CROP_Z[1])
     near = np.zeros(len(Q), bool)
     for b in range(14):                                  # distance to each bar line, extended 60 mm past the ends
