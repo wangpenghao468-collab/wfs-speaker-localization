@@ -35,6 +35,15 @@ settings.example.yaml  路徑設定範本
 
 原始照片、COLMAP 資料庫與快取不在倉庫中，位置由 `settings.yaml` 指定。
 
+## 網頁處理工具（本機）
+
+雙擊 `處理工具.bat`（或 `python tools/webtool/server.py`），瀏覽器會打開本機頁面：
+
+- **3DGS 場景重建**：選照片資料夾 → 選相機位姿來源（COLMAP 自動／已定位的 Sony 位姿／既有模型）、方法（PGSR／原版 3DGS）、步數、解析度、GPU、省記憶體、曝光補償 → 開始。結果是高斯 `point_cloud.ply`，PGSR 另有網格 `tsdf_fusion_post.ply`。
+- **喇叭空間位置**：用目前結果重設原點與 x 軸（幾秒），或加入新照片後重算；輸出 CSV、PLY、Panoramix 兩行及設定檔副本。
+
+只監聽 127.0.0.1，網頁和每個訓練都自動挑沒人用的連接埠，不會和其他本機服務衝突。每個工作有自己的資料夾（`settings.yaml` 的 `jobs_dir`），關掉工具視窗工作仍會繼續；失敗可「重試」，已完成的步驟會跳過。
+
 ## 執行
 
 ```bash

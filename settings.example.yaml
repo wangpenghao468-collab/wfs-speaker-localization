@@ -21,3 +21,12 @@ font: C:/Windows/Fonts/msjh.ttc                      # a font with Chinese glyph
 work_dir: work                                       # caches and intermediate files (~1.5 GB)
 output_dir: outputs                                  # full local results (finder with previews, csv, figures)
 measurement_dir: measurements/2026-10-13             # results copied into the repository
+
+# --- web tool (tools/webtool) ---
+jobs_dir: work/webtool_jobs                          # every job gets its own folder here
+gs_3dgs_repo: C:/path/to/gaussian-splatting          # graphdeco-inria/gaussian-splatting
+gs_3dgs_python: C:/path/to/envs/3DGS/python.exe
+gs_pgsr_repo: C:/path/to/PGSR                        # zju3dv/PGSR
+gs_pgsr_python: C:/path/to/envs/pgsr/python.exe
+vocab_tree: tools/vocab_tree_flickr100K_words32K.bin # only for the vocabulary-tree matcher
+sony_posed_model: work/ba/triangulated               # Sony photos with the adopted poses (ba_sony.py --triangulate-only)

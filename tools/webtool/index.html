@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>重建處理工具</title>
+<style>
+:root {
+  --bg: #f6f5f2; --panel: #fff; --ink: #1d1d1b; --muted: #65645f; --line: #e2e0da; --accent: #1f6feb;
+  --ok: #1a7f37; --warn: #b26b00; --bad: #c8372d; --chip: #efeee9; --code: #f1f0ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a3a29c; --line: #33322f;
+    --accent: #5aa2ff; --ok: #4cc26a; --warn: #e0a040; --bad: #ff6b5e; --chip: #2a2a27; --code: #2a2a27; }
+}
+:root[data-theme="dark"] { --bg: #151514; --panel: #1f1f1d; --ink: #ecebe7; --muted: #a3a29c; --line: #33322f;
+  --accent: #5aa2ff; --ok: #4cc26a; --warn: #e0a040; --bad: #ff6b5e; --chip: #2a2a27; --code: #2a2a27; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14.5px/1.55 system-ui, "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
+header { display: flex; align-items: center; gap: 10px 20px; flex-wrap: wrap; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+header h1 { font-size: 18px; margin: 0; }
+.gpu { font-size: 13px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.gpu b { color: var(--ink); font-weight: 600; }
+.wrap { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 18px; padding: 18px; max-width: 1500px; margin: 0 auto; }
+@media (max-width: 1000px) { .wrap { grid-template-columns: 1fr; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+.tabs button { flex: 1; font: inherit; font-weight: 600; padding: 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--chip); color: var(--ink); cursor: pointer; }
+.tabs button.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.f { margin: 0 0 14px; }
+.f > label, .f > .lab { display: block; font-weight: 600; margin-bottom: 4px; }
+.hint { color: var(--muted); font-size: 13px; margin: 3px 0 0; }
+.row { display: flex; gap: 6px; align-items: center; }
+input[type=text], input[type=number], select { font: inherit; padding: 7px 9px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel); color: var(--ink); width: 100%; min-width: 0; }
+button { font: inherit; padding: 7px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--panel); color: var(--ink); cursor: pointer; white-space: nowrap; }
+button:hover { border-color: var(--muted); }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; padding: 10px 16px; width: 100%; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg label { display: flex; gap: 6px; align-items: flex-start; border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; cursor: pointer; flex: 1 1 200px; font-weight: 400; }
+.seg label:has(input:checked) { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.seg label small { display: block; color: var(--muted); font-size: 12.5px; }
+.badge { font-size: 12px; padding: 1px 8px; border-radius: 10px; background: var(--chip); color: var(--muted); }
+.badge.ok { color: var(--ok); } .badge.bad { color: var(--bad); }
+.preset { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.preset button { font-size: 13px; }
+.est { background: var(--code); border-radius: 8px; padding: 8px 10px; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#map { width: 100%; aspect-ratio: 1.15; display: block; background: var(--code); border-radius: 8px; }
+.job { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; }
+.job.sel { border-color: var(--accent); }
+.job .top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; cursor: pointer; }
+.job .top b { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.st { font-size: 12px; padding: 1px 8px; border-radius: 10px; border: 1px solid currentColor; }
+.st.running { color: var(--accent); } .st.done { color: var(--ok); } .st.error, .st.stopped, .st.cancelled { color: var(--bad); }
+.steps { display: flex; gap: 4px; flex-wrap: wrap; margin: 8px 0 4px; }
+.steps span { font-size: 12px; padding: 1px 7px; border-radius: 6px; background: var(--chip); color: var(--muted); }
+.steps span.cur { background: var(--accent); color: #fff; } .steps span.done { color: var(--ok); }
+pre.log { background: #111; color: #ddd; border-radius: 8px; padding: 10px; font: 12px/1.45 Consolas, monospace; height: 280px; overflow: auto; white-space: pre-wrap; margin: 8px 0; }
+.files { font-size: 13px; }
+.files div { display: flex; gap: 6px; align-items: center; padding: 3px 0; border-bottom: 1px dashed var(--line); }
+.files code { flex: 1; overflow-wrap: anywhere; font: 12px Consolas, monospace; }
+.files button { font-size: 12px; padding: 2px 8px; }
+.thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin: 8px 0; }
+.thumbs img { width: 100%; border-radius: 6px; display: block; }
+dialog { border: 1px solid var(--line); border-radius: 12px; padding: 0; width: min(720px, 94vw); background: var(--panel); color: var(--ink); }
+dialog::backdrop { background: rgba(0,0,0,.4); }
+.dlg-h { padding: 12px 14px; border-bottom: 1px solid var(--line); display: flex; gap: 6px; align-items: center; }
+.dlg-b { max-height: 55vh; overflow: auto; padding: 6px 8px; }
+.dlg-b div { padding: 6px 8px; border-radius: 6px; cursor: pointer; }
+.dlg-b div:hover { background: var(--chip); }
+.dlg-f { padding: 10px 14px; border-top: 1px solid var(--line); display: flex; gap: 8px; align-items: center; }
+.dlg-f span { flex: 1; color: var(--muted); font-size: 13px; }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>重建處理工具</h1>
+  <div class="gpu" id="gpu">讀取 GPU…</div>
+</header>
+<div class="wrap">
+<section class="panel">
+  <div class="tabs"><button id="tGs" class="on">3DGS 場景重建</button><button id="tSp">喇叭空間位置</button></div>
+
+  <!-- ===================== 3DGS ===================== -->
+  <div id="pGs">
+    <div class="preset">
+      <button data-preset="sony">Sony 663 張（已定位位姿）</button>
+      <button data-preset="video">影片抽幀（DJI 等）</button>
+      <button data-preset="photos">一般照片資料夾</button>
+    </div>
+    <div class="f"><label for="gImg">照片資料夾</label>
+      <div class="row"><input type="text" id="gImg" placeholder="C:\..."><button data-browse="gImg">瀏覽…</button></div>
+      <p class="hint" id="gImgInfo"></p></div>
+
+    <div class="f"><span class="lab">相機位置怎麼來</span>
+      <div class="seg">
+        <label><input type="radio" name="gPose" value="colmap" checked><span>自動計算（COLMAP）<small>任何照片都可以，會多花 10–60 分鐘</small></span></label>
+        <label><input type="radio" name="gPose" value="sony_posed"><span>用已定位的 Sony 位姿<small>663 張、左右正確、和喇叭結果同一套座標</small></span></label>
+        <label><input type="radio" name="gPose" value="existing"><span>已有 COLMAP 模型<small>選含 images.bin 的資料夾</small></span></label>
+      </div>
+      <div class="row hidden" id="gSparseRow" style="margin-top:6px"><input type="text" id="gSparse" placeholder="含 cameras.bin / images.bin 的資料夾"><button data-browse="gSparse">瀏覽…</button></div>
+    </div>
+
+    <div id="gColmapOpts">
+      <div class="grid2">
+        <div class="f"><label for="gMatch">照片性質（匹配方式）</label>
+          <select id="gMatch"><option value="exhaustive">一般照片，少於 300 張（全部互相比對）</option>
+            <option value="sequential">影片連續幀（依檔名順序）</option>
+            <option value="vocab">大量照片，300 張以上（詞彙樹）</option></select></div>
+        <div class="f"><label for="gCam">相機</label>
+          <select id="gCam"><option value="0">每張各自估焦距（有變焦／不同相機）</option>
+            <option value="1">同一台相機、固定焦距</option></select></div>
+      </div>
+    </div>
+
+    <div class="f"><span class="lab">方法</span>
+      <div class="seg">
+        <label><input type="radio" name="gMethod" value="pgsr" checked><span>PGSR<small>畫面好，也輸出表面網格（可量尺寸）</small></span></label>
+        <label><input type="radio" name="gMethod" value="3dgs"><span>原版 3DGS<small>較快、檢視器相容性最好</small></span></label>
+      </div></div>
+
+    <div class="grid2">
+      <div class="f"><label for="gIter">品質（訓練步數）</label>
+        <select id="gIter"><option value="30000">高品質 30,000 步</option><option value="7000">快速 7,000 步</option><option value="2000">試跑 2,000 步</option></select></div>
+      <div class="f"><label for="gSize">訓練解析度（長邊）</label>
+        <select id="gSize"><option value="1600">1600 px（建議）</option><option value="2400">2400 px（更細，需 24 GB）</option><option value="1200">1200 px（省記憶體）</option><option value="1000">1000 px</option></select></div>
+      <div class="f"><label for="gGpu">GPU</label><select id="gGpu"></select></div>
+      <div class="f"><label for="gMem">顯示記憶體</label>
+        <select id="gMem"><option value="0">標準（24 GB 卡）</option><option value="1">省記憶體（8–12 GB 卡，或 GPU 有其他工作）</option></select></div>
+    </div>
+    <div class="f"><label><input type="checkbox" id="gExp" checked> 曝光補償（每張照片亮度不同時建議開啟，例如相機自動曝光）</label>
+      <label><input type="checkbox" id="gMesh" checked> 訓練完產生網格／預覽圖</label>
+      <div class="row" style="margin-top:4px"><span class="hint" style="margin:0">網格細緻度</span>
+        <select id="gDetail" style="width:auto"><option value="medium">中（約 5 mm，建議）</option><option value="coarse">粗（約 1 cm，最省記憶體）</option><option value="fine">細（約 3 mm，需要很多記憶體）</option></select></div></div>
+    <div class="f"><label for="gName">工作名稱</label><input type="text" id="gName" placeholder="例如 sony_pgsr"></div>
+    <div class="est" id="gEst"></div>
+    <button class="primary" id="gGo">開始重建</button>
+  </div>
+
+  <!-- ===================== speakers ===================== -->
+  <div id="pSp" class="hidden">
+    <div class="f"><span class="lab">要做什麼</span>
+      <div class="seg">
+        <label><input type="radio" name="sMode" value="frame" checked><span>只重設原點<small>用目前結果，幾秒完成</small></span></label>
+        <label><input type="radio" name="sMode" value="recompute"><span>加入照片後重算<small>30–90 分鐘，不會覆蓋目前結果</small></span></label>
+      </div></div>
+    <div class="f hidden" id="sImgRow"><label for="sImg">Sony 照片資料夾</label>
+      <div class="row"><input type="text" id="sImg"><button data-browse="sImg">瀏覽…</button></div>
+      <p class="hint">必須包含原本的 Sony 照片，新照片直接放進同一個資料夾。鏡頭參數和喇叭編號（你的 DJI 標註）都依賴原本的資料；換一個完全不同的陣列需要重新標註。</p></div>
+
+    <div class="f"><span class="lab">原點</span>
+      <div class="seg">
+        <label><input type="radio" name="sOrg" value="design" checked><span>Panoramix 設計原點<small>和 1012_measured.txt 相同</small></span></label>
+        <label><input type="radio" name="sOrg" value="speakers"><span>指定喇叭的中點<small>例如 41,72 = 前排兩端的中點</small></span></label>
+      </div>
+      <input type="text" id="sOrgIds" class="hidden" style="margin-top:6px" placeholder="喇叭編號，用逗號分隔，例如 41,72 或 1-112">
+    </div>
+    <div class="f"><span class="lab">x 軸（向右）方向</span>
+      <div class="row"><select id="sAxis" style="flex:0 0 auto;width:auto"><option value="design">沿用 Panoramix</option><option value="pair">從喇叭 A 指向 B</option></select>
+        <input type="number" id="sXa" class="hidden" min="1" max="112" placeholder="A"><input type="number" id="sXb" class="hidden" min="1" max="112" placeholder="B"></div>
+      <p class="hint">y 軸為向前（x 逆時針轉 90°），z 為離地高度；方位角 0° = 正前方，向右為正。</p></div>
+    <div class="grid2">
+      <div class="f"><label for="sOx">再平移 x（mm）</label><input type="number" id="sOx" value="0" step="1"></div>
+      <div class="f"><label for="sOy">再平移 y（mm）</label><input type="number" id="sOy" value="0" step="1"></div>
+    </div>
+    <div class="f"><label for="sDesign">Panoramix 設定檔（作為範本，不會被修改）</label>
+      <div class="row"><input type="text" id="sDesign"></div></div>
+    <div class="f"><span class="lab">預覽（俯視，單位 mm）</span><canvas id="map" width="700" height="610"></canvas>
+      <p class="hint" id="sInfo"></p></div>
+    <div class="f"><label for="sName">工作名稱</label><input type="text" id="sName" placeholder="例如 origin_front_center"></div>
+    <button class="primary" id="sGo">輸出喇叭位置</button>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="row" style="justify-content:space-between;margin-bottom:10px"><b>工作</b><span class="hint" id="jobsDir"></span></div>
+  <div id="jobs"><p class="hint">還沒有工作。</p></div>
+</section>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-h"><button id="dUp">↑ 上一層</button><input type="text" id="dPath"><button id="dGo">前往</button></div>
+  <div class="dlg-b" id="dList"></div>
+  <div class="dlg-f"><span id="dInfo"></span><button id="dCancel">取消</button><button id="dOk" class="primary" style="width:auto">選這個資料夾</button></div>
+</dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+const api = (u, body) => fetch(u, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {}).then(r => r.json());
+const val = name => (document.querySelector(`input[name=${name}]:checked`) || {}).value;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+let STATE = null, selJob = null;
+
+// tabs
+function tab(gs) { $("tGs").classList.toggle("on", gs); $("tSp").classList.toggle("on", !gs); $("pGs").classList.toggle("hidden", !gs); $("pSp").classList.toggle("hidden", gs); if (!gs) drawMap(); }
+$("tGs").onclick = () => tab(true); $("tSp").onclick = () => tab(false);
+
+// folder browser
+let dlgTarget = null, dlgCur = "";
+async function dlgLoad(p) {
+  const r = await api("/api/ls?path=" + encodeURIComponent(p)); dlgCur = r.path; $("dPath").value = r.path;
+  const list = $("dList"); list.innerHTML = "";
+  const items = r.path ? r.dirs.map(d => [d, r.path.replace(/\\$/, "") + "\\" + d]) : r.dirs.map(d => [d, d]).concat((r.home || []).map(h => ["★ " + h, h]));
+  for (const [label, path] of items) { const d = document.createElement("div"); d.textContent = "📁 " + label; d.onclick = () => dlgLoad(path); list.appendChild(d); }
+  if (r.error) list.innerHTML = `<p class="hint">${esc(r.error)}</p>`;
+  $("dInfo").textContent = r.path ? `${r.images} 張影像` + (r.colmap_model ? " · 這是 COLMAP 模型資料夾" : "") : "選擇磁碟或常用位置";
+  $("dUp").onclick = () => dlgLoad(r.parent ?? "");
+}
+document.querySelectorAll("[data-browse]").forEach(b => b.onclick = () => { dlgTarget = b.dataset.browse; $("dlg").showModal(); dlgLoad($(dlgTarget).value || ""); });
+$("dGo").onclick = () => dlgLoad($("dPath").value);
+$("dCancel").onclick = () => $("dlg").close();
+$("dOk").onclick = () => { if (dlgCur) { $(dlgTarget).value = dlgCur; $(dlgTarget).dispatchEvent(new Event("change")); } $("dlg").close(); };
+
+// ---- 3DGS form
+async function imgInfo() {
+  const p = $("gImg").value.trim(); if (!p) { $("gImgInfo").textContent = ""; return estimate(); }
+  const r = await api("/api/ls?path=" + encodeURIComponent(p));
+  $("gImgInfo").textContent = r.error ? "找不到資料夾" : `${r.images} 張影像`; $("gImgInfo").dataset.n = r.images || 0; estimate();
+}
+$("gImg").addEventListener("change", imgInfo);
+function gsUi() {
+  const pose = val("gPose");
+  $("gSparseRow").classList.toggle("hidden", pose !== "existing");
+  $("gColmapOpts").classList.toggle("hidden", pose !== "colmap");
+  estimate();
+}
+document.querySelectorAll("input[name=gPose], input[name=gMethod], #gIter, #gSize, #gMem, #gMatch").forEach(e => e.addEventListener("change", gsUi));
+function estimate() {
+  const n = +$("gImgInfo").dataset.n || (val("gPose") === "sony_posed" ? 663 : 0), it = +$("gIter").value, pgsr = val("gMethod") === "pgsr";
+  const size = +$("gSize").value, low = $("gMem").value === "1";
+  let colmap = val("gPose") === "colmap" ? Math.max(5, n * ($("gMatch").value === "exhaustive" ? 0.08 : 0.03)) : 0;
+  let train = it / 30000 * (pgsr ? 60 : 30) * (size / 1600) ** 1.3 * (low ? 1.6 : 1) * Math.max(0.7, Math.min(2, n / 300));
+  const post = pgsr ? 10 : 3, tot = colmap + 8 + train + post;
+  const h = m => m < 60 ? `${Math.round(m)} 分鐘` : `${(m / 60).toFixed(1)} 小時`;
+  $("gEst").innerHTML = `預估（RTX 4090）：${colmap ? "COLMAP " + h(colmap) + " · " : ""}縮圖 ~8 分 · 訓練 ${h(train)} · ${pgsr ? "網格" : "預覽"} ${post} 分 → <b>共約 ${h(tot)}</b>。` +
+    (n ? ` 照片 ${n} 張。` : "") + (size >= 2400 && low ? " 2400 px 搭配省記憶體可能仍不夠，建議 1600 px。" : "");
+}
+document.querySelectorAll("[data-preset]").forEach(b => b.onclick = () => {
+  const p = b.dataset.preset;
+  if (p === "sony") { $("gImg").value = STATE.defaults.sony_images; document.querySelector("input[name=gPose][value=sony_posed]").checked = true; $("gName").value = "sony_663_pgsr"; }
+  if (p === "video") { document.querySelector("input[name=gPose][value=colmap]").checked = true; $("gMatch").value = "sequential"; $("gCam").value = "1"; }
+  if (p === "photos") { document.querySelector("input[name=gPose][value=colmap]").checked = true; $("gMatch").value = "exhaustive"; $("gCam").value = "0"; }
+  gsUi(); imgInfo();
+});
+$("gGo").onclick = async () => {
+  const o = { type: "gs", name: $("gName").value || "gs", images: $("gImg").value.trim(), poses: val("gPose"), sparse: $("gSparse").value.trim(),
+    matcher: $("gMatch").value, single_camera: $("gCam").value === "1", method: val("gMethod"), iterations: +$("gIter").value,
+    max_size: +$("gSize").value, gpu: +$("gGpu").value, low_mem: $("gMem").value === "1", mesh: $("gMesh").checked, render: $("gMesh").checked, exposure: $("gExp").checked, mesh_detail: $("gDetail").value };
+  if (!o.images) return alert("請先選照片資料夾");
+  const r = await api("/api/jobs", o); if (r.error) return alert(r.error); selJob = r.id; refresh();
+};
+
+// ---- speakers form
+let SPK = null;
+function spUi() {
+  $("sImgRow").classList.toggle("hidden", val("sMode") !== "recompute");
+  $("sOrgIds").classList.toggle("hidden", val("sOrg") !== "speakers");
+  const pair = $("sAxis").value === "pair"; $("sXa").classList.toggle("hidden", !pair); $("sXb").classList.toggle("hidden", !pair);
+  $("sGo").textContent = val("sMode") === "recompute" ? "開始重算" : "輸出喇叭位置";
+  drawMap();
+}
+document.querySelectorAll("input[name=sMode], input[name=sOrg], #sAxis, #sXa, #sXb, #sOrgIds, #sOx, #sOy").forEach(e => e.addEventListener("input", spUi));
+function parseIds(t) {
+  const out = []; for (const part of t.split(",")) { const m = part.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/); if (!m) continue;
+    for (let i = +m[1]; i <= +(m[2] || m[1]); i++) if (i >= 1 && i <= 112) out.push(i); } return out;
+}
+function frame() {
+  const P = id => SPK[id - 1];
+  let xa = [1, 0];
+  if ($("sAxis").value === "pair" && +$("sXa").value && +$("sXb").value && $("sXa").value !== $("sXb").value) {
+    const a = P(+$("sXa").value), b = P(+$("sXb").value), d = Math.hypot(b.x - a.x, b.y - a.y); xa = [(b.x - a.x) / d, (b.y - a.y) / d];
+  }
+  const ya = [-xa[1], xa[0]];
+  let o = [0, 0];
+  if (val("sOrg") === "speakers") { const ids = parseIds($("sOrgIds").value); if (ids.length) o = [ids.reduce((s, i) => s + P(i).x, 0) / ids.length, ids.reduce((s, i) => s + P(i).y, 0) / ids.length]; }
+  const ox = +$("sOx").value || 0, oy = +$("sOy").value || 0; o = [o[0] + ox * xa[0] + oy * ya[0], o[1] + ox * xa[1] + oy * ya[1]];
+  return { o, xa, ya };
+}
+function drawMap() {
+  if (!SPK) return;
+  const cv = $("map"), c = cv.getContext("2d"), W = cv.width, H = cv.height, css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  c.clearRect(0, 0, W, H);
+  const xs = SPK.map(p => p.x), ys = SPK.map(p => p.y), cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+  const sc = Math.min(W, H) * 0.86 / Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+  const T = (x, y) => [W / 2 + (x - cx) * sc, H / 2 - (y - cy) * sc];
+  c.font = "15px system-ui";
+  for (const p of SPK) { const [u, v] = T(p.x, p.y); c.fillStyle = css("--muted"); c.beginPath(); c.arc(u, v, 3.5, 0, 7); c.fill(); if (p.id % 8 === 1) { c.fillStyle = css("--ink"); c.fillText(p.id, u + 6, v - 6); } }
+  const f = frame(), [u0, v0] = T(f.o[0], f.o[1]), L = 70;
+  c.lineWidth = 3;
+  c.strokeStyle = "#e5484d"; c.beginPath(); c.moveTo(u0, v0); c.lineTo(u0 + f.xa[0] * L, v0 - f.xa[1] * L); c.stroke(); c.fillStyle = "#e5484d"; c.fillText("x", u0 + f.xa[0] * (L + 12) - 4, v0 - f.xa[1] * (L + 12) + 5);
+  c.strokeStyle = "#30a46c"; c.beginPath(); c.moveTo(u0, v0); c.lineTo(u0 + f.ya[0] * L, v0 - f.ya[1] * L); c.stroke(); c.fillStyle = "#30a46c"; c.fillText("y 前", u0 + f.ya[0] * (L + 14) - 8, v0 - f.ya[1] * (L + 14) + 5);
+  c.fillStyle = css("--ink"); c.beginPath(); c.arc(u0, v0, 6, 0, 7); c.fill();
+  const loc = p => [((p.x - f.o[0]) * f.xa[0] + (p.y - f.o[1]) * f.xa[1]), ((p.x - f.o[0]) * f.ya[0] + (p.y - f.o[1]) * f.ya[1])];
+  const s1 = loc(SPK[0]), s41 = loc(SPK[40]);
+  $("sInfo").textContent = `原點在 Panoramix 座標 (${f.o[0].toFixed(0)}, ${f.o[1].toFixed(0)}) mm。新座標下：1 號 = (${s1[0].toFixed(0)}, ${s1[1].toFixed(0)})，41 號 = (${s41[0].toFixed(0)}, ${s41[1].toFixed(0)}) mm。`;
+}
+$("sGo").onclick = async () => {
+  const o = { type: "speakers", name: $("sName").value || "speakers", mode: val("sMode"), design: $("sDesign").value.trim() };
+  if (o.mode === "recompute") { o.images = $("sImg").value.trim(); if (!confirm("重算約 30–90 分鐘，會用一個新的工作資料夾，不會覆蓋目前結果。開始？")) return; }
+  if (val("sOrg") === "speakers") { const ids = parseIds($("sOrgIds").value); if (!ids.length) return alert("請輸入喇叭編號"); o.origin_speakers = ids.join(","); }
+  if ($("sAxis").value === "pair") { o.x_from = +$("sXa").value; o.x_to = +$("sXb").value; if (!o.x_from || !o.x_to || o.x_from === o.x_to) return alert("請輸入兩個不同的喇叭編號"); }
+  const ox = +$("sOx").value || 0, oy = +$("sOy").value || 0; if (ox || oy) o.offset = [ox, oy];
+  const r = await api("/api/jobs", o); if (r.error) return alert(r.error); selJob = r.id; refresh();
+};
+
+// ---- jobs
+const label = { running: "執行中", done: "完成", error: "錯誤", stopped: "已中止", cancelled: "已取消" };
+function fileRow(p) {
+  const name = p.split(/[\\/]/).pop(), img = /\.(jpg|jpeg|png)$/i.test(p), viewable = /\.(jpg|jpeg|png|txt|csv|json)$/i.test(p);
+  return `<div><code>${esc(p)}</code>${viewable ? `<a href="/api/file?path=${encodeURIComponent(p)}" target="_blank"><button>${img ? "看" : "開"}</button></a>` : ""}` +
+    `<button data-copy="${esc(p)}">複製路徑</button><button data-open="${esc(p)}">在資料夾中顯示</button></div>`;
+}
+async function renderJobs() {
+  const box = $("jobs");
+  if (!STATE.jobs.length) { box.innerHTML = '<p class="hint">還沒有工作。</p>'; return; }
+  if (!selJob) selJob = STATE.jobs[0].id;
+  let html = "";
+  for (const j of STATE.jobs) {
+    const s = j.status || {}, state = j.running ? "running" : (s.state || "stopped"), o = j.job, sel = j.id === selJob;
+    const what = o.type === "gs" ? `${o.method === "pgsr" ? "PGSR" : "3DGS"} · ${({ colmap: "COLMAP", sony_posed: "Sony 已定位", existing: "既有模型" })[o.poses]} · ${o.iterations} 步 · ${o.max_size}px`
+      : `喇叭位置 · ${o.mode === "recompute" ? "重算" : "重設原點"}${o.origin_speakers ? " · 原點 " + o.origin_speakers : ""}${o.x_from ? ` · x ${o.x_from}→${o.x_to}` : ""}`;
+    html += `<div class="job${sel ? " sel" : ""}" data-id="${j.id}"><div class="top"><b>${esc(j.id)}</b><span class="st ${state}">${label[state] || state}</span></div>` +
+      `<div class="hint">${esc(what)}</div>`;
+    if (sel) {
+      html += `<div class="steps">${(s.steps || []).map(t => { const i = (s.steps || []).indexOf(s.step), k = s.steps.indexOf(t);
+        return `<span class="${t === s.step && state === "running" ? "cur" : (k < i || state === "done") ? "done" : ""}">${esc(t)}</span>`; }).join("")}</div>`;
+      if (state === "running" && s.progress != null && s.step === "訓練") html += `<div style="height:8px;background:var(--chip);border-radius:4px;margin:6px 0"><div style="height:8px;width:${s.progress}%;background:var(--accent);border-radius:4px"></div></div><p class="hint">訓練 ${s.progress}%</p>`;
+      if (s.n_input && s.n_images < 0.7 * s.n_input) html += `<p class="hint" style="color:var(--warn)">只有 ${s.n_images}/${s.n_input} 張照片定位成功，其餘沒有參與重建。可改用其他匹配方式，或補拍重疊更多的照片。</p>`;
+      else if (s.n_images) html += `<p class="hint">${s.n_images}${s.n_input ? "/" + s.n_input : ""} 張照片參與重建</p>`;
+      if (s.error) html += `<p class="hint" style="color:var(--bad)">${esc(s.error)}</p>`;
+      const r = s.result || {};
+      if (r.psnr_train || r.gaussians) html += `<p class="hint">訓練視角 PSNR ${r.psnr_train ?? "–"} dB · ${r.gaussians ? (r.gaussians / 1e6).toFixed(2) + " M 個高斯" : ""}</p>`;
+      if ((r.previews || []).length) html += `<div class="thumbs">${r.previews.map(p => `<a href="/api/file?path=${encodeURIComponent(p)}" target="_blank"><img loading="lazy" src="/api/file?path=${encodeURIComponent(p)}"></a>`).join("")}</div>`;
+      const files = [r.gaussians_ply, r.mesh, ...(r.files || [])].filter(Boolean);
+      html += `<div class="files">${fileRow(j.dir.replace(/\//g, "\\"))}${files.map(f => fileRow(f.replace(/\//g, "\\"))).join("")}${r.outputs ? fileRow(r.outputs.replace(/\//g, "\\")) : ""}</div>`;
+      html += `<pre class="log" id="log"></pre>`;
+      if (state === "running") html += `<button data-cancel="${j.id}">取消這個工作</button>`;
+      else if (state !== "done") html += `<button data-retry="${j.id}">重試（已完成的步驟會跳過）</button>`;
+    }
+    html += `</div>`;
+  }
+  box.innerHTML = html;
+  box.querySelectorAll(".job .top").forEach(t => t.onclick = () => { selJob = t.parentElement.dataset.id; renderJobs(); });
+  box.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => navigator.clipboard.writeText(b.dataset.copy).then(() => b.textContent = "已複製"));
+  box.querySelectorAll("[data-open]").forEach(b => b.onclick = () => api("/api/open", { path: b.dataset.open }));
+  box.querySelectorAll("[data-cancel]").forEach(b => b.onclick = async () => { if (confirm("確定取消？已完成的步驟會保留在工作資料夾。")) { await api("/api/cancel", { id: b.dataset.cancel }); refresh(); } });
+  box.querySelectorAll("[data-retry]").forEach(b => b.onclick = async () => { const r = await api("/api/retry", { id: b.dataset.retry }); if (r.error) alert(r.error); refresh(); });
+  loadLog();
+}
+async function loadLog() {
+  const el = $("log"); if (!el || !selJob) return;
+  const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20;
+  const r = await api("/api/log?n=300&id=" + encodeURIComponent(selJob)); el.textContent = r.lines.join("\n");
+  if (atBottom) el.scrollTop = el.scrollHeight;
+}
+async function refresh() {
+  STATE = await api("/api/state");
+  $("gpu").innerHTML = STATE.gpus.length ? STATE.gpus.map(g => `<span>GPU ${g.index} <b>${esc(g.name)}</b> · ${(g.mem_used / 1024).toFixed(1)}/${(g.mem_total / 1024).toFixed(0)} GB · ${g.util}% · ${g.temp}°C</span>`).join("") : "找不到 NVIDIA GPU";
+  const gsel = $("gGpu"); if (!gsel.options.length) STATE.gpus.forEach(g => gsel.add(new Option(`GPU ${g.index} ${g.name}（${(g.mem_total / 1024).toFixed(0)} GB）`, g.index)));
+  if (!gsel.options.length) gsel.add(new Option("GPU 0", 0));
+  $("jobsDir").textContent = "工作資料夾：" + STATE.jobs_dir;
+  renderJobs();
+}
+(async function init() {
+  await refresh();
+  $("sDesign").value = STATE.defaults.design; $("sImg").value = STATE.defaults.sony_images;
+  if (!STATE.defaults.sony_posed) document.querySelector("input[name=gPose][value=sony_posed]").disabled = true;
+  SPK = await api("/api/speakers"); gsUi(); spUi();
+  setInterval(refresh, 4000);
+})();
+</script>
+</body>
+</html>

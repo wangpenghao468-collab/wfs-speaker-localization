@@ -4,7 +4,7 @@ import os, sys
 import yaml
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\", "/")
-_path = f"{REPO}/settings.yaml"
+_path = os.environ.get("WFS_SETTINGS") or f"{REPO}/settings.yaml"   # the web tool passes a per-job copy
 if not os.path.exists(_path):
     sys.exit(f"settings.yaml not found in {REPO}. Copy settings.example.yaml to settings.yaml and set your paths "
              f"(python tools/check_env.py checks them).")
