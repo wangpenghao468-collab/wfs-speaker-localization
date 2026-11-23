@@ -1,0 +1,112 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>完整流程</title>
+<link rel="stylesheet" href="site.css">
+<style>
+.wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 80px; }
+h1 { font-size: 28px; margin: 6px 0 6px; }
+h2 { font-size: 21px; margin: 44px 0 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+h3 { font-size: 17px; margin: 22px 0 6px; }
+.lead { color: var(--muted); }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; margin: 10px 0 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; background: var(--panel); margin: 8px 0 14px; }
+th, td { border: 1px solid var(--line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--code); font-weight: 600; }
+.tw { overflow-x: auto; }
+.note { color: var(--muted); font-size: 14px; }
+ol.steps > li { margin: 0 0 12px; }
+.box { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; background: var(--panel); margin: 12px 0; }
+code { word-break: break-all; }
+</style>
+</head>
+<body>
+<nav class="sitenav"><a class="brand" href="index.html">WFS 喇叭定位</a><a href="index.html">首頁</a><a class="on" href="workflow.html">完整流程</a><a href="finder.html">照片查找</a><a href="learn.html">原理教學</a><a href="results.html">結果與驗證</a><a href="manual.html">操作手冊</a><a href="catalog.html">資料目錄</a></nav>
+<div class="wrap">
+<h1>完整流程：從拍照到 Panoramix</h1>
+<p class="lead">適用於新的空間或新的聽音區。分成三段：現場拍攝與量測 → 電腦計算 → 檢查與輸出。</p>
+<div class="toc"><a href="#prep">0 準備</a><a href="#shoot">1 拍攝</a><a href="#tape">2 捲尺</a><a href="#compute">3 計算</a><a href="#check">4 檢查</a><a href="#output">5 輸出</a><a href="#phone">手機 vs Sony 驗證</a><a href="#limits">限制</a></div>
+
+<h2 id="prep">0 準備</h2>
+<ul>
+<li>確認喇叭編號：每顆喇叭的編號要和 Panoramix 的通道一致。不確定就先在每根架子上貼編號小紙條（第 1 顆和第 8 顆），拍照時一起入鏡，之後編號最不會錯。</li>
+<li>準備一份設計檔（Panoramix txt），填大概位置即可，用來當輸出模板與初始對齊。</li>
+<li>現場照明打亮、穩定；關掉會閃爍的燈。</li>
+</ul>
+
+<h2 id="shoot">1 拍攝</h2>
+<h3>1a 連續影片（建立整體座標，必要）</h3>
+<ul>
+<li>手機或 DJI，4K，主鏡頭 1×（不要用超廣角），鎖定對焦與曝光。</li>
+<li>在喇叭高度繞陣列走一整圈，回到起點；走慢、不要跳接。再拍一段較高的俯視全景，帶到地板。</li>
+<li>目的：讓左右兩側不會被認錯（相同喇叭＋對稱房間很容易讓模型「折疊」）。</li>
+</ul>
+<h3>1b 高解析照片（精確量測）</h3>
+<div class="tw"><table>
+<tr><th>項目</th><th>建議</th><th>原因</th></tr>
+<tr><td>數量</td><td>每顆喇叭至少出現在 20 張照片裡</td><td>多視角三角化與 bootstrap 誤差需要</td></tr>
+<tr><td>角度</td><td>同一根架子從正面、左右約 ±45° 各拍</td><td>角度差大，深度才準；超過 75° 的不會被採用</td></tr>
+<tr><td>距離</td><td>1–2 m，整根架子入鏡</td><td>振膜要完整在畫面內，被切到的不會被採用</td></tr>
+<tr><td>重疊</td><td>相鄰照片約 70% 重疊，邊走邊拍</td><td>照片之間才配得起來</td></tr>
+<tr><td>相機設定</td><td>固定焦距、鎖曝光、f/8 左右、快門夠快不手震</td><td>焦距不變內參才穩定；模糊會讓振膜偵測失敗</td></tr>
+<tr><td>手機特別注意</td><td>只用主鏡頭 1×、最高解析、關人像／夜景模式、不要數位變焦</td><td>手機會自動切鏡頭，每個鏡頭內參不同</td></tr>
+<tr><td>別忘了</td><td>後排、轉角、側邊兩端的喇叭</td><td>邊角最容易照片不夠</td></tr>
+</table></div>
+
+<h2 id="tape">2 捲尺實測（論文的真值）</h2>
+<ul>
+<li>量 3–5 根架子：第 1 顆到第 8 顆振膜中心，讀到 0.5 mm，記下架子編號。都對齊振膜中心（或都用同一側邊緣）。</li>
+<li>量一顆喇叭振膜中心離地高度。</li>
+<li>聽音區原點：在地上貼十字膠帶，量它到前排架子線的垂直距離、到左右兩側的距離。工具用「喇叭對＋偏移量」設原點，這些距離就是偏移量。</li>
+</ul>
+
+<h2 id="compute">3 電腦計算</h2>
+<ol class="steps">
+<li><b>整理檔案</b>：新建日期資料夾，例如 <code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\work\&lt;日期&gt;\</code>，影片抽幀與高解析照片分開放。</li>
+<li><b>設定路徑</b>：複製 <code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\settings.example.yaml</code>，填入新照片、模型、設計檔路徑。</li>
+<li><b>影片幀 COLMAP</b>：建立整體座標模型（設定裡的 DJI_MODEL）。</li>
+<li><b>人工編號</b>：<code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\tools\coarse_annotation_ui.py</code>，在一部分影片幀上框出喇叭並標編號，每顆至少在幾幀裡標到。整個流程唯一需要人工的一步。</li>
+<li><b>全部重算</b>：<code>python C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\pipeline\run_all.py</code>，依序 14 步：照片定位（PnP）→ 鄰居投票 → 振膜偵測 → 編號配對 → 多視角三角化 → 地板擬合 → 對齊設計。</li>
+</ol>
+
+<h2 id="check">4 檢查</h2>
+<div class="tw"><table>
+<tr><th>檢查</th><th>合格標準（參考 2026-10-13）</th></tr>
+<tr><td>照片查找頁逐顆看拼圖</td><td>每張小圖中心都在正確的喇叭上</td></tr>
+<tr><td>架內相鄰間距</td><td>約 80 mm，標準差 &lt; 1 mm</td></tr>
+<tr><td>直線度</td><td>同架 8 顆離直線 &lt; 1 mm</td></tr>
+<tr><td>Bootstrap</td><td>中位數 &lt; 1 mm</td></tr>
+<tr><td>捲尺比對</td><td>架長差 &lt; 1 mm（第 6 架：實測 557–558，照片 557.4）</td></tr>
+<tr><td>高度</td><td>和捲尺量的離地高度差 &lt; 數 mm</td></tr>
+</table></div>
+
+<h2 id="output">5 設原點與輸出</h2>
+<ol class="steps">
+<li><code>python C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\pipeline\custom_frame.py --out C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\measurements\&lt;日期&gt; --origin-speakers 41,72 --x-from 41 --x-to 72 --offset 0 -1500</code>（例：原點在 41–72 中點往後 1500 mm）。也可以用處理工具的「喇叭空間位置」分頁設定並預覽。</li>
+<li>把 <code>&lt;設計檔&gt;_custom.txt</code> 載入 Panoramix，實際試聽：虛擬聲源在左右、前後移動時位置是否穩定。</li>
+<li>雙擊 <code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\上傳更新.bat</code> 更新網站與 GitHub。</li>
+</ol>
+
+<h2 id="phone">手機 vs Sony：手機拍的值不值得信任</h2>
+<div class="box">做法：同一個現場，先只用手機（影片＋照片）跑完全部流程，得到結果 P；再用 Sony 照片跑一次，得到結果 S。兩者都和捲尺比。</div>
+<div class="tw"><table>
+<tr><th>比較</th><th>怎麼算</th><th>手機可信的標準（建議）</th></tr>
+<tr><td>和捲尺的架長差</td><td>每根量過的架子，P 和 S 各自的誤差</td><td>P 的誤差 &lt; 2 mm</td></tr>
+<tr><td>P 與 S 每顆中心距離</td><td>兩組座標剛體對齊後逐顆相減</td><td>中位數 &lt; 2 mm、最大 &lt; 5 mm</td></tr>
+<tr><td>Bootstrap、間距、直線度</td><td>同第 4 段</td><td>和 S 同等級</td></tr>
+<tr><td>覆蓋率</td><td>有幾顆喇叭照片夠（≥ 20 張）</td><td>112 / 112</td></tr>
+<tr><td>朝向</td><td>每架法向量角度差</td><td>&lt; 1°</td></tr>
+</table></div>
+<p class="note">對 WFS 來說，聲源定位對喇叭位置誤差的容忍度大約在公分級，所以即使手機比 Sony 差幾 mm 也通常足夠；這個比較是要給論文一個有數據的答案。</p>
+
+<h2 id="limits">目前的限制</h2>
+<ul>
+<li>程式假設 112 顆、每架 8 顆、架內 80 mm（<code>dji_bars.py</code> 等）。喇叭數量或架子規格不同時要先改程式。</li>
+<li>處理工具的「加入新照片重算」沿用這間房間的影片模型與人工編號，新空間要走上面的完整流程。</li>
+<li>工具目前不會自動辨識地上的原點標記，原點用喇叭對＋偏移量設定。</li>
+</ul>
+</div>
+</body>
+</html>
