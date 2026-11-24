@@ -92,7 +92,7 @@ def job_info(jid):
         except Exception:
             pass
     pid = job_pid(jid)
-    running = pid is not None and pid_alive(pid) and st.get("state") not in ("done", "error")
+    running = pid is not None and pid_alive(pid) and st.get("state") not in ("done", "error", "needs_ids")
     if st.get("state") == "running" and not running:
         st["state"] = "stopped"
     return {"id": jid, "dir": d, "job": job, "status": st, "running": running}
@@ -110,7 +110,7 @@ def start_job(opts):
 
 def launch(d, kind, append=False):
     """Start the job in folder d, or continue it after a failure (the job script skips finished steps)."""
-    script = {"gs": "gs_job.py", "speakers": "speaker_job.py"}[kind]
+    script = {"gs": "gs_job.py", "speakers": "speaker_job.py", "locate": "locate_job.py"}[kind]
     log = open(os.path.join(d, "log.txt"), "a" if append else "w", encoding="utf-8")
     if append:
         log.write(f"\n===== 重試 {time.strftime('%Y-%m-%d %H:%M:%S')} =====\n"); log.flush()
@@ -167,6 +167,15 @@ class H(BaseHTTPRequestHandler):
             txt = open(p, encoding="utf-8", errors="replace").read() if os.path.exists(p) else ""
             lines = [l.split("\r")[-1] for l in txt.splitlines()]
             return self.send(200, {"lines": lines[-int(q.get("n", 200)):]})
+        if u.path == "/api/locate":
+            out = os.path.join(JOBS_DIR, q["id"], "out")
+            r = {"ready": os.path.exists(os.path.join(out, "analysis.json"))}
+            for k in ("preview", "report", "spec"):
+                f = os.path.join(out, k + ".json")
+                if os.path.exists(f):
+                    r[k] = json.load(open(f, encoding="utf-8"))
+            r["checks"] = sorted(os.path.join(out, f) for f in os.listdir(out) if f.startswith("check_")) if os.path.isdir(out) else []
+            return self.send(200, r)
         if u.path == "/api/file":
             p = q.get("path", "")
             if not (allowed(p) and os.path.isfile(p)):
@@ -181,10 +190,30 @@ class H(BaseHTTPRequestHandler):
         u = urllib.parse.urlparse(self.path)
         body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or b"{}")
         if u.path == "/api/jobs":
-            if body.get("type") == "gs" and not os.path.isdir(body.get("images", "")):
+            if body.get("type") in ("gs", "locate") and not os.path.isdir(body.get("images", "")):
                 return self.send(400, {"error": "照片資料夾不存在"})
             with LOCK:
                 return self.send(200, {"id": start_job(body)})
+        if u.path == "/api/assign":                       # numbers + frame for a new-room job (seconds)
+            jd = os.path.join(JOBS_DIR, body["id"]); out = os.path.join(jd, "out")
+            if not os.path.exists(os.path.join(out, "analysis.json")):
+                return self.send(400, {"error": "這個工作還沒找完喇叭"})
+            spec = os.path.join(out, "spec.json")
+            json.dump(body["spec"], open(spec, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            cmd = "preview" if body.get("preview") else "assign"
+            p = subprocess.run([sys.executable, "-u", os.path.join(REPO, "pipeline", "auto_locate.py"), cmd, "--out", out, "--spec", spec],
+                               capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=600,
+                               env=dict(os.environ, PYTHONIOENCODING="utf-8"), creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+            if p.returncode != 0:
+                return self.send(500, {"error": (p.stdout + p.stderr)[-1500:]})
+            if cmd == "assign":
+                files = [os.path.join(out, f) for f in sorted(os.listdir(out)) if f.endswith((".csv", ".txt", ".ply")) or f.startswith("check_")]
+                sp = os.path.join(jd, "status.json"); st = json.load(open(sp, encoding="utf-8"))
+                st.update(state="done", step="完成", result={"outputs": out, "files": files}, finished=time.strftime("%Y-%m-%d %H:%M:%S"))
+                json.dump(st, open(sp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+                with open(os.path.join(jd, "log.txt"), "a", encoding="utf-8") as lg:
+                    lg.write(f"\n===== 輸出 {time.strftime('%Y-%m-%d %H:%M:%S')} =====\n" + p.stdout[-3000:] + "\n")
+            return self.send(200, {"ok": True})
         if u.path == "/api/retry":
             info = job_info(body["id"])
             if not info or info["running"]:

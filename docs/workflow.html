@@ -27,7 +27,7 @@ code { word-break: break-all; }
 <div class="wrap">
 <h1>完整流程：從拍照到 Panoramix</h1>
 <p class="lead">適用於新的空間或新的聽音區。分成三段：現場拍攝與量測 → 電腦計算 → 檢查與輸出。</p>
-<div class="toc"><a href="#prep">0 準備</a><a href="#shoot">1 拍攝</a><a href="#tape">2 捲尺</a><a href="#compute">3 計算</a><a href="#check">4 檢查</a><a href="#output">5 輸出</a><a href="#phone">手機 vs Sony 驗證</a><a href="#limits">限制</a></div>
+<div class="toc"><a href="#prep">0 準備</a><a href="#shoot">1 拍攝</a><a href="#tape">2 捲尺</a><a href="#tool">處理工具</a><a href="#compute">3 計算</a><a href="#check">4 檢查</a><a href="#output">5 輸出</a><a href="#phone">手機 vs Sony 驗證</a><a href="#limits">限制</a></div>
 
 <h2 id="prep">0 準備</h2>
 <ul>
@@ -62,7 +62,18 @@ code { word-break: break-all; }
 <li>聽音區原點：在地上貼十字膠帶，量它到前排架子線的垂直距離、到左右兩側的距離。工具用「喇叭對＋偏移量」設原點，這些距離就是偏移量。</li>
 </ul>
 
-<h2 id="compute">3 電腦計算</h2>
+<h2 id="tool">2½ 最簡單的做法：處理工具的「新空間定位」</h2>
+<div class="box">雙擊 <code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\處理工具.bat</code> → 分頁「新空間定位」。
+不需要影片標註，下面第 3 段的步驟由工具自動完成。</div>
+<ol class="steps">
+<li><b>找喇叭</b>：選照片資料夾（手機照片選「同一支手機、固定焦距」），每架幾顆（預設 8），按「開始找喇叭」。工具會跑 COLMAP → 每張照片偵測振膜 → 在不同照片間配對並三角化 → 依架內間距分出每根架子並補找漏掉的喇叭 → 找地板。300 張照片約 30–60 分鐘。</li>
+<li><b>設編號</b>：在俯視圖上點一顆喇叭選取它的架子，按「設為第一根」，填第一顆的編號和繞行方向（順／逆時針）。個別架子可以改起始編號、反向或排除（例如反光造成的假架子）。圖上粗體字是每根架的第一顆。</li>
+<li><b>尺度與原點</b>：預設用架內 80 mm 決定尺度；有捲尺實測就填「從／到／mm」，會改用捲尺。原點填喇叭編號（取中點），x 軸填兩顆喇叭，必要時再平移。</li>
+<li><b>輸出並檢查</b>：按「確定，輸出結果」。結果有 <code>speakers.csv</code>、<code>panoramix_bus10.txt</code>、設定檔副本、PLY，以及 4 張畫上編號的照片，和架上貼的編號紙條對照，確認編號正確。</li>
+</ol>
+<p class="note">品質指標：架內間距（應接近 80 mm、標準差小）、直線度、bootstrap 誤差、每顆用了幾張照片。間距標準差大或有架子不是 8 顆，表示有假點或漏掉的喇叭，請看俯視圖檢查。</p>
+
+<h2 id="compute">3 電腦計算（手動、進階）</h2>
 <ol class="steps">
 <li><b>整理檔案</b>：新建日期資料夾，例如 <code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\work\&lt;日期&gt;\</code>，影片抽幀與高解析照片分開放。</li>
 <li><b>設定路徑</b>：複製 <code>C:\Users\wangwang\Documents\Codex\2026-10-05\zh\wfs-speaker-localization\settings.example.yaml</code>，填入新照片、模型、設計檔路徑。</li>
@@ -104,7 +115,8 @@ code { word-break: break-all; }
 <h2 id="limits">目前的限制</h2>
 <ul>
 <li>程式假設 112 顆、每架 8 顆、架內 80 mm（<code>dji_bars.py</code> 等）。喇叭數量或架子規格不同時要先改程式。</li>
-<li>處理工具的「加入新照片重算」沿用這間房間的影片模型與人工編號，新空間要走上面的完整流程。</li>
+<li>處理工具「喇叭空間位置」分頁的「加入新照片重算」沿用這間房間的影片模型與人工編號；新空間請用「新空間定位」分頁。</li>
+<li>「新空間定位」用 663 張 Sony 照片測試：對得上的喇叭誤差中位數約 1.5 mm；但右側一段和主流程差 10–17 mm（原因未定），照片太少的架子會找不到，反光可能形成假架子。所以一定要用捲尺和編號照片檢查。</li>
 <li>工具目前不會自動辨識地上的原點標記，原點用喇叭對＋偏移量設定。</li>
 </ul>
 </div>

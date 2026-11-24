@@ -51,7 +51,7 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 .job .top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; cursor: pointer; }
 .job .top b { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .st { font-size: 12px; padding: 1px 8px; border-radius: 10px; border: 1px solid currentColor; }
-.st.running { color: var(--accent); } .st.done { color: var(--ok); } .st.error, .st.stopped, .st.cancelled { color: var(--bad); }
+.st.running { color: var(--accent); } .st.needs_ids { color: var(--warn); } .st.done { color: var(--ok); } .st.error, .st.stopped, .st.cancelled { color: var(--bad); }
 .steps { display: flex; gap: 4px; flex-wrap: wrap; margin: 8px 0 4px; }
 .steps span { font-size: 12px; padding: 1px 7px; border-radius: 6px; background: var(--chip); color: var(--muted); }
 .steps span.cur { background: var(--accent); color: #fff; } .steps span.done { color: var(--ok); }
@@ -80,7 +80,7 @@ dialog::backdrop { background: rgba(0,0,0,.4); }
 </header>
 <div class="wrap">
 <section class="panel">
-  <div class="tabs"><button id="tGs" class="on">3DGS 場景重建</button><button id="tSp">喇叭空間位置</button></div>
+  <div class="tabs"><button id="tGs" class="on">3DGS 場景重建</button><button id="tSp">喇叭空間位置</button><button id="tNw">新空間定位</button></div>
 
   <!-- ===================== 3DGS ===================== -->
   <div id="pGs">
@@ -171,6 +171,62 @@ dialog::backdrop { background: rgba(0,0,0,.4); }
     <div class="f"><label for="sName">工作名稱</label><input type="text" id="sName" placeholder="例如 origin_front_center"></div>
     <button class="primary" id="sGo">輸出喇叭位置</button>
   </div>
+  <!-- ===================== new room ===================== -->
+  <div id="pNw" class="hidden">
+    <p class="hint" style="margin-top:0">新的空間或聽音區：不需要 DJI 標註。照片 → 自動找出所有振膜 → 你在俯視圖上設定編號 → 輸出。</p>
+    <h3 style="margin:8px 0">1 找喇叭</h3>
+    <div class="f"><label for="nImg">照片資料夾（手機或相機，可混合影片抽幀）</label>
+      <div class="row"><input type="text" id="nImg" placeholder="C:\..."><button data-browse="nImg">瀏覽…</button></div>
+      <p class="hint" id="nImgInfo"></p></div>
+    <div class="f"><span class="lab">相機位置怎麼來</span>
+      <div class="seg">
+        <label><input type="radio" name="nPose" value="colmap" checked><span>自動計算（COLMAP）<small>新照片用這個</small></span></label>
+        <label><input type="radio" name="nPose" value="existing"><span>已有 COLMAP 模型<small>選含 images.bin 的資料夾</small></span></label>
+      </div>
+      <div class="row hidden" id="nSparseRow" style="margin-top:6px"><input type="text" id="nSparse" placeholder="含 cameras.bin / images.bin 的資料夾"><button data-browse="nSparse">瀏覽…</button></div></div>
+    <div class="grid2" id="nColmapOpts">
+      <div class="f"><label for="nMatch">照片數量</label>
+        <select id="nMatch"><option value="exhaustive">少於 300 張（全部互相比對）</option><option value="vocab">300 張以上（詞彙樹）</option><option value="sequential">影片連續幀</option></select></div>
+      <div class="f"><label for="nCam">相機</label>
+        <select id="nCam"><option value="1">同一支手機／相機、固定焦距（建議）</option><option value="0">不同相機或有變焦</option></select></div>
+    </div>
+    <div class="grid2">
+      <div class="f"><label for="nPer">每根架子幾顆</label><input type="number" id="nPer" value="8" min="1" max="64"></div>
+      <div class="f"><label for="nName">工作名稱</label><input type="text" id="nName" placeholder="例如 phone_room2"></div>
+    </div>
+    <button class="primary" id="nGo">開始找喇叭</button>
+
+    <h3 style="margin:22px 0 8px">2 設定編號與原點</h3>
+    <div class="f"><label for="nJob">工作</label><select id="nJob"></select></div>
+    <div id="nEdit" class="hidden">
+      <canvas id="nMap" width="700" height="610" style="width:100%;display:block;background:var(--code);border-radius:8px;cursor:pointer"></canvas>
+      <p class="hint" id="nMapInfo">點一顆喇叭選取它所在的架子。</p>
+      <div class="grid2">
+        <div class="f"><label for="nFirst">第一根架的第一顆編號</label><input type="number" id="nFirst" value="1"></div>
+        <div class="f"><label for="nDir">繞行方向（俯視）</label><select id="nDir"><option value="1">順時針</option><option value="0">逆時針</option></select></div>
+      </div>
+      <div class="f"><div class="row"><button id="nSetStart">把選取的架設為第一根</button><span class="hint" id="nSelInfo" style="margin:0"></span></div></div>
+      <div class="grid2">
+        <div class="f"><label for="nOvFirst">選取的架：第一顆改成</label><input type="number" id="nOvFirst" placeholder="不改（接續編號）"></div>
+        <div class="f"><label>&nbsp;</label><label style="font-weight:400"><input type="checkbox" id="nOvRev"> 選取的架反向編號</label>
+          <label style="font-weight:400"><input type="checkbox" id="nOvEx"> 排除選取的架（不是喇叭，例如反光）</label></div>
+      </div>
+      <details class="f"><summary><b>尺度、高度、原點、輸出</b></summary>
+        <div class="grid2" style="margin-top:8px">
+          <div class="f"><label for="nPitch">架內振膜間距（mm）</label><input type="number" id="nPitch" value="80" step="0.1"></div>
+          <div class="f"><label>捲尺（可選，比間距更準）</label><div class="row"><input type="number" id="nTa" placeholder="從"><input type="number" id="nTb" placeholder="到"><input type="number" id="nTmm" placeholder="mm" step="0.5"></div></div>
+          <div class="f"><label>已知高度（可選）</label><div class="row"><input type="number" id="nHid" placeholder="喇叭編號"><input type="number" id="nHmm" placeholder="離地 mm"></div><p class="hint">不填就用照片裡的地板。</p></div>
+          <div class="f"><label for="nOrg">原點 = 這些喇叭的中點</label><input type="text" id="nOrg" placeholder="空白 = 全部；例如 41,72"></div>
+          <div class="f"><label>x 軸（向右）從 → 到</label><div class="row"><input type="number" id="nXa" placeholder="A"><input type="number" id="nXb" placeholder="B"></div><p class="hint">空白 = 沿第一根架。</p></div>
+          <div class="f"><label>再平移 x / y（mm）</label><div class="row"><input type="number" id="nOx" value="0"><input type="number" id="nOy" value="0"></div></div>
+          <div class="f"><label for="nDesign">Panoramix 設定檔範本（可選）</label><input type="text" id="nDesign"></div>
+          <div class="f"><label for="nBus">bus 編號</label><input type="number" id="nBus" value="10"></div>
+        </div>
+      </details>
+      <button class="primary" id="nOut">確定，輸出結果</button>
+      <div id="nResult"></div>
+    </div>
+  </div>
 </section>
 
 <section class="panel">
@@ -193,8 +249,9 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 let STATE = null, selJob = null;
 
 // tabs
-function tab(gs) { $("tGs").classList.toggle("on", gs); $("tSp").classList.toggle("on", !gs); $("pGs").classList.toggle("hidden", !gs); $("pSp").classList.toggle("hidden", gs); if (!gs) drawMap(); }
-$("tGs").onclick = () => tab(true); $("tSp").onclick = () => tab(false);
+function tab(k) { for (const [t, p] of [["tGs", "pGs"], ["tSp", "pSp"], ["tNw", "pNw"]]) { $(t).classList.toggle("on", t === k); $(p).classList.toggle("hidden", t !== k); }
+  if (k === "tSp") drawMap(); if (k === "tNw") nwJobs(); }
+$("tGs").onclick = () => tab("tGs"); $("tSp").onclick = () => tab("tSp"); $("tNw").onclick = () => tab("tNw");
 
 // folder browser
 let dlgTarget = null, dlgCur = "";
@@ -304,8 +361,108 @@ $("sGo").onclick = async () => {
   const r = await api("/api/jobs", o); if (r.error) return alert(r.error); selJob = r.id; refresh();
 };
 
+// ---- new room
+let NW = { start: 0, sel: null, ov: {}, prev: null, job: null };
+function nwUi() { $("nSparseRow").classList.toggle("hidden", val("nPose") !== "existing"); $("nColmapOpts").classList.toggle("hidden", val("nPose") !== "colmap"); }
+document.querySelectorAll("input[name=nPose]").forEach(e => e.addEventListener("change", nwUi));
+$("nImg").addEventListener("change", async () => { const r = await api("/api/ls?path=" + encodeURIComponent($("nImg").value.trim())); $("nImgInfo").textContent = r.error ? "找不到資料夾" : `${r.images} 張影像`; });
+$("nGo").onclick = async () => {
+  const o = { type: "locate", name: $("nName").value || "newroom", images: $("nImg").value.trim(), poses: val("nPose"), sparse: $("nSparse").value.trim(),
+    matcher: $("nMatch").value, single_camera: $("nCam").value === "1", per_bar: +$("nPer").value || 8 };
+  if (!o.images) return alert("請先選照片資料夾");
+  const r = await api("/api/jobs", o); if (r.error) return alert(r.error); selJob = r.id; refresh();
+};
+function nwJobs() {
+  if (!STATE) return;
+  const js = STATE.jobs.filter(j => j.job.type === "locate" && ["needs_ids", "done"].includes(j.status.state)), sel = $("nJob"), cur = sel.value;
+  sel.innerHTML = js.length ? js.map(j => `<option value="${j.id}">${esc(j.id)}（${label[j.status.state]}）</option>`).join("") : '<option value="">（還沒有找完喇叭的工作）</option>';
+  if (js.some(j => j.id === cur)) sel.value = cur;
+  if (sel.value !== NW.job) nwLoad(sel.value);
+}
+$("nJob").onchange = () => nwLoad($("nJob").value);
+function nwSpec() {
+  const n = id => +$(id).value || null, spec = { start_bar: NW.start, first_id: +$("nFirst").value || 1, clockwise: $("nDir").value === "1", overrides: NW.ov,
+    pitch_mm: +$("nPitch").value || 80, origin_ids: parseIds($("nOrg").value), x_from: n("nXa"), x_to: n("nXb"),
+    offset: [+$("nOx").value || 0, +$("nOy").value || 0], design: $("nDesign").value.trim(), bus: +$("nBus").value || 10 };
+  if (n("nTa") && n("nTb") && n("nTmm")) spec.tape = { a: n("nTa"), b: n("nTb"), mm: +$("nTmm").value };
+  if (n("nHid") && $("nHmm").value !== "") spec.known_height = { id: n("nHid"), mm: +$("nHmm").value };
+  return spec;
+}
+async function nwLoad(id) {
+  NW.job = id; $("nEdit").classList.toggle("hidden", !id); if (!id) return;
+  const r = await api("/api/locate?id=" + encodeURIComponent(id));
+  const s = r.spec || {}; NW.start = s.start_bar || 0; NW.ov = s.overrides || {}; NW.sel = null;
+  if (s.first_id) $("nFirst").value = s.first_id; if (s.clockwise === false) $("nDir").value = "0";
+  if (!$("nDesign").value) $("nDesign").value = s.design ?? STATE.defaults.design;
+  nwShowResult(r); nwPreview();
+}
+let nwT = null;
+function nwPreview() { clearTimeout(nwT); nwT = setTimeout(async () => {
+  const r = await api("/api/assign", { id: NW.job, preview: true, spec: nwSpec() }); if (r.error) { $("nMapInfo").textContent = r.error; return; }
+  NW.prev = (await api("/api/locate?id=" + encodeURIComponent(NW.job))).preview; nwDraw(); }, 250); }
+["nFirst", "nDir", "nPitch", "nOrg", "nXa", "nXb", "nOx", "nOy", "nTa", "nTb", "nTmm", "nHid", "nHmm"].forEach(i => $(i).addEventListener("change", nwPreview));
+const BAR_COL = ["#e5484d", "#f76b15", "#ffb224", "#30a46c", "#12a594", "#0090ff", "#3e63dd", "#8e4ec6", "#d6409f", "#978365", "#5b5bd6", "#29a383", "#e54666", "#46a758"];
+let nwT2 = null;
+function nwDraw() {
+  const P = NW.prev; if (!P) return;
+  const cv = $("nMap"), c = cv.getContext("2d"), W = cv.width, H = cv.height, css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  c.clearRect(0, 0, W, H);
+  const S = P.speakers, xs = S.map(p => p.x).concat([0]), ys = S.map(p => p.y).concat([0]);
+  const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+  const sc = Math.min(W, H) * 0.84 / Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys), 500);
+  const T = (x, y) => [W / 2 + (x - cx) * sc, H / 2 - (y - cy) * sc];
+  NW.T = T;
+  c.font = "11px system-ui";
+  for (const p of S) {
+    const [u, v] = T(p.x, p.y), col = BAR_COL[P.order.indexOf(p.bar) % BAR_COL.length];
+    if (p.bar === NW.sel) { c.fillStyle = "rgba(31,111,235,.18)"; c.beginPath(); c.arc(u, v, 12, 0, 7); c.fill(); }
+    c.strokeStyle = col; c.fillStyle = p.predicted ? "transparent" : col; c.lineWidth = 2; c.beginPath(); c.arc(u, v, 4.5, 0, 7); c.fill(); c.stroke();
+    c.strokeStyle = col; c.lineWidth = 1; c.beginPath(); c.moveTo(u, v); c.lineTo(u + p.nx * 14, v - p.ny * 14); c.stroke();
+    c.fillStyle = css("--ink"); c.font = p.bar === P.order[0] || S.find(q => q.bar === p.bar).id === p.id ? "bold 13px system-ui" : "10px system-ui";
+    c.fillText(p.id, u - p.nx * 18 - 7, v + p.ny * 18 + 4);
+  }
+  const [u0, v0] = T(0, 0); c.lineWidth = 3;
+  c.strokeStyle = "#e5484d"; c.beginPath(); c.moveTo(u0, v0); c.lineTo(u0 + 60, v0); c.stroke();
+  c.strokeStyle = "#30a46c"; c.beginPath(); c.moveTo(u0, v0); c.lineTo(u0, v0 - 60); c.stroke();
+  c.fillStyle = css("--ink"); c.font = "13px system-ui"; c.fillText("x", u0 + 64, v0 + 4); c.fillText("y 前", u0 - 10, v0 - 66);
+  c.beginPath(); c.arc(u0, v0, 5, 0, 7); c.fill();
+  const lens = P.order.map(b => S.filter(p => p.bar === b).length), np = S.filter(p => p.predicted).length;
+  $("nMapInfo").innerHTML = `${S.length} 顆（${S[0].id}–${S[S.length - 1].id}），${P.n_bars} 根架：${lens.join("、")} 顆` +
+    (lens.some(l => l !== P.per_bar) ? ` <b style="color:var(--warn)">有架子不是 ${P.per_bar} 顆</b>` : "") + (np ? ` · 空心 = 照片不夠、由同架推算（${np} 顆）` : "") +
+    `<br>尺度：${esc(P.scale)} · 高度：${esc(P.height)} · 粗體 = 每根架的第一顆。點一顆喇叭選取它的架子。`;
+  const ov = NW.sel != null ? NW.ov[NW.sel] || {} : null;
+  $("nSelInfo").textContent = NW.sel != null ? `已選第 ${P.order.indexOf(NW.sel) + 1} 根（${S.filter(p => p.bar === NW.sel).map(p => p.id).join(",")}）` : "先在圖上點一顆喇叭";
+  if (ov) { $("nOvFirst").value = ov.first || ""; $("nOvRev").checked = !!ov.reverse; $("nOvEx").checked = !!ov.exclude; }
+}
+$("nMap").onclick = e => {
+  if (!NW.prev) return; const r = $("nMap").getBoundingClientRect(), k = $("nMap").width / r.width, x = (e.clientX - r.left) * k, y = (e.clientY - r.top) * k;
+  let best = null, bd = 1e9; for (const p of NW.prev.speakers) { const [u, v] = NW.T(p.x, p.y), d = Math.hypot(u - x, v - y); if (d < bd) { bd = d; best = p; } }
+  if (best && bd < 25) { NW.sel = best.bar; nwDraw(); }
+};
+$("nSetStart").onclick = () => { if (NW.sel == null) return alert("先在圖上點一顆喇叭"); NW.start = NW.sel; nwPreview(); };
+function nwOv() { if (NW.sel == null) return; const f = +$("nOvFirst").value || null, rv = $("nOvRev").checked, ex = $("nOvEx").checked;
+  if (!f && !rv && !ex) delete NW.ov[NW.sel]; else NW.ov[NW.sel] = { first: f, reverse: rv, exclude: ex }; nwPreview(); }
+$("nOvFirst").addEventListener("change", nwOv); $("nOvRev").addEventListener("change", nwOv); $("nOvEx").addEventListener("change", nwOv);
+function nwShowResult(r) {
+  const rep = r.report; let h = "";
+  if (rep) {
+    h += `<div class="est" style="margin-top:12px">${rep.n_speakers} 顆 · 架內間距 ${rep.in_bar_gap_mm ? rep.in_bar_gap_mm.mean + " ± " + rep.in_bar_gap_mm.sd + " mm" : "–"} · 直線度中位數 ${rep.straightness_mm_median ?? "–"} mm · ` +
+      `bootstrap 中位數 ${rep.sd_mm_median ?? "–"} mm（90% ≤ ${rep.sd_mm_p90 ?? "–"}）· 每顆照片中位數 ${rep.views_median} 張 · 高度 ${rep.height_mm_range.join("–")} mm` +
+      (rep.warnings.length ? `<br><b style="color:var(--warn)">${rep.warnings.map(esc).join("；")}</b>` : "") + `</div>`;
+  }
+  if ((r.checks || []).length) h += `<p class="hint">檢查：照片上的編號是否和架上貼的編號一致。</p><div class="thumbs">${r.checks.map(p => `<a href="/api/file?path=${encodeURIComponent(p)}" target="_blank"><img loading="lazy" src="/api/file?path=${encodeURIComponent(p)}&t=${Date.now()}"></a>`).join("")}</div>`;
+  $("nResult").innerHTML = h;
+}
+$("nOut").onclick = async () => {
+  $("nOut").disabled = true; $("nOut").textContent = "輸出中…";
+  const r = await api("/api/assign", { id: NW.job, spec: nwSpec() });
+  $("nOut").disabled = false; $("nOut").textContent = "確定，輸出結果";
+  if (r.error) return alert(r.error);
+  nwShowResult(await api("/api/locate?id=" + encodeURIComponent(NW.job))); selJob = NW.job; refresh();
+};
+
 // ---- jobs
-const label = { running: "執行中", done: "完成", error: "錯誤", stopped: "已中止", cancelled: "已取消" };
+const label = { needs_ids: "等待編號", running: "執行中", done: "完成", error: "錯誤", stopped: "已中止", cancelled: "已取消" };
 function fileRow(p) {
   const name = p.split(/[\\/]/).pop(), img = /\.(jpg|jpeg|png)$/i.test(p), viewable = /\.(jpg|jpeg|png|txt|csv|json)$/i.test(p);
   return `<div><code>${esc(p)}</code>${viewable ? `<a href="/api/file?path=${encodeURIComponent(p)}" target="_blank"><button>${img ? "看" : "開"}</button></a>` : ""}` +
@@ -318,13 +475,15 @@ async function renderJobs() {
   let html = "";
   for (const j of STATE.jobs) {
     const s = j.status || {}, state = j.running ? "running" : (s.state || "stopped"), o = j.job, sel = j.id === selJob;
-    const what = o.type === "gs" ? `${o.method === "pgsr" ? "PGSR" : "3DGS"} · ${({ colmap: "COLMAP", sony_posed: "Sony 已定位", existing: "既有模型" })[o.poses]} · ${o.iterations} 步 · ${o.max_size}px`
+    const what = o.type === "locate" ? `新空間定位 · ${o.poses === "colmap" ? "COLMAP" : "既有模型"} · 每架 ${o.per_bar} 顆${s.n_found ? ` · 找到 ${s.n_found} 顆、${s.n_bars} 根架` : ""}` : o.type === "gs" ? `${o.method === "pgsr" ? "PGSR" : "3DGS"} · ${({ colmap: "COLMAP", sony_posed: "Sony 已定位", existing: "既有模型" })[o.poses]} · ${o.iterations} 步 · ${o.max_size}px`
       : `喇叭位置 · ${o.mode === "recompute" ? "重算" : "重設原點"}${o.origin_speakers ? " · 原點 " + o.origin_speakers : ""}${o.x_from ? ` · x ${o.x_from}→${o.x_to}` : ""}`;
     html += `<div class="job${sel ? " sel" : ""}" data-id="${j.id}"><div class="top"><b>${esc(j.id)}</b><span class="st ${state}">${label[state] || state}</span></div>` +
       `<div class="hint">${esc(what)}</div>`;
     if (sel) {
       html += `<div class="steps">${(s.steps || []).map(t => { const i = (s.steps || []).indexOf(s.step), k = s.steps.indexOf(t);
         return `<span class="${t === s.step && state === "running" ? "cur" : (k < i || state === "done") ? "done" : ""}">${esc(t)}</span>`; }).join("")}</div>`;
+      if (o.type === "locate" && state === "needs_ids") html += `<p class="hint" style="color:var(--warn)">喇叭已找到，請到左邊「新空間定位」第 2 步設定編號。</p>`;
+      if (state === "running" && s.progress != null && s.step !== "訓練" && o.type === "locate") html += `<div style="height:8px;background:var(--chip);border-radius:4px;margin:6px 0"><div style="height:8px;width:${s.progress}%;background:var(--accent);border-radius:4px"></div></div><p class="hint">${esc(s.detail || "")}</p>`;
       if (state === "running" && s.progress != null && s.step === "訓練") html += `<div style="height:8px;background:var(--chip);border-radius:4px;margin:6px 0"><div style="height:8px;width:${s.progress}%;background:var(--accent);border-radius:4px"></div></div><p class="hint">訓練 ${s.progress}%</p>`;
       if (s.n_input && s.n_images < 0.7 * s.n_input) html += `<p class="hint" style="color:var(--warn)">只有 ${s.n_images}/${s.n_input} 張照片定位成功，其餘沒有參與重建。可改用其他匹配方式，或補拍重疊更多的照片。</p>`;
       else if (s.n_images) html += `<p class="hint">${s.n_images}${s.n_input ? "/" + s.n_input : ""} 張照片參與重建</p>`;
@@ -336,7 +495,7 @@ async function renderJobs() {
       html += `<div class="files">${fileRow(j.dir.replace(/\//g, "\\"))}${files.map(f => fileRow(f.replace(/\//g, "\\"))).join("")}${r.outputs ? fileRow(r.outputs.replace(/\//g, "\\")) : ""}</div>`;
       html += `<pre class="log" id="log"></pre>`;
       if (state === "running") html += `<button data-cancel="${j.id}">取消這個工作</button>`;
-      else if (state !== "done") html += `<button data-retry="${j.id}">重試（已完成的步驟會跳過）</button>`;
+      else if (state !== "done" && state !== "needs_ids") html += `<button data-retry="${j.id}">重試（已完成的步驟會跳過）</button>`;
     }
     html += `</div>`;
   }
