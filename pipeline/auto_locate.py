@@ -441,17 +441,34 @@ def analyse(a):
     stray = [i for i in range(len(keep)) if i not in used]
     log(f"精修後 {len(used)} 顆在架上（第一輪 {n0} 個點）；{len(stray)} 個不在架上的點已排除")
     e1 = np.cross(up, [1.0, 0, 0] if abs(up[0]) < 0.9 else [0, 1.0, 0]); e1 /= np.linalg.norm(e1); e2 = np.cross(up, e1)
-    # floor: densest level of the sparse points at least ~0.3 m (3.75 pitches) below the speakers
+    # floor: the largest near-horizontal plane of the sparse points at least ~0.3 m below the speakers
+    # (RANSAC; among planes nearly as large, the lowest). With a single straight row the vertical from
+    # the cameras is rough, so the floor normal then becomes the vertical.
     _, pts = read_points3D(os.path.join(a.model, "points3D.bin"))
-    h = pts @ up; hs = P @ up
-    low = h[h < hs.min() - 3.75 * pitch]
+    low = pts[pts @ up < (P @ up).min() - 3.75 * pitch]
     floor_h, floor_n = None, int(len(low))
     if len(low) > 50:
-        bw = 0.125 * pitch                     # ~10 mm bins
-        hist, edges = np.histogram(low, bins=max(10, int((low.max() - low.min()) / bw)))
-        k = int(np.argmax(hist)); c = (edges[k] + edges[k + 1]) / 2
-        sel = low[np.abs(low - c) < 0.4 * pitch]
-        floor_h, floor_n = float(np.median(sel)), int(len(sel))
+        rng = np.random.default_rng(0); thr = 0.1 * pitch; planes = []
+        for _ in range(800):
+            a3 = low[rng.choice(len(low), 3, replace=False)]
+            n = np.cross(a3[1] - a3[0], a3[2] - a3[0]); L = np.linalg.norm(n)
+            if L < 1e-12:
+                continue
+            n /= L
+            if abs(n @ up) < np.cos(np.radians(20 if up_src == "camera" else 8)):
+                continue
+            n = n if n @ up > 0 else -n
+            inl = np.abs((low - a3[0]) @ n) < thr
+            planes.append((int(inl.sum()), float(a3[0] @ n), n, inl))
+        if planes:
+            best = max(p_[0] for p_ in planes)
+            cand = [p_ for p_ in planes if p_[0] >= 0.6 * best]
+            _, _, n, inl = min(cand, key=lambda p_: p_[1])            # lowest of the large planes
+            Q = low[inl]; c = Q.mean(0); n = np.linalg.svd(Q - c)[2][2]; n = n if n @ up > 0 else -n
+            if up_src == "camera":
+                up = n; up_src = "floor"
+                e1 = np.cross(up, [1.0, 0, 0] if abs(up[0]) < 0.9 else [0, 1.0, 0]); e1 /= np.linalg.norm(e1); e2 = np.cross(up, e1)
+            floor_h, floor_n = float(np.median(Q @ up)), int(inl.sum())
     # which side the photos were taken from (for the facing direction)
     items = []
     for i, (X, refs, e, obs, Ps) in enumerate(keep):
@@ -552,19 +569,25 @@ def assign(a):
         xa = T[pos[xt]] - T[pos[xf]]
     else:
         b0 = [i for i in ids if S[i]["bar"] == order[0]]; xa = T[pos[b0[-1]]] - T[pos[b0[0]]]
-    xa /= np.linalg.norm(xa); ya = np.array([-xa[1], xa[0]])
-    org = T[[pos[i] for i in oid]].mean(0) + float(spec.get("offset", [0, 0])[0]) * xa + float(spec.get("offset", [0, 0])[1]) * ya
-    Pm = (T - org) @ np.stack([xa, ya]).T
-    # facing: normal of the bar line, towards the side the photos were taken from
-    N = np.zeros_like(Pm)
-    for bi in set(S[i]["bar"] for i in ids):
-        m = [pos[i] for i in ids if S[i]["bar"] == bi]
-        Q = Pm[m]; c = Q.mean(0)
-        u = np.linalg.svd(Q - c)[2][0] if len(m) > 1 else xa
-        n = np.array([-u[1], u[0]])
-        cams = [A["points"][S[i]["point"]]["cam_mean"] for i in ids if S[i]["bar"] == bi and S[i]["point"] is not None]
-        cm = ((np.c_[np.array(cams) @ e1, np.array(cams) @ e2] * mmu - org) @ np.stack([xa, ya]).T).mean(0)
-        N[m] = n if n @ (cm - c) >= 0 else -n
+    xa /= np.linalg.norm(xa)
+    for attempt in range(2):
+        ya = np.array([-xa[1], xa[0]])
+        org = T[[pos[i] for i in oid]].mean(0) + float(spec.get("offset", [0, 0])[0]) * xa + float(spec.get("offset", [0, 0])[1]) * ya
+        Pm = (T - org) @ np.stack([xa, ya]).T
+        # facing: normal of the bar line, towards the side the photos were taken from
+        N = np.zeros_like(Pm)
+        for bi in set(S[i]["bar"] for i in ids):
+            m = [pos[i] for i in ids if S[i]["bar"] == bi]
+            Q = Pm[m]; c = Q.mean(0)
+            u = np.linalg.svd(Q - c)[2][0] if len(m) > 1 else xa
+            n = np.array([-u[1], u[0]])
+            cams = [A["points"][S[i]["point"]]["cam_mean"] for i in ids if S[i]["bar"] == bi and S[i]["point"] is not None]
+            cm = ((np.c_[np.array(cams) @ e1, np.array(cams) @ e2] * mmu - org) @ np.stack([xa, ya]).T).mean(0)
+            N[m] = n if n @ (cm - c) >= 0 else -n
+        # default x axis: chosen so the speakers face the listener from the front (Panoramix: y = front)
+        if (xf in pos and xt in pos) or N[:, 1].mean() <= 0:
+            break
+        xa = -xa
     az = np.degrees(np.arctan2(Pm[:, 0], Pm[:, 1])); dist = np.linalg.norm(Pm, axis=1) / 1000
     if a.cmd == "preview":
         json.dump(dict(speakers=[dict(id=i, x=round(Pm[k, 0], 1), y=round(Pm[k, 1], 1), z=round(Z[k], 1), bar=S[i]["bar"],
@@ -587,9 +610,15 @@ def assign(a):
     open(os.path.join(a.out, f"panoramix_bus{bus}.txt"), "w", encoding="utf-8").write(
         f"# {len(rows)} speakers, ids {ids[0]}..{ids[-1]} in this order. Elevation 0; heights in speakers.csv.\n" + lines[AK] + "\n" + lines[DK] + "\n")
     design = spec.get("design") or ""
+    design_note = f"找不到設定檔範本 {design}" if design and not os.path.exists(design) else ""
     if design and os.path.exists(design):
         raw = open(design, "rb").read(); eol = b"\r\n" if b"\r\n" in raw else b"\n"
         key = lambda l: l.split(b" ", 1)[0].decode("utf-8", "ignore")
+        n_design = next(((len(l.split()) - 1) // 3 for l in raw.split(eol) if key(l) == AK), None)
+        if n_design is not None and n_design != len(rows):
+            design = ""
+            design_note = f"設定檔範本有 {n_design} 顆、這次量了 {len(rows)} 顆，沒有產生設定檔副本（數量不同會讓 Panoramix 讀錯）"
+    if design and os.path.exists(design):
         o = [lines[key(l)].encode() if key(l) in lines else l for l in raw.split(eol)]
         open(os.path.join(a.out, os.path.splitext(os.path.basename(design))[0] + "_custom.txt"), "wb").write(eol.join(o))
     sys.path.insert(0, os.path.join(os.path.dirname(HERE), "tools"))
@@ -621,7 +650,7 @@ def assign(a):
     rep["warnings"] = [w for w in [
         f"{rep['n_predicted']} 顆照片不夠，由同架其他顆推算" if rep["n_predicted"] else "",
         f"有架子不是 {A['per_bar']} 顆：{rep['bar_lengths']}" if any(l != A["per_bar"] for l in rep["bar_lengths"]) else "",
-        "高度沒有地板可參考" if "找不到" in h_src else ""] if w]
+        "高度沒有地板可參考" if "找不到" in h_src else "", design_note] if w]
     json.dump(rep, open(os.path.join(a.out, "report.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     check_images(a.out, A, S, ids)
     log(json.dumps(rep, ensure_ascii=False))
