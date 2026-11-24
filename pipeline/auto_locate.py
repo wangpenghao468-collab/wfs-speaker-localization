@@ -588,11 +588,37 @@ def assign(a):
         if (xf in pos and xt in pos) or N[:, 1].mean() <= 0:
             break
         xa = -xa
+    merge = None
+    if spec.get("mode") == "merge":
+        # update an existing txt: put the measured speakers where they best fit that txt's own positions
+        # (rotation + translation, no scale), so its origin and axes are kept; other speakers stay as they are
+        tpl = spec.get("design") or ""
+        if not os.path.exists(tpl):
+            raise RuntimeError(f"找不到要更新的 txt：{tpl}")
+        merge = read_template(tpl, int(spec.get("bus", 10)))
+        nt = len(merge["xy"])
+        upd = [int(i) for i in (spec.get("update_ids") or ids) if int(i) in pos]
+        bad = [i for i in upd if not 1 <= i <= nt]
+        if bad:
+            raise RuntimeError(f"txt 只有 {nt} 顆，沒有 {bad[:5]} 號")
+        if len(upd) < 2:
+            raise RuntimeError("至少要更新 2 顆量到的喇叭才能對齊")
+        Am = Pm[[pos[i] for i in upd]]; B = merge["xy"][np.array(upd) - 1]
+        ca, cb = Am.mean(0), B.mean(0)
+        U, _, Vt = np.linalg.svd((Am - ca).T @ (B - cb)); R = Vt.T @ U.T
+        if np.linalg.det(R) < 0:
+            Vt[-1] *= -1; R = Vt.T @ U.T
+        Pm = (Pm - ca) @ R.T + cb; N = N @ R.T
+        res = np.linalg.norm(Pm[[pos[i] for i in upd]] - B, axis=1)
+        merge.update(upd=upd, fit_rms=float(np.sqrt((res ** 2).mean())), moved_max=float(res.max()), moved_med=float(np.median(res)),
+                     rot_deg=float(np.degrees(np.arctan2(R[1, 0], R[0, 0]))))
     az = np.degrees(np.arctan2(Pm[:, 0], Pm[:, 1])); dist = np.linalg.norm(Pm, axis=1) / 1000
     if a.cmd == "preview":
         json.dump(dict(speakers=[dict(id=i, x=round(Pm[k, 0], 1), y=round(Pm[k, 1], 1), z=round(Z[k], 1), bar=S[i]["bar"],
                                       predicted=S[i]["point"] is None, nx=round(N[k, 0], 4), ny=round(N[k, 1], 4)) for k, i in enumerate(ids)],
-                       order=[int(b) for b in order], n_bars=len(order), per_bar=A["per_bar"], scale=scale_src, height=h_src),
+                       order=[int(b) for b in order], n_bars=len(order), per_bar=A["per_bar"], scale=scale_src, height=h_src,
+                       template=merge["xy"].round(1).tolist() if merge else None, update_ids=merge["upd"] if merge else None,
+                       fit_rms=round(merge["fit_rms"], 1) if merge else None, moved_max=round(merge["moved_max"], 1) if merge else None),
                   open(os.path.join(a.out, "preview.json"), "w", encoding="utf-8"), ensure_ascii=False)
         return
     rows = []
@@ -601,26 +627,46 @@ def assign(a):
         rows.append(dict(id=i, bar=order.index(S[i]["bar"]) + 1, x_mm=round(Pm[k, 0], 1), y_mm=round(Pm[k, 1], 1), height_mm=round(Z[k], 1),
                          azimuth_deg=round(az[k], 4), distance_m=round(dist[k], 5), dir_x=round(N[k, 0], 6), dir_y=round(N[k, 1], 6),
                          n_views=p["n_views"] if p else 0, sd_mm=round(p["sd_units"] * mmu, 2) if p and p["sd_units"] else None,
-                         predicted=p is None))
+                         predicted=p is None,
+                         moved_mm=round(float(np.linalg.norm(Pm[k] - merge["xy"][i - 1])), 1) if merge and i in merge["upd"] else None))
     with open(os.path.join(a.out, "speakers.csv"), "w", newline="", encoding="utf-8-sig") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
     bus = int(spec.get("bus", 10)); AK, DK = f"/bus/{bus}/speakers/aed", f"/bus/{bus}/speakers/directions/xyz"
-    lines = {AK: AK + " " + " ".join(f"{r['azimuth_deg']:.4f} 0.0 {r['distance_m']:.5f}" for r in rows),
-             DK: DK + " " + " ".join(f"{r['dir_x']:.6f} {r['dir_y']:.6f} 0.0" for r in rows)}
-    open(os.path.join(a.out, f"panoramix_bus{bus}.txt"), "w", encoding="utf-8").write(
-        f"# {len(rows)} speakers, ids {ids[0]}..{ids[-1]} in this order. Elevation 0; heights in speakers.csv.\n" + lines[AK] + "\n" + lines[DK] + "\n")
     design = spec.get("design") or ""
-    design_note = f"找不到設定檔範本 {design}" if design and not os.path.exists(design) else ""
-    if design and os.path.exists(design):
-        raw = open(design, "rb").read(); eol = b"\r\n" if b"\r\n" in raw else b"\n"
-        key = lambda l: l.split(b" ", 1)[0].decode("utf-8", "ignore")
-        n_design = next(((len(l.split()) - 1) // 3 for l in raw.split(eol) if key(l) == AK), None)
-        if n_design is not None and n_design != len(rows):
-            design = ""
-            design_note = f"設定檔範本有 {n_design} 顆、這次量了 {len(rows)} 顆，沒有產生設定檔副本（數量不同會讓 Panoramix 讀錯）"
-    if design and os.path.exists(design):
-        o = [lines[key(l)].encode() if key(l) in lines else l for l in raw.split(eol)]
-        open(os.path.join(a.out, os.path.splitext(os.path.basename(design))[0] + "_custom.txt"), "wb").write(eol.join(o))
+    design_note = ""
+    if merge:
+        # replace only the numbers of the updated speakers; every other number stays exactly as written
+        ta = merge["lines"][merge["ia"]].decode().split()
+        td = merge["lines"][merge["idr"]].decode().split() if merge["idr"] is not None else None
+        for i in merge["upd"]:
+            k = pos[i]; b = 1 + 3 * (i - 1)
+            ta[b], ta[b + 2] = f"{az[k]:.4f}", f"{dist[k]:.5f}"
+            if td:
+                td[b], td[b + 1] = f"{N[k, 0]:.6f}", f"{N[k, 1]:.6f}"
+        lines = {AK: " ".join(ta), DK: " ".join(td) if td else ""}
+        L = list(merge["lines"]); L[merge["ia"]] = lines[AK].encode()
+        if td:
+            L[merge["idr"]] = lines[DK].encode()
+        v = merge["aed"]
+        name = os.path.splitext(os.path.basename(design))[0] + "_updated.txt"
+        open(os.path.join(a.out, name), "wb").write(merge["eol"].join(L))
+        head = f"# {len(v)} speakers (whole txt); updated {len(merge['upd'])}: {merge['upd'][0]}..{merge['upd'][-1]}. Paste both lines.\n"
+    else:
+        lines = {AK: AK + " " + " ".join(f"{r['azimuth_deg']:.4f} 0.0 {r['distance_m']:.5f}" for r in rows),
+                 DK: DK + " " + " ".join(f"{r['dir_x']:.6f} {r['dir_y']:.6f} 0.0" for r in rows)}
+        head = f"# {len(rows)} speakers, ids {ids[0]}..{ids[-1]} in this order. Elevation 0; heights in speakers.csv.\n"
+        if design and os.path.exists(design):
+            n_design = len(read_template(design, bus)["xy"])
+            if n_design == len(rows):
+                t = read_template(design, bus); L = list(t["lines"]); L[t["ia"]] = lines[AK].encode()
+                if t["idr"] is not None:
+                    L[t["idr"]] = lines[DK].encode()
+                open(os.path.join(a.out, os.path.splitext(os.path.basename(design))[0] + "_custom.txt"), "wb").write(t["eol"].join(L))
+            else:
+                design_note = f"txt 有 {n_design} 顆、這次量了 {len(rows)} 顆：請用「更新既有 txt」"
+        elif design:
+            design_note = f"找不到 {design}"
+    open(os.path.join(a.out, f"panoramix_bus{bus}.txt"), "w", encoding="utf-8").write(head + lines[AK] + "\n" + lines[DK] + "\n")
     sys.path.insert(0, os.path.join(os.path.dirname(HERE), "tools"))
     from export_ply import write_ply
     write_ply(os.path.join(a.out, "speakers_points.ply"), np.c_[Pm, Z], normals=np.c_[N, np.zeros(len(N))], ids=np.array(ids),
@@ -646,14 +692,33 @@ def assign(a):
                straightness_mm_median=round(float(np.median(straight)), 2) if straight else None,
                sd_mm_median=round(float(np.median(sds)), 2) if sds else None, sd_mm_p90=round(float(np.percentile(sds, 90)), 2) if sds else None,
                views_median=int(np.median([r["n_views"] for r in rows if r["n_views"]])),
-               height_mm_range=[round(float(Z.min()), 1), round(float(Z.max()), 1)])
+               height_mm_range=[round(float(Z.min()), 1), round(float(Z.max()), 1)],
+               merge=dict(txt=design, updated=len(merge["upd"]), fit_rms_mm=round(merge["fit_rms"], 1), change_median_mm=round(merge["moved_med"], 1),
+                          change_max_mm=round(merge["moved_max"], 1), rotation_deg=round(merge["rot_deg"], 3)) if merge else None)
     rep["warnings"] = [w for w in [
         f"{rep['n_predicted']} 顆照片不夠，由同架其他顆推算" if rep["n_predicted"] else "",
         f"有架子不是 {A['per_bar']} 顆：{rep['bar_lengths']}" if any(l != A["per_bar"] for l in rep["bar_lengths"]) else "",
-        "高度沒有地板可參考" if "找不到" in h_src else "", design_note] if w]
+        "高度沒有地板可參考" if "找不到" in h_src else "", design_note,
+        f"和 txt 原本位置差最多 {merge['moved_max']:.0f} mm：編號或架子對錯了嗎？請看俯視圖" if merge and merge["moved_max"] > 150 else ""] if w]
     json.dump(rep, open(os.path.join(a.out, "report.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     check_images(a.out, A, S, ids)
     log(json.dumps(rep, ensure_ascii=False))
+
+
+def read_template(path, bus):
+    """Positions of every speaker in an existing Panoramix txt (bus N aed + directions lines)."""
+    raw = open(path, "rb").read(); eol = b"\r\n" if b"\r\n" in raw else b"\n"
+    AK, DK = f"/bus/{bus}/speakers/aed", f"/bus/{bus}/speakers/directions/xyz"
+    L = raw.split(eol); key = lambda l: l.split(b" ", 1)[0].decode("utf-8", "ignore")
+    ia = next((k for k, l in enumerate(L) if key(l) == AK), None)
+    if ia is None:
+        raise RuntimeError(f"txt 裡沒有 {AK} 這一行（bus 編號對嗎？）")
+    v = np.array([float(t) for t in L[ia].split()[1:]]).reshape(-1, 3)
+    idr = next((k for k, l in enumerate(L) if key(l) == DK), None)
+    d = np.array([float(t) for t in L[idr].split()[1:]]).reshape(-1, 3) if idr is not None else None
+    az, el, r = np.radians(v[:, 0]), np.radians(v[:, 1]), v[:, 2] * 1000
+    xy = np.c_[r * np.cos(el) * np.sin(az), r * np.cos(el) * np.cos(az)]
+    return dict(lines=L, eol=eol, ia=ia, idr=idr, aed=v, dirs=d, xy=xy)
 
 
 def check_images(out, A, S, ids, n=4):

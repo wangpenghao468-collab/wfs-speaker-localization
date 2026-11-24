@@ -196,7 +196,7 @@ dialog::backdrop { background: rgba(0,0,0,.4); }
     </div>
     <button class="primary" id="nGo">開始找喇叭</button>
 
-    <h3 style="margin:22px 0 8px">2 設定編號與原點</h3>
+    <h3 style="margin:22px 0 8px">2 設定編號</h3>
     <div class="f"><label for="nJob">工作</label><select id="nJob"></select></div>
     <div id="nEdit" class="hidden">
       <canvas id="nMap" width="700" height="610" style="width:100%;display:block;background:var(--code);border-radius:8px;cursor:pointer"></canvas>
@@ -211,16 +211,28 @@ dialog::backdrop { background: rgba(0,0,0,.4); }
         <div class="f"><label>&nbsp;</label><label style="font-weight:400"><input type="checkbox" id="nOvRev"> 選取的架反向編號</label>
           <label style="font-weight:400"><input type="checkbox" id="nOvEx"> 排除選取的架（不是喇叭，例如反光）</label></div>
       </div>
-      <details class="f"><summary><b>尺度、高度、原點、輸出</b></summary>
+      <h3 style="margin:18px 0 8px">3 輸出到哪裡</h3>
+      <div class="f"><div class="seg">
+        <label><input type="radio" name="nMode" value="merge" checked><span>更新既有的 txt（建議）<small>只改量到的喇叭，其他不動；原點、方向沿用 txt，不用設定</small></span></label>
+        <label><input type="radio" name="nMode" value="frame"><span>新的座標<small>自己指定原點和 x 軸，只輸出量到的喇叭</small></span></label>
+      </div></div>
+      <div id="nMergeBox">
+        <div class="f"><label for="nDesign">要更新的 txt</label><input type="text" id="nDesign"><p class="hint">不會修改原檔，會另存一份 <code>…_updated.txt</code>。</p></div>
+        <div class="grid2">
+          <div class="f"><label for="nUpd">只更新這些編號</label><input type="text" id="nUpd" placeholder="空白 = 全部量到的；例如 41-56"></div>
+          <div class="f"><label for="nBus">bus 編號</label><input type="number" id="nBus" value="10"></div>
+        </div>
+      </div>
+      <div id="nFrameBox" class="hidden grid2">
+        <div class="f"><label for="nOrg">原點 = 這些喇叭的中點</label><input type="text" id="nOrg" placeholder="空白 = 全部；例如 41,72"></div>
+        <div class="f"><label>x 軸（向右）從 → 到</label><div class="row"><input type="number" id="nXa" placeholder="A"><input type="number" id="nXb" placeholder="B"></div></div>
+        <div class="f"><label>再平移 x / y（mm）</label><div class="row"><input type="number" id="nOx" value="0"><input type="number" id="nOy" value="0"></div><p class="hint">聽音點在喇叭前方 2 m：y 填 -2000。</p></div>
+      </div>
+      <details class="f"><summary><b>進階：尺度、高度</b>（不填也可以）</summary>
         <div class="grid2" style="margin-top:8px">
           <div class="f"><label for="nPitch">架內振膜間距（mm）</label><input type="number" id="nPitch" value="80" step="0.1"></div>
-          <div class="f"><label>捲尺（可選，比間距更準）</label><div class="row"><input type="number" id="nTa" placeholder="從"><input type="number" id="nTb" placeholder="到"><input type="number" id="nTmm" placeholder="mm" step="0.5"></div></div>
-          <div class="f"><label>已知高度（可選）</label><div class="row"><input type="number" id="nHid" placeholder="喇叭編號"><input type="number" id="nHmm" placeholder="離地 mm"></div><p class="hint">不填就用照片裡的地板。</p></div>
-          <div class="f"><label for="nOrg">原點 = 這些喇叭的中點</label><input type="text" id="nOrg" placeholder="空白 = 全部；例如 41,72"></div>
-          <div class="f"><label>x 軸（向右）從 → 到</label><div class="row"><input type="number" id="nXa" placeholder="A"><input type="number" id="nXb" placeholder="B"></div><p class="hint">空白 = 沿第一根架。</p></div>
-          <div class="f"><label>再平移 x / y（mm）</label><div class="row"><input type="number" id="nOx" value="0"><input type="number" id="nOy" value="0"></div></div>
-          <div class="f"><label for="nDesign">Panoramix 設定檔範本（可選）</label><input type="text" id="nDesign"></div>
-          <div class="f"><label for="nBus">bus 編號</label><input type="number" id="nBus" value="10"></div>
+          <div class="f"><label>捲尺（比間距更準）</label><div class="row"><input type="number" id="nTa" placeholder="從"><input type="number" id="nTb" placeholder="到"><input type="number" id="nTmm" placeholder="mm" step="0.5"></div></div>
+          <div class="f"><label>已知高度</label><div class="row"><input type="number" id="nHid" placeholder="喇叭編號"><input type="number" id="nHmm" placeholder="離地 mm"></div><p class="hint">不填就用照片裡的地板。</p></div>
         </div>
       </details>
       <button class="primary" id="nOut">確定，輸出結果</button>
@@ -320,7 +332,7 @@ function spUi() {
 document.querySelectorAll("input[name=sMode], input[name=sOrg], #sAxis, #sXa, #sXb, #sOrgIds, #sOx, #sOy").forEach(e => e.addEventListener("input", spUi));
 function parseIds(t) {
   const out = []; for (const part of t.split(",")) { const m = part.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/); if (!m) continue;
-    for (let i = +m[1]; i <= +(m[2] || m[1]); i++) if (i >= 1 && i <= 112) out.push(i); } return out;
+    for (let i = +m[1]; i <= +(m[2] || m[1]); i++) if (i >= 1 && i <= 4096) out.push(i); } return out;
 }
 function frame() {
   const P = id => SPK[id - 1];
@@ -383,7 +395,8 @@ $("nJob").onchange = () => nwLoad($("nJob").value);
 function nwSpec() {
   const n = id => +$(id).value || null, spec = { start_bar: NW.start, first_id: +$("nFirst").value || 1, clockwise: $("nDir").value === "1", overrides: NW.ov,
     pitch_mm: +$("nPitch").value || 80, origin_ids: parseIds($("nOrg").value), x_from: n("nXa"), x_to: n("nXb"),
-    offset: [+$("nOx").value || 0, +$("nOy").value || 0], design: $("nDesign").value.trim(), bus: +$("nBus").value || 10 };
+    offset: [+$("nOx").value || 0, +$("nOy").value || 0], design: $("nDesign").value.trim(), bus: +$("nBus").value || 10,
+    mode: val("nMode"), update_ids: parseIds($("nUpd").value) };
   if (n("nTa") && n("nTb") && n("nTmm")) spec.tape = { a: n("nTa"), b: n("nTb"), mm: +$("nTmm").value };
   if (n("nHid") && $("nHmm").value !== "") spec.known_height = { id: n("nHid"), mm: +$("nHmm").value };
   return spec;
@@ -392,6 +405,8 @@ async function nwLoad(id) {
   NW.job = id; $("nEdit").classList.toggle("hidden", !id); if (!id) return;
   const r = await api("/api/locate?id=" + encodeURIComponent(id));
   const s = r.spec || {}; NW.start = s.start_bar || 0; NW.ov = s.overrides || {}; NW.sel = null;
+  if (s.mode) document.querySelector(`input[name=nMode][value=${s.mode}]`).checked = true; nwMode();
+  if (s.update_ids) $("nUpd").value = s.update_ids.join(",");
   if (s.first_id) $("nFirst").value = s.first_id; if (s.clockwise === false) $("nDir").value = "0";
   if (!$("nDesign").value) $("nDesign").value = s.design ?? STATE.defaults.design;
   nwShowResult(r); nwPreview();
@@ -400,6 +415,9 @@ let nwT = null;
 function nwPreview() { clearTimeout(nwT); nwT = setTimeout(async () => {
   const r = await api("/api/assign", { id: NW.job, preview: true, spec: nwSpec() }); if (r.error) { $("nMapInfo").textContent = r.error; return; }
   NW.prev = (await api("/api/locate?id=" + encodeURIComponent(NW.job))).preview; nwDraw(); }, 250); }
+function nwMode() { const m = val("nMode") === "merge"; $("nMergeBox").classList.toggle("hidden", !m); $("nFrameBox").classList.toggle("hidden", m); }
+document.querySelectorAll("input[name=nMode]").forEach(e => e.addEventListener("change", () => { nwMode(); nwPreview(); }));
+["nDesign", "nUpd", "nBus"].forEach(i => $(i).addEventListener("change", nwPreview));
 ["nFirst", "nDir", "nPitch", "nOrg", "nXa", "nXb", "nOx", "nOy", "nTa", "nTb", "nTmm", "nHid", "nHmm"].forEach(i => $(i).addEventListener("change", nwPreview));
 const BAR_COL = ["#e5484d", "#f76b15", "#ffb224", "#30a46c", "#12a594", "#0090ff", "#3e63dd", "#8e4ec6", "#d6409f", "#978365", "#5b5bd6", "#29a383", "#e54666", "#46a758"];
 let nwT2 = null;
@@ -407,12 +425,14 @@ function nwDraw() {
   const P = NW.prev; if (!P) return;
   const cv = $("nMap"), c = cv.getContext("2d"), W = cv.width, H = cv.height, css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   c.clearRect(0, 0, W, H);
-  const S = P.speakers, xs = S.map(p => p.x).concat([0]), ys = S.map(p => p.y).concat([0]);
+  const S = P.speakers, TP = P.template || [], xs = S.map(p => p.x).concat([0], TP.map(t => t[0])), ys = S.map(p => p.y).concat([0], TP.map(t => t[1]));
   const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
   const sc = Math.min(W, H) * 0.84 / Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys), 500);
   const T = (x, y) => [W / 2 + (x - cx) * sc, H / 2 - (y - cy) * sc];
   NW.T = T;
   c.font = "11px system-ui";
+  TP.forEach((t, k) => { const [u, v] = T(t[0], t[1]); c.strokeStyle = css("--muted"); c.lineWidth = 1; c.beginPath(); c.arc(u, v, 6, 0, 7); c.stroke();
+    if ((k + 1) % 8 === 1 && !S.some(p => p.id === k + 1)) { c.fillStyle = css("--muted"); c.fillText(k + 1, u + 7, v - 7); } });
   for (const p of S) {
     const [u, v] = T(p.x, p.y), col = BAR_COL[P.order.indexOf(p.bar) % BAR_COL.length];
     if (p.bar === NW.sel) { c.fillStyle = "rgba(31,111,235,.18)"; c.beginPath(); c.arc(u, v, 12, 0, 7); c.fill(); }
@@ -429,7 +449,9 @@ function nwDraw() {
   const lens = P.order.map(b => S.filter(p => p.bar === b).length), np = S.filter(p => p.predicted).length;
   $("nMapInfo").innerHTML = `${S.length} 顆（${S[0].id}–${S[S.length - 1].id}），${P.n_bars} 根架：${lens.join("、")} 顆` +
     (lens.some(l => l !== P.per_bar) ? ` <b style="color:var(--warn)">有架子不是 ${P.per_bar} 顆</b>` : "") + (np ? ` · 空心 = 照片不夠、由同架推算（${np} 顆）` : "") +
-    `<br>尺度：${esc(P.scale)} · 高度：${esc(P.height)} · 粗體 = 每根架的第一顆。點一顆喇叭選取它的架子。`;
+    `<br>尺度：${esc(P.scale)} · 高度：${esc(P.height)} · 粗體 = 每根架的第一顆。點一顆喇叭選取它的架子。` +
+    (P.template ? `<br>灰色圓圈 = txt 原本的位置。更新 ${P.update_ids.length} 顆，和原本差：平均 ${P.fit_rms} mm、最多 ${P.moved_max} mm` +
+      (P.moved_max > 150 ? ` <b style="color:var(--bad)">差太多，編號可能錯了</b>` : "") : "");
   const ov = NW.sel != null ? NW.ov[NW.sel] || {} : null;
   $("nSelInfo").textContent = NW.sel != null ? `已選第 ${P.order.indexOf(NW.sel) + 1} 根（${S.filter(p => p.bar === NW.sel).map(p => p.id).join(",")}）` : "先在圖上點一顆喇叭";
   if (ov) { $("nOvFirst").value = ov.first || ""; $("nOvRev").checked = !!ov.reverse; $("nOvEx").checked = !!ov.exclude; }
@@ -448,6 +470,7 @@ function nwShowResult(r) {
   if (rep) {
     h += `<div class="est" style="margin-top:12px">${rep.n_speakers} 顆 · 架內間距 ${rep.in_bar_gap_mm ? rep.in_bar_gap_mm.mean + " ± " + rep.in_bar_gap_mm.sd + " mm" : "–"} · 直線度中位數 ${rep.straightness_mm_median ?? "–"} mm · ` +
       `bootstrap 中位數 ${rep.sd_mm_median ?? "–"} mm（90% ≤ ${rep.sd_mm_p90 ?? "–"}）· 每顆照片中位數 ${rep.views_median} 張 · 高度 ${rep.height_mm_range.join("–")} mm` +
+      (rep.merge ? `<br>已更新 ${rep.merge.updated} 顆到 txt，和原本差中位數 ${rep.merge.change_median_mm} mm、最多 ${rep.merge.change_max_mm} mm` : "") +
       (rep.warnings.length ? `<br><b style="color:var(--warn)">${rep.warnings.map(esc).join("；")}</b>` : "") + `</div>`;
   }
   if ((r.checks || []).length) h += `<p class="hint">檢查：照片上的編號是否和架上貼的編號一致。</p><div class="thumbs">${r.checks.map(p => `<a href="/api/file?path=${encodeURIComponent(p)}" target="_blank"><img loading="lazy" src="/api/file?path=${encodeURIComponent(p)}&t=${Date.now()}"></a>`).join("")}</div>`;
