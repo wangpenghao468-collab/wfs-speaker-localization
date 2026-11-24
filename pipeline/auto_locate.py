@@ -351,14 +351,18 @@ def refine_grow(V, keep, bars, pitch, up, rho, per_bar):
                 break
         result.append(new)
     # drop duplicates claimed by two bars (keep the bar where it has more views)
-    flat = sorted(((len(r[1]), bi, s_) for bi, nw in enumerate(result) for s_, r in nw.items()), reverse=True)
+    # two bars on top of each other (a ghost copy of a row, a few cm off): keep the better-supported bar whole.
+    # Bars are judged as a whole, so a ghost row can't steal single speakers from the real one.
+    order_b = sorted(range(len(result)), key=lambda bi: -sum(len(r[1]) for r in result[bi].values()))
     taken = []
-    for _, bi, s_ in flat:
-        X = result[bi][s_][0]
-        if any(np.linalg.norm(X - t) < 0.5 * pitch for t in taken):
-            del result[bi][s_]
-        else:
-            taken.append(X)
+    for bi in order_b:
+        nw = result[bi]
+        clash = [s_ for s_, r in nw.items() if any(np.linalg.norm(r[0] - t) < 0.8 * pitch for t in taken)]
+        if len(clash) > 0.3 * len(nw):
+            result[bi] = {}; continue
+        for s_ in clash:
+            del nw[s_]
+        taken += [r[0] for r in nw.values()]
     keep2, bars2 = [], []
     for nw in result:
         if not nw:
