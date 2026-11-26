@@ -228,6 +228,7 @@ details[open] summary { margin-bottom: 6px; }
 <li>過濾：形狀要夠圓（圓度 ≥ 0.6），外圍要有一圈暗的邊（≥ 35%），大小要合理。</li>
 <li>取區塊的<b>質心</b>（所有像素位置的平均）作為中心，再去畸變。</li>
 </ol>
+<figure><img src="figures/detection_steps_20.png" alt="振膜偵測每一步的黑白圖"><figcaption>「高亮法」每一步：先做黑白遮罩（又亮又沒顏色的地方變白），再逐塊檢查大小、圓度和周圍是否夠暗，通過的那塊取重心。</figcaption></figure>
 <figure><img src="figures/detection_demo_20.png" alt="20 號振膜偵測示例"><figcaption>20 號在不同照片中的偵測結果。綠色點是算出的中心。</figcaption></figure>
 <details><summary>為什麼不用 SAM2 遮罩來找中心？</summary>
 <p>SAM2 的遮罩是在 DJI 幀上做的，DJI 影像本身就模糊，遮罩邊緣只能精準到幾個像素，換算成實際距離有好幾 mm。SAM2 的任務是「哪一塊是哪顆喇叭」（身份），不是精確量測。在 7008 px 的 Sony 照片上，振膜直徑常有上百像素，亮白色和深色外圈的對比非常明顯，用簡單的亮度門檻加質心就比 SAM2 精確許多。</p>
